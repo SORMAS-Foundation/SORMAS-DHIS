@@ -221,7 +221,7 @@ public class orgUnitConn extends HttpServlet {
             System.out.println("Records inserted.....");
         } catch (ParseException e) {
         } catch (java.text.ParseException ex) {
-            Logger.getLogger(JsonToDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(jsonController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(orgUnitConn.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -296,9 +296,9 @@ public class orgUnitConn extends HttpServlet {
             }
 
         } catch (MalformedURLException ex) {
-            Logger.getLogger(JsonToDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(jsonController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(JsonToDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(jsonController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
 if (1==2){
             try {
@@ -309,7 +309,7 @@ if (1==2){
 
                 System.err.println("FIXED: Warning!");
             } catch (java.text.ParseException ex) {
-                Logger.getLogger(JsonToDatabase.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(jsonController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }

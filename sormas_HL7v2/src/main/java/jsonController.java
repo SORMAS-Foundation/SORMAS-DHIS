@@ -21,7 +21,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class JsonToDatabase {
+public class jsonController {
 
     public static void main(String args[]) {
         //Creating a JSONParser object
@@ -77,7 +77,7 @@ public class JsonToDatabase {
         } catch (ParseException e) {
         } catch (ClassNotFoundException | SQLException e) {
         } catch (java.text.ParseException ex) {
-            Logger.getLogger(JsonToDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(jsonController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -149,9 +149,9 @@ public class JsonToDatabase {
             }
 
         } catch (MalformedURLException ex) {
-            Logger.getLogger(JsonToDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(jsonController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(JsonToDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(jsonController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
 
             try {
@@ -162,7 +162,7 @@ public class JsonToDatabase {
                 
                 System.err.println("FIXED: Warning!");
             } catch (java.text.ParseException ex) {
-                Logger.getLogger(JsonToDatabase.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(jsonController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }

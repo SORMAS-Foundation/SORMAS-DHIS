@@ -1,13 +1,16 @@
 package com.mirabilia.org.hzi.test;
 
+import com.mirabilia.org.hzi.PusttoFHIR;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
 
 public class tester {
 
     public static void main(String[] args) {
-        if (1 == 1) {
+        PusttoFHIR.fireDB();
+        
+        
+        if (1 == 2) {
 
             JSONObject json = new JSONObject();
             json.put("resourceType", "Location");
@@ -58,17 +61,17 @@ public class tester {
             JSONObject managingOrganization_json = new JSONObject();
             managingOrganization_json.put("reference", "Location/UUID");
             json.put("managingOrganization", managingOrganization_json);
-            
+
             JSONObject address_json = new JSONObject();
             address_json.put("city", "");
             address_json.put("postalCode", "");
-            
+
             JSONArray address_array = new JSONArray();
             address_array.add("6060 Green Park Avenue");
             address_array.add("Abuja");
             address_json.put("line", address_array);
             json.put("address", address_json);
-            
+
             JSONArray tag_arrary = new JSONArray();
             JSONObject tag_json = new JSONObject();
             tag_json.put("system", "http://dhis2.org/organistionUnitLevels");
@@ -82,4 +85,3 @@ public class tester {
     }
 
 }
-

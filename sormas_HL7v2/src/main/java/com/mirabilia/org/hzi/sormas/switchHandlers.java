@@ -14,7 +14,7 @@ import java.util.UUID;
  */
 public class switchHandlers {
 
-    public static void SourceButton(String debug, String uid, String what_Do) throws SQLException, ClassNotFoundException {
+    public static void SourceButton(String debug, String uuid_title, String source_url, String desc, String active, String what_Do) throws SQLException, ClassNotFoundException {
 
         try {
 
@@ -22,29 +22,38 @@ public class switchHandlers {
             ResultSet rx;
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DbConnector.getConnection();
-
+String uuid = "";
             try {
 
                 ps = null;
                 rx = null;
                 //update data source
                 if (what_Do.contains("update")) {
-                    ps = conn.prepareStatement("UPDATE `sormas_`.`_sources` SET `url`=?, `title`=?, `desc`=?, `source_dest_switch`=?, `last_update`=now() WHERE  `uid`=?");
+                    ps = conn.prepareStatement("UPDATE `_sources` SET status = ?, `last_update`=now() WHERE  `uuid`=?");
+                    ps.setString(1, source_url); //url
+                    ps.setString(2, uuid_title);//title
+                    uuid = uuid_title;
                 }
                 //create data source
                 if (what_Do.contains("create")) {
-                    uid = shortUUID(debug);
-                    ps = conn.prepareStatement("insert into `sormas_`.`_sources` SET `url`=?, `title`=?, `desc`=?, `source_dest_switch`=?, `created`=now()");
+                   uuid = shortUUID(debug);
+                    ps = conn.prepareStatement("insert into `sormas_`.`_sources` SET `url`=?, `title`=?, `desc`=?, `status`=?,`uuid` = ?, `created`=now()");
+                    
+                    ps.setString(1, source_url); //url
+                    ps.setString(2, uuid_title);//title
+                    ps.setString(3, desc);//descripton 
+                    ps.setString(4, active);//descripton 
+                    ps.setString(5, uuid);//uuid 
                 }
-                ps.setString(1, ""); //url
-                ps.setString(2, "");//title
-                ps.setString(3, "");//descripton
-                ps.setString(4, "");//destination
-                ps.setString(5, uid);//uid
-
+                
+                   System.out.println("SQL = "+ps.toString());
+                
                 ps.execute();
+                
+               
+                
                 if (debug.contains("debug")) {
-                    System.out.println("Sources with the following uid updated!" + uid);
+                    System.out.println("Sources with the following uid updated!" + uuid);
                 }
                 return;
             } finally {

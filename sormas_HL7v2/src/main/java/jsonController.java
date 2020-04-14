@@ -1,5 +1,5 @@
 
-import com.mirabilia.org.hzi.proj.sormas.DbConnector;
+import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

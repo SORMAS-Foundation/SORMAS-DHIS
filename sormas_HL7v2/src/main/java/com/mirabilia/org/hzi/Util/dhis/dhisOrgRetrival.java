@@ -23,10 +23,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.mirabilia.org.hzi.Util;
+package com.mirabilia.org.hzi.Util.dhis;
 
-import static com.mirabilia.org.hzi.Util.dbResolver.gotoDB;
-import static com.mirabilia.org.hzi.Util.resolver.getDemAll;
+
+import static com.mirabilia.org.hzi.Util.dbResolvers.gotoDB;
+import static com.mirabilia.org.hzi.Util.dhis.DHIS2resolver.getDemAll;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;

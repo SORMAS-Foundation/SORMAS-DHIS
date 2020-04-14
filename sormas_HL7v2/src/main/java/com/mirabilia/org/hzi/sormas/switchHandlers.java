@@ -1,6 +1,6 @@
 package com.mirabilia.org.hzi.sormas;
 
-import com.mirabilia.org.hzi.proj.sormas.DbConnector;
+import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import java.nio.ByteBuffer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

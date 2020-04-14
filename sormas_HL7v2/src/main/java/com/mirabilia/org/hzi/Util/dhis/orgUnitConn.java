@@ -1,9 +1,9 @@
-package com.mirabilia.org.hzi.Util;
+package com.mirabilia.org.hzi.Util.dhis;
 
 
 
-import static com.mirabilia.org.hzi.Util.dhisOrgRetrival.starter;
-import static com.mirabilia.org.hzi.Util.resolver.getDemAll;
+import static com.mirabilia.org.hzi.Util.dhis.DHIS2resolver.getDemAll;
+import static com.mirabilia.org.hzi.Util.dhis.dhisOrgRetrival.starter;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;

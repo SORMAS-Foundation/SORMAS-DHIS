@@ -169,7 +169,7 @@ sup {
 }
 
 a {
-    color: #007bff;
+    color: #000;
     text-decoration: none;
     background-color: transparent
 }
@@ -397,22 +397,22 @@ h6 {
 
 .h1,
 h1 {
-    font-size: 2.5rem
+    font-size: 1.5rem
 }
 
 .h2,
 h2 {
-    font-size: 2rem
+    font-size: 1rem
 }
 
 .h3,
 h3 {
-    font-size: 1.75rem
+    font-size: 0.75rem
 }
 
 .h4,
 h4 {
-    font-size: 1.5rem
+    font-size: 0.5rem
 }
 
 .h5,
@@ -30390,7 +30390,7 @@ a.text-muted:hover {
 
 .accent-purple .btn-link,
 .accent-purple a:not(.dropdown-item) {
-    color: #6f42c1
+    color: #000
 }
 
 .accent-purple .btn-link:hover,

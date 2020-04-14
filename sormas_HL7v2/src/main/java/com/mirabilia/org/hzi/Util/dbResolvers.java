@@ -25,7 +25,8 @@
  */
 package com.mirabilia.org.hzi.Util;
 
-import com.mirabilia.org.hzi.proj.sormas.DbConnector;
+import com.mirabilia.org.hzi.Util.fhir.PusttoFHIR;
+import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,7 +44,7 @@ import org.json.simple.parser.ParseException;
  *
  * @author Mathew Official
  */
-public class dbResolver {
+public class dbResolvers {
 
     public static String gotoDB(String json_all) throws ClassNotFoundException {
         JSONParser jsonParser = new JSONParser();
@@ -95,13 +96,105 @@ public class dbResolver {
             con.close();;
             System.out.println("Records inserted.....");
         } catch (SQLException ex) {
-            Logger.getLogger(dbResolver.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(dbResolvers.class.getName()).log(Level.SEVERE, null, ex);
         } catch (java.text.ParseException ex) {
-            Logger.getLogger(dbResolver.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(dbResolvers.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
-            Logger.getLogger(dbResolver.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(dbResolvers.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;
     }
+    
+    
+    
+    
+    public static String getAllOrgFromDB(int uuid) throws ClassNotFoundException{
+
+
+        PreparedStatement pstmt = null;
+        ResultSet rx = null;
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DbConnector.getConnection();
+            
+            if(uuid  == 1){
+            //retrieving all new orgunits from staging db.
+            pstmt = con.prepareStatement("SELECT UUID, NAME, shortname, path_parent, LEVEL, updated_last, created, geopoint_ FROM raw_ WHERE fhiruuid IS null limit 2;");
+            } else if(uuid == 2){
+                 //retrieving all updateable orgunits from staging db.
+            pstmt = con.prepareStatement("SELECT UUID, NAME, shortname, path_parent, LEVEL, updated_last, created, geopoint_, fhiruuid FROM raw_ WHERE fhiruuid IS not null limit 2;");
+            }
+            
+            rx = pstmt.executeQuery();
+            while (rx.next()){
+            String uuidx = rx.getString(1);
+            String name = rx.getString(2);;
+            String shortname = rx.getString(3);;
+            String path = rx.getString(4);
+            String level = rx.getString(5);;
+            String updated = rx.getString(6);;
+            String created = rx.getString(7);;
+            String geopoint = "";
+            //taking care of null geopoint entry on state, lga and ward level + hf with no geoloc
+            if (rx.getString(8) == null){
+                geopoint = "0";
+            }else{
+            geopoint = rx.getString(8);
+            }
+            String phone = "";
+            String fhirID = "";
+            
+            if (uuid == 2){
+            fhirID = PusttoFHIR.fireDB(uuidx, name, shortname, path, level, updated, created, geopoint, phone, rx.getString(9));
+            } else{
+            //sending each orguint to fhir and retriving the created id for further porcessing at on the staging DB
+            fhirID = PusttoFHIR.fireDB(uuidx, name, shortname, path, level, updated, created, geopoint, phone, "x");
+            }
+            if(fhirID.contains("#######")){
+            try{
+                PreparedStatement pstmtx;
+                ResultSet rxx;
+                
+                pstmtx = con.prepareStatement("update raw_ set fhiruuid_history = ? where uuid = ?");
+                pstmtx.setString(1, fhirID.replaceAll("#######", ""));
+                pstmtx.setString(2, uuidx);
+                
+                pstmtx.executeUpdate();
+                
+            }finally{
+            fhirID = "";
+            uuidx = "";
+            
+            }
+            
+            }else{
+            try{
+                PreparedStatement pstmtx;
+                ResultSet rxx;
+                
+                pstmtx = con.prepareStatement("update raw_ set fhiruuid = ? where uuid = ?");
+                pstmtx.setString(1, fhirID);
+                pstmtx.setString(2, uuidx);
+                
+                pstmtx.executeUpdate();
+                
+            }finally{
+            fhirID = "";
+            uuidx = "";
+            
+            }}
+            }
+            con.close();
+            System.out.println("Records inserted.....");
+        } catch (SQLException ex) {
+            Logger.getLogger(dbResolvers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+        
+   
 }
+

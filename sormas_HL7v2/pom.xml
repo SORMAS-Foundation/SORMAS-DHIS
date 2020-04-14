@@ -82,6 +82,15 @@
     <artifactId>org.json.simple</artifactId>
     <version>0.4</version>
 </dependency>
+
+<!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+<dependency>
+    <groupId>postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>8.3-603.jdbc4</version>
+</dependency>
+
+
    <dependency>
       <groupId>com.googlecode.json-simple</groupId>
       <artifactId>json-simple</artifactId>

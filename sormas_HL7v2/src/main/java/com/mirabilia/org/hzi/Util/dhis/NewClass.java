@@ -23,32 +23,12 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.mirabilia.webapi.service;
-
-import java.util.Set;
-import javax.ws.rs.core.Application;
+package com.mirabilia.org.hzi.Util.dhis;
 
 /**
  *
  * @author Mathew Official
  */
-@javax.ws.rs.ApplicationPath("webresources")
-public class ApplicationConfig extends Application {
-
-    @Override
-    public Set<Class<?>> getClasses() {
-        Set<Class<?>> resources = new java.util.HashSet<>();
-        addRestResourceClasses(resources);
-        return resources;
-    }
-
-    /**
-     * Do not modify addRestResourceClasses() method.
-     * It is automatically populated with
-     * all resources defined in the project.
-     * If required, comment out calling this method in getClasses().
-     */
-    private void addRestResourceClasses(Set<Class<?>> resources) {
-    }
+public class NewClass {
     
 }

@@ -4,6 +4,7 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
 
         <title>SORMAS ADAPTER | Location Dashboard</title>
+        
 
         <!-- Font Awesome Icons -->
         <link rel="stylesheet" href="./mira_assets/css/all.min.css">
@@ -15,5 +16,5 @@
   <link rel="stylesheet" href="./mira_assets/css/sw_bootstrap-4.min.css">
 
         <!-- Google Font: Source Sans Pro -->
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        <!--link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"-->
     </head>

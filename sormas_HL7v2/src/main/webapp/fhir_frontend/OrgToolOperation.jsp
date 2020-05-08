@@ -67,15 +67,21 @@
                                     <a href="source_controller.jsp" class="btn btn-app">
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
-                                    
-                                    
+
+
                                     <a class="btn btn-app" onclick="location.href = '../controllers_jsp/localized.jsp';">
-                                        <i class="fas fa-cogs"></i> Analyse
+                                        <i class="fas fa-play"></i> Prime S1
+                                    </a>
+
+
+
+
+                                    <a onclick="dd();" id="sync_" class="btn btn-app">
+                                        <i class="fas fa-download"></i> Sync DHIS
                                     </a>
                                     
-                                    
-                                    <a onclick="dd();" id="sync_" class="btn btn-app">
-                                        <i class="fas fa-play"></i> Sync
+                                     <a onclick="ana();" id="analyse" class="btn btn-app">
+                                        <i class="fas fa-cogs"></i> Analyse
                                     </a>
 
 
@@ -148,197 +154,267 @@
 
 
 
-            <script>
-                $('#progress_').hide();
-                $('#progress_Fhir').hide();
-                $('#sync_').hide();
-
-                var max = 0;
-
-                var xhr = new XMLHttpRequest();
-
-
-                xhr.open('GET', '../orggetter?pg_counter=1', true);
-
-                xhr.responseType = 'text';
-
-                var maxx = 0;
-
-                //populates the number of chunks from Source 1 (prehead)
-                starterx();
-
-
-                //fires the main sync process.
-                function starter() {
-                    $('#progress_').show();
-                    servlet_primer(10);
-                    //console.log(maxx);
-                    //  myloader(0);
-
-                }
-                ;
-
-
-
-                //get the total chunks
-                function starterx() {
-                    xhr.onload = function () {
-                        if (xhr.readyState === xhr.DONE) {
-                            if (xhr.status === 200) {
-                                maxx = xhr.responseText;
-                                console.log("1 - total chunks to be process = " + maxx);
-                                alertx();
-                                //    $('#addit').append("<button type=\"button\" class=\"btn btn-block bg-gradient-success btn-xs col-lg-4\">Server now ready</button><br>");
-
-                                gren();
-                                //   style="background-color: darkseagreen;min-height: 530px;"                            
-                                $('#sync_').show();
-
-                                var total = maxx * 100;
-
-                                $('#totaler').append(total);//chunker
-                                //   $('#chunker').append("chunks to process | "+ maxx);//chunker
-
-
-
-
-
-                            } else {
-                                console.log("Server error while contacting main methods to get total number of chunks");
-                                return;
-                            }
-                        }
-                    };
-
-                    xhr.send("");
-                }
-                ;
-                function gren() {
-                    document.getElementById("contw").style.background = "#9eca9d";
-//  document.getElementById("contw").style.background-color = "darkseagreen";
-                }
-                ;
-                //process the entire chunks one after the other
-
-                function servlet_primer(stat) {
-
-                    if (stat > 0) {
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('GET', '../orggetter?pg_counterx=' + stat, true);
-
-
-
-                        xhr.responseType = 'text';
-                        xhr.onload = function () {
-                            if (xhr.readyState === xhr.DONE) {
-                                if (xhr.status === 200) {
-                                    max = xhr.responseText;
-                                    myloader(max);
-                                    //   console.log("Number of chunk been processed currently = " + max);
-                                }
-                            }
-                        };
-
-                        xhr.send(null);
-
-
-                        success: servlet_primer(stat - 1);
-
-                    }
-
-                }
-                ;
-
-                function myloader(width) {
-                    // $('.progress-bar').css('width', width+'%');
-                    console.log(width + '%');
-
-                    //    $('#pbar').append(width);//???
-                    //
-
-                    var dd = document.getElementById("pbar").style.width = width + '%';
-                    var ddc = document.getElementById("chunker").innerHTML = width + "%";
-
-                    if (width < 3) {
-
-//Fhir need to start here.
-                        $('#progress_').hide();
-                        $('#progress_Fhir').show();
-//Debugging with create only
-                        setTimeout(servlet_primer_fhir(1), 3000)
-
-                    }
-                }
-                ;
-
-
-
-
-
-            </script>
-            <script type="text/javascript">
-                document.getElementById("sync").addEventListener("click", function (event) {
-                    event.preventDefault()
-                });
-
-                function dd() {
-
-                    starter();
-
-                }
-                
-                
-                 function ds() {
-                 // window.location("./controllers/localizer.jsp");
-                }
-
-                function servlet_primer_fhir(stat) {
-
-                    if (stat > 0) {
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('GET', '../controller?getAllListfromDBtoFHIR=' + stat, true);
-
-
-
-                        xhr.responseType = 'text';
-                        xhr.onload = function () {
-                            if (xhr.readyState === xhr.DONE) {
-                                if (xhr.status === 200) {
-                                    cleaner();
-                                }
-                            }
-                        };
-
-                        xhr.send(null);
-
-
-                        success: servlet_primer(stat - 1);
-
-                    }
-
-                }
-                ;
-
-
-                function cleaner() {
+                <script>
                     $('#progress_').hide();
                     $('#progress_Fhir').hide();
-                }
-                ;
+                    $('#sync_').hide();
 
-                function alertx() {
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 3000
+                    var max = 0;
+
+                    var xhr = new XMLHttpRequest();
+
+
+                    xhr.open('GET', '../orggetter?pg_counter=1', true);
+
+                    xhr.responseType = 'text';
+
+                    var maxx = 0;
+
+                    //populates the number of chunks from Source 1 (prehead)
+                    starterx();
+
+
+
+
+                    //get the total chunks
+                    function starterx() {
+                        xhr.onload = function () {
+                            if (xhr.readyState === xhr.DONE) {
+                                if (xhr.status === 200) {
+                                    maxx = xhr.responseText;
+                                    console.log("1 - total chunks to be process = " + maxx);
+                                    alertx();
+                                    //    $('#addit').append("<button type=\"button\" class=\"btn btn-block bg-gradient-success btn-xs col-lg-4\">Server now ready</button><br>");
+
+                                    gren();
+                                    //   style="background-color: darkseagreen;min-height: 530px;"                            
+                                    $('#sync_').show();
+
+                                    var total = maxx * 100;
+
+                                    $('#totaler').append(total);//chunker
+                                    //   $('#chunker').append("chunks to process | "+ maxx);//chunker
+
+
+
+
+
+                                } else {
+                                    console.log("Server error while contacting main methods to get total number of chunks");
+                                    return;
+                                }
+                            }
+                        };
+
+                        xhr.send("");
+                    }
+                    ;
+                    function gren() {
+                        document.getElementById("contw").style.background = "#9eca9d";
+                        //  document.getElementById("contw").style.background-color = "darkseagreen";
+                    }
+                    ;
+                    //process the entire chunks one after the other
+
+
+
+
+                    //fires the main sync process.
+                    function starter() {
+                        $('#progress_').show();
+                        servlet_primer(maxx);
+                        console.log('priming ' + maxx);
+
+                        //  myloader(0);
+
+                    }
+                    ;
+
+
+
+                    function servlet_primer(stat) {
+
+                        if (stat > 0) {
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('GET', '../orggetter?pg_counterx=' + stat, true);
+
+
+
+                            xhr.responseType = 'text';
+                            xhr.onload = function () {
+                                if (xhr.readyState === xhr.DONE) {
+                                    if (xhr.status === 200) {
+                                        max = xhr.responseText;
+                                        myloader(max);
+                                        //   console.log("Number of chunk been processed currently = " + max);
+                                    }
+                                }
+                            };
+
+                            xhr.send(null);
+
+
+                            success: servlet_primer(stat - 1);
+
+                        }
+
+                    }
+                    ;
+
+                    function myloader(width) {
+                        // $('.progress-bar').css('width', width+'%');
+                        console.log(width + '%');
+
+                        //    $('#pbar').append(width);//???
+                        //
+
+                        var dd = document.getElementById("pbar").style.width = width + '%';
+                        var ddc = document.getElementById("chunker").innerHTML = width + "%";
+
+                        if (width < 3) {
+
+                            //Fhir need to start here.
+                            $('#progress_').hide();
+                            $('#progress_Fhir').show();
+                            //Debugging with create only
+                            setTimeout(servlet_primer_fhir(1), 3000)
+
+                        }
+                    }
+                    ;
+
+
+
+
+
+                </script>
+                <script type="text/javascript">
+                    document.getElementById("sync").addEventListener("click", function (event) {
+                        event.preventDefault()
                     });
-                    Toast.fire({
-                        type: 'success',
-                        title: 'Server now ready!.'
-                    });
+
+                    function dd() {
+
+                        starter();
+
+                    }
+
+
+                    function ds() {
+                        // window.location("./controllers/localizer.jsp");
+                    }
+
+                    function servlet_primer_fhir(stat) {
+
+                        if (stat > 0) {
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('GET', '../controller?getAllListfromDBtoFHIR=' + stat, true);
+
+
+
+                            xhr.responseType = 'text';
+                            xhr.onload = function () {
+                                if (xhr.readyState === xhr.DONE) {
+                                    if (xhr.status === 200) {
+                                        cleaner();
+                                    }
+                                }
+                            };
+
+                            xhr.send(null);
+
+
+                            success: servlet_primer(stat - 1);
+
+                        }
+
+                    }
+                    ;
+
+
+                    function cleaner() {
+                        $('#progress_').hide();
+                        $('#progress_Fhir').hide();
+                    }
+                    ;
+
+                    function alertx() {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                        Toast.fire({
+                            type: 'success',
+                            title: 'Server now ready!.'
+                        });
+                    }
+                    ;
+
+
+
+                </script>
+
+            <%
+                if (request.getParameter("sayfini") != null) {
+                    String sta = request.getParameter("sayfini");
+
+                    switch (sta) {
+                        case "true":
+                           %>
+            
+                           <script>
+                              
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: true,
+                            timer: 6000
+                        });
+                        Toast.fire({
+                            type: 'success',
+                            title: 'Server completed.'
+                        });
+                               
+                           </script>
+                
+                
+                
+                <%
+                            break;
+                        case "false":
+                            %>
+            
+                           <script>
+                          
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: true,
+                            timer: 6000
+                        });
+                        Toast.fire({
+                            type: 'error',
+                            title: 'Server could not complete Operation!'
+                        });
+                  
+
+                               
+                           </script>
+                
+                
+                
+                <%
+                            break;
+                        default:
+                        // code block
+                    }
+
                 }
-                ;
-            </script>
+
+
+            %>
+
     </body>
 </html>

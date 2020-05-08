@@ -107,6 +107,7 @@
                         } else {
                             $('#d_text').html("Server down: 500");
                             console.log("Server error while contacting main methods to get total number of chunks");
+                            window.location.replace("../fhir_frontend/OrgToolOperation.jsp?sayfini=false");
                             return;
                         }
                          ds_starter();
@@ -129,6 +130,7 @@
                             $('#d_text').append("<br>Cached: LGA / districts data successfully");
                         } else {
                             $('#d_text').html("Server down: 500");
+                            window.location.replace("../fhir_frontend/OrgToolOperation.jsp?sayfini=false");
                             return;
                         }
                         wd_starter();
@@ -152,9 +154,10 @@
                            $('#d_text').append("<br>Cached: ward / community data successfully!<br>now processing facilities, this might take a moment");
                         } else {
                             $('#d_text').html("Server down: 500");
+                            window.location.replace("../fhir_frontend/OrgToolOperation.jsp?sayfini=false");
                             return;
                         }
-                           window.location.replace("../fhir_frontend/OrgToolOperation.jsp");
+                           window.location.replace("../fhir_frontend/OrgToolOperation.jsp?sayfini=true"); //should be removed to allow facility run
                       //  fc_starter()
                     }
                 };
@@ -177,6 +180,7 @@
                             $('#d_text').html("Server down: 500");
                             return;
                         }
+                         window.location.replace("../fhir_frontend/OrgToolOperation.jsp?sayfini=true");
                      
                     }
                 };

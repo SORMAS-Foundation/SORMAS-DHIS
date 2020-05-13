@@ -96,7 +96,7 @@ public class getterSetters {
         }
     return null;
     }
-    public static void Localizer(String ch, String cm, String cc, String cx, String co) throws ClassNotFoundException, SQLException {
+    public static void Localizer(String ch, String cm, String cc, String cx, String co, String gf, String gh) throws ClassNotFoundException, SQLException {
         // System.out.println(ch + "-" + cm + "-" + cc);
 
         PreparedStatement ps;
@@ -105,12 +105,14 @@ public class getterSetters {
 
         String str = "";
         try {
-            ps = conn.prepareStatement("insert ignore into sormas_local set changedate = ?, uuid = ?, ext_cdate = ?, level = ?, namex = ?;");
+            ps = conn.prepareStatement("insert ignore into sormas_local set changedate = ?, uuid = ?, ext_cdate = ?, level = ?, namex = ?, uid = ?, parent_id = ?;");
             ps.setString(1, ch);
             ps.setString(2, cm);
             ps.setString(3, cc);
             ps.setString(4, cx);
             ps.setString(5, co);
+            ps.setString(6, gf);
+            ps.setString(7, gh);
 
             ps.execute();
         } finally {

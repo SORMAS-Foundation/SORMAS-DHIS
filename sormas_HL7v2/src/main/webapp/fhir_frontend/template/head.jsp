@@ -6,6 +6,8 @@
         <title>SORMAS ADAPTER | Location Dashboard</title>
         
 
+  <link href="./mira_assets/css/hover.css" rel="stylesheet" type="text/css" media="all"/>
+  
         <!-- Font Awesome Icons -->
         <link rel="stylesheet" href="./mira_assets/css/all.min.css">
         <!-- overlayScrollbars -->
@@ -14,7 +16,6 @@
         <link rel="stylesheet" href="./mira_assets/css/mira.min.css">
          <!-- SweetAlert2 -->
   <link rel="stylesheet" href="./mira_assets/css/sw_bootstrap-4.min.css">
-
         <!-- Google Font: Source Sans Pro -->
         <!--link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"-->
     </head>

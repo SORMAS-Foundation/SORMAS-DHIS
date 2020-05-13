@@ -73,7 +73,7 @@ public class jsonController {
                 System.out.println("inserting records..." + pstmt);
                 pstmt.executeUpdate();
             }
-            System.out.println("Records inserted.....");
+          //  System.out.println("Records inserted.....");
         } catch (ParseException e) {
         } catch (ClassNotFoundException | SQLException e) {
         } catch (java.text.ParseException ex) {

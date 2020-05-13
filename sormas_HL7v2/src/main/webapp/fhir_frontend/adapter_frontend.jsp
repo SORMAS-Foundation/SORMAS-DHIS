@@ -250,6 +250,96 @@ String totalOrg = sourceDTO.totalORGinDB();
               <!-- /.card-footer -->
             </div>
             <!-- /.card -->
+            
+            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title" id="678i">Milestone Analysis</h3>
+
+                                    <div class="card-tools">
+                                        <div class="input-group input-group-sm" style="width: 150px;">
+                                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 10px">#</th>
+                                                <th style="width: 200px">Milestone</th>
+                                                <th style="width: 300px">Actual</th>
+                                                <th>Progress</th>
+                                                <th style="width: 40px">%</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1.</td>
+                                                <td>Facility Matching</td>
+                                                <td>232/12000</td>
+                                                <td>
+                                                    <div class="progress progress-xs">
+                                                        <div class="progress-bar bg-success"  style="width: 55%"></div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-danger">55%</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2.</td>
+                                                <td>Source 1 Data Sync</td>
+                                                <td>9234/9234</td>
+                                                <td>
+                                                    <div class="progress progress-xs">
+                                                        <div class="progress-bar bg-success" style="width: 100%"></div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-warning">100%</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>3.</td>
+                                                <td>DHIS2 Data Sync</td>
+                                                <td>12210/12210</td>
+                                                <td>
+                                                    <div class="progress progress-xs progress-striped active">
+                                                        <div class="progress-bar bg-success" style="width: 100%"></div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-primary">100%</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>4.</td>
+                                                <td>Sources Reconciliation</td>
+                                                <td>9234/12210</td>
+                                                <td>
+                                                    <div class="progress progress-xs progress-striped active">
+                                                        <div class="progress-bar bg-success" style="width: 90%"></div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-success">90%</span></td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td>5.</td>
+                                                <td>FHIR Data Published</td>
+                                                <td>9234/12210</td>
+                                                <td>
+                                                    <div class="progress progress-xs progress-striped active">
+                                                        <div class="progress-bar bg-success" style="width: 90%"></div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-success">90%</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
           </div>
           <!-- /.col -->
         </div>

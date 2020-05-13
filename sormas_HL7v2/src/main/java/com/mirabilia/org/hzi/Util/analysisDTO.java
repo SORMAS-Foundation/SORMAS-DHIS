@@ -26,12 +26,13 @@
 package com.mirabilia.org.hzi.Util;
 
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
+import static java.lang.System.out;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -39,27 +40,220 @@ import java.util.logging.Logger;
  */
 public class analysisDTO {
     
-    public static String ServerReserve(String controller) throws ClassNotFoundException {
+    private static List<String> fieldList = new ArrayList();
+
+
+    public static void fastSender(int primer, int destin) throws ClassNotFoundException {
+        //matching Ward/Community upward
+        //this method do the major duplicationa analysis and also try to match each or unit with the entire DB to ascertain there are no deplicates and hf misplacement
         
-        PreparedStatement pstmt;
+        //data are feed into this method by the amount sent in cutter method
+
+        String lister = "";
+
+        PreparedStatement ps;
         ResultSet rx;
+
+        PreparedStatement xps;
+        ResultSet xrx;
+
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DbConnector.getConnection();
+        String stack = "";
+        String xstack = "";
+        int found = 0;
+        String dub_string = "";
+        String ps_uuid = "";
+        int ro = 0;
+
+        String pr = primer + "";
+        String ds = (destin + 1) + "";
+
         try {
 
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DbConnector.getConnection();
-            //Parsing the contents of the JSON file retrieved from DHIS2
-               pstmt = con.prepareStatement("select count(*) from raw_");
-           rx = pstmt.executeQuery();
-           if(rx.next()){
-            System.out.println("Records inserted....." + rx.getString(1));
-           }
-           
+            ps = conn.prepareStatement("SELECT UUID, name, shortname, level, updated_last, parent_id FROM raw_ where idx > ? and idx < ? ORDER BY idx;");
+            ps.setString(1, pr);
+            ps.setString(2, ds);
+            System.out.println("Now running : " + ps);
+
+            rx = ps.executeQuery();
+            while (rx.next()) {
+                ro = ro + 1;
+                //lets clean dhis data...
+                //check if org unit is valid from dhis
+                if (rx.getString("name").contains(" ")) {
+                    String[] bb = rx.getString("name").split(" ");
+                    //verify if it has convetional first two prefix and strip them
+                    if (bb[0].length() == 2) {
+                        stack = rx.getString("name").replaceFirst(bb[0], "");
+                    }
+                }
+
+                //lets remove the ward / LGA / HF Strings
+                switch (rx.getString("level")) {
+                    case "1":
+                        // code block
+                        stack = stack.replaceFirst("ng ", "");
+                        break;
+                    case "2":
+                        // code block
+                        stack = stack.replaceFirst(" State", "");
+                        break;
+                    case "3":
+                        // code block
+                        stack = stack.replaceFirst(" Local Government Area", "");
+                        break;
+                    case "4":
+                        // code block
+                        stack = stack.replaceFirst(" Ward", "");
+                        break;
+                    default:
+                    // code block
+                }
+
+                try {
+                    stack = stack.toLowerCase();
+                    xps = conn.prepareStatement("SELECT UUID, namex, level FROM sormas_local where level = ?");
+                    xps.setString(1, rx.getString("level"));
+                    xrx = xps.executeQuery();
+                    int dub = 0;
+
+                    while (xrx.next()) {
+                        if (xrx.getString("namex").length() > 2) {
+                            xstack = xrx.getString("namex").replace(" ward", "");
+
+                            //xstack = Compare(xstack);
+                            if (stack.contains(xstack.toLowerCase())) {
+                                //   System.out.println("found a match : '" + xrx.getString("namex").toLowerCase() + "' matching dhis : '" + stack + "' with uuid :" + xrx.getString("UUID"));
+
+                                found = 1;
+                                dub = dub + 1;
+                                dub_string = rx.getString("UUID") + ", " + dub_string;
+                                fieldList.add(xrx.getString("UUID"));
+                                ps_uuid = xrx.getString("UUID");
+
+                            }
+
+                        }
+                    }
+
+                    /**
+                     * System.out.println("duble no : "+dub);
+                     * System.out.println("found : "+found);
+                     * System.out.println("stack : "+stack);
+                     * System.out.println("xstack : "+xstack);
+                     *
+                     */
+                    if (dub > 1) {
+                        System.out.println("DUPLICATE: times = " + dub + " likely duplicates are : " + dub_string);
+                        Localizer("", dub_string, dub_string, "");
+
+                    } else if (found > 1 || found == 1) {
+                        //   System.out.println("Found a MATCH for : " + rx.getString("name")+ " at "+ ps_uuid);
+                        //   System.out.println(rx.getString("uuid")+ "// "+rx.getString("updated_last")+"  //  "+ ps_uuid);
+                        Localizer(rx.getString("uuid"), "", rx.getString("updated_last"), ps_uuid);
+                    }
+//
+                    //taking care of the garbage
+                    dub = 0;
+                    found = 0;
+                    stack = "";
+                    dub_string = "";
+                    //  System.out.println(lister);
+                    fieldList.clear();
+                    ps_uuid = "";
+
+                } catch (SQLException ex) {
+                    out.print("SQLException: " + ex.getMessage());
+                    out.print("SQLState: " + ex.getSQLState());
+                    out.print("VendorError: " + ex.getErrorCode());
+                }
+
+                //  System.out.println("Total at SORCE 1 : " + rx.getString(1));
+                System.out.println("number of round made = " + ro);
+            }
+            System.out.println(lister);
+            conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(dbResolvers.class.getName()).log(Level.SEVERE, null, ex);
+            out.print("SQLException: " + ex.getMessage());
+            out.print("SQLState: " + ex.getSQLState());
+            out.print("VendorError: " + ex.getErrorCode());
+        }
+    }
+
+    public static int Cutter() throws ClassNotFoundException, SQLException {
+
+        PreparedStatement ps = null;
+        ResultSet rx = null;
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DbConnector.getConnection();
+
+        int how_many = 0;
+
+        try {
+
+            ps = conn.prepareStatement("select count(*) from raw_");
+            rx = ps.executeQuery();
+            if (rx.next()) {
+
+                int all = Integer.parseInt(rx.getString(1));
+
+                how_many = all / 500;
+
+                System.out.println(how_many);
+                System.out.println(rx.getString(1));
+
+            }
+
+        } finally {
+            conn.close();
+        }
+        return how_many + 1;
+    }
+
+    public static void Localizer(String ch, String cm, String cc, String cdt) throws ClassNotFoundException, SQLException {
+        // System.out.println(ch + "-" + cm + "-" + cc);
+
+        PreparedStatement ps;
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DbConnector.getConnection();
+
+        String str = "";
+
+        try {
+            if (cm.length() == 0) {
+                ps = conn.prepareStatement("update sormas_local set changedate = now(), externalid = ?, ext_cdate = ? where uuid = ?");
+                ps.setString(1, ch);
+                ps.setString(2, cc);
+                ps.setString(3, cdt);
+            } else {
+
+                StringBuffer sb = new StringBuffer();
+
+                sb.append("  update sormas_local set changedate = now(), duplicate_with = ? \n");
+                sb.append("  WHERE uuid IN (\n");
+
+                for (int i = 0; i < fieldList.size(); i++) {
+                    if (i == 0) {
+                        sb.append("'" + fieldList.get(i) + "'\n");
+                    } else {
+                        sb.append(",'" + fieldList.get(i) + "'\n");
+                    }
+                }
+                sb.append(")\n");
+
+                ps = conn.prepareStatement(sb.toString());
+                //  System.out.println(sb.toString());
+                ps.setString(1, cm);
+
+            }
+
+            ps.execute();
+            //   System.out.println(ps);
+
+        } finally {
+            conn.close();
         }
 
-        return null;
     }
 }
-    
-

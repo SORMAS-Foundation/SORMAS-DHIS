@@ -1,15 +1,28 @@
 package com.mirabilia.org.hzi.test;
 
-import com.mirabilia.org.hzi.PusttoFHIR;
+import static com.mirabilia.org.hzi.Util.dhis.DHIS2resolver.getDemAllfromFHIR;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class tester {
 
-    public static void main(String[] args) {
-        PusttoFHIR.fireDB();
-        
-        
+    public static void main(String[] args) throws ParseException {
+        // PusttoFHIR.fireDB();
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObjectx;
+        String base_url = "http://172.105.77.79:3447/fhir/Location";
+        String json_all = getDemAllfromFHIR(base_url);
+
+        System.out.println(json_all);
+
+        jsonObjectx = (JSONObject) jsonParser.parse(json_all);
+        Object total_values_onFHIR = jsonObjectx.get("total");
+
+        //JSONObject jsonObjectxx = (JSONObject) total_values_onFHIR;
+        System.out.println("Total resources = " + total_values_onFHIR);
+
         if (1 == 2) {
 
             JSONObject json = new JSONObject();

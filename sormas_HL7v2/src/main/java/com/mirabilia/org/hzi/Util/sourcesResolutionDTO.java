@@ -23,12 +23,12 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.mirabilia.org.hzi.Util.EntryControllers;
+package com.mirabilia.org.hzi.Util;
 
 /**
  *
  * @author Mathew Official
  */
-public class entry {
+public class sourcesResolutionDTO {
     
 }

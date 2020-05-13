@@ -64,8 +64,8 @@ public class orgUnitConn extends HttpServlet {
 
         JSONObject jsonObjectx;
 
-        System.out.println("initial target = " + initz);
-        System.out.println("number to process = " + initzx);
+        //System.out.println("initial target = " + initz);
+        //System.out.println("number to process = " + initzx);
 
         if (initz == 1) {
             //getting initializer
@@ -157,7 +157,7 @@ public class orgUnitConn extends HttpServlet {
                 ServletOutputStream sout = response.getOutputStream();
                 String content = ""+pg_;
                 sout.print(content);
-        System.out.println("percentage been sent back to frontend"+content+"%");
+       // System.out.println("percentage been sent back to frontend"+content+"%");
         }
      
     }

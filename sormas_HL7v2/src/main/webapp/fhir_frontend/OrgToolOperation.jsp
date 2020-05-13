@@ -550,17 +550,23 @@
                   <i class="fas fa-user bg-green"></i>
                   <div class="timeline-item">
                       <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
-                      <h3 class="timeline-header no-border"><a href="#">Nigeria</a> | parent organisation unit</h3>
+                      <h3 class="timeline-header no-border"><a href="#"></a> Parent organisation unit</h3>
                       <div class="timeline-body">
                           <div class="row">
+  <div class="input-group input-group col-3">
+                                  <input type="text" onchange="" id="nigeria_x" list="" autocomplete="off" value="Nigeria" disable="true" readonly class="form-control">
 
+                              </div>
                               <div class="col-5">
                                   <div class="progress progress-xs" style="height: 30%;">
-                                      <div class="progress-bar progress-bar-danger" id="dfe" style="width: 0%"> 
-                                          <a onclick="statex('state_x')" id="state_g" type="button" class="btn btn-danger btn-flat"></a>
+                                      <div class="progress-bar progress-bar-warning" id="dfe" style="width: 0%"> 
+                                          <a onclick="statex('state_x')" id="state_g" type="button" class="btn btn-warning btn-flat"></a>
                                       </div></div>
                                   <h3 class="" id="789"></h3>
                               </div>
+                                <div class="col-2">
+                                    <a onclick="tableloader('nigeria_x')" id="state_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                 </div>
                           </div>
                       </div>
                   </div>
@@ -574,17 +580,20 @@
                       <h3 class="timeline-header"><a href="#">Select</a> State / Region</h3>
                       <div class="timeline-body">
                           <div class="row">
-                              <div class="input-group input-group col-5">
+                              <div class="input-group input-group col-3">
                                   <input type="text" onchange="load_lga()" id="state_x" list="state" autocomplete="off" class="form-control">
 
                               </div>
                               <div class="col-5">
                                   <div class="progress progress-xs" style="height: 30%;">
-                                      <div class="progress-bar progress-bar-danger" id="dfe_lga" style="width: 0%"> 
-                                          <a onclick="lgax('lgax')" id="lga_g" type="button" class="btn btn-danger btn-flat"></a>
+                                      <div class="progress-bar progress-bar-warning" id="dfe_lga" style="width: 0%"> 
+                                          <a onclick="tableloader('state_x')" id="lga_g" type="button" class="btn btn-warning btn-flat"></a>
                                       </div></div>
                                   <h3 class="" id="789_lga"></h3>
                               </div>
+                               <div class="col-2">
+                                    <a onclick="tableloader('state_x')" id="lga_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                 </div>
                           </div>
                       </div>
                   </div>
@@ -599,25 +608,73 @@
                         <h3 class="timeline-header"><a href="#">Select</a> Local Government Area / District</h3>
                         <div class="timeline-body">
                             <div class="row">
-                                <div class="input-group input-group-sm col-5">
+                                <div class="input-group input-group-sm col-3">
                                     <input type="text" list="lga" onchange="load_ward()" id="lga_x" autocomplete="off" class="form-control">
 
                                 </div>
                                 <div class="col-5">
                                     <div class="progress progress-xs" style="height: 30%;">
-                                        <div class="progress-bar progress-bar-danger" id="dfe_ward" style="width: 0%"> 
-                                            <a onclick="wardx('wardx')" id="ward_g" type="button" class="btn btn-danger btn-flat"></a>
+                                        <div class="progress-bar progress-bar-warning" id="dfe_ward" style="width: 0%"> 
+                                            <a onclick="tableloader('lga_x')" id="ward_g" type="button" class="btn btn-warning btn-flat"></a>
                                         </div>
                                     </div>
                                     <h3 class="" id="789_ward"></h3>
                                 </div>
+                                <div class="col-2">
+                                    <a onclick="tableloader('lga_x')" id="ward_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
               <!-- END timeline item -->
               
-                <!-- timeline item -->
+              
+              
+              
+              
+              
+              
+               <!-- timeline item -->
+                <div id="wardx" style="display: none">
+                    <i id="wardxx" class="fas fa-bars bg-yellow"></i>
+                    <div class="timeline-item">
+                        <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
+                        <h3 class="timeline-header"><a href="#">Select</a> Ward / Community</h3>
+                        <div class="timeline-body">
+                            <div class="row">
+                                <div class="input-group input-group-sm col-3">
+                                    <input type="text" list="ward" onchange="load_hf()" id="ward_x" autocomplete="off" class="form-control">
+
+                                </div>
+                                <div class="col-5">
+                                    <div class="progress progress-xs" style="height: 30%;">
+                                        <div class="progress-bar progress-bar-warning" id="dfe_hf" style="width: 0%"> 
+                                            <a onclick="tableloader('ward_x')" id="hf_g" type="button" class="btn btn-warning btn-flat"></a>
+                                        </div>
+                                    </div>
+                                    <h3 class="" id="789_hf"></h3>
+                                </div>
+                                <div class="col-2">
+                                    <a onclick="tableloader('ward_x')" id="hf_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <!-- END timeline item -->
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+                <!--
               <div id="wardx" style="display: none">
                 <i id="wardxx" class="fas fa-bars bg-yellow"></i>
                 <div class="timeline-item">
@@ -664,30 +721,31 @@
               
               <!-- timeline item -->
               <div>
-                <i class="fa fa-camera bg-purple"></i>
+                <i class="fa fa-bars bg-purple"></i>
                 <div class="timeline-item">
                   <span class="time"><i class="fas fa-clock"></i> 2 days ago</span>
-                  <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
+                  
+                  
                   <div class="timeline-body">
-                    <table id="example" class="display" style="width:100%">
+                    <table id="detailer" class="display" style="width:100%">
         <thead>
             <tr>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th>SN</th>
+                <th>SOMRAS UUID</th>
+                <th>SOURCE UUID</th>
+                <th>SORMAS NAME</th>
+                <th>SOURCE NAME</th>
+                <th>LAST MATCHED</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th>SN</th>
+                <th>SOMRAS UUID</th>
+                <th>SOURCE UUID</th>
+                <th>SORMAS NAME</th>
+                <th>SOURCE NAME</th>
+                <th>LAST MATCHED</th>
             </tr>
         </tfoot>
     </table>
@@ -698,9 +756,7 @@
               <!-- timeline item -->
              
               <!-- END timeline item -->
-              <div>
-                <i class="fas fa-clock bg-gray"></i>
-              </div>
+             
             </div>
           </div>
           <!-- /.col -->
@@ -826,17 +882,24 @@
                     xhr.send(null);
                   
               }
-              $(document).ready(function() {
-                $('#example').DataTable( {
+              
+              function tableloader(e) {
+               
+                 var pd = document.getElementById(e).value;
+               
+                
+                $('#detailer').DataTable( {
+                    "destroy": true,
+                    "paging": true,
                 "processing": true,
-             "serverSide": true,
+            
                 "ajax": {
-                 "url": "../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?jsonparentx=yes",
-                 "dataType": "jsonp"
+                 "url": "../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?jsonparentx="+pd+"&jsonlevelx"+e,
+                 "dataType": "json"
                     }
                 } );
-                    } );
-              
+                    } ;
+                    
           </script>
-    </body>
+            </body>
 </html>

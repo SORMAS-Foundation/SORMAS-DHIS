@@ -28,6 +28,7 @@ package com.mirabilia.org.hzi.Util;
 import com.mirabilia.org.hzi.Strings.sql;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,6 +41,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -50,7 +54,6 @@ public class UtilServer extends HttpServlet {
 
     private static String mat = "";
     private static int nox = 0;
-    
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -92,7 +95,7 @@ public class UtilServer extends HttpServlet {
 
                 String vc = counterXString_withParameters_(sql.count_by_level_using_parent_source_name_xx, parentx); //total lgas matched
 
-                float seq = ((float) xx / xc);
+                float seq = ((float) xm / xc);
                 String str = String.format("%2.02f", (seq * 100));
                 System.out.println(vc);
                 mat = str + "%," + xx + "," + xc + "," + xm + ",@@@" + vc;
@@ -103,8 +106,7 @@ public class UtilServer extends HttpServlet {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-            
-        
+
         if (request.getParameter("parentx") != null && "4".contains(request.getParameter("levelx"))) {
 
             try {
@@ -120,7 +122,7 @@ public class UtilServer extends HttpServlet {
 
                 String vc = counterXString_withParameters_(sql.L4_count_by_level_using_parent_source_name_xx, parentx); //total lgas matched
 
-                float seq = ((float) xx / xc);
+                float seq = ((float) xm / xc);
                 String str = String.format("%2.02f", (seq * 100));
                 System.out.println(vc);
                 mat = str + "%," + xx + "," + xc + "," + xm + ",@@@" + vc;
@@ -131,42 +133,79 @@ public class UtilServer extends HttpServlet {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-        
-        
-        
-        
-        /**
-          JSONObject jsonObject = (JSONObject) jsonParser.parse(json_all);
 
-            //Retrieving the array
-            JSONArray jsonArray = (JSONArray) jsonObject.get("organisationUnits");
-            * 
-         **/
-         //infrasstructure parent info controller
+        if (request.getParameter("jsonparentx") != null && request.getParameter("jsonparentx") != null) {
+
+            try {
+                String vc = "";
+                String parentx = request.getParameter("jsonparentx");
+                
+                String leveld = request.getParameter("jsonparentx");
+                
+                
+                if ("Nigeria".equalsIgnoreCase(parentx)) {
+                    vc = counterXString_withParameters_x(sql.L2_count_by_level_using_parent_source_name_details, ""); //total lgas matched
+                } else if ("lga_x".equalsIgnoreCase(leveld)){
+                vc = counterXString_withParameters_x(sql.L3_count_by_level_using_parent_source_name_details, parentx); //total lgas matched
+                }
+                else {
+                    vc = counterXString_withParameters_x(sql.L3_count_by_level_using_parent_source_name_details, parentx); //total lgas matched
+                }
+                JSONParser parser = new JSONParser();
+
+                JSONObject json = (JSONObject) parser.parse(vc);
+
+                System.out.println(json);
+
+                // mat = vc;
+                PrintWriter out = response.getWriter();
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                out.print(json);
+                out.flush();
+
+                return;
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+ System.out.println("ssssssssssssssssssssssssssssss");
+        /**
+         * JSONObject jsonObject = (JSONObject) jsonParser.parse(json_all);
+         *
+         * //Retrieving the array JSONArray jsonArray = (JSONArray)
+         * jsonObject.get("organisationUnits");
+         *
+         *
+         */
+        //infrasstructure parent info controller
         if (request.getParameter("primer") != null) {
-           
+
             try {
                 String parentx = request.getParameter("primer");
-                
+
                 int xx = counterXint(sql.count_all_from_destination_no);
                 int xc = counterXint(sql.count_all_from_source_no);
                 int xv = counterXint(sql.count_matched_no);
                 String vc = counterXmany(sql.count_matched_name);
-                
-                float seq = ((float)xv / xc);
+
+                float seq = ((float) xv / xc);
                 String str = String.format("%2.02f", (seq * 100));
                 System.out.println(vc);
-                mat = str+"%,"+xx+","+xc+","+xv+",@@@"+vc;
-                
-              } catch (ClassNotFoundException ex) {
+                mat = str + "%," + xx + "," + xc + "," + xv + ",@@@" + vc;
+
+            } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
-            }  
             }
-            
-            
+        }
+
         response.setContentType("text/plain;charset=UTF-8");
         response.setStatus(200);
         ServletOutputStream sout = response.getOutputStream();
@@ -174,7 +213,7 @@ public class UtilServer extends HttpServlet {
         sout.print(mat);
         mat = "";
     }
-    
+
     public static String counterXmany(String sqq) throws ClassNotFoundException, SQLException {
 
         PreparedStatement ps = null;
@@ -188,7 +227,7 @@ public class UtilServer extends HttpServlet {
             rx = ps.executeQuery();
             while (rx.next()) {
 
-                ret = " <option value=\""+rx.getString(1)+"\">"+ret;
+                ret = " <option value=\"" + rx.getString(1) + "\">" + ret;
 
             }
 
@@ -197,7 +236,7 @@ public class UtilServer extends HttpServlet {
         }
         return ret;
     }
-    
+
     public static String counterXmany_withParameters(String sqq, String par1, String par2) throws ClassNotFoundException, SQLException {
 
         PreparedStatement ps = null;
@@ -213,7 +252,7 @@ public class UtilServer extends HttpServlet {
             rx = ps.executeQuery();
             while (rx.next()) {
 
-                ret = " <option value=\""+rx.getString(1)+"\">"+ret;
+                ret = " <option value=\"" + rx.getString(1) + "\">" + ret;
 
             }
 
@@ -222,7 +261,6 @@ public class UtilServer extends HttpServlet {
         }
         return ret;
     }
-    
 
     public static String counterX(String sqq) throws ClassNotFoundException, SQLException {
 
@@ -246,8 +284,8 @@ public class UtilServer extends HttpServlet {
         }
         return ret;
     }
-    
-     public static int counterXint(String sqq) throws ClassNotFoundException, SQLException {
+
+    public static int counterXint(String sqq) throws ClassNotFoundException, SQLException {
 
         PreparedStatement ps = null;
         ResultSet rx = null;
@@ -269,7 +307,8 @@ public class UtilServer extends HttpServlet {
         }
         return ret;
     }
-     public static int counterXint_withParameters(String sqq, String par1) throws ClassNotFoundException, SQLException {
+
+    public static int counterXint_withParameters(String sqq, String par1) throws ClassNotFoundException, SQLException {
 
         PreparedStatement ps = null;
         ResultSet rx = null;
@@ -279,11 +318,10 @@ public class UtilServer extends HttpServlet {
         try {
 
             ps = conn.prepareStatement(sqq);
-            ps.setString(1, "%"+par1+"%");
-            
+            ps.setString(1, "%" + par1 + "%");
+
             System.out.println(ps.toString());
-            
-            
+
             rx = ps.executeQuery();
             if (rx.next()) {
 
@@ -296,8 +334,8 @@ public class UtilServer extends HttpServlet {
         }
         return ret;
     }
-     
-     public static String counterXString_withParameters(String sqq, String par1) throws ClassNotFoundException, SQLException {
+
+    public static String counterXString_withParameters(String sqq, String par1) throws ClassNotFoundException, SQLException {
 
         PreparedStatement ps = null;
         ResultSet rx = null;
@@ -307,11 +345,10 @@ public class UtilServer extends HttpServlet {
         try {
 
             ps = conn.prepareStatement(sqq);
-            ps.setString(1, "%"+par1+"%");
-            
+            ps.setString(1, "%" + par1 + "%");
+
             System.out.println(ps.toString());
-            
-            
+
             rx = ps.executeQuery();
             while (rx.next()) {
 
@@ -324,8 +361,8 @@ public class UtilServer extends HttpServlet {
         }
         return ret;
     }
-     
-     public static String counterXString_withParameters_(String sqq, String par1) throws ClassNotFoundException, SQLException {
+
+    public static String counterXString_withParameters_(String sqq, String par1) throws ClassNotFoundException, SQLException {
 
         PreparedStatement ps = null;
         ResultSet rx = null;
@@ -335,22 +372,85 @@ public class UtilServer extends HttpServlet {
         try {
 
             ps = conn.prepareStatement(sqq);
-            ps.setString(1, "%"+par1+"%");
-            
+            ps.setString(1, "%" + par1 + "%");
+
             System.out.println(ps.toString());
-            
-            
+
             rx = ps.executeQuery();
-            while (rx.next()) {
+            String jsonPrimer = "{\n"
+                    + "  \"draw\": 1,\n"
+                    + "  \"recordsTotal\": 57,\n"
+                    + "  \"recordsFiltered\": 57,\n"
+                    + "  \"data\": [";
+            String jsonPrimerClose = "@@]";
 
-                ret = " <option value=\""+rx.getString(1)+"\">"+ret;
+            if (sqq.startsWith("SELECT d.uid")) {
+                while (rx.next()) {
 
+                    ret = " <option value=\"" + rx.getString(1) + "\">" + ret;
+                    String dd = "[\n"
+                            + "      \"" + rx.getString(1) + "\",\n"
+                            + "      \"" + rx.getString(2) + "\",\n"
+                            + "      \"" + rx.getString(3) + "\",\n"
+                            + "      \"" + rx.getString(4) + "\",\n"
+                            + "      \"" + rx.getString(5) + "\",\n"
+                            + "      \"" + rx.getString(6) + "\"\n"
+                            + "    ],";
+
+                    ret = dd + ret;
+                }
+            } else {
+
+                while (rx.next()) {
+                    ret = " <option value=\"" + rx.getString(1) + "\">" + ret;
+                }
             }
 
         } finally {
             conn.close();
         }
         return ret;
+    }
+
+    public static String counterXString_withParameters_x(String sqq, String par1) throws ClassNotFoundException, SQLException {
+
+        PreparedStatement ps = null;
+        ResultSet rx = null;
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DbConnector.getConnection();
+        String ret = "";
+        try {
+
+            ps = conn.prepareStatement(sqq);
+            ps.setString(1, "%" + par1 + "%");
+
+            System.out.println(ps.toString());
+
+            rx = ps.executeQuery();
+            String jsonPrimer = "{\n"
+                    + "  \"data\": [";
+            String jsonPrimerClose = "@@]";
+
+            while (rx.next()) {
+
+                String dd = "[\n"
+                        + "      \"" + rx.getString(1) + "\",\n"
+                        + "      \"" + rx.getString(2) + "\",\n"
+                        + "      \"" + rx.getString(3) + "\",\n"
+                        + "      \"" + rx.getString(4) + "\",\n"
+                        + "      \"" + rx.getString(5) + "\",\n"
+                        + "      \"" + rx.getString(6) + "\"\n"
+                        + "    ],";
+
+                ret = dd + ret;
+            }
+
+            ret = jsonPrimer + ret + jsonPrimerClose;
+        } finally {
+            conn.close();
+        }
+
+        return ret.replaceAll(",@@", "")+"}";
     }
 
 }

@@ -59,6 +59,9 @@ public class sql {
     public static String L4_count_by_level_using_parent_source_name = "SELECT count(*) FROM raw_ r inner JOIN sormas_local d ON (r.UUID = d.externalid) WHERE r.`level` =43 and d.parent_id = (select sx.uid from sormas_local sx where sx.namex like ?  and level = 3)";
     public static String L4_count_by_level_using_parent_source_name_xx = "SELECT d.namex FROM raw_ r inner JOIN sormas_local d ON (r.UUID = d.externalid) WHERE r.`level` = 4 and d.parent_id = (select sx.uid from sormas_local sx where sx.namex like ?  and level = 3)";
     
+    public static String L4_count_by_level_using_parent_source_name_details = "SELECT d.uid, d.uuid, r.uuid, d.namex,  r.name, d.adapter_cdate FROM raw_ r inner JOIN sormas_local d ON (r.UUID = d.externalid) WHERE r.`level` = 4 and d.parent_id = (select sx.uid from sormas_local sx where sx.namex like ?  and level = 3)";
+    public static String L3_count_by_level_using_parent_source_name_details = "SELECT d.uid, d.uuid, r.uuid, d.namex,  r.name, d.adapter_cdate FROM raw_ r inner JOIN sormas_local d ON (r.UUID = d.externalid) WHERE r.`level` = 3 and d.parent_id = (select sx.uid from sormas_local sx where sx.namex like ?  and level = 2)";
+    public static String L2_count_by_level_using_parent_source_name_details = "SELECT   d.uid, d.uuid, r.uuid, d.namex,  r.name, d.adapter_cdate FROM raw_ r inner JOIN sormas_local d ON (r.UUID = d.externalid) WHERE r.`level` = 2 and r.name like ?";
 
 
     public static String count_unmatched_at_destination = "SELECT * FROM sormas_local d WHERE d.uid not IN (SELECT dd.uid FROM raw_ r inner JOIN sormas_local dd ON (r.UUID = dd.externalid) WHERE r.`level` = 2) AND d.`level` = 2";

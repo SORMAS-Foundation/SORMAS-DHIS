@@ -94,7 +94,7 @@ public class dbResolvers {
                 pstmt.executeUpdate();
             }
             con.close();;
-            System.out.println("Records inserted.....");
+           // System.out.println("Records inserted.....");
         } catch (SQLException ex) {
             Logger.getLogger(dbResolvers.class.getName()).log(Level.SEVERE, null, ex);
         } catch (java.text.ParseException ex) {
@@ -187,7 +187,7 @@ public class dbResolvers {
             }}
             }
             con.close();
-            System.out.println("Records inserted.....");
+           // System.out.println("Records inserted.....");
         } catch (SQLException ex) {
             Logger.getLogger(dbResolvers.class.getName()).log(Level.SEVERE, null, ex);
         }

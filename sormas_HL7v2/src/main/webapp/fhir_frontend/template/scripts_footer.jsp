@@ -3,6 +3,8 @@
         <!-- REQUIRED SCRIPTS -->
         <!-- jQuery -->
         <script src="./mira_assets/js/jquery.min.js"></script>
+        
+        <script src="./mira_assets/js/knob.js" type="text/javascript"></script>
         <!-- Bootstrap -->
         <script src="./mira_assets/js/bootstrap.bundle.min.js"></script>
         <!-- overlayScrollbars -->

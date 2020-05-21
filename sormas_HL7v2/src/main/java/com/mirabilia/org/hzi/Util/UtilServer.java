@@ -33,6 +33,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -62,15 +64,15 @@ public class UtilServer extends HttpServlet {
         if (request.getParameter("count") != null) {
             try {
                 //System.out.println(request.getParameter("count"));
-                int counter = Integer.parseInt(request.getParameter("count"));
+               // int counter = Integer.parseInt(request.getParameter("count"));
 
-                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.externalid != 'null' AND d.duplicate_with IS NULL;");
+                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.externalid != 'null' AND d.duplicate_with IS NULL or d.duplicate_with = '';");
 
                 mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.externalid != 'null' AND d.duplicate_with IS not NULL and d.duplicate_with != '';") + "," + mat;
 
                 mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.externalid IS NULL AND d.duplicate_with != '';") + "," + mat;
 
-                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.externalid IS NULL AND d.duplicate_with IS null;") + "," + mat;
+                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.externalid IS NULL AND d.duplicate_with IS null or d.duplicate_with = '';") + "," + mat;
 
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
@@ -79,6 +81,7 @@ public class UtilServer extends HttpServlet {
             }
 
         }
+        //MATCHED
         //infrasstructure hirachy controller
         if (request.getParameter("parentx") != null && "3".contains(request.getParameter("levelx"))) {
 
@@ -134,22 +137,102 @@ public class UtilServer extends HttpServlet {
             }
         }
 
-        if (request.getParameter("jsonparentx") != null && request.getParameter("jsonparentx") != null) {
+        //DUPLICATES
+        //infrasstructure hirachy controller
+        if (request.getParameter("dup_parentx") != null && "3".contains(request.getParameter("levelx"))) {
+            //   System.out.println("ddddddddddddddddddddddd"+request.getParameter("levelx"));
+
+            try {
+                String parentx = request.getParameter("dup_parentx");
+                String levelx = request.getParameter("levelx");
+
+                int xx = counterXint_withParameters(sql.count_by_level_using_parent, parentx); //total lgas from sormas
+
+                //total lgas from source
+                String sub = counterXString_withParameters(sql.count_by_level_using_parent_source_q1, parentx); //subquery getting uid for ltr
+
+                int xc = counterXint_withParameters(sql.count_by_level_using_parent_source_q2, sub); //number of lga from dhis
+
+                int xm = counterXint_withParameters(sql.dup_count_by_level_using_parent_source_name, parentx); //total 100% duplicates
+
+                String vc = counterXString_withParameters_(sql.cdup_ount_by_level_using_parent_source_name_xx, parentx); //lgas from state
+
+                float seq = ((float) xm / xc);
+                String str = String.format("%2.02f", (seq * 100));
+                //  System.out.println(xc+"vc_____xm"+xm+"______"+sub+"_______"+vc);
+                mat = str + "%," + xx + "," + xc + "," + xm + ",@@@" + vc;
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
+        if (request.getParameter("dup_parentx") != null && "4".contains(request.getParameter("levelx"))) {
+            //   System.out.println("ddddddddddddddddddddddd"+request.getParameter("levelx"));
+
+            try {
+                String parentx = request.getParameter("dup_parentx");
+                String levelx = request.getParameter("levelx");
+
+                int xx = counterXint_withParameters(sql.L4_count_by_level_using_parent, parentx); //total ward from sormas
+
+                //total lgas from source
+                String sub = counterXString_withParameters(sql.L4_count_by_level_using_parent_source_q1, parentx); //subquery getting uid for ltr
+
+                int xc = counterXint_withParameters(sql.L4_count_by_level_using_parent_source_q2, sub); //number of ward from dhis
+
+                int xm = counterXint_withParameters(sql.L4_dup_count_by_level_using_parent_source_name, parentx); //total 100% duplicates
+
+                String vc = counterXString_withParameters_(sql.L4_cdup_ount_by_level_using_parent_source_name_xx, parentx); //wards from state 
+
+                float seq = ((float) xm / xc);
+                String str = String.format("%2.02f", (seq * 100));
+                //  System.out.println(xc+"vc_____xm"+xm+"______"+sub+"_______"+vc);
+                mat = str + "%," + xx + "," + xc + "," + xm + ",@@@" + vc;
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
+        
+
+        if (request.getParameter("jsonparentx") != null && request.getParameter("jsonlevelx") != null) {
 
             try {
                 String vc = "";
                 String parentx = request.getParameter("jsonparentx");
-                
-                String leveld = request.getParameter("jsonparentx");
-                
-                
-                if ("Nigeria".equalsIgnoreCase(parentx)) {
-                    vc = counterXString_withParameters_x(sql.L2_count_by_level_using_parent_source_name_details, ""); //total lgas matched
-                } else if ("lga_x".equalsIgnoreCase(leveld)){
-                vc = counterXString_withParameters_x(sql.L3_count_by_level_using_parent_source_name_details, parentx); //total lgas matched
-                }
-                else {
-                    vc = counterXString_withParameters_x(sql.L3_count_by_level_using_parent_source_name_details, parentx); //total lgas matched
+
+                String leveld = request.getParameter("jsonlevelx");
+
+                //   System.out.println("nnnnnnnnnnnnnnnnnnn"+leveld);
+                if ("nigeria_x".equalsIgnoreCase(leveld)) {
+
+                    vc = counterXString_withParameters_x(sql.L2_count_by_level_using_parent_source_name_details, ""); //tables for states Matched
+
+                } else if ("dup_nigeria_x".equalsIgnoreCase(leveld)) {
+                    vc = counterXString_withParameters_x(sql.dup_L2_count_by_level_using_parent_source_name_details, ""); //tables for states Matched
+                    System.out.println("nnnnnnnnnnnnnnnnnnn" + vc);
+                } else if ("lga_x".equalsIgnoreCase(leveld)) {
+                    vc = counterXString_withParameters_x(sql.L4_count_by_level_using_parent_source_name_details, parentx); //tables for Ward Matched
+                    System.out.println("lglglglglglglg");
+                } else if ("state_x".equalsIgnoreCase(leveld)) {
+                    vc = counterXString_withParameters_x(sql.L3_count_by_level_using_parent_source_name_details, parentx); //tables for LGA Matched
+                    System.out.println("statatatatatat");
+                } else if ("dup_state_x".equalsIgnoreCase(leveld)) {
+                    System.out.println("dupdupduo______stat dup ________" + parentx);
+                    vc = counterXString_withParameters_seeded(sql.dup_L3_count_by_level_using_parent_source_name_details, parentx, sql.dup__SUB_count_by_level_using_parent_source_name_details); //tables for lga Matched
+
+                }else if ("dup_lga_x".equalsIgnoreCase(leveld)) {
+                    System.out.println("dupdupduo______stat dup ________" + parentx);
+                    vc = counterXString_withParameters_seeded(sql.L4_dup_L3_count_by_level_using_parent_source_name_details, parentx, sql.dup__SUB_count_by_level_using_parent_source_name_details); //tables for Ward Matched
+
                 }
                 JSONParser parser = new JSONParser();
 
@@ -174,7 +257,6 @@ public class UtilServer extends HttpServlet {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
- System.out.println("ssssssssssssssssssssssssssssss");
         /**
          * JSONObject jsonObject = (JSONObject) jsonParser.parse(json_all);
          *
@@ -198,6 +280,28 @@ public class UtilServer extends HttpServlet {
                 String str = String.format("%2.02f", (seq * 100));
                 System.out.println(vc);
                 mat = str + "%," + xx + "," + xc + "," + xv + ",@@@" + vc;
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        //duplicate alogth
+        if (request.getParameter("dup_primer") != null) {
+
+            try {
+                //String parentx = request.getParameter("dup_primer");
+
+                int xx = counterXint(sql.dup_count_all_from_sorma_local);
+                int xc = counterXint(sql.count_all_from_source_no);
+                String vc = counterXmany(sql.dup_count_matched_name);
+
+                float seq = ((float) xx / xc);
+                String str = String.format("%2.02f", (seq * 100));
+                //  System.out.println(vc);
+                mat = str + "%," + xx + "," + xc + ",@@@" + vc;
 
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
@@ -297,6 +401,29 @@ public class UtilServer extends HttpServlet {
             ps = conn.prepareStatement(sqq);
             rx = ps.executeQuery();
             if (rx.next()) {
+
+                ret = rx.getInt(1);
+
+            }
+
+        } finally {
+            conn.close();
+        }
+        return ret;
+    }
+
+    public static int counterXint_dup(String sqq) throws ClassNotFoundException, SQLException {
+
+        PreparedStatement ps = null;
+        ResultSet rx = null;
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DbConnector.getConnection();
+        int ret = 0;
+        try {
+
+            ps = conn.prepareStatement("SELECT d.duplicate_with FROM sormas_local d WHERE d.duplicate_with is not null and duplicate_with != '' and d.`level` = 3;");
+            rx = ps.executeQuery();
+            while (rx.next()) {
 
                 ret = rx.getInt(1);
 
@@ -450,7 +577,87 @@ public class UtilServer extends HttpServlet {
             conn.close();
         }
 
-        return ret.replaceAll(",@@", "")+"}";
+        return ret.replaceAll(",@@", "") + "}";
     }
+
+    public static String counterXString_withParameters_seeded(String sqq, String par1, String sqq_) throws ClassNotFoundException, SQLException {
+
+        PreparedStatement ps = null;
+        ResultSet rx = null;
+
+        PreparedStatement ps_ = null;
+        ResultSet rx_ = null;
+        
+        PreparedStatement ps_x = null;
+        ResultSet rx_x = null;
+        
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DbConnector.getConnection();
+        String ret = "";
+        try {
+
+            ps = conn.prepareStatement(sqq);
+            ps.setString(1, "%" + par1 + "%");
+
+            System.out.println(ps.toString());
+
+            rx = ps.executeQuery();
+            String jsonPrimer = "{\n"
+                    + "  \"data\": [";
+            String jsonPrimerClose = "@@]";
+
+            while (rx.next()) {
+                String dimp = rx.getString("duplicate_with").replaceAll(" ", "").replaceAll(",", "\",\"");
+                String sss = sqq_ + "(\"" + dimp + "\")";
+
+                System.out.println(sss);
+
+                ps_ = conn.prepareStatement(sss);
+                //    ps_.setString(1, dimp.replaceAll(" ", "").replaceAll(",", "\",\""));
+
+                System.out.println(ps_.toString());
+                rx_ = ps_.executeQuery();
+                while (rx_.next()) {
+                    
+                    ps_x = conn.prepareStatement("select r.name, r.uuid from raw_ r where r.uuid = '"+rx.getString("externalid")+"'");
+                    System.out.println(ps_x.toString());
+                rx_x = ps_x.executeQuery();
+                    // System.out.println("__________________________________________________");
+                String dd = "[\n"
+                            + "      \"" + rx.getString("idx") + "\",\n"
+                            + "      \"" + rx.getString("uuid") + "\",\n"
+                            + "      \"" + rx.getString("namex") + "\",\n"
+                            + "      \"" + rx_.getString("name") + "\",\n"
+                            + "      \"" + rx_.getString("uuid") + "\",\n";
+                        String dx = "";
+                if (rx_x.next()) {
+                   // System.out.println("__________________________________________________");
+                    dx="      \"" + rx_x.getString("name") + "\",\n"
+                            + "      \"" + rx_x.getString("uuid") + "\",\n";
+                }else{
+                dx="      \"non\",\n"
+                            + "      \"non\",\n";
+                }
+                   dd = dd+dx+"   \"" + rx.getString("adapter_cdate") + "\", \"<div class='tools'><a href='#' data-toggle='modal' data-target='#deduplicate'><i class='fas fa-edit' aria-hidden='true'></i><i class='fas fa-trash-o' aria-hidden='true'></i></a></div>\" ],";
+                   System.out.println("__________________________________________________"+dx);
+                    ret = dd + ret;
+                    System.out.println("_________________________________________________>>>>_"+ret);
+                }
+                     
+            }
+
+            ret = jsonPrimer + ret + jsonPrimerClose;
+        } finally {
+            conn.close();
+        }
+
+        return ret.replaceAll(",@@", "") + "}";
+    }
+
+    
+    
+    
+    
+    
 
 }

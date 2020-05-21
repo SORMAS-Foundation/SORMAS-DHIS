@@ -39,16 +39,14 @@ import java.util.List;
  * @author Mathew Official
  */
 public class analysisDTO {
-    
-    private static List<String> fieldList = new ArrayList();
 
+    private static List<String> fieldList = new ArrayList();
 
     public static void fastSender(int primer, int destin) throws ClassNotFoundException {
         //matching Ward/Community upward
         //this method do the major duplicationa analysis and also try to match each or unit with the entire DB to ascertain there are no deplicates and hf misplacement
-        
-        //data are feed into this method by the amount sent in cutter method
 
+        //data are feed into this method by the amount sent in cutter method
         String lister = "";
 
         PreparedStatement ps;
@@ -71,7 +69,7 @@ public class analysisDTO {
 
         try {
 
-            ps = conn.prepareStatement("SELECT UUID, name, shortname, level, updated_last, parent_id FROM raw_ where idx > ? and idx < ? ORDER BY idx;");
+            ps = conn.prepareStatement("SELECT UUID, name, shortname, level, updated_last, path_parent FROM raw_ where idx > ? and idx < ? ORDER BY idx;");
             ps.setString(1, pr);
             ps.setString(2, ds);
             System.out.println("Now running : " + ps);
@@ -103,10 +101,7 @@ public class analysisDTO {
                         // code block
                         stack = stack.replaceFirst(" Local Government Area", "");
                         break;
-                    case "4":
-                        // code block
-                        stack = stack.replaceFirst(" Ward", "");
-                        break;
+
                     default:
                     // code block
                 }
@@ -209,6 +204,58 @@ public class analysisDTO {
             conn.close();
         }
         return how_many + 1;
+    }
+
+    public static void Deduplicate() throws ClassNotFoundException, SQLException {
+
+        PreparedStatement ps = null;
+        ResultSet rx = null;
+
+        PreparedStatement ps_ = null;
+        ResultSet rx_ = null;
+
+        PreparedStatement ps_x = null;
+        ResultSet rx_x = null;
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DbConnector.getConnection();
+
+        try {
+
+            ps = conn.prepareStatement("SELECT duplicate_with, idx FROM sormas_local where duplicate_with is not null and externalid is null;");
+            rx = ps.executeQuery();
+            while (rx.next()) {
+
+                String s = rx.getString(1);
+                s = s + "~";
+                s = s.replace(", ~", "");
+              //  System.out.println(s);
+                String[] words = s.split(",");
+                String dup_ = "";
+                int dx = words.length;
+               // System.out.println("checking if "+words[0]+"equals"+words[dx - 1]);
+                if (words[0].equals(words[dx - 1])) {
+                } else {
+
+                    ps_x = conn.prepareStatement("select idx from sormas_local where externalid = ?");
+                    ps_x.setString(1, words[0]);
+                    rx_x = ps_x.executeQuery();
+                    if (rx_x.next()) {
+                    } 
+                    
+                    else {
+                        ps_ = conn.prepareStatement("update sormas_local set externalid = ?, duplicate_with = '' where idx = ? and externalid is null");
+                        ps_.setString(1, words[0]);
+                        ps_.setString(2, rx.getString(2));
+                        System.out.println(ps_.toString());
+                        ps_.executeUpdate();
+                    }
+                }
+
+            }
+
+        } finally {
+            conn.close();
+        }
     }
 
     public static void Localizer(String ch, String cm, String cc, String cdt) throws ClassNotFoundException, SQLException {

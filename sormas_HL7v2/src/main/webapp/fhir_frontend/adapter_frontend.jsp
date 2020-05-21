@@ -251,7 +251,7 @@ String totalOrg = sourceDTO.totalORGinDB();
             </div>
             <!-- /.card -->
             
-            <div class="card">
+            <!--div class="card" style ="displat: none;">
                                 <div class="card-header">
                                     <h3 class="card-title" id="678i">Milestone Analysis</h3>
 
@@ -265,7 +265,8 @@ String totalOrg = sourceDTO.totalORGinDB();
                                         </div>
                                     </div>
                                 </div>
-                                <!-- /.card-header -->
+                              
+            
                                 <div class="card-body table-responsive p-0">
                                     <table class="table table-striped">
                                         <thead>
@@ -338,8 +339,8 @@ String totalOrg = sourceDTO.totalORGinDB();
                                     </table>
 
                                 </div>
-                                <!-- /.card-body -->
-                            </div>
+                               
+                            </div-->
           </div>
           <!-- /.col -->
         </div>

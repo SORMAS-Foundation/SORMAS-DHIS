@@ -146,7 +146,7 @@ public class sourceDTO {
                 
                 }
                 
-            jsonString = "<strong>Source : </strong>"+jsonString+" | <strong> Destination : </strong>"+jsonStringx;
+            jsonString = "<strong>Master : </strong>"+jsonString+" | <strong> Destination : </strong>"+jsonStringx;
             
             conn.close();
             } 

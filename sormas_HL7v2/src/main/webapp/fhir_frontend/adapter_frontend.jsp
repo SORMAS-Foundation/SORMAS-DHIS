@@ -45,13 +45,14 @@
                                         <span class="info-box-icon bg-info elevation-1"><i class="fa fa-hospital"></i></span>
 <%
 String totalOrg = sourceDTO.totalORGinDB();
+String totalDest = sourceDTO.totalDestDB();
 
 %>
                                         <div class="info-box-content" style="width:40%">
                                             <span class="info-box-text">Total Org Unit on Adapter</span>
                                             <span class="info-box-number">
                                                 <%=totalOrg%> 
-                                                <small>| Stored</small>
+                                                <small>| Stored from Remote DHIS2</small>
                                             </span>
                                         </div>
                                         <!-- /.info-box-content -->
@@ -89,7 +90,7 @@ String totalOrg = sourceDTO.totalORGinDB();
 
                                         <div class="info-box-content">
                                             <span class="info-box-text">Total No of Org Unit on DHIS</span>
-                                            <span class="info-box-text"><b id="DHIS">loading</b></span>
+                                            <span class="info-box-text"><b id="DHIS">about... ${total_org}</b></span>
                                         </div>
                                         <!-- /.info-box-content -->
                                     </div>
@@ -101,8 +102,9 @@ String totalOrg = sourceDTO.totalORGinDB();
                                         <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-sign-out-alt"></i></span>
 
                                         <div class="info-box-content">
-                                            <span class="info-box-text">Total No of Org Unit Synced</span>
-                                            <span class="info-box-text"><b>External Destination not set</b></span>
+                                            <span class="info-box-text">Total No of Org Unit from SORMAS</span>
+                                            <span class="info-box-text"><b> <%=totalDest%> </b>  <small>| found on SORMAS</small></span>
+                                            
                                         </div>
                                         <!-- /.info-box-content -->
                                     </div>
@@ -151,7 +153,7 @@ String totalOrg = sourceDTO.totalORGinDB();
                 <div class="row">
                   <div class="col-md-8">
                     <p class="text-center">
-                      <strong>Infrastructure log (last month)</strong>
+                      <strong>Infrastructure log (current month)</strong>
                     </p>
 
                     <div class="chart">
@@ -167,37 +169,64 @@ String totalOrg = sourceDTO.totalORGinDB();
                     </p>
 
                     <div class="progress-group">
-                      Possible duplicates to be resolved
-                      <span class="float-right"><b>160</b>/200</span>
+                      Unmatched infrastructure to be resolved
+                      <span class="float-right" id="att"></span>
                       <div class="progress progress-sm">
-                        <div class="progress-bar bg-primary" style="width: 80%"></div>
+                        <div class="progress-bar bg-danger" id="att_" style="width: 100%"></div>
                       </div>
                     </div>
                     <!-- /.progress-group -->
 
                     <div class="progress-group">
-                      Locations without GeoPoints
-                      <span class="float-right"><b>310</b>/400</span>
+                      Duplicates infrastructure to be resolved
+                      <span class="float-right" id="btt"></span>
                       <div class="progress progress-sm">
-                        <div class="progress-bar bg-danger" style="width: 75%"></div>
+                        <div class="progress-bar bg-primary" id="btt_"  style="width: 100%"></div>
+                      </div>
+                    </div>
+
+                    <!-- /.progress-group -->
+                    <div class="progress-group">
+                      <span class="progress-text">Possible Duplicates infrastructure to be resolved</span>
+                      <span class="float-right" id="ctt"></span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-warning" id="ctt_" style="width: 100%"></div>
+                      </div>
+                    </div>
+
+                    <!-- /.progress-group -->
+                    <div class="progress-group">
+                      Total Matched Infrastructure
+                      <span class="float-right" id="dtt"></span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-success" id="dtt_" style="width: 100%"></div>
+                      </div>
+                    </div>
+                    <!-- /.progress-group -->
+                    <br>
+                      <div class="progress-group">
+                      Locations without GeoPoints
+                      <span class="float-right"><b>0</b>/11879</span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-info" style="width: 1%"></div>
                       </div>
                     </div>
 
                     <!-- /.progress-group -->
                     <div class="progress-group">
                       <span class="progress-text">Locations without phone no</span>
-                      <span class="float-right"><b>480</b>/800</span>
+                      <span class="float-right"><b>0</b>/11879</span>
                       <div class="progress progress-sm">
-                        <div class="progress-bar bg-success" style="width: 60%"></div>
+                        <div class="progress-bar bg-purple" style="width: 1%"></div>
                       </div>
                     </div>
 
                     <!-- /.progress-group -->
                     <div class="progress-group">
                       Unclassified issues
-                      <span class="float-right"><b>250</b>/500</span>
+                      <span class="float-right"><b>0</b>/11879</span>
                       <div class="progress progress-sm">
-                        <div class="progress-bar bg-warning" style="width: 50%"></div>
+                        <div class="progress-bar bg-dark" style="width: 1%"></div>
                       </div>
                     </div>
                     <!-- /.progress-group -->
@@ -403,6 +432,7 @@ String totalOrg = sourceDTO.totalORGinDB();
                 xhr.DONE
             }
             starter();
+            
             function starter() {
             var xhr = new XMLHttpRequest();
             xhr.open('GET', '../controller?getAllTotalfromFHIR=', true);
@@ -431,6 +461,55 @@ String totalOrg = sourceDTO.totalORGinDB();
                 xhr.send("");
                 xhr.DONE
             }
+            
+            
+            
+            
+            resx();
+            
+            
+             function resx() {
+
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?count=10', true);
+                        xhr.responseType = 'text';
+                        xhr.onload = function () {
+                            if (xhr.readyState === xhr.DONE) {
+                                if (xhr.status === 200) {
+                                    intPerser(xhr.responseText);
+                                } else {
+                                    alert("There is a problem retreiving analytics from server, please rerun Analytics 'Analyse' button");
+                                    return;
+                                }
+                            }
+                        };
+                        xhr.send(null);
+
+                    }
+
+                    function intPerser(e) {
+                        const words = e.split(',');
+                        var a = parseInt(words[0]);
+                        var b = parseInt(words[1]);
+                        var c = parseInt(words[2]);
+                        var d = parseInt(words[3]);
+
+                        var tt = a + b + c + d;
+                        $('#att').html('<b>'+a+'</b>/'+tt+'')
+                        $('#att_').css('width', ''+Math.floor((a / tt) * 100)+'%')
+                        
+                        $('#btt').html('<b>'+b+'</b>/'+tt+'')
+                        $('#btt_').css('width', ''+Math.floor((b / tt) * 100)+'%')
+                        
+                        $('#ctt').html('<b>'+c+'</b>/'+tt+'')
+                        $('#ctt_').css('width', ''+Math.floor((c / tt) * 100)+'%')
+                        
+                        $('#dtt').html('<b>'+d+'</b>/'+tt+'')
+                        $('#dtt_').css('width', ''+Math.floor((d / tt) * 100)+'%')
+                        
+
+
+                    }
         </script>
 
     </body>

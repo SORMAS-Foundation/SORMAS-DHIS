@@ -27,3 +27,14 @@
         <script src="./mira_assets/js/kit.js"></script>
         <!-- SweetAlert2 -->
         <script src="./mira_assets/js/sweetalert2.min.js"></script>
+        
+        <script>
+                    function cases(){
+                      $("#facl ul").hide(1000);
+                    }
+                    
+                    
+                    function cases_(){
+                      $("#caxl ul").hide(1000);
+                    }
+                </script>

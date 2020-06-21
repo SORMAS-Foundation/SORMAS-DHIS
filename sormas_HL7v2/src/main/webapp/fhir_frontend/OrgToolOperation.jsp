@@ -3,8 +3,32 @@
 <!DOCTYPE html>
 <html lang="en">
     <jsp:include page="template/head.jsp"></jsp:include>
-
         <body class="sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed control-sidebar-slide-open accent-purple">
+            <style>
+                .clickables {
+                    background-color: #ffffff;
+                    /* HOVER OFF */
+                    -webkit-transition: padding 2s;
+                }
+
+                .clickables:hover {
+                    background-color:  #f4f4f4;
+
+                    /* HOVER ON */
+                    -webkit-transition: border-radius 2s;
+                }
+
+                .modal-backdrop {
+                    visibility: hidden !important;
+                }
+                .modal.in {
+                    background-color: rgba(0,0,0,0.5);
+                }
+                body{
+                    background-color: #9dbeca;
+                }
+
+            </style>
             <div class="wrapper">
 
 
@@ -38,7 +62,7 @@
                     </section>
 
                     <div id="overlay" onclick="off()">
-                        <div id="text"><h2>Working on it... we will redirect you to the processor.</h2></div></div>
+                        <div id="text"><h2>please wait...</h2></div></div>
 
                 <%
                     String sourcesX = sourceDTO.getSourcePaired();
@@ -73,7 +97,7 @@
                                     </a>
 
 
-                                    <a class="btn btn-app hvr-icon-buzz-out" onclick="location.href = '../controllers_jsp/localized.jsp';">
+                                    <a class="btn btn-app hvr-icon-buzz-out" onclick="lc()">
                                         <i class="fas fa-download hvr-icon"></i> Prime < Destination
                                     </a>
 
@@ -92,7 +116,7 @@
                                         <i class="fas fa-cogs hvr-icon"></i> Display Results
                                     </a>
 
-                                    <a onclick="" id="analysefhir" class="btn btn-app hvr-icon-buzz-out">
+                                    <a onclick="fhir_()" id="analysefhir" class="btn btn-app hvr-icon-buzz-out">
                                         <i class="fas fa-play hvr-icon"></i> Sync with FHIR
                                     </a>
 
@@ -111,7 +135,7 @@
 
                                             <div class="info-box-content">
                                                 <span class="info-box-text">Total Expected</span>
-                                                <span class="info-box-number" id="totaler"></span>
+                                                <span class="info-box-number" id="totalerc">${total_org}</span>
 
                                                 <div class="progress">
                                                     <div id="pbar" class="progress-bar" style="width: 100%"></div>
@@ -155,7 +179,7 @@
 
                             <div class="card card-success card-outline" id="body_wx">
                                 <div class="card-header">
-                                    <h3 class="card-title">
+                                    <h3 class="card-title" data-togg="tooltip" title="NOTE: This is using local SORMAS Server as a baseline">
                                         <i class="fas fa-search"></i>
                                         Infrastructure Match Results
                                     </h3>
@@ -167,27 +191,28 @@
 
 
                                     <div class="row input-group">
-                                        <div onclick="dmd('')" class="col-xs-6 col-md-3 text-center" data-toggle="modal" data-target="#modal-xl" style="border-right: 1px solid #f4f4f4">
+                                        <div onclick="dmd('')" class="col-xs-6 col-md-3 text-center clickables" data-togg="tooltip" title="Click here to view the Matched Data!" data-toggle="modal" data-target="#modal-xl" style="border-right: 1px solid #f4f4f4">
                                             <div style="display:inline;width:60px;height:60px;">
-                                                <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;"></div>
+                                                <input type="text" class="knob" data-readonly="true" value="20" id="dtt" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;">
+                                            </div>
 
                                             <div class="knob-label" id="full" ></div>
                                         </div>
 
                                         <!-- ./col -->
                                         <div onclick="dmd('pat_mat')" class="col-xs-6 col-md-3 text-center" style="border-right: 1px solid #f4f4f4" data-toggle="modal" data-target="#">
-                                            <div style="display:inline;width:60px;height:60px;"><input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;"></div>
+                                            <div style="display:inline;width:60px;height:60px;"><input type="text" class="knob" data-readonly="true" id="ctt"  value="50" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;"></div>
 
                                             <div class="knob-label" id="fullx" ></div>
                                         </div>
                                         <!-- ./col -->
-                                        <div class="col-xs-6 col-md-3 text-center" onclick="dmd('dup_')" data-toggle="modal"  data-target="#dup_modal-xl">
-                                            <div style="display:inline;width:60px;height:60px;"><input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;"></div>
+                                        <div class="col-xs-6 col-md-3 text-center clickables"  data-togg="tooltip" title="Click here to load Deduplicator Wizard!" onclick="dmd('dup_')" data-toggle="modal"  data-target="#dup_modal-xl">
+                                            <div style="display:inline;width:60px;height:60px;"><input type="text" id="btt"  class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;"></div>
 
                                             <div class="knob-label" id="fullxxx"></div>
                                         </div>
                                         <div class="col-xs-6 col-md-3 text-center" onclick="dmd('_mat')" data-toggle="modal"  data-target="#modal-warning"> 
-                                            <div style="display:inline;width:60px;height:60px;"><input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;"></div>
+                                            <div style="display:inline;width:60px;height:60px;"><input type="text" id="att" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;"></div>
 
                                             <div class="knob-label" id="fullxxxx"></div>
                                         </div>
@@ -223,7 +248,8 @@
 
 
                 <script>
-
+                                            var ctbb = '';
+                                            $('[data-togg="tooltip"]').tooltip();
 
                                             $('#body_wx').hide();
 
@@ -231,6 +257,7 @@
                                             $('#progress_Fhir').hide();
                                             $('#sync_').hide();
                                             var max = 0;
+                                            var maz = 0;
                                             var xhr = new XMLHttpRequest();
                                             xhr.open('GET', '../orggetter?pg_counter=1', true);
                                             xhr.responseType = 'text';
@@ -260,6 +287,7 @@
 
                                                         } else {
                                                             //   console.log("Server error while contacting main methods to get total number of chunks");
+                                                            alertx("DHIS2 Not Availalable");
                                                             return;
                                                         }
                                                     }
@@ -268,8 +296,9 @@
                                             }
                                             ;
                                             function gren() {
-                                                document.getElementById("contw").style.background = "#9eca9d";
+                                               // document.getElementById("contw").style.background = "#9eca9d";
                                                 //  document.getElementById("contw").style.background-color = "darkseagreen";
+                                                alertx("All Set");
                                             }
                                             ;
                                             //process the entire chunks one after the other
@@ -279,9 +308,11 @@
 
                                             //fires the main sync process.
                                             function starter() {
+                                                 maz = maxx;     
+                                                document.getElementById("overlay").style.display = "none";
                                                 $('#progress_').show();
                                                 servlet_primer(maxx);
-                                                console.log('priming ' + maxx);
+                                        //        console.log('priming ' + maxx);
                                                 //  myloader(0);
 
                                             }
@@ -309,12 +340,13 @@
                                             ;
                                             function myloader(width) {
                                                 // $('.progress-bar').css('width', width+'%');
-                                                console.log(width + '%');
+                                           //     console.log(width + '%');
                                                 //    $('#pbar').append(width);//???
                                                 //
 
-                                                var dd = document.getElementById("pbar").style.width = width + '%';
-                                                var ddc = document.getElementById("chunker").innerHTML = width + "%";
+                                                document.getElementById("pbar").style.width = width + '%';
+                                                document.getElementById("chunker").innerHTML = 'Total chunks remaining = '+width ;
+                                                //document.getElementById("chunker_").innerHTML = maz;
                                                 if (width < 3) {
 
                                                     //Fhir need to start here.
@@ -327,21 +359,40 @@
                                             }
                                             ;
                 </script>
-                <script type="text/javascript">
-                    document.getElementById("sync").addEventListener("click", function (event) {
-                        event.preventDefault()
-                    });
-                    function dd() {
 
-                        starter();
+
+
+                <script type="text/javascript">
+
+
+                    function dd() {
+                        document.getElementById("overlay").style.display = "block";
+                        setTimeout(function () {
+                            if (confirm("DANGER! \nThis action will Purge all MASTER Source Infrastructure Data already on the Adapter and reimport it afresh. \nDo you want to do that?")) {
+                          
+            starter();
+                                
+                            } else {
+                                document.getElementById("overlay").style.display = "none";
+
+                            }
+
+
+                        }, 1000);
                     }
 
                     function ana() {
                         document.getElementById("overlay").style.display = "block";
                         setTimeout(function () {
+                            if (confirm("WARNING! \nLong Processing Action, you are about to run the match processor... This will take time. \nDo you want to do that?")) {
+                                location.replace("../controllers_jsp/analytics_staging.jsp");
+                            } else {
+                                document.getElementById("overlay").style.display = "none";
 
-                            location.replace("../controllers_jsp/analytics_staging.jsp");
-                        }, 2000);
+                            }
+
+
+                        }, 1000);
                     }
 
                     function resx() {
@@ -353,13 +404,15 @@
                             if (xhr.readyState === xhr.DONE) {
                                 if (xhr.status === 200) {
 
-                                    console.log("Number of 100 percent machedprocessed currently = " + xhr.responseText);
+                                    //    console.log("Number of 100 percent machedprocessed currently = " + xhr.responseText);
+
                                     const words = xhr.responseText.split(',');
                                     $('#fullxxxx').html("100% Not Matchable = " + words[0]);
                                     $('#fullxxx').html("Duplicates = " + words[1]);
                                     $('#fullx').html("Partial Duplicates = " + words[2]);
                                     $('#full').html("Matched = " + words[3]);
-                                    $('#body_wx').show();
+                                    intPerser(xhr.responseText);
+
                                 } else {
                                     alert("There is a problem retreiving analytics from server, please rerun Analytics 'Analyse' button");
                                     return;
@@ -367,6 +420,25 @@
                             }
                         };
                         xhr.send(null);
+
+                    }
+
+                    function intPerser(e) {
+                        const words = e.split(',');
+                        var a = parseInt(words[0]);
+                        var b = parseInt(words[1]);
+                        var c = parseInt(words[2]);
+                        var d = parseInt(words[3]);
+
+                        var tt = a + b + c + d;
+
+                        $('#att').val(Math.floor((a / tt) * 100)+'%');
+                        $('#btt').val(Math.floor((b / tt) * 100)+'%');
+                        $('#ctt').val(Math.floor((c / tt) * 100)+'%');
+                        $('#dtt').val(Math.floor((d / tt) * 100)+'%');
+                        //   alert(Math.floor((c / tt) * 100));
+                        $('#body_wx').show();
+                        triggerKnob();
 
                     }
 
@@ -401,7 +473,7 @@
                         $('#progress_Fhir').hide();
                     }
                     ;
-                    function alertx() {
+                    function alertxx() {
                         const Toast = Swal.mixin({
                             toast: true,
                             position: 'top-end',
@@ -411,6 +483,33 @@
                         Toast.fire({
                             type: 'success',
                             title: 'Server now ready!.'
+                        });
+                    }
+                    ;
+
+                    function alertx(e) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                        Toast.fire({
+                            type: 'success',
+                            title: e
+                        });
+                    }
+                    ;
+                    function alerterr(e) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                        Toast.fire({
+                            type: 'error',
+                            title: e
                         });
                     }
                     ;
@@ -620,7 +719,7 @@
                                                         <div class="timeline-body">
                                                             <div class="row">
                                                                 <div class="input-group input-group-sm col-3">
-                                                                    <input type="text" list="lga" onchange="load_ward()" id="lga_x" autocomplete="off" class="form-control">
+                                                                    <input type="text" list="lga" onchange="load_ward('')" id="lga_x" autocomplete="off" class="form-control">
 
                                                                 </div>
                                                                 <div class="col-5">
@@ -655,7 +754,7 @@
                                                         <div class="timeline-body">
                                                             <div class="row">
                                                                 <div class="input-group input-group-sm col-3">
-                                                                    <input type="text" list="ward" onchange="load_hf()" id="ward_x" autocomplete="off" class="form-control">
+                                                                    <input type="text" list="ward" onchange="load_hf('')" id="ward_x" autocomplete="off" class="form-control">
 
                                                                 </div>
                                                                 <div class="col-5">
@@ -842,6 +941,14 @@
                                                                 <div class="col-2">
                                                                     <a onclick="tableloader('dup_state_x')" id="dup_lga_g" type="button" class="btn btn-success btn-flat">Show Details</a>
                                                                 </div>
+                                                                <div class="col-xs-2 col-md-1 text-center clickables">
+                                                                    <div style="display:inline;width:60px;height:60px;"><div style="display:inline;width:60px;height:60px;">
+                                                                           `<input type="text" id="btt_state" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="knob-label" id="fullxxx">Total Left = 23</div>
+                                                                </div>
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -871,6 +978,14 @@
                                                                 <div class="col-2">
                                                                     <a onclick="tableloader('dup_lga_x')" id="dup_ward_g" type="button" class="btn btn-success btn-flat">Show Details</a>
                                                                 </div>
+                                                                
+                                                                <div class="col-xs-2 col-md-1 text-center clickables">
+                                                                    <div style="display:inline;width:60px;height:60px;"><div style="display:inline;width:60px;height:60px;">
+                                                                           `<input type="text" id="btt_lga" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="knob-label" id="fullxxx">Total Left = 423</div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -892,7 +1007,7 @@
                                                         <div class="timeline-body">
                                                             <div class="row">
                                                                 <div class="input-group input-group-sm col-3">
-                                                                    <input type="text" list="ward" onchange="dup_load_hf()" id="dup_ward_x" autocomplete="off" class="form-control">
+                                                                    <input type="text" list="ward" onchange="load_hf('dup_')" id="dup_ward_x" autocomplete="off" class="form-control">
 
                                                                 </div>
                                                                 <div class="col-5">
@@ -905,6 +1020,13 @@
                                                                 </div>
                                                                 <div class="col-2">
                                                                     <a onclick="tableloader('dup_ward_x')" id="dup_hf_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                </div>
+                                                                <div class="col-xs-2 col-md-1 text-center clickables">
+                                                                    <div style="display:inline;width:60px;height:60px;"><div style="display:inline;width:60px;height:60px;">
+                                                                           `<input type="text" id="btt_ward" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="knob-label" id="fullxxx">Total Left = 223</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1028,9 +1150,9 @@
 
                             <i>Please mouse over each action to understand them before performing this operation. Note that this operation cannot be undone.</i>
                             <br/><div class="btn-group btn-group-justified" style="width: 100%;">
-                                <a href="#" class="btn btn-info">Accept Duplicate</a>
-                                <a href="#" class="btn btn-success">Accept Current Match</a>
-                                <a href="#" class="btn btn-warning">Remove all Matched Elements</a>
+                                <a href="#" id="acp_dup" class="btn btn-info">Accept Duplicate</a>
+                                <a href="#" id="acp_cur"  class="btn btn-success">Accept Current Match</a>
+                                <a href="#" id="acp_res"  class="btn btn-warning">Remove all Matched Elements</a>
                             </div>
                         </div>
 
@@ -1040,7 +1162,33 @@
                     </div>
                 </div>
             </div>
+            <script>
+                //buttons
+                function lc() {
+                    document.getElementById("overlay").style.display = "block";
+                    setTimeout(function () {
+                        if (confirm("DANGER! \nThis action will Purge all SORMAS Infrastructure Data already on the Adapter and reimport it afresh. \nDo you want to do that?")) {
+                            location.href = '../controllers_jsp/localized.jsp';
+                        } else {
+                            document.getElementById("overlay").style.display = "none";
 
+                        }
+
+                    }, 1000);
+                }
+                ;
+                function fhir_() {
+
+                    alert("This action require all duplicates to be resuloved.");
+
+
+                }
+
+
+
+
+
+            </script>
 
             <script>
                 function dmd(e) {
@@ -1099,6 +1247,7 @@
                     const gh = e.split(',');
                     var xhr = new XMLHttpRequest();
                     xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=4', true);
+              //     console.log('../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=4');
                     xhr.responseType = 'text';
                     xhr.onload = function () {
                         if (xhr.readyState === xhr.DONE) {
@@ -1155,6 +1304,7 @@
                 }
 
                 function tableloader(e) {
+                    ctbb = e;
 
 
                     $('#esef3456n').show();
@@ -1164,8 +1314,8 @@
 
 
                     if (e.includes('dup_')) {
-                        console.log("../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?jsonparentx=" + pd + "&jsonlevelx=" + e);
-                        $('#dup_detailer').DataTable({
+                 //       console.log("../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?jsonparentx=" + pd + "&jsonlevelx=" + e);
+                       var table = $('#dup_detailer').DataTable({
                             "destroy": true,
                             "paging": true,
                             "processing": true,
@@ -1176,7 +1326,7 @@
                             }
                         });
                     } else {
-                        $('#detailer').DataTable({
+                      var table =  $('#detailer').DataTable({
                             "destroy": true,
                             "paging": true,
                             "processing": true,
@@ -1186,9 +1336,14 @@
                                 "dataType": "json"
                             }
                         });
-                    }
-                    ;
+                    }; 
+                    table.rows().every( function ( rowIdx, tableLoop, rowLoop ) {       
+        var cell = table.cell({ row: rowIdx, column: 0 }).node();
+        $(cell).addClass('warningwwwwww');        
+    });
+                    
                 }
+                ;
 
 
 
@@ -1196,6 +1351,95 @@
                 $(function () {
                     $(".knob").knob();
                 });
+                
+                function triggerKnob() {
+                   $("input.knob").trigger('change');
+                };
+
+                $('#deduplicate').on('show.bs.modal', function (e) {
+                    //dmd('dup_')
+
+                    var uri_ = $(e.relatedTarget).data('uri');
+
+                    const uri = uri_.split('@@');
+                    $('#acp_dup').prop("href", "../4a24cf8b-fbcb-4554-b676-2b54a239be62?accept=" + uri[1] + "&wht=" + uri[0]);
+                    $('#acp_cur').prop("href", "../4a24cf8b-fbcb-4554-b676-2b54a239be62?current=" + uri[2] + "&wht=" + uri[0]);
+                    $('#acp_res').prop("href", "../4a24cf8b-fbcb-4554-b676-2b54a239be62?reset=true&wht=" + uri[0]);
+                });
+
+
+                $('#acp_dup').click(function (event) {
+                    event.preventDefault();
+                    var href = $(this).attr('href');
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', href, true);
+                    xhr.responseType = 'text';
+                    xhr.onload = function () {
+                        if (xhr.readyState === xhr.DONE) {
+                            if (xhr.status === 200) {
+                                alertx(xhr.responseText)
+                            } else {
+                                alerterr(xhr.responseText)
+                            }
+                            $('#deduplicate').modal().hide();
+                            ;
+
+                            tableloader(ctbb);
+
+                        }
+                    };
+                    xhr.send(null);
+                });
+
+                $('#acp_cur').click(function (event) {
+                    event.preventDefault();
+                    var href = $(this).attr('href');
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', href, true);
+                    xhr.responseType = 'text';
+                    xhr.onload = function () {
+                        if (xhr.readyState === xhr.DONE) {
+                            if (xhr.status === 200) {
+                                alertx(xhr.responseText)
+                            } else {
+                                alerterr(xhr.responseText)
+                            }
+                            $('#deduplicate').modal().hide();
+                            ;
+
+                            tableloader(ctbb);
+
+                        }
+                    };
+                    xhr.send(null);
+                });
+
+                $('#acp_res').click(function (event) {
+                    event.preventDefault();
+                    var href = $(this).attr('href');
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', href, true);
+                    xhr.responseType = 'text';
+                    xhr.onload = function () {
+                        if (xhr.readyState === xhr.DONE) {
+                            if (xhr.status === 200) {
+                                alertx(xhr.responseText)
+                            } else {
+                                alerterr(xhr.responseText)
+                            }
+                            $('#deduplicate').modal().hide();
+                            ;
+
+                            tableloader(ctbb);
+
+                        }
+                    };
+                    xhr.send(null);
+                });
+
             </script>
     </body>
 </html>

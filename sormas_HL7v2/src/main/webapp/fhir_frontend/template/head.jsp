@@ -18,4 +18,7 @@
   <link rel="stylesheet" href="./mira_assets/css/sw_bootstrap-4.min.css">
         <!-- Google Font: Source Sans Pro -->
         <!--link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"-->
+      
+        <link href="./mira_assets/css/slider.css" rel="stylesheet" type="text/css"/>
+        
     </head>

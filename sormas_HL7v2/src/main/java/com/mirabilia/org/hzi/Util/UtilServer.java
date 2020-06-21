@@ -63,16 +63,16 @@ public class UtilServer extends HttpServlet {
 
         if (request.getParameter("count") != null) {
             try {
-                //System.out.println(request.getParameter("count"));
-               // int counter = Integer.parseInt(request.getParameter("count"));
+               
+                
 
-                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.externalid != 'null' AND d.duplicate_with IS NULL or d.duplicate_with = '';");
+                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.externalid != 'null' AND d.duplicate_with IS NULL or d.duplicate_with = '';"); //counts all MATCHED
 
-                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.externalid != 'null' AND d.duplicate_with IS not NULL and d.duplicate_with != '';") + "," + mat;
+                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.externalid != 'null' AND d.duplicate_with IS not NULL and d.duplicate_with != '';") + "," + mat; //counting all possible duplicate
 
-                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.externalid IS NULL AND d.duplicate_with != '';") + "," + mat;
+                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.externalid IS NULL AND d.duplicate_with != '';") + "," + mat; //counting real Duplicates
 
-                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.externalid IS NULL AND d.duplicate_with IS null or d.duplicate_with = '';") + "," + mat;
+                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.externalid IS NULL AND d.duplicate_with IS null or d.duplicate_with = '';") + "," + mat; //Unmachables
 
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
@@ -100,7 +100,7 @@ public class UtilServer extends HttpServlet {
 
                 float seq = ((float) xm / xc);
                 String str = String.format("%2.02f", (seq * 100));
-                System.out.println(vc);
+            //    System.out.println(vc);
                 mat = str + "%," + xx + "," + xc + "," + xm + ",@@@" + vc;
 
             } catch (ClassNotFoundException ex) {
@@ -111,13 +111,16 @@ public class UtilServer extends HttpServlet {
         }
 
         if (request.getParameter("parentx") != null && "4".contains(request.getParameter("levelx"))) {
+        //    System.out.println("ddddddddddddddd");
 
             try {
                 String parentx = request.getParameter("parentx");
                 String levelx = request.getParameter("levelx");
+                
 
                 int xx = counterXint_withParameters(sql.L4_count_by_level_using_parent, parentx); //total lgas from destination
                 //total lgas from source
+                System.out.println(xx);
                 String sub = counterXString_withParameters(sql.L4_count_by_level_using_parent_source_q1, parentx); //subquery
                 int xc = counterXint_withParameters(sql.L4_count_by_level_using_parent_source_q2, sub);
 
@@ -226,11 +229,11 @@ public class UtilServer extends HttpServlet {
                     vc = counterXString_withParameters_x(sql.L3_count_by_level_using_parent_source_name_details, parentx); //tables for LGA Matched
                     System.out.println("statatatatatat");
                 } else if ("dup_state_x".equalsIgnoreCase(leveld)) {
-                    System.out.println("dupdupduo______stat dup ________" + parentx);
+                  //  System.out.println("dupdupduo______stat dup ________" + parentx);
                     vc = counterXString_withParameters_seeded(sql.dup_L3_count_by_level_using_parent_source_name_details, parentx, sql.dup__SUB_count_by_level_using_parent_source_name_details); //tables for lga Matched
 
                 }else if ("dup_lga_x".equalsIgnoreCase(leveld)) {
-                    System.out.println("dupdupduo______stat dup ________" + parentx);
+                   // System.out.println("dupdupduo______stat dup ________" + parentx);
                     vc = counterXString_withParameters_seeded(sql.L4_dup_L3_count_by_level_using_parent_source_name_details, parentx, sql.dup__SUB_count_by_level_using_parent_source_name_details); //tables for Ward Matched
 
                 }
@@ -238,7 +241,7 @@ public class UtilServer extends HttpServlet {
 
                 JSONObject json = (JSONObject) parser.parse(vc);
 
-                System.out.println(json);
+             //   System.out.println(json);
 
                 // mat = vc;
                 PrintWriter out = response.getWriter();
@@ -278,7 +281,7 @@ public class UtilServer extends HttpServlet {
 
                 float seq = ((float) xv / xc);
                 String str = String.format("%2.02f", (seq * 100));
-                System.out.println(vc);
+              //  System.out.println(vc);
                 mat = str + "%," + xx + "," + xc + "," + xv + ",@@@" + vc;
 
             } catch (ClassNotFoundException ex) {
@@ -447,7 +450,7 @@ public class UtilServer extends HttpServlet {
             ps = conn.prepareStatement(sqq);
             ps.setString(1, "%" + par1 + "%");
 
-            System.out.println(ps.toString());
+       //     System.out.println(ps.toString());
 
             rx = ps.executeQuery();
             if (rx.next()) {
@@ -474,7 +477,7 @@ public class UtilServer extends HttpServlet {
             ps = conn.prepareStatement(sqq);
             ps.setString(1, "%" + par1 + "%");
 
-            System.out.println(ps.toString());
+        //    System.out.println(ps.toString());
 
             rx = ps.executeQuery();
             while (rx.next()) {
@@ -501,7 +504,7 @@ public class UtilServer extends HttpServlet {
             ps = conn.prepareStatement(sqq);
             ps.setString(1, "%" + par1 + "%");
 
-            System.out.println(ps.toString());
+        //    System.out.println(ps.toString());
 
             rx = ps.executeQuery();
             String jsonPrimer = "{\n"
@@ -551,7 +554,7 @@ public class UtilServer extends HttpServlet {
             ps = conn.prepareStatement(sqq);
             ps.setString(1, "%" + par1 + "%");
 
-            System.out.println(ps.toString());
+        //    System.out.println(ps.toString());
 
             rx = ps.executeQuery();
             String jsonPrimer = "{\n"
@@ -599,7 +602,7 @@ public class UtilServer extends HttpServlet {
             ps = conn.prepareStatement(sqq);
             ps.setString(1, "%" + par1 + "%");
 
-            System.out.println(ps.toString());
+         //   System.out.println(ps.toString());
 
             rx = ps.executeQuery();
             String jsonPrimer = "{\n"
@@ -610,17 +613,17 @@ public class UtilServer extends HttpServlet {
                 String dimp = rx.getString("duplicate_with").replaceAll(" ", "").replaceAll(",", "\",\"");
                 String sss = sqq_ + "(\"" + dimp + "\")";
 
-                System.out.println(sss);
+            //    System.out.println(sss);
 
                 ps_ = conn.prepareStatement(sss);
                 //    ps_.setString(1, dimp.replaceAll(" ", "").replaceAll(",", "\",\""));
 
-                System.out.println(ps_.toString());
+              //  System.out.println(ps_.toString());
                 rx_ = ps_.executeQuery();
                 while (rx_.next()) {
                     
                     ps_x = conn.prepareStatement("select r.name, r.uuid from raw_ r where r.uuid = '"+rx.getString("externalid")+"'");
-                    System.out.println(ps_x.toString());
+              //      System.out.println(ps_x.toString());
                 rx_x = ps_x.executeQuery();
                     // System.out.println("__________________________________________________");
                 String dd = "[\n"
@@ -630,18 +633,22 @@ public class UtilServer extends HttpServlet {
                             + "      \"" + rx_.getString("name") + "\",\n"
                             + "      \"" + rx_.getString("uuid") + "\",\n";
                         String dx = "";
+                        String dduuid = "non";
                 if (rx_x.next()) {
                    // System.out.println("__________________________________________________");
                     dx="      \"" + rx_x.getString("name") + "\",\n"
                             + "      \"" + rx_x.getString("uuid") + "\",\n";
+                    dduuid = rx_x.getString("uuid");
+                    
                 }else{
                 dx="      \"non\",\n"
                             + "      \"non\",\n";
+                dduuid = "non";
                 }
-                   dd = dd+dx+"   \"" + rx.getString("adapter_cdate") + "\", \"<div class='tools'><a href='#' data-toggle='modal' data-target='#deduplicate'><i class='fas fa-edit' aria-hidden='true'></i><i class='fas fa-trash-o' aria-hidden='true'></i></a></div>\" ],";
-                   System.out.println("__________________________________________________"+dx);
+                   dd = dd+dx+"   \"" + rx.getString("adapter_cdate") + "\", \"<div class='tools'><a href='' data-uri='" + rx.getString("uuid") + "@@" + rx_.getString("uuid") + "@@" + dduuid + "'  data-toggle='modal' data-target='#deduplicate'><i class='fas fa-edit' aria-hidden='true'></i></a></div>\" ],";
+               //    System.out.println("__________________________________________________"+dx);
                     ret = dd + ret;
-                    System.out.println("_________________________________________________>>>>_"+ret);
+             //       System.out.println("________>>>>\n"+ret);
                 }
                      
             }

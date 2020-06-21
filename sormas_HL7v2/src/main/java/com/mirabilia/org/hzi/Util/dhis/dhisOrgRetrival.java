@@ -52,8 +52,10 @@ public class dhisOrgRetrival {
 
         JSONObject jsonObjectx;
 
-      //  System.out.println("XXXXX<<<<<<<<<<<<<<XXXXXXXXXXX = " + pg_counterd);
-         
+        System.out.println("XXXXX<<<<<<<<<<<<<<XXXXXXXXXXX = " + pg_counterd);
+         if(json_all.isEmpty()){
+         return 0;
+         }else{
             try {
                 jsonObjectx = (JSONObject) jsonParser.parse(json_all);
                 Object pager_values = jsonObjectx.get("pager");
@@ -73,7 +75,7 @@ public class dhisOrgRetrival {
          } 
         }
      
-     
+     }
     
     return pg_counterd;
     }

@@ -43,11 +43,11 @@
                             <!-- Source creator -->
                             <section class="col-lg-12 connectedSortable">
                                 <!-- TO DO List -->
-                                <div class="card">
+                                <div class="card" data-togg="tooltip" title="Use this tool to configure deduplication mechanism">
                                     <div class="card-header">
                                         <h3 class="card-title">
                                             <i class="ion ion-clipboard mr-1"></i>
-                                            Configure Admin Level Configuration
+                                            Admin Level Configuration
                                         </h3>
 
                                       
@@ -56,18 +56,45 @@
 
                                     <div class="card-body">
                                         
-                                        <table class="table-responsive">
-                                            <thead>
-                                                <tr>
-                                                    <th></th>
-                                                </tr>
-                                                
-                                            </thead>
-                                        </table>
+                                      
+              <table class="table table-bordered">
+                <tbody><tr>
+                  <th style="width: 10px">#</th>
+                  <th>Description</th>
+                  <th>Affected Leve#</th>
+                  <th style="width: 40px">active</th>
+                </tr>
+                <tr>
+                  <td>1.</td>
+                  <td>Striping all "Local Government Area" form DHIS2 Data</td>
+                  <td>
+                   3
+                  </td>
+                  <td><span class="badge bg-red">Y</span></td>
+                </tr>
+                 <tr>
+                  <td>1.</td>
+                  <td>Striping all "State" form DHIS2 Data</td>
+                  <td>
+                   2
+                  </td>
+                  <td><span class="badge bg-red">Y</span></td>
+                </tr>
+                 <tr>
+                  <td>1.</td>
+                  <td>Striping all "/" form DHIS2 Data</td>
+                  <td>
+                   all
+                  </td>
+                  <td><span class="badge bg-red">Y</span></td>
+                </tr>
+                
+              </tbody></table>
+          
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer clearfix">
-                                        <button type="button" class="btn btn-info float-right" data-toggle="modal" id="source_addition_button" data-target="#modal-sources"><i class="fas fa-plus">
+                                        <button type="button" class="btn btn-info float-right" data-toggle="modal" title="You can specify your own mechanism here... please read the github documentation before attemptng to do this" id="source_addition_button" data-target="#modal-sources"><i class="fas fa-plus">
 
                                             </i> Add item
                                         </button>
@@ -257,7 +284,7 @@
                                         <div class="col-md-6">
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <h3 class="card-title"> <strong>Source</strong></h3>
+                                                    <h3 class="card-title"> <strong>Master Server</strong></h3>
                                                 </div>
                                                 <!-- /.card-header -->
                                                 <div class="card-body">
@@ -301,7 +328,7 @@
                                         <div class="col-md-6">
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <h3 class="card-title"><strong>Destination</strong></h3>
+                                                    <h3 class="card-title"><strong>Destination Server</strong></h3>
                                                 </div>
                                                 <!-- /.card-header -->
                                                 <div class="card-body">
@@ -735,7 +762,7 @@
 
                     function productBuildTableRow(product) {
 
-                    var ret = "<span class=\"handle\"><i class=\"fas fa-ellipsis-v\"></i><i class=\"fas fa-ellipsis-v\"></i></span><div  class=\"icheck-primary d-inline ml-2\"></div><span class=\"text\">" + product.url + "</span><small class=\"badge badge-danger\"><i class=\"fa fa-" + product.status + "\"></i></small><div class=\"tools\"><a href=\"" + product.url + "\" id=\"ss\"><i class=\"fas fa-edit\"></i><i class=\"fas fa-trash-o\"></i></a></div><hr>";
+                    var ret = "<span class=\"handle\"><i class=\"fas fa-ellipsis-v\"></i><i class=\"fas fa-ellipsis-v\"></i></span><div  class=\"icheck-primary d-inline ml-2\"></div><span class=\"text\">" + product.url + "</span><small class=\"badge badge-danger\"><i class=\"fa fa-" + product.status + "\"></i></small><div class=\"tools\"><a href=../4a24cf8b-fbcb-4554-b653-2b54a239be62?dea_link=true&url='"+ product.url +"'><i class=\"fas fa-edit\"></i></i></a></div><hr>";
                     //      console.log(product.url);
                     //     console.log(ret);
                     return ret;

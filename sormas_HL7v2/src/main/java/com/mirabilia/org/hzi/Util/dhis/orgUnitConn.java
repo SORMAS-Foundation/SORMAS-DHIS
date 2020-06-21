@@ -1,7 +1,5 @@
 package com.mirabilia.org.hzi.Util.dhis;
 
-
-
 import static com.mirabilia.org.hzi.Util.dhis.DHIS2resolver.getDemAll;
 import static com.mirabilia.org.hzi.Util.dhis.dhisOrgRetrival.starter;
 
@@ -40,21 +38,19 @@ public class orgUnitConn extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-         HttpSession sessionx = request.getSession(false);  
+
+        HttpSession sessionx = request.getSession(false);
 
         int initz = 0;
         int initzx = 0;
-       
 
         if (request.getParameter("pg_counter") != null) {
             initz = Integer.parseInt((String) request.getParameter("pg_counter"));
         }
-        
+
         if (request.getParameter("pg_counterx") != null) {
             initzx = Integer.parseInt((String) request.getParameter("pg_counterx"));
         }
-       
 
         JSONParser jsonParser = new JSONParser();
         String base_url = "http://172.105.77.79:8080/dhis/api/organisationUnits.json?fields=lastUpdated,id,closedDate,openingDate,name,shortName,level,created,path&paging=true&maxLevel=4";
@@ -64,102 +60,109 @@ public class orgUnitConn extends HttpServlet {
 
         JSONObject jsonObjectx;
 
-        //System.out.println("initial target = " + initz);
-        //System.out.println("number to process = " + initzx);
-
-        if (initz == 1) {
-            //getting initializer
-
-            try {
-                jsonObjectx = (JSONObject) jsonParser.parse(json_all);
-                Object pager_values = jsonObjectx.get("pager");
-                
-                System.out.println(pager_values);
-
-                JSONObject jsonObjectxx = (JSONObject) pager_values;
-
-                Long level = (Long) jsonObjectxx.get("pageCount");
-                String conv = level + "";
-
-                int page_count = Integer.parseInt((String) conv);
-                int counter = 1;
-                
-                
-                response.setContentType("text/plain;charset=UTF-8");
-                response.setStatus(200);
-                ServletOutputStream sout = response.getOutputStream();
-                String content = ""+page_count;
-                
-                //returning total number of available pages
-              //  sessionx.setAttribute("total_org", content);
-
-                sout.print(content);
-
-            //    System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-                return;
-
-            } catch (ParseException ex) {
-                Logger.getLogger(orgUnitConn.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-            }
-
-        }
-        
-        
-        
-         if (initz == 5050) {
-            //getting initializer
- 
-            try {
-                jsonObjectx = (JSONObject) jsonParser.parse(json_all);
-                Object pager_values = jsonObjectx.get("pager");
-                
-                System.out.println(pager_values);
-
-                JSONObject jsonObjectxx = (JSONObject) pager_values;
-
-                Long level = (Long) jsonObjectxx.get("total");
-                String conv = level + "";
-
-                int page_count = Integer.parseInt((String) conv);
-                int counter = 1;
-                
-                
-                response.setContentType("text/plain;charset=UTF-8");
-                response.setStatus(200);
-                ServletOutputStream sout = response.getOutputStream();
-                String content = ""+page_count;
-                
-                //returning total number of available pages
-                sessionx.setAttribute("total_org", content);
-
-                sout.print(content);
-
-            //    System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-                return;
-
-            } catch (ParseException ex) {
-                Logger.getLogger(orgUnitConn.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-            }
-
-        }
-        
-        
-        
-        if(initzx > 0){
+        if (json_all.isEmpty()) {
             
-        //process each shunk and send the progress back to progress bar.
-        int pg_ = starter(initzx);
-        
-        response.setContentType("text/plain;charset=UTF-8");
+            response.setContentType("text/plain;charset=UTF-8");
+                    response.setStatus(500);
+                    ServletOutputStream sout = response.getOutputStream();
+                    String content = "DHIS2 Not Responding";
+
+                    //returning total number of available pages
+                    //  sessionx.setAttribute("total_org", content);
+                    sout.print(content);
+                    
+                    
+        } else {
+            //System.out.println("initial target = " + initz);
+            //System.out.println("number to process = " + initzx);
+
+            if (initz == 1) {
+                //getting initializer
+
+                try {
+                    jsonObjectx = (JSONObject) jsonParser.parse(json_all);
+                    Object pager_values = jsonObjectx.get("pager");
+
+                    System.out.println(pager_values);
+
+                    JSONObject jsonObjectxx = (JSONObject) pager_values;
+
+                    Long level = (Long) jsonObjectxx.get("pageCount");
+                    String conv = level + "";
+
+                    int page_count = Integer.parseInt((String) conv);
+                    int counter = 1;
+
+                    response.setContentType("text/plain;charset=UTF-8");
+                    response.setStatus(200);
+                    ServletOutputStream sout = response.getOutputStream();
+                    String content = "" + page_count;
+
+                    //returning total number of available pages
+                    //  sessionx.setAttribute("total_org", content);
+                    sout.print(content);
+
+                    //    System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+                    return;
+
+                } catch (ParseException ex) {
+                    Logger.getLogger(orgUnitConn.class.getName()).log(Level.SEVERE, null, ex);
+                } finally {
+                }
+
+            }
+
+            if (initz == 5050) {
+                //getting initializer
+
+                try {
+                    jsonObjectx = (JSONObject) jsonParser.parse(json_all);
+                    Object pager_values = jsonObjectx.get("pager");
+
+                    System.out.println(pager_values);
+
+                    JSONObject jsonObjectxx = (JSONObject) pager_values;
+
+                    Long level = (Long) jsonObjectxx.get("total");
+                    String conv = level + "";
+
+                    int page_count = Integer.parseInt((String) conv);
+                    int counter = 1;
+
+                    response.setContentType("text/plain;charset=UTF-8");
+                    response.setStatus(200);
+                    ServletOutputStream sout = response.getOutputStream();
+                    String content = "" + page_count;
+
+                    //returning total number of available pages
+                    sessionx.setAttribute("total_org", content);
+
+                    sout.print(content);
+
+                    //    System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+                    return;
+
+                } catch (ParseException ex) {
+                    Logger.getLogger(orgUnitConn.class.getName()).log(Level.SEVERE, null, ex);
+                } finally {
+                }
+
+            }
+
+            if (initzx > 0) {
+
+                //process each shunk and send the progress back to progress bar.
+                int pg_ = starter(initzx);
+
+                response.setContentType("text/plain;charset=UTF-8");
                 response.setStatus(200);
                 ServletOutputStream sout = response.getOutputStream();
-                String content = ""+pg_;
+                String content = "" + pg_;
                 sout.print(content);
-       // System.out.println("percentage been sent back to frontend"+content+"%");
+                // System.out.println("percentage been sent back to frontend"+content+"%");
+            }
+
         }
-     
     }
 
     /**

@@ -112,23 +112,21 @@ public class sourceControllergettersetter extends HttpServlet {
             
             String multi_ = request.getParameter("getAllList");
             
-             JSONParser jsonParser = new JSONParser();
-                JSONObject jsonObjectx;
-            //      System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        
             try {
                
 
                 String jsonRaw = sourceDTO.ListSourcestoJSON(multi_);
 
-             //   jsonObjectx = (JSONObject) jsonParser.parse(jsonRaw);
+          
                 
-                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+jsonRaw.toString());
+           //     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+jsonRaw.toString());
 
                 response.setContentType("text/plain;charset=UTF-8");
                 response.setStatus(200);
                 ServletOutputStream sout = response.getOutputStream();
                 String content = "" + jsonRaw;
-                   System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>"+jsonRaw);
+             //      System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>"+jsonRaw);
 
                 sout.print(content);
 

@@ -56,13 +56,14 @@ public class DHIS2resolver {
             urlConnection.setDoOutput(true);
             urlConnection.setRequestMethod("GET");
             urlConnection.setUseCaches(true);
-            urlConnection.setConnectTimeout(10000);
-            urlConnection.setReadTimeout(10000);
-            // urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.setConnectTimeout(20000);
+            urlConnection.setReadTimeout(20000);
+             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.connect();
 
             int HttpResult = urlConnection.getResponseCode();
-            //debug  System.out.println("######cccccccccccc####Outreach Session HTTP Return Code = " + HttpResult);
+            //debug  
+            System.out.println("######cccccccccccc####Outreach Session HTTP Return Code = " + HttpResult);
 
             if (HttpResult == 200) {
                 BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
@@ -106,6 +107,7 @@ public class DHIS2resolver {
         } 
          catch (IOException ex) {
              Logger.getLogger(DHIS2resolver.class.getName()).log(Level.SEVERE, null, ex);
+            
          }        finally {
             
             /**
@@ -124,6 +126,7 @@ public class DHIS2resolver {
         }
         **/
         }
+        System.out.println(sb.toString());
         return sb.toString();
     }
      

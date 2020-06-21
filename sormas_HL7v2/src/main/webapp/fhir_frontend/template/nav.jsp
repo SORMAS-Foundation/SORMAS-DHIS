@@ -5,7 +5,7 @@
                         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
                     </li>
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="index3.html" class="nav-link">Home</a>
+                        <a href="../" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item d-none d-sm-inline-block">
                         <a href="#" class="nav-link">Contact</a>
@@ -41,6 +41,8 @@
                                             ADULOJU Mathew
                                         </h3>
                                         <p class="text-sm">aduloju@gmail.com | 07031252904</p>
+                                         <a class="nav-link"  href="<%=request.getContextPath()%>/logout.jsp" title="log out?"><i
+                                class="fas fa-lock-open"></i> Logout</a>
                                     </div>
                                 </div>
                                 <!-- Message End -->
@@ -76,7 +78,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" title="log out?"><i
+                        <a class="nav-link"  href="<%=request.getContextPath()%>/logout.jsp" title="log out?"><i
                                 class="fas fa-lock-open"></i></a>
                     </li>
                 </ul>

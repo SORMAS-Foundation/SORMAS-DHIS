@@ -106,7 +106,7 @@ public class jsonController {
             urlConnection.connect();
 
             int HttpResult = urlConnection.getResponseCode();
-            System.out.println("######cccccccccccc####Outreach Session HTTP Return Code = " + HttpResult);
+            //System.out.println("######cccccccccccc####Outreach Session HTTP Return Code = " + HttpResult);
 
             if (HttpResult == 200) {
                 BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));

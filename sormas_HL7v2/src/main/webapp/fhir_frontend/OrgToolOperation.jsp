@@ -115,9 +115,13 @@
                                     <a onclick="resx();" id="analyse"dsp class="btn btn-app hvr-icon-buzz-out">
                                         <i class="fas fa-cogs hvr-icon"></i> Display Results
                                     </a>
-
+                                    
                                     <a onclick="fhir_()" id="analysefhir" class="btn btn-app hvr-icon-buzz-out">
                                         <i class="fas fa-play hvr-icon"></i> Sync with FHIR
+                                    </a>
+
+                                    <a onclick="start_pushX_()" id="send_all_avail" class="btn btn-app hvr-icon-buzz-out">
+                                        <i class="fas fa-play hvr-icon"></i> Sync with SORMAS
                                     </a>
 
                                     <%
@@ -1183,7 +1187,26 @@
 
 
                 }
-
+                function start_pushX_() {
+                     document.getElementById("overlay").style.display = "block";
+                     $('#text').html("Pushing all available matched data to sormas...");
+                  var xhr = new XMLHttpRequest();
+                    xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?pushavailable=true', true);
+                    xhr.responseType = 'text';
+                    xhr.onload = function () {
+                        
+                        if (xhr.readyState === xhr.DONE) {
+                            if (xhr.status === 200) {
+                               
+                                 document.getElementById("overlay").style.display = "none";
+                                 
+                                 alertx(xhr.responseText);
+                                
+                            }
+                        }};
+                    xhr.send(null);
+                
+};
 
 
 

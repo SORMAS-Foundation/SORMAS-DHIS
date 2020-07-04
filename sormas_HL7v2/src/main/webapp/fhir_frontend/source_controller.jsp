@@ -47,7 +47,7 @@
                                     <div class="card-header">
                                         <h3 class="card-title">
                                             <i class="ion ion-clipboard mr-1"></i>
-                                            Admin Level Configuration
+                                           De-duplication and Matching Mechanism Configuration
                                         </h3>
 
                                       
@@ -126,19 +126,18 @@
                                             Available Sources
                                         </h3>
 
-                                        <!--div class="card-tools">
-                                            <ul class="pagination pagination-sm">
-                                                <li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
-                                                <li class="page-item"><a href="#" class="page-link">1</a></li>
-                                                <li class="page-item"><a href="#" class="page-link">2</a></li>
-                                                <li class="page-item"><a href="#" class="page-link">3</a></li>
-                                                <li class="page-item"><a href="#" class="page-link">&raquo;</a></li>
-                                            </ul>
-                                        </div-->
+                                      
                                     </div>
                                     <!-- /.card-header -->
 
                                     <div class="card-body">
+                                        <ul class="todo-list" data-widget="todo-list">
+<li>
+                                         
+    <span class="text"><i>Note that SORMAS running on the localhost will automatically be selected as the Destination Server</i></span></small>
+                                            <div class="tools"></div><hr>
+</li>
+                                        </ul>
                                         <ul class="todo-list" data-widget="todo-list" id="productTable">
 
                                         </ul>
@@ -622,6 +621,20 @@
                     });
                     //  productList();
                     }
+                    
+                    function alertxxX(ee) {
+                    const Toast = Swal.mixin({
+                    toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                    });
+                    Toast.fire({
+                    type: 'success',
+                            title:  ee
+                    });
+                    //  productList();
+                    }
                     ;
                 </script>
 
@@ -762,7 +775,7 @@
 
                     function productBuildTableRow(product) {
 
-                    var ret = "<span class=\"handle\"><i class=\"fas fa-ellipsis-v\"></i><i class=\"fas fa-ellipsis-v\"></i></span><div  class=\"icheck-primary d-inline ml-2\"></div><span class=\"text\">" + product.url + "</span><small class=\"badge badge-danger\"><i class=\"fa fa-" + product.status + "\"></i></small><div class=\"tools\"><a href=../4a24cf8b-fbcb-4554-b653-2b54a239be62?dea_link=true&url='"+ product.url +"'><i class=\"fas fa-edit\"></i></i></a></div><hr>";
+                    var ret = "<span class=\"handle\"><i class=\"fas fa-ellipsis-v\"></i><i class=\"fas fa-ellipsis-v\"></i></span><div  class=\"icheck-primary d-inline ml-2\"></div><span class=\"text\">" + product.url + "</span><small class=\"badge badge-danger\"><i class=\"fa fa-" + product.status + "\"></i></small><div class=\"tools\"><a href=../4a24cf8b-fbcb-4554-b653-2b54a239be62?dea_link=true&url='"+ product.url +"'><i class=\"fas fa-trash\"></i></i></a></div><hr>";
                     //      console.log(product.url);
                     //     console.log(ret);
                     return ret;

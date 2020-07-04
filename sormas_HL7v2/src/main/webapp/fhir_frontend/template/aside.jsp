@@ -14,7 +14,7 @@
                         <ul class="nav nav-pills nav-sidebar flex-column  nav-compact" data-widget="treeview" role="menu" data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
                                  with font-awesome or any other icon font library -->
-                            <li class="nav-item has-treeview menu-open" id="facl">
+                            <li class="nav-item has-treeview" id="facl">
                                 <a href="#" class="nav-link" onclick="cases_()">
                                     <p style="font-size:14px">
                                         OrganizationTool Module
@@ -61,15 +61,15 @@
                                     <li class="nav-item">
                                         <a href="controller.jsp" class="nav-link">
                                             <i class="fas fa-cogs nav-icon"></i>
-                                            <p style="font-size:12px">Configuration</p>
+                                            <p style="font-size:12px">Maintenance</p>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
+                                    <!--li class="nav-item">
                                         <a href="sormas2.html" class="nav-link">
                                             <i class="fas fa-exchange-alt nav-icon"></i>
                                             <p style="font-size:12px">Operations</p>
                                         </a>
-                                    </li>
+                                    </li-->
                                 </ul>
                             </li>
 
@@ -82,7 +82,7 @@
                                     </p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <!--li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="fas fa-sign-in-alt"></i>
                                     <p>
@@ -97,7 +97,7 @@
                                         Sync Setting
                                     </p>
                                 </a>
-                            </li>
+                            </li-->
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="fas fa-chart-line"></i>

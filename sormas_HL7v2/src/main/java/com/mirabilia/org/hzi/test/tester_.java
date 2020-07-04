@@ -1,6 +1,6 @@
 package com.mirabilia.org.hzi.test;
 
-import com.mirabilia.org.hzi.Util.analysisDTO;
+import com.mirabilia.org.hzi.sormas.cases.AggregrateController;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,9 @@ public class tester_ {
 
     public static void main(String[] args) throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
-        analysisDTO.Deduplicate();
-    }      
+         AggregrateController.SormasAggregrator("4");
+       // AggregrateController.SendCasesInJsontoDHIS();
+        
+      
+    }
 }

@@ -114,7 +114,31 @@
                     }
 
                 </style>
+                <style>
+                    #overlay {
+                        position: fixed;
+                        display: none;
+                        width: 100%;
+                        height: 100%;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background-color: rgba(0,0,0,0.5);
+                        z-index: 2;
+                        cursor: pointer;
+                    }
 
+                    #text{
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        font-size: 50px;
+                        color: white;
+                        transform: translate(-50%,-50%);
+                        -ms-transform: translate(-50%,-50%);
+                    }
+                </style>
                 <!-- Content Wrapper. Contains page content -->
                 <div class="content-wrapper">
                     <!-- Content Header (Page header) -->
@@ -150,18 +174,18 @@
                                     <!-- /.card-header -->
                                     <div class="card-body">
                                         <div class="callout" id="stepx">
-                                            <h5>System Configuration choice</h5>
+                                            <h5>Maintenance</h5>
 
-                                            <p>Please answer Yes if this is the first time the adapter is been installed or the adapter service has just been reinstalled. If not, select No</p>
+                                            <p>Please answer "Setup" if this is the first time the adapter is been installed or the adapter service has just been reinstalled. If not, click next to perform maintenance</p>
                                             <div class="row">
                                                 <div class="col s4">
                                                     New Server?
                                                     <div class="switch">
                                                         <label>
-                                                            No
-                                                            <input type="checkbox">
+                                                            Perform maintenance
+                                                            <input type="checkbox" id="maintenance">
                                                             <span class="lever"></span>
-                                                            Yes
+                                                            Setup as new Server
                                                         </label>
                                                     </div>
 
@@ -173,6 +197,41 @@
                                             </div>
 
                                         </div>
+
+
+                                        <div class="callout" style="display: none;" id="p_maintenance">
+                                            <h5>Maintenance Options</h5>
+
+                                            <p>Please click on any of the available options to perform mainatnace, you may want to refer to the user manual on this
+                                            </p>
+                                            <div class="row">
+
+                                                <table class="table table-bordered text-center">
+                                                    <tbody>
+
+                                                        <tr>
+
+                                                            <td>
+                                                                <a type="button" onclick="start_pushX_()" class="btn btn-block btn-outline-secondary btn-xs nope">Manually Sync Aggregate Data</a>
+                                                            </td>
+                                                            <td>
+                                                                <a type="button" href="" class="btn btn-block btn-outline-secondary btn-xs disabled">Manually Sync Case Based Data</a>
+                                                            </td>
+                                                            <td>
+                                                                <a type="button" href="" class="btn btn-block btn-outline-secondary btn-xs disabled">Edit Option/Configuration Files</a>
+                                                            </td>
+                                                            <td>
+                                                                <a type="button" href="" class="btn btn-block btn-outline-secondary btn-xs disabled">Reset the system and configurations</a>
+                                                            </td>
+
+                                                        </tr>
+                                                    </tbody></table> 
+
+                                            </div>
+                                        </div>
+
+
+
 
                                         <div class="callout" style="display: none;" id="2_stepx">
                                             <h5>What will you like to publish to DHIS2 Server from the SORMAS System?</h5>
@@ -233,39 +292,36 @@
                                         </div>
 
 
-
-
-
                                         <div class="callout" style="display: none;" id="2_2_stepx">
-                                            <h5>How often?</h5>
+                                            <h5>Aggregation lowest level?</h5>
 
-                                            <p>Please select one, note that too often duration may poss more traffic on both servers</p>
-                                            <div class="row">
-                                                <div class="col s4">
+                                            <p id="non_app_"></p>
+                                            <div class="row" >
+                                                <div class="col s4" id="non_app">
                                                     <div class="icheck-primary d-inline">
-                                                        <input type="radio" id="radioPrimar" name="r1">
+                                                        <input type="radio" id="radioPrimar" name="r1x">
                                                         <label for="radioPrimar">
-                                                            hourly
+                                                            Admin 2 (State / Region)
                                                         </label>
                                                     </div><p></p>
                                                     <div class="icheck-primary d-inline">
 
 
-                                                        <input type="radio" id="radioPrimary" name="r1" >
+                                                        <input type="radio" id="radioPrimary" name="r1x" >
                                                         <label for="radioPrimary">
-                                                            6-hour
+                                                            Admin 3 (LGA / District)
                                                         </label>
                                                     </div><p></p>
                                                     <div class="icheck-primary d-inline">
-                                                        <input type="radio" id="radioPrim" name="r1" >
+                                                        <input type="radio" id="radioPrim" name="r1x" >
                                                         <label for="radioPrim">
-                                                            12-hour
+                                                            Admin 4 (Ward / Community)
                                                         </label>
                                                     </div><p></p>
                                                     <div class="icheck-primary d-inline">
-                                                        <input type="radio" id="radioP" name="r1" >
+                                                        <input type="radio" id="radioP" name="r1x" >
                                                         <label for="radioP">
-                                                            daily
+                                                            Admin 5 (Health Facility / Facility)
                                                         </label>
                                                     </div>
 
@@ -285,6 +341,54 @@
 
 
                                         <div class="callout" style="display: none;" id="2_2_2_stepx">
+                                            <h5>How often?</h5>
+
+                                            <p>Please select one, note that too often duration may poss more traffic on both servers</p>
+                                            <div class="row">
+                                                <div class="col s4">
+                                                    <div class="icheck-primary d-inline">
+                                                        <input type="radio" id="radioPrimarx" name="r1">
+                                                        <label for="radioPrimarx">
+                                                            hourly
+                                                        </label>
+                                                    </div><p></p>
+                                                    <div class="icheck-primary d-inline">
+
+
+                                                        <input type="radio" id="radioPrimaryx" name="r1" >
+                                                        <label for="radioPrimaryx">
+                                                            6-hour
+                                                        </label>
+                                                    </div><p></p>
+                                                    <div class="icheck-primary d-inline">
+                                                        <input type="radio" id="radioPrimx" name="r1" >
+                                                        <label for="radioPrimx">
+                                                            12-hour
+                                                        </label>
+                                                    </div><p></p>
+                                                    <div class="icheck-primary d-inline">
+                                                        <input type="radio" id="radioPx" name="r1" >
+                                                        <label for="radioPx">
+                                                            daily
+                                                        </label>
+                                                    </div>
+
+
+                                                </div>
+
+
+
+
+                                                <a class="btn btn-app" onclick="step('2_2_2_stepx')">
+                                                    <i class="fa fa-angle-double-right"></i> Next
+                                                </a>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="callout" style="display: none;" id="2_2_2_2_stepx">
                                             <h5>Can I do ahead and install SORMAS Module on you DHIS2?</h5>
 
                                             <p>You will meed to provide an administrator username and password of the DHIS2 server</p>
@@ -300,9 +404,9 @@
                                                 </div>
                                             </div>
                                             <hr>
-                                            
-                                          
-                                            
+
+
+
                                             <div class="row" id="instllx" style="display: none;">
                                                 <div class="col s4 m4 l4">
 
@@ -336,87 +440,134 @@
                                                         <!-- /.input group -->
                                                     </div>
 
-                                                    <a class="btn btn-app" onclick="step('2_2_2_stepx')">
+                                                    <a class="btn btn-app" onclick="step('2_2_2_2_stepx')">
                                                         <i class="fa fa-sign-in-alt"></i> Perform selected Action
                                                     </a>
 
                                                 </div>
 
                                             </div>
-                                            
-                                              <div class="row" id="instllx_" style="display: none;">
+
+                                            <div class="row" id="instllx_" style="display: none;">
                                                 <div class="col s4 m4 l4">
-                                            <a class="btn btn-app" onclick="step('2_2_2_stepx')">
+                                                    <a class="btn btn-app" onclick="step('2_2_2_2_stepx')">
                                                         <i class="fa fa-download"></i> Download Installers
                                                     </a>
-                                            
+
+                                                </div>
+
+
+
+
                                             </div>
-                                            
-
-
-
+                                            <!-- /.card-body -->
                                         </div>
-                                        <!-- /.card-body -->
-                                    </div>
-                                    <!-- /.card -->
-                            </section> 
+                                        <!-- /.card -->
+                                        </section> 
 
-                        </div>             
+                                    </div>             
 
-                    </section>
+                            </section>
 
 
 
 
-                </div>
+                        </div>
+
+                        <div id="overlay" onclick="off()">
+                            <div id="text"><h2>please wait...</h2></div></div>
+
+
+                    <jsp:include page="template/scripts_footer.jsp"></jsp:include>
+
+
+                    <script>
+
+                        function step(e) {
+                            $("#" + e).addClass("disabledbutton");
+                            $("#" + e).toggleClass("callout-success");
+                            // alert("#2_" + e);
+                            $("#2_" + e).show(500);
+                            checker();
+                        }
+                        function checker() {
+                            if ($("#only_").prop("checked") === true) {
+                                $(".only_").prop("checked", false);
+                                $('#non_app').show();
+                                $('#non_app_').html('Please select the lowest level you will like the sync with DHIS2');
+                                // alert("You have selected Aggregate only, hence, all other options are disabled");
+                            } else {
+                                //  alert("You have selected Aggregate only");
+                                $('#non_app').hide();
+                                $('#non_app_').html('Not applicable... please click on next');
+                            }
+                            ;
+
+                            if ($("#maintenance").prop("checked") === true) {
+
+                            } else {
+
+                                $('#p_maintenance').show(100);
+                                $('#2_stepx').remove();
+                            }
+                            ;
+
+                        }
+
+
+
+//maintenance
+
+                        function checkerX() {
+                            if ($("#instll").prop("checked") === true) {
+                                $("#instllx").show(1000);
+                                $("#instllx_").hide(1000);
+
+
+                            } else {
+                                $("#instllx").hide(1000);
+                                $("#instllx_").show(1000);
+                            }
+
+                        }
 
 
 
 
-            <jsp:include page="template/scripts_footer.jsp"></jsp:include>
 
 
-            <script>
+                        ;
 
-                function step(e) {
-                    $("#" + e).addClass("disabledbutton");
-                    $("#" + e).toggleClass("callout-success");
-                    // alert("#2_" + e);
-                    $("#2_" + e).show(500);
-                    checker();
-                }
-                function checker() {
-                    if ($("#only_").prop("checked") === true) {
-                        $(".only_").prop("checked", false);
-                        alert("You have selected Aggregate only, hence, all other options are disabled");
-                    }
-
-                }
+                        $('a.nope').click(function () {
+                            return false;
+                        })
 
 
+                        function start_pushX_(e) {
 
+                         
+                            document.getElementById("overlay").style.display = "block";
+                            $('#text').html("Pushing all available matched data to sormas...");
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?aggregatToDHIS=true', true);
+                            xhr.responseType = 'text';
+                            xhr.onload = function () {
 
+                                if (xhr.readyState === xhr.DONE) {
+                                    if (xhr.status === 200) {
 
-                function checkerX() {
-                    if ($("#instll").prop("checked") === true) {
-                        $("#instllx").show(1000);
-                        $("#instllx_").hide(1000);
-                        
+                                        document.getElementById("overlay").style.display = "none";
 
-                    } else {
-                        $("#instllx").hide(1000);
-                        $("#instllx_").show(1000);
-                    }
+                                        alert('response from server  : '+xhr.responseText);
 
-                }
+                                    }
+                                }
+                            };
+                            xhr.send(null);
 
+                        }
+                        ;
 
-
-
-
-
-                ;
-
-            </script>
-    </body>
-</html>
+                    </script>
+                    </body>
+                    </html>

@@ -30,12 +30,91 @@ package com.mirabilia.org.hzi.Strings;
  * @author Mathew Official
  */
 public class sql {
-
+    public static String dash_table_counter = "select d.created, s.namex, s.adapter_cdate, s.resolved_by from sormas_local s, raw_ d where s.externalid = d.uuid order by s.adapter_cdate asc limit 5";
+    
     public static String dup_count_all_from_sorma_local = "SELECT count(*) FROM sormas_local d WHERE d.`level` = 2 and d.duplicate_with is not null and d.duplicate_with != '';";
+
+    public static String sync_count_all_synced = "SELECT count(*) FROM sormas_local d WHERE synced = 1;";
+    public static String sync_primer_all_matched = "SELECT uuid, level, externalid, idx FROM sormas_local d WHERE (d.duplicate_with is null or d.duplicate_with = '') and (d.externalid != '' or d.externalid is not null);";
+
+    public static String getSROMAS_district_PG = "select count(*), c.disease, (select name from district where id = c.district_id), (select externalid from district where id = c.district_id), c.creationdate::date\n"
+            + "from cases c\n"
+            + "left join district r on (c.district_id = r.id)\n"
+            + "group by c.disease, c.district_id, c.creationdate::date";
+
+    public static String getSROMAS_region_PG = "select count(*), c.disease, (select name from region where id = c.region_id), (select externalid from region where id = c.region_id), c.creationdate::date\n"
+            + "from cases c\n"
+            + "left join region r on (c.region_id = r.id)\n"
+            + "group by c.disease, c.region_id, c.creationdate::date";
+
+    public static String getSROMAS_community_PG = "select count(*), c.disease, (select name from community where id = c.community_id), (select externalid from community where id = c.community_id), c.creationdate::date\n"
+            + "from cases c\n"
+            + "left join community r on (c.community_id = r.id)\n"
+            + "group by c.disease, c.community_id, c.creationdate::date";
+
+    public static String getSROMAS_hf_PG = "select count(*), c.disease, (select name from facility where id = c.healthfacility_id), (select externalid from facility where id = c.healthfacility_id), c.creationdate::date\n"
+            + "from cases c\n"
+            + "left join facility r on (c.healthfacility_id = r.id)\n"
+            + "group by c.disease, c.healthfacility_id, c.creationdate::date";
+    
+    
+    
+    
+        public static String getSROMAS_district_PG_outc = "select count(*), c.outcome, (select name from district where id = c.district_id), (select externalid from district where id = c.district_id), c.outcomedate::date\n"
+            + "from cases c\n"
+            + "left join district r on (c.district_id = r.id)\n"
+            + "group by c.outcome, c.district_id, c.outcomedate::date";
+
+    public static String getSROMAS_region_PG_outc = "select count(*), c.outcome, (select name from region where id = c.region_id), (select externalid from region where id = c.region_id), c.outcomedate::date\n"
+            + "from cases c\n"
+            + "left join region r on (c.region_id = r.id)\n"
+            + "group by c.outcome, c.region_id, c.outcomedate::date";
+
+    public static String getSROMAS_community_PG_outc = "select count(*), c.outcome, (select name from community where id = c.community_id), (select externalid from community where id = c.community_id), c.outcomedate::date\n"
+            + "from cases c\n"
+            + "left join community r on (c.community_id = r.id)\n"
+            + "group by c.outcome, c.community_id, c.outcomedate::date";
+
+    public static String getSROMAS_hf_PG_outc = "select count(*), c.outcome, (select name from facility where id = c.healthfacility_id), (select externalid from facility where id = c.healthfacility_id), c.outcomedate::date\n"
+            + "from cases c\n"
+            + "left join facility r on (c.healthfacility_id = r.id)\n"
+            + "group by c.outcome, c.healthfacility_id, c.outcomedate::date";
+    
+    
+    
+    
+    
+    
+    
+        public static String getSROMAS_district_PG_class = "select count(*), c.caseclassification, (select name from district where id = c.district_id), (select externalid from district where id = c.district_id), c.classificationdate::date\n"
+            + "from cases c\n"
+            + "left join district r on (c.district_id = r.id)\n"
+            + "group by c.caseclassification, c.district_id, c.classificationdate::date";
+
+    public static String getSROMAS_region_PG_class = "select count(*), c.caseclassification, (select name from region where id = c.region_id), (select externalid from region where id = c.region_id), c.classificationdate::date\n"
+            + "from cases c\n"
+            + "left join region r on (c.region_id = r.id)\n"
+            + "group by c.caseclassification, c.region_id, c.classificationdate::date";
+
+    public static String getSROMAS_community_PG_class = "select count(*), c.caseclassification, (select name from community where id = c.community_id), (select externalid from community where id = c.community_id), c.classificationdate::date\n"
+            + "from cases c\n"
+            + "left join community r on (c.community_id = r.id)\n"
+            + "group by c.caseclassification, c.community_id, c.classificationdate::date";
+
+    public static String getSROMAS_hf_PG_class = "select count(*), c.caseclassification, (select name from facility where id = c.healthfacility_id), (select externalid from facility where id = c.healthfacility_id), c.classificationdate::date\n"
+            + "from cases c\n"
+            + "left join facility r on (c.healthfacility_id = r.id)\n"
+            + "group by c.caseclassification, c.healthfacility_id, c.classificationdate::date";
+    
+    
+    
+    
+    
+
+    public static String sync_send_all_matched_My = "update sormas_local set synced = 1 where idx = ?;";
 
     //public static String dup_count_matched_no = "SELECT count(*) FROM raw_ r inner JOIN sormas_local d ON (r.UUID = d.externalid) WHERE r.`level` = 2";
     // public static String dup_count_all_from_source_no= "SELECT count(*) FROM raw_ r WHERE r.`level` = 2;";
-    
     public static String dup_count_matched_name = "select namex from sormas_local where level = 2;";
     public static String dup_L2_count_by_level_using_parent_source_name_details = "select * from sormas_local s where  s.duplicate_with is not null and s.duplicate_with != '' and level = 2";
     public static String dup_L3_count_by_level_using_parent_source_name_details = "select * from sormas_local s where  s.duplicate_with is not null and s.duplicate_with != '' and level = 3 and parent_id = (select uid from sormas_local where level = 2 and namex like ?)";

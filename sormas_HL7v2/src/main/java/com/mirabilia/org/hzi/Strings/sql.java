@@ -30,12 +30,15 @@ package com.mirabilia.org.hzi.Strings;
  * @author Mathew Official
  */
 public class sql {
+
     public static String dash_table_counter = "select d.created, s.namex, s.adapter_cdate, s.resolved_by from sormas_local s, raw_ d where s.externalid = d.uuid order by s.adapter_cdate asc limit 5";
-    
+
     public static String dup_count_all_from_sorma_local = "SELECT count(*) FROM sormas_local d WHERE d.`level` = 2 and d.duplicate_with is not null and d.duplicate_with != '';";
 
     public static String sync_count_all_synced = "SELECT count(*) FROM sormas_local d WHERE synced = 1;";
     public static String sync_primer_all_matched = "SELECT uuid, level, externalid, idx FROM sormas_local d WHERE (d.duplicate_with is null or d.duplicate_with = '') and (d.externalid != '' or d.externalid is not null);";
+
+    public static String sync_primer_all_new_matched = "SELECT name, level, externalid, idx, rec_created FROM sormas_local d WHERE (d.duplicate_with is null or d.duplicate_with = '') and (d.externalid != '' or d.externalid is not null);";
 
     public static String getSROMAS_district_PG = "select count(*), c.disease, (select name from district where id = c.district_id), (select externalid from district where id = c.district_id), c.creationdate::date\n"
             + "from cases c\n"
@@ -56,11 +59,8 @@ public class sql {
             + "from cases c\n"
             + "left join facility r on (c.healthfacility_id = r.id)\n"
             + "group by c.disease, c.healthfacility_id, c.creationdate::date";
-    
-    
-    
-    
-        public static String getSROMAS_district_PG_outc = "select count(*), c.outcome, (select name from district where id = c.district_id), (select externalid from district where id = c.district_id), c.outcomedate::date\n"
+
+    public static String getSROMAS_district_PG_outc = "select count(*), c.outcome, (select name from district where id = c.district_id), (select externalid from district where id = c.district_id), c.outcomedate::date\n"
             + "from cases c\n"
             + "left join district r on (c.district_id = r.id)\n"
             + "group by c.outcome, c.district_id, c.outcomedate::date";
@@ -79,14 +79,8 @@ public class sql {
             + "from cases c\n"
             + "left join facility r on (c.healthfacility_id = r.id)\n"
             + "group by c.outcome, c.healthfacility_id, c.outcomedate::date";
-    
-    
-    
-    
-    
-    
-    
-        public static String getSROMAS_district_PG_class = "select count(*), c.caseclassification, (select name from district where id = c.district_id), (select externalid from district where id = c.district_id), c.classificationdate::date\n"
+
+    public static String getSROMAS_district_PG_class = "select count(*), c.caseclassification, (select name from district where id = c.district_id), (select externalid from district where id = c.district_id), c.classificationdate::date\n"
             + "from cases c\n"
             + "left join district r on (c.district_id = r.id)\n"
             + "group by c.caseclassification, c.district_id, c.classificationdate::date";
@@ -105,11 +99,6 @@ public class sql {
             + "from cases c\n"
             + "left join facility r on (c.healthfacility_id = r.id)\n"
             + "group by c.caseclassification, c.healthfacility_id, c.classificationdate::date";
-    
-    
-    
-    
-    
 
     public static String sync_send_all_matched_My = "update sormas_local set synced = 1 where idx = ?;";
 
@@ -162,5 +151,24 @@ public class sql {
     public static String count_unmatched_at_destination_no = "SELECT COUNT(*) FROM sormas_local d WHERE d.uid not IN (SELECT dd.uid FROM raw_ r inner JOIN sormas_local dd ON (r.UUID = dd.externalid) WHERE r.`level` = 2) AND d.`level` = 2";
     public static String count_unmatched_at_source = "SELECT * FROM raw_ rr WHERE rr.uuid not IN (SELECT r.uuid FROM raw_ r inner JOIN sormas_local dd ON (r.UUID = dd.externalid) WHERE r.`level` = 2) AND rr.`level` = 2";
     public static String count_unmatched_at_source_no = "SELECT COUNT(*) FROM raw_ rr WHERE rr.uuid not IN (SELECT r.uuid FROM raw_ r inner JOIN sormas_local dd ON (r.UUID = dd.externalid) WHERE r.`level` = 2) AND rr.`level` = 2";
+
+//Agregate Strings
+    public static String Get_all_Tested_today = "select count(*), p.lab_id, (select externalid from region where id = f.region_id), f.region_id from pathogentest p left join facility f on (p.lab_id = f.id) where p.creationdate::date  = '2020-06-15' group by p.lab_id,f.region_id;";
+    public static String Get_all_Hospitalized_today = "select count(*), region_id, (select externalid from region where id = region_id) from cases c left join hospitalization h on (c.hospitalization_id = h.id) where (admittedtohealthfacility = 'YES' OR isolated = 'YES') and (h.admissiondate::date  = '2020-06-15' or h.isolationdate::date  = '2020-06-15') group by region_id";
+    public static String Get_all_Isolated_today = "select count(*), region_id, (select externalid from region where id = region_id) from cases c left join hospitalization h on (c.hospitalization_id = h.id) where isolated = 'YES' and h.isolationdate::date  = '2020-06-15' group by region_id";
+    public static String Get_all_ICU_today = "";//no date on the table... cant track
+    public static String Get_all_Suspect_CASES_PORTOFENTRY_today = "select count(*), region_id, (select externalid from region where id = region_id)  from samples s left join cases c on (s.associatedcase_id = c.id)\n"
+            + "where (s.pathogentestresult is null or s.pathogentestresult = 'PENDING') and s.changedate::date = '2020-06-15' and c.id in (select id from cases where pointofentry_id is not null and creationdate::date = '2020-06-15') group by region_id";
+    public static String Get_all_Suspected_Community_Transmitted_CASES_today = "select count(*), region_id, (select externalid from region where id = region_id)  from samples s left join cases c on (s.associatedcase_id = c.id)\n"
+            + "where (s.pathogentestresult is null or s.pathogentestresult = 'PENDING') and s.changedate::date = '2020-06-15' and c.id not in (select id from cases where pointofentry_id is not null and creationdate::date = '2020-06-15') group by region_id";
+    public static String Get_all_Confirmed_CASES_PORTOFENTRY_today = "select count(*), region_id, (select externalid from region where id = region_id) from samples s left join cases c on (s.associatedcase_id = c.id)\n"
+            + "where  s.pathogentestresult = 'POSITIVE' and s.changedate::date = '2020-06-15' and c.id in (select id from cases where pointofentry_id is not null and creationdate::date = '2020-06-15') group by region_id";
+    public static String Get_all_Confirmed_Community_Transmitted_CASES_today = "select count(*), region_id, (select externalid from region where id = region_id) from samples s left join cases c on (s.associatedcase_id = c.id)\n"
+            + "where  s.pathogentestresult = 'POSITIVE' and s.changedate::date = '2020-06-15' and c.id not in (select id from cases where pointofentry_id is not null and creationdate::date = '2020-06-15') group by region_id";
+
+   // public static String Get_all_Isolated_today = "";
+   // public static String Get_all_Isolated_today = "";
+   // public static String Get_all_Isolated_today = "";
+   // public static String Get_all_Isolated_today = "";
 
 }

@@ -86,8 +86,8 @@ public class jsonController {
         String http = "http://172.105.77.79:8080/dhis/api/organisationUnits.json?fields=lastUpdated,id,name,shortName,level,created,path&paging=true&maxLevel=1";
 
         HttpURLConnection urlConnection = null;
-        String name = "field";
-        String password = "Passcode1!x";
+        String name = "admin";
+        String password = "district";
         StringBuilder sb = new StringBuilder();
 
         String authString = name + ":" + password;

@@ -28,12 +28,15 @@ package com.mirabilia.org.hzi.sormas.cases;
 import com.mirabilia.org.hzi.Strings.sql;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,6 +49,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -122,8 +126,8 @@ public class AggregrateController {
         String http = "http://172.105.77.79:8080/dhis/api/dataValueSets";
 
         HttpURLConnection urlConnection = null;
-        String name = "field";
-        String password = "Passcode1!x";
+        String name = "admin";
+        String password = "district";
 
         String authString = name + ":" + password;
 
@@ -269,6 +273,94 @@ public class AggregrateController {
             conn.close();
         }
 
+    }
+
+    public static String MetadaJsonSender() throws ParseException {
+        String ret = "opps... Something not right";
+
+        StringBuilder sb = new StringBuilder();
+        String filePath = "C:\\Intel\\NetBeansProjects\\SORMAS-DHIS\\sormas_HL7v2\\src\\main\\webapp\\dhis_processor";
+        String http = "http://172.105.77.79:8080/dhis/api/metadata";
+
+        HttpURLConnection urlConnection = null;
+        String name = "admin";
+        String password = "district";
+
+        String authString = name + ":" + password;
+
+        byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
+        String authStringEnc = new String(authEncBytes);
+        try {
+            URL url = new URL(http);
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestProperty("Authorization", "Basic " + authStringEnc);
+            urlConnection.setDoOutput(true);
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setUseCaches(true);
+            urlConnection.setConnectTimeout(10000);
+            urlConnection.setReadTimeout(10000);
+            urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.connect();
+
+            //  System.out.println();
+            JSONParser parser = new JSONParser();
+
+            JSONObject json = (JSONObject) parser.parse(readAllBytesJava7(filePath));
+
+            // System.out.println(json.toString());
+            //  File file = new File(this.getClass().getClassLoader().getResource("someName.json").getFile());
+            OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
+            out.write(json.toString());
+            out.close();
+
+            int HttpResult = urlConnection.getResponseCode();
+            System.err.println("done...");
+            System.out.println("response Code : " + HttpResult);
+
+            if (HttpResult == 200) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
+                String line = null;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                br.close();
+
+                System.err.println(sb.toString());
+                ret = sb.toString();
+
+            } else {
+                System.out.println("finally : " + urlConnection.getResponseMessage());
+                System.out.println("finally Code : " + HttpResult);
+                if (HttpResult == 401) {
+                    System.out.println("Username and Pass not working");
+
+                    // return;
+                }
+            }
+        } catch (MalformedURLException localMalformedURLException) {
+        } catch (IOException e) {
+            System.err.println("Pushers says..... DHIS2 not found or not working.");
+            return "Pushers says..... DHIS2 not found or not working.";
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+
+        }
+        return ret;
+    }
+
+    //Read file content into string with - Files.readAllBytes(Path path)
+    private static String readAllBytesJava7(String filePath) {
+        String content = "";
+
+        try {
+            content = new String(Files.readAllBytes(Paths.get(filePath)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return content;
     }
 
 }

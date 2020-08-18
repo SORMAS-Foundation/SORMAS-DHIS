@@ -42,8 +42,8 @@ public class DHIS2resolver {
      public static String getDemAll(String pg_url) {
 
         HttpURLConnection urlConnection = null;
-        String name = "field";
-        String password = "Passcode1!x";
+        String name = "admin";
+        String password = "district";
         StringBuilder sb = new StringBuilder();
 
         String authString = name + ":" + password;

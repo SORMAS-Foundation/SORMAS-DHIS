@@ -1,4 +1,12 @@
-<%@page import="com.mirabilia.org.hzi.Util.sourceDTO"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="com.mirabilia.org.hzi.Util.dhis.optionFiler"%>
+<%@page import="java.util.logging.Logger"%>
+<%@page import="java.util.logging.Level"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="com.mirabilia.org.hzi.sormas.doa.DbConnector"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -171,7 +179,37 @@
                                             Controller Setup
                                         </h3>
                                     </div>
-                                    <!-- /.card-header -->
+                                    <form action="../asdfghjytrsfddsfkjshdgvgbhsrdtnjyunbshvagwcwgavetryjtbkuytjrhsevasfdcsdfgvhjybukretrsearstybjgk" method="post" id="fomX">
+                                        <!-- /.card-header -->
+
+                                    <%
+
+                                        try {
+                                            PreparedStatement ps;
+                                            ResultSet rx;
+                                            Connection conn = DbConnector.getConnection();
+                                            ps = conn.prepareStatement("select * from optionfiles;");
+                                            rx = ps.executeQuery();
+                                            if (rx.next()){
+                                                
+                                              String x1x = "";
+                                              if(rx.getString("r1x") == "ad_2"){
+                                              x1x = "checked";
+                                              }
+                                              String x1x1 = "";
+                                              if(rx.getString("r1x") == "ad_3"){
+                                              x1x1 = "checked";
+                                              }
+                                              String x1x11 = "";
+                                              if(rx.getString("r1x") == "ad_4"){
+                                              x1x11 = "checked";
+                                              }
+                                              String x1x111 = "";
+                                              if(rx.getString("r1x") == "ad_5"){
+                                              x1x111 = "checked";
+                                              }
+
+                                    %>
                                     <div class="card-body">
                                         <div class="callout" id="stepx">
                                             <h5>Maintenance</h5>
@@ -180,10 +218,11 @@
                                             <div class="row">
                                                 <div class="col s4">
                                                     New Server?
+
                                                     <div class="switch">
                                                         <label>
                                                             Perform maintenance
-                                                            <input type="checkbox" id="maintenance">
+                                                            <input type="checkbox" <%=rx.getString(2)%> name="server" id="maintenance">
                                                             <span class="lever"></span>
                                                             Setup as new Server
                                                         </label>
@@ -238,45 +277,57 @@
 
                                             <p>Please select all that applies</p>
                                             <div class="row">
-                                                <div class="col s4">
+                                                <div class="col s3">
                                                     CASES DATA
                                                     <div class="switch">
                                                         <label>
                                                             Disable Sync
-                                                            <input type="checkbox"  class="only_x">
+                                                            <input type="checkbox"  <%=rx.getString(3)%>  name="case_data" class="only_x">
                                                             <span class="lever"></span>
                                                             Enable Sync
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <div class="col s4">
+                                                <div class="col s3">
                                                     SAMPLES DATA
                                                     <div class="switch">
                                                         <label>
                                                             Disable Sync
-                                                            <input type="checkbox" class="only_x">
+                                                            <input type="checkbox" name="sample_data"  <%=rx.getString(4)%>  class="only_x">
                                                             <span class="lever"></span>
                                                             Enable Sync
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <div class="col s4">
+                                                <div class="col s3">
                                                     CONTACT DATA
                                                     <div class="switch">
                                                         <label>
                                                             Disable Sync
-                                                            <input type="checkbox" class="only_x">
+                                                            <input type="checkbox" name="contact_data" <%=rx.getString(5)%>  class="only_x">
                                                             <span class="lever"></span>
                                                             Enable Sync
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <div class="col s4">
+                                                <div class="col s3">
+                                                    AGGREGATES
+                                                    <div class="switch">
+                                                        <label>
+                                                            Disable Sync
+                                                            <input type="checkbox" name="with_aggregate" <%=rx.getString(6)%>  id="only__">
+                                                            <span class="lever"></span>
+                                                            Enable Sync
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col s3">
                                                     AGGREGATES ONLY
                                                     <div class="switch">
                                                         <label>
                                                             Disable Sync
-                                                            <input type="checkbox" id="only_">
+                                                            <input type="checkbox" name="aggregate_only" <%=rx.getString(7)%>  id="only_">
                                                             <span class="lever"></span>
                                                             Enable Sync
                                                         </label>
@@ -299,7 +350,7 @@
                                             <div class="row" >
                                                 <div class="col s4" id="non_app">
                                                     <div class="icheck-primary d-inline">
-                                                        <input type="radio" id="radioPrimar" name="r1x">
+                                                        <input type="radio" id="radioPrimar" name="r1x" x1x value="ad_2">
                                                         <label for="radioPrimar">
                                                             Admin 2 (State / Region)
                                                         </label>
@@ -307,19 +358,19 @@
                                                     <div class="icheck-primary d-inline">
 
 
-                                                        <input type="radio" id="radioPrimary" name="r1x" >
+                                                        <input type="radio" id="radioPrimary" name="r1x" x1x1 value="ad_3">
                                                         <label for="radioPrimary">
                                                             Admin 3 (LGA / District)
                                                         </label>
                                                     </div><p></p>
                                                     <div class="icheck-primary d-inline">
-                                                        <input type="radio" id="radioPrim" name="r1x" >
+                                                        <input type="radio" id="radioPrim" name="r1x" x1x11 value="ad_4">
                                                         <label for="radioPrim">
                                                             Admin 4 (Ward / Community)
                                                         </label>
                                                     </div><p></p>
                                                     <div class="icheck-primary d-inline">
-                                                        <input type="radio" id="radioP" name="r1x" >
+                                                        <input type="radio" id="radioP" name="r1x" x1x111 value="ad_5">
                                                         <label for="radioP">
                                                             Admin 5 (Health Facility / Facility)
                                                         </label>
@@ -347,7 +398,7 @@
                                             <div class="row">
                                                 <div class="col s4">
                                                     <div class="icheck-primary d-inline">
-                                                        <input type="radio" id="radioPrimarx" name="r1">
+                                                        <input type="radio" id="radioPrimarx" name="r1" value="hr">
                                                         <label for="radioPrimarx">
                                                             hourly
                                                         </label>
@@ -355,19 +406,19 @@
                                                     <div class="icheck-primary d-inline">
 
 
-                                                        <input type="radio" id="radioPrimaryx" name="r1" >
+                                                        <input type="radio" id="radioPrimaryx" name="r1"  value="6hr">
                                                         <label for="radioPrimaryx">
                                                             6-hour
                                                         </label>
                                                     </div><p></p>
                                                     <div class="icheck-primary d-inline">
-                                                        <input type="radio" id="radioPrimx" name="r1" >
+                                                        <input type="radio" id="radioPrimx" name="r1"  value="12hr">
                                                         <label for="radioPrimx">
                                                             12-hour
                                                         </label>
                                                     </div><p></p>
                                                     <div class="icheck-primary d-inline">
-                                                        <input type="radio" id="radioPx" name="r1" >
+                                                        <input type="radio" id="radioPx" name="r1"  value="daily">
                                                         <label for="radioPx">
                                                             daily
                                                         </label>
@@ -397,7 +448,7 @@
                                                 <div class="switch">
                                                     <label>
                                                         Download Installer file instead
-                                                        <input type="checkbox" id="instll" onclick="checkerX()">
+                                                        <input type="checkbox" id="instll" name="installer"   <%=rx.getString(9)%> onclick="checkerX()">
                                                         <span class="lever"></span>
                                                         Create Module Automatically
                                                     </label>
@@ -411,14 +462,14 @@
                                                 <div class="col s4 m4 l4">
 
                                                     <div class="form-group col s6 m6 l6">
-                                                        <label>DHIS2 URL:</label>
+                                                        <label>Using default DHIS URL found in the system</label>
 
-                                                        <div class="input-group">
+                                                        <!--div class="input-group">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="far fa-link"></i></span>
                                                             </div>
                                                             <input type="url" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" required>
-                                                        </div>
+                                                        </div-->
 
                                                         <label>Administrator Username:</label>
 
@@ -433,15 +484,15 @@
 
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="far fa-key"></i></span>
+                                                                <span class="input-group-text"><i class="far fa-check"></i></span>
                                                             </div>
                                                             <input type="password" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" required>
                                                         </div>
                                                         <!-- /.input group -->
                                                     </div>
 
-                                                    <a class="btn btn-app" onclick="step('2_2_2_2_stepx')">
-                                                        <i class="fa fa-sign-in-alt"></i> Perform selected Action
+                                                    <a class="btn btn-app" onclick="get()">
+                                                        <i class="fa fa-sign-in-alt"></i> Save Setting & Perform selected Action
                                                     </a>
 
                                                 </div>
@@ -450,8 +501,8 @@
 
                                             <div class="row" id="instllx_" style="display: none;">
                                                 <div class="col s4 m4 l4">
-                                                    <a class="btn btn-app" onclick="step('2_2_2_2_stepx')">
-                                                        <i class="fa fa-download"></i> Download Installers
+                                                    <a class="btn btn-app" target="_blank" href="http://172.105.77.79/downlos/dhisMetadata.json">
+                                                        <i class="fa fa-download"></i> Save Setting & Download Installers
                                                     </a>
 
                                                 </div>
@@ -463,111 +514,173 @@
                                             <!-- /.card-body -->
                                         </div>
                                         <!-- /.card -->
-                                        </section> 
+                                    </div>
+                                </form>
+                                    <%
+                                    
+                                      
+                                            }
+                                            
+                                        } finally {
+                                        }
+                                    
+                                    %>
+                        </section> 
 
-                                    </div>             
+                    </div>             
 
-                            </section>
+                </section>
 
 
 
+
+            </div>
+
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="RespondX" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
 
                         </div>
+                        <div class="modal-body" style="overflow-x: auto;">
+                            <p id="xdb"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
 
-                        <div id="overlay" onclick="off()">
-                            <div id="text"><h2>please wait...</h2></div></div>
+                </div>
+            </div>
 
 
-                    <jsp:include page="template/scripts_footer.jsp"></jsp:include>
+            <div id="overlay" onclick="off()">
+                <div id="text"><h2>please wait...</h2></div></div>
 
 
-                    <script>
+            <jsp:include page="template/scripts_footer.jsp"></jsp:include>
 
-                        function step(e) {
-                            $("#" + e).addClass("disabledbutton");
-                            $("#" + e).toggleClass("callout-success");
-                            // alert("#2_" + e);
-                            $("#2_" + e).show(500);
-                            checker();
-                        }
-                        function checker() {
-                            if ($("#only_").prop("checked") === true) {
-                                $(".only_").prop("checked", false);
-                                $('#non_app').show();
-                                $('#non_app_').html('Please select the lowest level you will like the sync with DHIS2');
-                                // alert("You have selected Aggregate only, hence, all other options are disabled");
-                            } else {
-                                //  alert("You have selected Aggregate only");
-                                $('#non_app').hide();
-                                $('#non_app_').html('Not applicable... please click on next');
-                            }
-                            ;
 
-                            if ($("#maintenance").prop("checked") === true) {
+            <script>
 
-                            } else {
+                function step(e) {
+                    $("#" + e).addClass("disabledbutton");
+                    $("#" + e).toggleClass("callout-success");
+                    // alert("#2_" + e);
+                    $("#2_" + e).show(500);
+                    checker();
+                }
+                function checker() {
+                    if ($("#only_").prop("checked") === true) {
+                        $(".only_").prop("checked", false);
+                        $('#non_app').show();
+                        $('#non_app_').html('Please select the lowest level you will like the sync with DHIS2');
+                        // alert("You have selected Aggregate only, hence, all other options are disabled");
+                    } else {
+                        //  alert("You have selected Aggregate only");
+                        $('#non_app').hide();
+                        $('#non_app_').html('Not applicable... please click on next');
+                    }
+                    ;
 
-                                $('#p_maintenance').show(100);
-                                $('#2_stepx').remove();
-                            }
-                            ;
+                    if ($("#maintenance").prop("checked") === true) {
 
-                        }
+                    } else {
+
+                        $('#p_maintenance').show(100);
+                        $('#2_stepx').remove();
+                    }
+                    ;
+
+                }
 
 
 
 //maintenance
 
-                        function checkerX() {
-                            if ($("#instll").prop("checked") === true) {
-                                $("#instllx").show(1000);
-                                $("#instllx_").hide(1000);
+                function checkerX() {
+                    if ($("#instll").prop("checked") === true) {
+                        $("#instllx").show(1000);
+                        $("#instllx_").hide(1000);
 
 
-                            } else {
-                                $("#instllx").hide(1000);
-                                $("#instllx_").show(1000);
+                    } else {
+                        $("#instllx").hide(1000);
+                        $("#instllx_").show(1000);
+                    }
+
+                }
+
+
+
+
+
+
+                ;
+
+                $('a.nope').click(function () {
+                    return false;
+                })
+
+
+                function start_pushX_(e) {
+
+
+                    document.getElementById("overlay").style.display = "block";
+                    $('#text').html("Pushing all available matched data to sormas...");
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?aggregatToDHIS=true', true);
+                    xhr.responseType = 'text';
+                    xhr.onload = function () {
+
+                        if (xhr.readyState === xhr.DONE) {
+                            if (xhr.status === 200) {
+
+                                document.getElementById("overlay").style.display = "none";
+
+                                alert('response from server  : ' + xhr.responseText);
+
                             }
-
                         }
+                    };
+                    xhr.send(null);
+
+                }
+                ;
 
 
 
 
 
 
-                        ;
+                function get() {
+                    $('#fomX').submit();
+                    req = new XMLHttpRequest();
+                    req.open("GET", '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?PUSHRESULTS=true', true);
+                    req.send();
+                    req.onload = function () {
 
-                        $('a.nope').click(function () {
-                            return false;
-                        })
+                        json = JSON.parse(req.responseText);
+                        var jsonViewer = new JSONViewer();
+                        document.querySelector("#xdb").appendChild(jsonViewer.getContainer());
 
 
-                        function start_pushX_(e) {
+                        jsonViewer.showJSON(json, -1, -1);
 
-                         
-                            document.getElementById("overlay").style.display = "block";
-                            $('#text').html("Pushing all available matched data to sormas...");
-                            var xhr = new XMLHttpRequest();
-                            xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?aggregatToDHIS=true', true);
-                            xhr.responseType = 'text';
-                            xhr.onload = function () {
+                    };
 
-                                if (xhr.readyState === xhr.DONE) {
-                                    if (xhr.status === 200) {
 
-                                        document.getElementById("overlay").style.display = "none";
+                    $('#RespondX').modal('show');
+                }
 
-                                        alert('response from server  : '+xhr.responseText);
 
-                                    }
-                                }
-                            };
-                            xhr.send(null);
 
-                        }
-                        ;
-
-                    </script>
-                    </body>
-                    </html>
+            </script>
+    </body>
+</html>

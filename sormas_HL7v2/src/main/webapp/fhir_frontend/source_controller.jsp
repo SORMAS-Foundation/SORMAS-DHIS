@@ -38,77 +38,7 @@
                     </section>
                     
                     
- <section class="col-lg-12 connectedSortable">
-                        <div class="row">
-                            <!-- Source creator -->
-                            <section class="col-lg-12 connectedSortable">
-                                <!-- TO DO List -->
-                                <div class="card" data-togg="tooltip" title="Use this tool to configure deduplication mechanism">
-                                    <div class="card-header">
-                                        <h3 class="card-title">
-                                            <i class="ion ion-clipboard mr-1"></i>
-                                           De-duplication and Matching Mechanism Configuration
-                                        </h3>
-
-                                      
-                                    </div>
-                                    <!-- /.card-header -->
-
-                                    <div class="card-body">
-                                        
-                                      
-              <table class="table table-bordered">
-                <tbody><tr>
-                  <th style="width: 10px">#</th>
-                  <th>Description</th>
-                  <th>Affected Leve#</th>
-                  <th style="width: 40px">active</th>
-                </tr>
-                <tr>
-                  <td>1.</td>
-                  <td>Striping all "Local Government Area" form DHIS2 Data</td>
-                  <td>
-                   3
-                  </td>
-                  <td><span class="badge bg-red">Y</span></td>
-                </tr>
-                 <tr>
-                  <td>1.</td>
-                  <td>Striping all "State" form DHIS2 Data</td>
-                  <td>
-                   2
-                  </td>
-                  <td><span class="badge bg-red">Y</span></td>
-                </tr>
-                 <tr>
-                  <td>1.</td>
-                  <td>Striping all "/" form DHIS2 Data</td>
-                  <td>
-                   all
-                  </td>
-                  <td><span class="badge bg-red">Y</span></td>
-                </tr>
-                
-              </tbody></table>
-          
-                                    </div>
-                                    <!-- /.card-body -->
-                                    <div class="card-footer clearfix">
-                                        <button type="button" class="btn btn-info float-right" data-toggle="modal" title="You can specify your own mechanism here... please read the github documentation before attemptng to do this" id="source_addition_button" data-target="#modal-sources"><i class="fas fa-plus">
-
-                                            </i> Add item
-                                        </button>
-                                        
-                                        
-                                    </div>
-
-                                </div>
-                                <!-- /.card -->
-                            </section> 
-
-                        </div>             
-
-                    </section>
+ 
 
 
 
@@ -506,7 +436,77 @@
 
 
 
+<section class="col-lg-12 connectedSortable">
+                        <div class="row">
+                            <!-- Source creator -->
+                            <section class="col-lg-12 connectedSortable">
+                                <!-- TO DO List -->
+                                <div class="card" data-togg="tooltip" title="Use this tool to configure deduplication mechanism">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            <i class="ion ion-clipboard mr-1"></i>
+                                           De-duplication and Matching Mechanism Configuration
+                                        </h3>
 
+                                      
+                                    </div>
+                                    <!-- /.card-header -->
+
+                                    <div class="card-body">
+                                        
+                                      
+              <table class="table table-bordered">
+                <tbody><tr>
+                  <th style="width: 10px">#</th>
+                  <th>Description</th>
+                  <th>Affected Leve#</th>
+                  <th style="width: 40px">active</th>
+                </tr>
+                <tr>
+                  <td>1.</td>
+                  <td>Striping all "Local Government Area" form DHIS2 Data</td>
+                  <td>
+                   3
+                  </td>
+                  <td><span class="badge bg-red">Y</span></td>
+                </tr>
+                 <tr>
+                  <td>1.</td>
+                  <td>Striping all "State" form DHIS2 Data</td>
+                  <td>
+                   2
+                  </td>
+                  <td><span class="badge bg-red">Y</span></td>
+                </tr>
+                 <tr>
+                  <td>1.</td>
+                  <td>Striping all "/" form DHIS2 Data</td>
+                  <td>
+                   all
+                  </td>
+                  <td><span class="badge bg-red">Y</span></td>
+                </tr>
+                
+              </tbody></table>
+          
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer clearfix">
+                                        <button type="button" class="btn btn-info float-right" data-toggle="modal" title="You can specify your own mechanism here... please read the github documentation before attemptng to do this" id="source_addition_button" data-target="#modal-sources"><i class="fas fa-plus">
+
+                                            </i> Add item
+                                        </button>
+                                        
+                                        
+                                    </div>
+
+                                </div>
+                                <!-- /.card -->
+                            </section> 
+
+                        </div>             
+
+                    </section>
 
 
                 <div class="modal fade" id="modal-sources">

@@ -36,6 +36,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -308,8 +309,33 @@ public class UtilServer extends HttpServlet {
             }
         }
 
-        //SEND Matched data to SORMAS
+        //SEND Matched data to SORMAS 
         if (request.getParameter("pushavailable") != null) {
+
+            try {
+                //String parentx = request.getParameter("dup_primer");
+
+                int xx = counterXint(sql.sync_count_all_synced);
+                System.out.println("total before push : "+xx);
+                sendDataX("");
+                int xx_ = counterXint(sql.sync_count_all_synced);
+                System.out.println("Push completed, total after push : "+xx_+" total newly pushed = "+(xx_ - xx));
+                
+                // int xx = counterXint(sql.sync_count_all_matched);
+
+                // float seq = ((float) xx);
+                //    String str = String.format("%2.02f", (seq * 100));
+                //  System.out.println(vc);
+              mat = (xx_ - xx) + "";
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
+        if (request.getParameter("pushfreshavailable") != null) {
 
             try {
                 //String parentx = request.getParameter("dup_primer");
@@ -342,6 +368,21 @@ public class UtilServer extends HttpServlet {
              AggregrateController.SormasAggregrator("2");
              
              mat = "Job done";
+             
+             
+         }
+         
+         if (request.getParameter("PUSHRESULTS") != null) {
+             
+            try {
+                // System.out.println("Yes... hit the Sevlets DEBUG");
+                
+              mat =  AggregrateController.MetadaJsonSender();
+                
+               // mat = "Job done";
+            } catch (ParseException ex) {
+                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
              
              
          }
@@ -722,23 +763,29 @@ public class UtilServer extends HttpServlet {
 
             ps = conn.prepareStatement(sql.sync_primer_all_matched);
             rx = ps.executeQuery();
+            
             while (rx.next()) {
+                UUID uuid = UUID.randomUUID();
+                 String randomUUIDString = uuid.toString().toUpperCase();
 
                 try {
                     String dxs = "";
                     if ("2".equals(rx.getString(2))) {
-                        dxs = "update region set externalid = ?, changedate = now() where uuid = ?;";
+                        dxs = "insert into region set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
                     } else if ("3".equals(rx.getString(2))) {
-                        dxs = "update district set externalid = ?, changedate = now() where uuid = ?;";
+                        dxs = "insert into region set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
                     } else if ("4".equals(rx.getString(2))) {
-                        dxs = "update community set externalid = ?, changedate = now() where uuid = ?;";
+                        dxs = "insert into region set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
                     } else if ("5".equals(rx.getString(2))) {
-                        dxs = "update facility set externalid = ?, changedate = now() where uuid = ?;";
+                        dxs = "insert into region set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
                     }
 
                     ps_pg = conn_pg.prepareStatement(dxs);
-                    ps_pg.setString(1, rx.getString(3));
+                    ps_pg.setString(1, randomUUIDString);
                     ps_pg.setString(2, rx.getString(1));
+                    ps_pg.setString(3, rx.getString(3));
+                    ps_pg.setString(4, rx.getString(4));
+                    ps_pg.setString(5, rx.getString(5));
                     
                    // System.out.println(ps_pg);
                     

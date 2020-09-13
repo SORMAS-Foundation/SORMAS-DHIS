@@ -1,3 +1,4 @@
+<%@page import="com.mirabilia.org.hzi.sormas.doa.ConffileCatcher"%>
 <%@page import="com.mirabilia.org.hzi.sormas.getterSetters"%>
 <%@page import="com.mirabilia.org.hzi.Util.sourceDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -45,6 +46,9 @@
                                     <div class="info-box">
                                         <span class="info-box-icon bg-info elevation-1"><i class="fa fa-hospital"></i></span>
                                         <%
+                                            String[] dhis_url = ConffileCatcher.fileCatcher("passed");
+                                            session.setAttribute("dhis_url", dhis_url[10].toString());
+                                            
                                             String totalOrg = sourceDTO.totalORGinDB();
                                             String totalDest = sourceDTO.totalDestDB();
                                              String tablx = getterSetters.getNoLastUpdated();

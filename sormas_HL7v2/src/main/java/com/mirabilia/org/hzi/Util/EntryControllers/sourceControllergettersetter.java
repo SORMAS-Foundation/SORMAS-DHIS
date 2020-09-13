@@ -160,12 +160,14 @@ public class sourceControllergettersetter extends HttpServlet {
         if (request.getParameter("getAllTotalfromFHIR") != null) {
             
             try {
+                HttpSession sess = request.getSession();
                 JSONParser jsonParser = new JSONParser();
                 JSONObject jsonObjectx;
-                String base_url = "http://172.105.77.79:3447/fhir/Location";
+                String base_url = sess.getAttribute("dhis_url").toString(); 
+//"http://172.105.77.79:3447/fhir/Location";
                 String json_all = getDemAllfromFHIR(base_url);
                 
-                System.out.println(json_all);
+              //  System.out.println(json_all);
                 
                 jsonObjectx = (JSONObject) jsonParser.parse(json_all);
                 Object total_values_onFHIR = jsonObjectx.get("total");

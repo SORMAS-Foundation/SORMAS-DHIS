@@ -27,11 +27,14 @@ public class ConffileCatcher {
             String pg_val_user = "";
             String pg_val_passw = "";
             
+            
+            String dhis_url = "";
+            
             if(valx.equalsIgnoreCase("passed")){
         try {
             //retrieving database values from configuration file
             File myObj = new File(System.getProperty("user.home") + File.separator + "somars.conf");
-          //  System.out.println(System.getProperty("user.home") + File.separator + "somars.conf");
+            System.out.println("config file should be located at : "+System.getProperty("user.home") + File.separator + "somars.conf");
             
             
             if(myObj.exists()){
@@ -92,6 +95,12 @@ public class ConffileCatcher {
              //       System.out.println("host>>>>>>" + val);
                     pg_val_passw = val;
                 }
+                
+                if (data.contains("dhis_url =")) {
+                   String val = data.replaceAll("dhis_url", "").replaceAll(" ", "").replaceAll("=", "");
+                    System.out.println("dhis2>>>>>>" + val);
+                    dhis_url = val;
+                }
 
             }
 
@@ -116,7 +125,7 @@ public class ConffileCatcher {
 
        // val_url = val_host + ":" + val_port + "/" + val_name + ", \'" + val_user + "\', \'" + val_passw + "\'";
         //System.out.println("jdbc:mysql://" + val_url);
-        String[] arr = new String[10];
+        String[] arr = new String[11];
         arr[0] = val_host;
         arr[1] = val_port;
         arr[2] = val_name;
@@ -128,6 +137,7 @@ public class ConffileCatcher {
         arr[7] = pg_val_name;
         arr[8] = pg_val_user;
         arr[9] = pg_val_passw;
+        arr[10] = dhis_url;
         
         return arr;
 

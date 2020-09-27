@@ -29,12 +29,14 @@ public class ConffileCatcher {
             
             
             String dhis_url = "";
+            String fhir_url = "";
             
             if(valx.equalsIgnoreCase("passed")){
         try {
             //retrieving database values from configuration file
+         //         File myObj = new File("/opt/domains/sormas/somars.conf");
             File myObj = new File(System.getProperty("user.home") + File.separator + "somars.conf");
-            System.out.println("config file should be located at : "+System.getProperty("user.home") + File.separator + "somars.conf");
+        //    System.out.println("config file is located at : "+System.getProperty("user.home") + File.separator + "somars.conf");
             
             
             if(myObj.exists()){
@@ -98,8 +100,15 @@ public class ConffileCatcher {
                 
                 if (data.contains("dhis_url =")) {
                    String val = data.replaceAll("dhis_url", "").replaceAll(" ", "").replaceAll("=", "");
-                    System.out.println("dhis2>>>>>>" + val);
+                //    System.out.println("dhis2>>>>>>" + val);
                     dhis_url = val;
+                    dhis_url = "";
+                }
+                
+                if (data.contains("fhir_url =")) {
+                   String val = data.replaceAll("fhir_url", "").replaceAll(" ", "").replaceAll("=", "");
+                //    System.out.println("FHIR>>>>>>" + val);
+                    fhir_url = val;
                 }
 
             }
@@ -125,7 +134,7 @@ public class ConffileCatcher {
 
        // val_url = val_host + ":" + val_port + "/" + val_name + ", \'" + val_user + "\', \'" + val_passw + "\'";
         //System.out.println("jdbc:mysql://" + val_url);
-        String[] arr = new String[11];
+        String[] arr = new String[12];
         arr[0] = val_host;
         arr[1] = val_port;
         arr[2] = val_name;
@@ -138,6 +147,7 @@ public class ConffileCatcher {
         arr[8] = pg_val_user;
         arr[9] = pg_val_passw;
         arr[10] = dhis_url;
+        arr[11] = fhir_url;
         
         return arr;
 

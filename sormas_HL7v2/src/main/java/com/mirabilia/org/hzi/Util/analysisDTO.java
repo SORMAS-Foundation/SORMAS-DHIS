@@ -80,13 +80,14 @@ public class analysisDTO {
                 //lets clean dhis data...
                 //check if org unit is valid from dhis
                 if (rx.getString("name").contains(" ")) {
-                    String[] bb = rx.getString("name").split(" ");
+                   // String[] bb = rx.getString("name").split(" ");
                     //verify if it has convetional first two prefix and strip them
-                    if (bb[0].length() == 2) {
-                        stack = rx.getString("name").replaceFirst(bb[0], "");
-                    }
+                   // if (bb[0].length() == 2) {
+                     //   stack = rx.getString("name").replaceFirst(bb[0], "");
+                   // }
+                    stack = rx.getString("name");
                 }
-
+/*
                 //lets remove the ward / LGA / HF Strings
                 switch (rx.getString("level")) {
                     case "1":
@@ -105,7 +106,7 @@ public class analysisDTO {
                     default:
                     // code block
                 }
-
+*/
                 try {
                     stack = stack.toLowerCase();
                     xps = conn.prepareStatement("SELECT UUID, namex, level FROM sormas_local where level = ?");
@@ -115,7 +116,7 @@ public class analysisDTO {
 
                     while (xrx.next()) {
                         if (xrx.getString("namex").length() > 2) {
-                            xstack = xrx.getString("namex").replace(" ward", "");
+                            xstack = xrx.getString("namex");//.replace(" ward", "");
 
                             //xstack = Compare(xstack);
                             if (stack.contains(xstack.toLowerCase())) {
@@ -195,8 +196,8 @@ public class analysisDTO {
 
                 how_many = all / 500;
 
-                System.out.println(how_many);
-                System.out.println(rx.getString(1));
+             //   System.out.println(how_many);
+            //    System.out.println(rx.getString(1));
 
             }
 

@@ -59,9 +59,9 @@ ARG DB_NAME=sormas-dhis
 
 ARG JVM_MAX=2096m
 
-ARG SORMAS_URL=https://github.com/hzi-braunschweig/SORMAS-DHIS/releases/download/released/sormas_HL7v
+ARG SORMAS_URL=https://github.com/hzi-braunschweig/SORMAS-DHIS/releases/download/released/sormas_HL7v_dockerized
 EXPOSE 6080
-ARG SORMAS-DHIS_VERSION=2-1.0.0.war
+ARG SORMAS-DHIS_VERSION=v2.1.zip
 EXPOSE 6048
 
 ENV ASENV_PATH="/opt/payara5/glassfish/config/asenv.conf"

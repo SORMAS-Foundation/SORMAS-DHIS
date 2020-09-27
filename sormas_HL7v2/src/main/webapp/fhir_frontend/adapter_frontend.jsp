@@ -1,7 +1,33 @@
+<%@page import="com.mirabilia.org.hzi.sormas.doa.DbConnector"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.mirabilia.org.hzi.sormas.doa.ConffileCatcher"%>
 <%@page import="com.mirabilia.org.hzi.sormas.getterSetters"%>
 <%@page import="com.mirabilia.org.hzi.Util.sourceDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+        PreparedStatement ps;
+        ResultSet rx;
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DbConnector.getConnection();
+        String str = "";
+        
+try {
+            ps = conn.prepareStatement("select url from _sources where title like '%dhis%';");
+            rx = ps.executeQuery();
+            if (rx.next()) {
+            session.setAttribute("url_dhis",rx.getString(1));
+            }
+            
+} 
+finally{
+    
+}
+
+
+%>
 <!DOCTYPE html>
 <html lang="en">
     <jsp:include page="template/head.jsp"></jsp:include>
@@ -46,20 +72,21 @@
                                     <div class="info-box">
                                         <span class="info-box-icon bg-info elevation-1"><i class="fa fa-hospital"></i></span>
                                         <%
-                                            String[] dhis_url = ConffileCatcher.fileCatcher("passed");
-                                            session.setAttribute("dhis_url", dhis_url[10].toString());
-                                            
+                                            String[] _url = ConffileCatcher.fileCatcher("passed");
+                                            session.setAttribute("dhis_url", _url[10].toString());
+                                            session.setAttribute("fhir_url", _url[11].toString());
+
                                             String totalOrg = sourceDTO.totalORGinDB();
                                             String totalDest = sourceDTO.totalDestDB();
-                                             String tablx = getterSetters.getNoLastUpdated();
-                                            
+                                            String tablx = getterSetters.getNoLastUpdated();
+
 
                                         %>
                                     <div class="info-box-content" style="width:40%">
-                                        <span class="info-box-text">Total Org Unit on Adapter</span>
+                                        <span class="info-box-text">Total No of Org Unit from DHIS2</span>
                                         <span class="info-box-number">
                                             <%=totalOrg%> 
-                                            <small>| Stored from Remote DHIS2</small>
+                                            <small>| Synced from Remote DHIS2</small>
                                         </span>
                                     </div>
                                     <!-- /.info-box-content -->
@@ -69,24 +96,20 @@
                             <!-- /.col -->
 
 
-
-
                             <div class="col-12 col-sm-6 col-md-3">
-
                                 <div class="info-box mb-3">
-
-                                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-sync-alt"></i></span>
+                                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-sign-out-alt"></i></span>
 
                                     <div class="info-box-content">
+                                        <span class="info-box-text">Total No of Org Unit from SORMAS</span>
+                                        <span class="info-box-text"><b> <%=totalDest%> </b>  <small>| Synced from SORMAS</small></span>
 
-                                        <span class="info-box-text">No of synced OrgUnits on FHIR</span>
-                                        <span class="info-box-number" id="FHIR">loading</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
                                 <!-- /.info-box -->
                             </div>
-                            <!-- /.col -->
+                                        
 
                             <!-- fix for small devices only -->
                             <div class="clearfix hidden-md-up"></div>
@@ -104,19 +127,24 @@
                                 <!-- /.info-box -->
                             </div>
                             <!-- /.col -->
+
                             <div class="col-12 col-sm-6 col-md-3">
+
                                 <div class="info-box mb-3">
-                                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-sign-out-alt"></i></span>
+
+                                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-sync-alt"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Total No of Org Unit from SORMAS</span>
-                                        <span class="info-box-text"><b> <%=totalDest%> </b>  <small>| found on SORMAS</small></span>
 
+                                        <span class="info-box-text">No of OrgUnits on SORMAS</span>
+                                        <span class="info-box-number" id="SRMS">loading</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
                                 <!-- /.info-box -->
                             </div>
+                            <!-- /.col -->
+
                             <!-- /.col -->
                         </div>
                         <!-- /.row -->
@@ -229,8 +257,6 @@
                                             <%
                                                 String dxe = getterSetters.getNoGeoPoints();
                                                 String dxex = getterSetters.getNoSynced();
-
-                                               
 
 
                                             %>
@@ -431,116 +457,119 @@
 
 
 
-        <script>
-            starterx("5050");
+            <script>
 
-            function starterx(what) {
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', '../orggetter?pg_counter=' + what, true);
-                xhr.responseType = 'text';
-                var maxx = 0;
-                //starterx();
-
-                console.log("1 - total chunks to be process");
-                //get the total chunks
-
-                xhr.onload = function () {
-                    if (xhr.readyState === xhr.DONE) {
-                        if (xhr.status === 200) {
-                            maxx = xhr.responseText;
-                            console.log(what + " getting value= " + maxx);
-                            document.getElementById("DHIS").innerHTML = "DHIS = " + xhr.responseText;
+                var ses_ = '<%= session.getAttribute("jobber")%>';
+                var ses1_ = '<%= session.getAttribute("jobber1")%>';
+                var ses2_ = '<%= session.getAttribute("jobber2")%>';
+                var ses3_ = '<%= session.getAttribute("jobber3")%>';
 
 
-                        } else {
-                            console.log("Server error while contacting main methods to get total number of chunks");
-                            return;
+                starterx("5050");
+
+                function starterx(what) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', '../orggetter?pg_counter=' + what, true);
+                    xhr.responseType = 'text';
+                    var maxx = 0;
+                    //starterx();
+
+                    console.log("1 - total chunks to be process");
+                    //get the total chunks
+
+                    xhr.onload = function () {
+                        if (xhr.readyState === xhr.DONE) {
+                            if (xhr.status === 200) {
+                                maxx = xhr.responseText;
+                                console.log(what + " getting value= " + maxx);
+                                document.getElementById("DHIS").innerHTML = "DHIS = " + xhr.responseText;
+
+
+                            } else {
+                                console.log("Server error while contacting main methods to get total number of chunks");
+                                return;
+                            }
                         }
-                    }
-                };
+                    };
 
-                xhr.send("");
-                xhr.DONE
-            }
-            starter();
+                    xhr.send("");
+                    xhr.DONE
+                }
+                starter();
 
-            function starter() {
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', '../controller?getAllTotalfromFHIR=', true);
-                xhr.responseType = 'text';
-                var maxx = 0;
-                //starterx();
+                function starter() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', '../controller?getAllTotalfromSRMS=', true);
+                    xhr.responseType = 'text';
+                    var maxx = 0;
 
-                console.log("1 - total chunks to be process");
-                //get the total chunks
-
-                xhr.onload = function () {
-                    if (xhr.readyState === xhr.DONE) {
-                        if (xhr.status === 200) {
-                            maxx = xhr.responseText;
-                            console.log(" getting value = " + maxx);
-                            document.getElementById("FHIR").innerHTML = "FHIR = " + xhr.responseText;
+                    xhr.onload = function () {
+                        if (xhr.readyState === xhr.DONE) {
+                            if (xhr.status === 200) {
+                                maxx = xhr.responseText;
+                                console.log("SRMS getting value = " + xhr.responseText);
+                                document.getElementById("SRMS").innerHTML = "SRMS = " + xhr.responseText;
 
 
-                        } else {
-                            console.log("Server error while contacting main methods to get total number of chunks");
-                            return;
+                            } else {
+                                console.log("Server error while contacting main methods to get total number of chunks");
+                                return;
+                            }
                         }
-                    }
-                };
+                    };
 
-                xhr.send("");
-                xhr.DONE
-            }
-
+                    xhr.send("");
+                    xhr.DONE
+                }
 
 
 
-            resx();
+
+                resx();
 
 
-            function resx() {
+                function resx() {
 
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?count=10', true);
-                xhr.responseType = 'text';
-                xhr.onload = function () {
-                    if (xhr.readyState === xhr.DONE) {
-                        if (xhr.status === 200) {
-                            intPerser(xhr.responseText);
-                        } else {
-                            alert("There is a problem retreiving analytics from server, please rerun Analytics 'Analyse' button");
-                            return;
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?count=10', true);
+                    xhr.responseType = 'text';
+                    xhr.onload = function () {
+                        if (xhr.readyState === xhr.DONE) {
+                            if (xhr.status === 200) {
+                                intPerser(xhr.responseText);
+                            } else {
+                                alert("There is a problem retreiving analytics from server, please rerun Analytics 'Analyse' button");
+                                return;
+                            }
                         }
-                    }
-                };
-                xhr.send(null);
+                    };
+                    xhr.send(null);
 
-            }
+                }
 
-            function intPerser(e) {
-                const words = e.split(',');
-                var a = parseInt(words[0]);
-                var b = parseInt(words[1]);
-                var c = parseInt(words[2]);
-                var d = parseInt(words[3]);
+                function intPerser(e) {
+                    const words = e.split(',');
+                    var a = parseInt(words[0]);
+                    var b = parseInt(words[1]);
+                    var c = parseInt(words[2]);
+                    var d = parseInt(words[3]);
 
-                var tt = a + b + c + d;
-                $('#att').html('<b>' + a + '</b>/' + tt + '')
-                $('#att_').css('width', '' + Math.floor((a / tt) * 100) + '%')
+                    var tt = a + b + c + d;
+                    $('#att').html('<b>' + a + '</b>/' + tt + '')
+                    $('#att_').css('width', '' + Math.floor((a / tt) * 100) + '%')
 
-                $('#btt').html('<b>' + b + '</b>/' + tt + '')
-                $('#btt_').css('width', '' + Math.floor((b / tt) * 100) + '%')
+                    $('#btt').html('<b>' + b + '</b>/' + tt + '')
+                    $('#btt_').css('width', '' + Math.floor((b / tt) * 100) + '%')
 
-                $('#ctt').html('<b>' + c + '</b>/' + tt + '')
-                $('#ctt_').css('width', '' + Math.floor((c / tt) * 100) + '%')
+                    $('#ctt').html('<b>' + c + '</b>/' + tt + '')
+                    $('#ctt_').css('width', '' + Math.floor((c / tt) * 100) + '%')
 
-                $('#dtt').html('<b>' + d + '</b>/' + tt + '')
-                $('#dtt_').css('width', '' + Math.floor((d / tt) * 100) + '%')
-
+                    $('#dtt').html('<b>' + d + '</b>/' + tt + '')
+                    $('#dtt_').css('width', '' + Math.floor((d / tt) * 100) + '%')
 
 
-            }
+
+                }
         </script>
 
     </body>

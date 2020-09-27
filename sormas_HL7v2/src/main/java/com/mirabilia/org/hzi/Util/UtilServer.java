@@ -45,6 +45,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -59,12 +60,17 @@ public class UtilServer extends HttpServlet {
     private static String mat = "";
     private static int nox = 0;
 
+    private static int re_g = 0;
+    private static int ds_c = 0;
+    private static int com_m = 0;
+    private static int fac_l = 0;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-       // System.out.println("Yes... hit the Sevlets DEBUG");
+        HttpSession sess = request.getSession(false);
 
+        // System.out.println("Yes... hit the Sevlets DEBUG");
         if (request.getParameter("count") != null) {
             try {
 
@@ -121,7 +127,7 @@ public class UtilServer extends HttpServlet {
 
                 int xx = counterXint_withParameters(sql.L4_count_by_level_using_parent, parentx); //total lgas from destination
                 //total lgas from source
-                System.out.println(xx);
+                //    System.out.println(xx);
                 String sub = counterXString_withParameters(sql.L4_count_by_level_using_parent_source_q1, parentx); //subquery
                 int xc = counterXint_withParameters(sql.L4_count_by_level_using_parent_source_q2, sub);
 
@@ -131,7 +137,7 @@ public class UtilServer extends HttpServlet {
 
                 float seq = ((float) xm / xc);
                 String str = String.format("%2.02f", (seq * 100));
-                System.out.println(vc);
+                //    System.out.println(vc);
                 mat = str + "%," + xx + "," + xc + "," + xm + ",@@@" + vc;
 
             } catch (ClassNotFoundException ex) {
@@ -316,79 +322,71 @@ public class UtilServer extends HttpServlet {
                 //String parentx = request.getParameter("dup_primer");
 
                 int xx = counterXint(sql.sync_count_all_synced);
-                System.out.println("total before push : "+xx);
+                System.out.println("total before push : " + xx);
                 sendDataX("");
                 int xx_ = counterXint(sql.sync_count_all_synced);
-                System.out.println("Push completed, total after push : "+xx_+" total newly pushed = "+(xx_ - xx));
-                
-                // int xx = counterXint(sql.sync_count_all_matched);
+                System.out.println("Push completed, total after push : " + xx_ + " total newly pushed = " + (xx_ - xx));
 
+                // int xx = counterXint(sql.sync_count_all_matched);
                 // float seq = ((float) xx);
                 //    String str = String.format("%2.02f", (seq * 100));
                 //  System.out.println(vc);
-              mat = (xx_ - xx) + "";
+                mat = (xx_ - xx) + "";
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-        
+
         if (request.getParameter("pushfreshavailable") != null) {
-
             try {
-                //String parentx = request.getParameter("dup_primer");
-
-                int xx = counterXint(sql.sync_count_all_synced);
-                System.out.println("total before push : "+xx);
-                sendDataX("");
-                int xx_ = counterXint(sql.sync_count_all_synced);
-                System.out.println("Push completed, total after push : "+xx_+" total newly pushed = "+(xx_ - xx));
-                
-                // int xx = counterXint(sql.sync_count_all_matched);
-
-                // float seq = ((float) xx);
-                //    String str = String.format("%2.02f", (seq * 100));
-                //  System.out.println(vc);
-              mat = (xx_ - xx) + "";
+                sess.setAttribute("fav", "plus-square");
+                sess.setAttribute("no", "1");
+                sess.setAttribute("notf", "Pending Job Progress");
+                int n = 6;
+                // System.out.print("Even Numbers from 1 to " + n + " are: ");
+                for (int i = 2; i < n; i++) {
+                    sendDataX_(i);
+                    sess.setAttribute("jobber", "Region Progress: "+re_g);
+                    sess.setAttribute("jobber1", "District Progress: "+ds_c);
+                    sess.setAttribute("jobber2", "Community Progress: "+com_m);
+                    sess.setAttribute("jobber3", "Health Facility Progress: "+fac_l);
+                }
+                mat = ("done");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-        
-        
-         if (request.getParameter("aggregatToDHIS") != null) {
-             
-             // System.out.println("Yes... hit the Sevlets DEBUG");
-             
-             AggregrateController.SormasAggregrator("2");
-             
-             mat = "Job done";
-             
-             
-         }
-         
-         if (request.getParameter("PUSHRESULTS") != null) {
-             
+
+        if (request.getParameter(
+                "aggregatToDHIS") != null) {
+
+            AggregrateController.SormasAggregrator("2");
+            mat = "Job done";
+        }
+
+        if (request.getParameter(
+                "PUSHRESULTS") != null) {
+
             try {
                 // System.out.println("Yes... hit the Sevlets DEBUG");
-                
-              mat =  AggregrateController.MetadaJsonSender();
-                
-               // mat = "Job done";
+
+                mat = AggregrateController.MetadaJsonSender();
+
+                // mat = "Job done";
             } catch (ParseException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             }
-             
-             
-         }
 
-        response.setContentType("text/plain;charset=UTF-8");
-        response.setStatus(200);
+        }
+
+        response.setContentType(
+                "text/plain;charset=UTF-8");
+        response.setStatus(
+                200);
         ServletOutputStream sout = response.getOutputStream();
 
         sout.print(mat);
@@ -488,7 +486,7 @@ public class UtilServer extends HttpServlet {
         }
         return ret;
     }
-    
+
     public static void update_oneParm(String sqq, String sqq_) throws ClassNotFoundException, SQLException {
 
         PreparedStatement ps = null;
@@ -580,6 +578,66 @@ public class UtilServer extends HttpServlet {
             conn.close();
         }
         return ret;
+    }
+
+    public static void sendDataX(String sqq) throws ClassNotFoundException {
+
+        PreparedStatement ps = null;
+        ResultSet rx = null;
+        Connection conn = DbConnector.getConnection();
+
+        PreparedStatement ps_pg = null;
+        ResultSet rx_pg = null;
+        Connection conn_pg = DbConnector.getPgConnection();
+        int ret = 0;
+
+        try {
+
+            ps = conn.prepareStatement(sql.sync_primer_all_matched);
+            rx = ps.executeQuery();
+
+            while (rx.next()) {
+                UUID uuid = UUID.randomUUID();
+                String randomUUIDString = uuid.toString().toUpperCase();
+
+                try {
+                    String dxs = "";
+                    if ("2".equals(rx.getString(2))) {
+                        dxs = "insert into region set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
+                    } else if ("3".equals(rx.getString(2))) {
+                        dxs = "insert into region set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
+                    } else if ("4".equals(rx.getString(2))) {
+                        dxs = "insert into region set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
+                    } else if ("5".equals(rx.getString(2))) {
+                        dxs = "insert into region set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
+                    }
+
+                    ps_pg = conn_pg.prepareStatement(dxs);
+                    ps_pg.setString(1, randomUUIDString);
+                    ps_pg.setString(2, rx.getString(1));
+                    ps_pg.setString(3, rx.getString(3));
+                    ps_pg.setString(4, rx.getString(4));
+                    ps_pg.setString(5, rx.getString(5));
+
+                    // System.out.println(ps_pg);
+                    ret = ps_pg.executeUpdate();
+
+                } finally {
+                    if (ret > 0) {
+                        //    System.out.println("afected rows =" + ret + " setting " + rx.getString(1) + " with externalID " + rx.getString(3) + " status to synced");
+                        update_oneParm(sql.sync_send_all_matched_My, rx.getString(4));
+                    }
+                    ret = 0;
+                }
+            }
+            conn_pg.close();
+            conn.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilServer.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public static String counterXString_withParameters_(String sqq, String par1) throws ClassNotFoundException, SQLException {
@@ -747,62 +805,119 @@ public class UtilServer extends HttpServlet {
         return ret.replaceAll(",@@", "") + "}";
     }
 
-    public static void sendDataX(String sqq) throws ClassNotFoundException {
+    public static void sendDataX_(int i) throws ClassNotFoundException, SQLException {
+        PreparedStatement ps = null;
+        ResultSet rx = null;
+
+        PreparedStatement ps_g = null;
+        ResultSet s_x = null;
+
+        Connection conn = DbConnector.getConnection();
+
+        try {
+            ps = conn.prepareStatement(sql.sync_primer_all_fresh);
+            ps.setString(1, i + "");
+            rx = ps.executeQuery();
+               System.out.println("deugging fresh pusher >>>>>>>>>>>>>>>>>>>>>>>.."+ps);
+
+            while (rx.next()) {
+                String abx = rx.getString(1);
+                String[] ab = abx.split("/");
+                int ddx = ab.length;
+                int ddx_ = ddx - 2;
+                //    System.out.println(rx.getString(1));
+
+                ps_g = conn.prepareStatement(sql.sync_primer_all_fresh_);
+                ps_g.setString(1, ab[ddx_]);
+                s_x = ps_g.executeQuery();
+
+                //  System.out.println(ps_g);
+                if (s_x.next()) {
+                       System.out.println(ab[ddx_] + "   ____   " + rx.getString(1)+" >>>>>>>>>  "+s_x.getString(1)+"");
+
+                    sendDataX_a(s_x.getString(1), ab[ddx_], i + "");
+
+                } else {
+                    // return;
+                }
+
+            }
+
+        } finally {
+
+        }
+
+    }
+
+    public static void sendDataX_a(String stt, String prnt, String numz) throws ClassNotFoundException, SQLException {
 
         PreparedStatement ps = null;
         ResultSet rx = null;
         Connection conn = DbConnector.getConnection();
 
         PreparedStatement ps_pg = null;
-        ResultSet rx_pg = null;
+        ResultSet s = null;
         Connection conn_pg = DbConnector.getPgConnection();
         int ret = 0;
 
-       
         try {
 
-            ps = conn.prepareStatement(sql.sync_primer_all_matched);
+            ps = conn.prepareStatement("select name, uuid, idx, rec_created, level  from raw_ where level = ? and path_parent like '%" + prnt + "%'");
+            ps.setString(1, numz);
             rx = ps.executeQuery();
-            
+
+            //   System.out.println(ps);
             while (rx.next()) {
                 UUID uuid = UUID.randomUUID();
-                 String randomUUIDString = uuid.toString().toUpperCase();
+                String randomUUIDString = uuid.toString().toUpperCase();
 
                 try {
                     String dxs = "";
-                    if ("2".equals(rx.getString(2))) {
-                        dxs = "insert into region set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
-                    } else if ("3".equals(rx.getString(2))) {
-                        dxs = "insert into region set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
-                    } else if ("4".equals(rx.getString(2))) {
-                        dxs = "insert into region set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
-                    } else if ("5".equals(rx.getString(2))) {
-                        dxs = "insert into region set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
-                    }
+                    int vk = 1;
 
-                    ps_pg = conn_pg.prepareStatement(dxs);
-                    ps_pg.setString(1, randomUUIDString);
-                    ps_pg.setString(2, rx.getString(1));
-                    ps_pg.setString(3, rx.getString(3));
-                    ps_pg.setString(4, rx.getString(4));
-                    ps_pg.setString(5, rx.getString(5));
-                    
-                   // System.out.println(ps_pg);
-                    
-                   ret =  ps_pg.executeUpdate();
-                    
+                    if ("2".equals(rx.getString(5))) {
+                        dxs = "insert into region (uuid,name,externalid,id,changedate,creationdate) values(?,?,?,?,now(),?) ON CONFLICT DO NOTHING";
+                        re_g++;
+                    } else if ("3".equals(rx.getString(5))) {
+                        ds_c++;
+                        dxs = "insert into district (uuid,name,externalid,id,changedate,creationdate,region_id) values(?,?,?,?,now(),?,'" + stt + "') ON CONFLICT DO NOTHING";
+                    } else if ("4".equals(rx.getString(5))) {
+                        com_m++;
+                        dxs = "insert into community (uuid,name,externalid,id,changedate,creationdate, district_id) values(?,?,?,?,now(),?,'" + stt + "') ON CONFLICT DO NOTHING";
+                    } else if ("5".equals(rx.getString(5))) {
+                        fac_l++;
+                        dxs = "insert into facility (uuid,name,externalid,id,changedate,creationdate, community_id) values(?,?,?,?,now(),?,'" + stt + "') ON CONFLICT DO NOTHING";
+                    } else if ("1".equals(rx.getString(5))) {
+                        vk = 0;
+                    }
+                    if (vk == 1) {
+                        ps_pg = conn_pg.prepareStatement(dxs);
+                        ps_pg.setString(1, randomUUIDString);
+                        ps_pg.setString(2, rx.getString(1));
+                        ps_pg.setString(3, rx.getString(2));
+                        ps_pg.setInt(4, rx.getInt(3));
+                        ps_pg.setDate(5, rx.getDate(4));
+
+                        //    System.out.println(ps_pg);
+                        ret = ps_pg.executeUpdate();
+                    }
                 } finally {
-                    if(ret > 0){
-                    System.out.println("afected rows ="+ret+" setting "+rx.getString(1)+" with externalID "+rx.getString(3)+" status to synced");
-                    update_oneParm(sql.sync_send_all_matched_My, rx.getString(4));
+                    if (ret > 0) {
+                        //    System.out.println("afected rows =" + ret + " setting " + rx.getString(1) + " with "
+                        //          + "ID " + rx.getString(3) + " status to synced");
+                        update_oneParm(sql.sync_send_all_matched_My, rx.getString(3));
                     }
                     ret = 0;
                 }
             }
             conn_pg.close();
             conn.close();
+
         } catch (SQLException ex) {
-            Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UtilServer.class
+                    .getName()).log(Level.SEVERE, null, ex);
+            conn_pg.close();
+            conn.close();
         }
 
     }

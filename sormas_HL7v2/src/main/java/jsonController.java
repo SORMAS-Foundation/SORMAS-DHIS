@@ -83,7 +83,7 @@ public class jsonController {
 
     public static String getDem() {
 
-        String http = "http://172.105.77.79:8080/dhis/api/organisationUnits.json?fields=lastUpdated,id,name,shortName,level,created,path&paging=true&maxLevel=1";
+        String http = "http://172.105.77.79:8080/api/organisationUnits.json?fields=lastUpdated,id,name,shortName,level,created,path&paging=true&maxLevel=1";
 
         HttpURLConnection urlConnection = null;
         String name = "admin";

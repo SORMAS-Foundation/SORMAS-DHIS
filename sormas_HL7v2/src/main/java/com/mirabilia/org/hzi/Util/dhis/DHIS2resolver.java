@@ -126,7 +126,7 @@ public class DHIS2resolver {
         }
         **/
         }
-        System.out.println(sb.toString());
+      //  System.out.println(sb.toString());
         return sb.toString();
     }
      

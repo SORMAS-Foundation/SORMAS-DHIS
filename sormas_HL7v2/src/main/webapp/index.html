@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+        <!--style>
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
+/*body{
+//  background: #3B2D4E;
+ // font-family: 'Varela Round', sans-serif;
+}
+**/
+.container {
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+h1 {
+  text-align: center;
+  color: #89A4FF;
+}
+.progress-bar-wrapper{
+  max-width: 500px;
+  background: #2F2540;
+}
+.progress-bar{
+  background: #89A4FF;
+  height: 10px;
+  width: 0px;
+}
+.load-button{
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: 1px solid #89A4FF;
+  border-radius: 2px;
+  background: #89A4FF;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-family: 'Varela Round', sans-serif;
+  outline: none;  /*to remove bluw glow in chrome*/
+}
+
+</style-->
+        <style>
+            /* Start by setting display:none to make this hidden.
+   Then we position it in relation to the viewport window
+   with position:fixed. Width, height, top and left speak
+   speak for themselves. Background we set to 80% white with
+   our animation centered, and no-repeating */
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('http://sampsonresume.com/labs/pIkfp.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modal {
+    display: block;
+}
+
+body.loadingx {
+    display: none;
+}
+            
+        </style>
+        
+    </head>
+    <body class="">
+        <div id="demo">
+            <h2>The XMLHttpRequest Object</h2>
+            <button type="button" onclick="starter()">Change Content</button>
+        </div>
+        
+     <div class="progress">
+    <div class="progress-bar" id="progress_" style="width:1100%">1000</div>
+  </div>
+        
+        <div class="modal"></div>
+        <script>
+
+
+
+ 
+            var xhr = new XMLHttpRequest();
+
+
+            xhr.open('GET', './orggetter?pg_counter=1', true);
+
+            xhr.responseType = 'text';
+
+            var maxx = 0;
+
+            starterx();
+
+            function starter() {
+              // document.getElementsByClassName('wwww')[0].classList.add('loading');
+             
+ $('body').addClass('loading');
+                servlet_primer(100);
+                
+                servlet_primer(maxx);
+                //console.log(maxx);
+               //  myloader(0);
+
+            }
+
+
+
+            //get the total chunks
+            function starterx() {
+                xhr.onload = function () {
+                    if (xhr.readyState === xhr.DONE) {
+                        if (xhr.status === 200) {
+                            maxx = xhr.responseText;
+                            console.log("1 - total chunks to be process = " + maxx);
+
+
+                        } else {
+                            console.log("Server error while contacting main methods to get total number of chunks");
+                            return;
+                        }
+                    }
+                };
+
+                xhr.send("");
+            }
+
+            //process the entire chunks one after the other
+
+            function servlet_primer(stat) {
+
+                if (stat > 0) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', './orggetter?pg_counterx=' + stat, true);
+
+
+
+                    xhr.responseType = 'text';
+                    xhr.onload = function () {
+                        if (xhr.readyState === xhr.DONE) {
+                            if (xhr.status === 200) {
+                               var max = xhr.responseText;
+                                myloader(max);
+                                console.log("Number of chunk been processed currently = " + max);
+                            }
+                        }
+                    };
+
+                    xhr.send(null);
+                    
+                    
+                    success: servlet_primer(stat - 1);
+
+                }
+
+            }
+            
+            function myloader(width) {
+                   // $('.progress-bar').css('width', width+'%');
+                    console.log(width+'%');
+                   var dd =  document.getElementById("progress_").style.width = width+'%';
+                   var ddc = document.getElementById("progress_").innerHTML = width+'%';
+                   
+                   if(width < 3){
+                       
+                      $('body').removeClass('loading');
+                      
+                      $('body').addClass('loadingx'); 
+                   }
+            }
+</script>
+    </body>
+</html>

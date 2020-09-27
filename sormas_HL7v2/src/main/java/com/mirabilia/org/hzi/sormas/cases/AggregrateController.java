@@ -91,7 +91,7 @@ public class AggregrateController {
                         String[] ad = splitt.split(",");
 
                         SendCasesToDHIS(ra.getString(5), ad[0], ra.getString(4), ad[1], ra.getString(1), dtf.format(now), ra.getString(4) + " Aggregate", ra.getString(3));
-                        //System.out.println( ra.getString(5) + " - " + ad[0] + " - " + ra.getString(4) + " - " + ad[1] + " - " + ra.getString(1) + " - " + dtf.format(now) );
+                        System.out.println( ra.getString(5) + " - " + ad[0] + " - " + ra.getString(4) + " - " + ad[1] + " - " + ra.getString(1) + " - " + dtf.format(now) );
                     }
                 } else {
 
@@ -123,7 +123,7 @@ public class AggregrateController {
     public static void SendCasesToDHIS(String cPer, String dSet, String OrgUnit, String dEle, String val, String tDay, String disC, String org_name) {
         StringBuilder sb = new StringBuilder();
 
-        String http = "http://172.105.77.79:8080/dhis/api/dataValueSets";
+        String http = "http://172.105.77.79:8080/api/dataValueSets";
 
         HttpURLConnection urlConnection = null;
         String name = "admin";
@@ -280,7 +280,7 @@ public class AggregrateController {
 
         StringBuilder sb = new StringBuilder();
         String filePath = "C:\\Intel\\NetBeansProjects\\SORMAS-DHIS\\sormas_HL7v2\\src\\main\\webapp\\dhis_processor";
-        String http = "http://172.105.77.79:8080/dhis/api/metadata";
+        String http = "http://172.105.77.79:8080/api/metadata";
 
         HttpURLConnection urlConnection = null;
         String name = "admin";

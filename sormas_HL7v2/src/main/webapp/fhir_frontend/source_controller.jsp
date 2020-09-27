@@ -74,10 +74,10 @@
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer clearfix">
-                                        <button type="button" class="btn btn-info float-right" data-toggle="modal" id="source_addition_button" data-target="#modal-sources"><i class="fas fa-plus">
+                                        <!--button type="button" class="btn btn-info float-right" data-toggle="modal" id="source_addition_button" data-target="#modal-sources"><i class="fas fa-plus">
 
                                             </i> Add item
-                                        </button>
+                                        </button->
                                         
                                         
                                     </div>

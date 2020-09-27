@@ -53,10 +53,9 @@ public class orgUnitConn extends HttpServlet {
         }
 
         JSONParser jsonParser = new JSONParser();
-        String base_url = "http://172.105.77.79:8080/dhis/api/organisationUnits.json?fields=lastUpdated,id,closedDate,openingDate,name,shortName,level,created,path&paging=true&maxLevel=4";
+        String base_url = "http://172.105.77.79:8080/api/organisationUnits.json?fields=lastUpdated,id,closedDate,openingDate,name,shortName,level,created,path&paging=true&maxLevel=4";
         String json_all = getDemAll(base_url);
-        PreparedStatement pstmt;
-        ResultSet rx;
+     
 
         JSONObject jsonObjectx;
 

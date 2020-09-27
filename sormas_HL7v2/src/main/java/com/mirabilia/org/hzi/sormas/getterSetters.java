@@ -88,7 +88,7 @@ public class getterSetters {
                     }
                 }
             }
-            //System.out.println(lister);
+            System.out.println(lister);
             String[] dd = lister.split("@");
             //System.out.println(dd[2]);
 
@@ -174,7 +174,7 @@ public class getterSetters {
                     //System.out.println("dddddddddddddddd");
                 }
 
-            System.out.println("ddddddddddddddddddddddddddddddddddddddddddddddddddddd"+ret);
+          //  System.out.println("ddddddddddddddddddddddddddddddddddddddddddddddddddddd"+ret);
           
         
     }   catch (ClassNotFoundException ex) {

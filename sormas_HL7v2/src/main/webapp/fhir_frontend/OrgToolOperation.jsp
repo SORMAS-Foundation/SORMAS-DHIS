@@ -146,7 +146,7 @@
                     position: absolute;
                     top: 50%;
                     left: 50%;
-                    font-size: 50px;
+                    font-size: 30px;
                     color: white;
                     transform: translate(-50%,-50%);
                     -ms-transform: translate(-50%,-50%);
@@ -272,16 +272,16 @@
                                             </a>
 
 
-                                        
+
 
                                             <a onclick="dd();" id="sync_x" class="btn btn-app hvr-icon-buzz-out">
                                                 <i class="fas fa-download hvr-icon"></i> Prime < Master
                                             </a>
 
-                                         
+
 
                                             <a onclick="start_pushX_X()" id="send_all_availx" class="btn btn-app hvr-icon-buzz-out">
-                                                <i class="fas fa-play hvr-icon"></i> Sync with SORMAS
+                                                <i class="fas fa-play hvr-icon"></i> Sync with NEW SORMAS
                                             </a>
 
 
@@ -292,6 +292,25 @@
 
 
 
+                                            <div class="col-md-3 col-sm-6 col-12 loadingxx" id="progress_x" style="display: none;">
+                                                <div class="info-box bg-info">
+                                                    <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
+
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">Total Expected</span>
+                                                        <span class="info-box-number" id="totalerc">${total_org}</span>
+
+                                                        <div class="progress">
+                                                            <div id="pbar" class="progress-bar" style="width: 100%"></div>
+                                                        </div>
+                                                        <span class="progress-description" id="chunker_">
+                                                            Preparing...
+                                                        </span>
+                                                    </div>
+                                                    <!-- /.info-box-content -->
+                                                </div>
+                                                <!-- /.info-box -->
+                                            </div>
 
 
 
@@ -324,7 +343,7 @@
 
 
                                     </div>
-                                  
+
 
 
                                 </section>  <!--section class="col-lg-5 connectedSortable"-->
@@ -404,7 +423,7 @@
 
 
 
-                                            <div class="col-md-3 col-sm-6 col-12 loadingxx" id="progress_">
+                                            <div class="col-md-3 col-sm-6 col-12 loadingxx" id="progress_" >
                                                 <div class="info-box bg-info">
                                                     <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
 
@@ -589,15 +608,19 @@
                                                     //fires the main sync process.
                                                     function starter() {
                                                         maz = maxx;
+                                                        //debugger ristricting to ward leve
+                                                        maxx = 233;
                                                         document.getElementById("overlay").style.display = "none";
                                                         $('#progress_').show();
+                                                        $('#progress_x').show();
                                                         servlet_primer(maxx);
-                                                        //        console.log('priming ' + maxx);
+                                                        console.log('running >>> ' + maxx);
                                                         //  myloader(0);
 
                                                     }
                                                     ;
                                                     function servlet_primer(stat) {
+                                                        // var stat = 233;
 
                                                         if (stat > 0) {
                                                             var xhr = new XMLHttpRequest();
@@ -626,11 +649,13 @@
 
                                                         document.getElementById("pbar").style.width = width + '%';
                                                         document.getElementById("chunker").innerHTML = 'Total chunks remaining = ' + width;
+                                                        document.getElementById("chunker_").innerHTML = 'Total chunks remaining = ' + width;
                                                         //document.getElementById("chunker_").innerHTML = maz;
                                                         if (width < 3) {
 
                                                             //Fhir need to start here.
                                                             $('#progress_').hide();
+                                                            $('#progress_x').hide();
                                                             $('#progress_Fhir').show();
                                                             //Debugging with create only
                                                             setTimeout(servlet_primer_fhir(1), 3000)
@@ -750,6 +775,7 @@
                             ;
                             function cleaner() {
                                 $('#progress_').hide();
+                                $('#progress_x').hide();
                                 $('#progress_Fhir').hide();
                             }
                             ;
@@ -885,15 +911,7 @@
                             cursor: pointer;
                         }
 
-                        #text{
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            font-size: 50px;
-                            color: white;
-                            transform: translate(-50%,-50%);
-                            -ms-transform: translate(-50%,-50%);
-                        }
+
                     </style>
                     <script>
                         document.getElementById("overlay").style.display = "none";
@@ -1467,13 +1485,14 @@
                             } else {
 
                                 $("#openxx1").show();
-                               // $("#cade").hide();
+                                // $("#cade").hide();
                                 $("#openxx_").hide();
 
                             }
 
-                        };
- function start_pushX_X() {
+                        }
+                        ;
+                        function start_pushX_X() {
                             document.getElementById("overlay").style.display = "block";
                             $('#text').html("Pushing all available matched data to sormas...");
                             var xhr = new XMLHttpRequest();
@@ -1494,7 +1513,7 @@
                             xhr.send(null);
 
                         }
-                                                        
+
 
 
                         //buttons

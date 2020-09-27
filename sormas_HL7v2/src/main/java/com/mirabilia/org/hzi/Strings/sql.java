@@ -36,8 +36,19 @@ public class sql {
     public static String dup_count_all_from_sorma_local = "SELECT count(*) FROM sormas_local d WHERE d.`level` = 2 and d.duplicate_with is not null and d.duplicate_with != '';";
 
     public static String sync_count_all_synced = "SELECT count(*) FROM sormas_local d WHERE synced = 1;";
+    
+    
+    
     public static String sync_primer_all_matched = "SELECT uuid, level, externalid, idx FROM sormas_local d WHERE (d.duplicate_with is null or d.duplicate_with = '') and (d.externalid != '' or d.externalid is not null);";
-
+    
+    public static String sync_primer_all_fresh = "select path_parent from raw_ where level = ?";
+    
+    public static String sync_primer_all_fresh_ = "select idx from raw_ where uuid = ?";
+    public static String sync_all_fresh = "select name, uuid, idx, rec_created, level  from raw_ where level = ? and path_parent like '%?%'";
+    
+    
+    
+    
     public static String sync_primer_all_new_matched = "SELECT name, level, externalid, idx, rec_created FROM sormas_local d WHERE (d.duplicate_with is null or d.duplicate_with = '') and (d.externalid != '' or d.externalid is not null);";
 
     public static String getSROMAS_district_PG = "select count(*), c.disease, (select name from district where id = c.district_id), (select externalid from district where id = c.district_id), c.creationdate::date\n"
@@ -100,7 +111,7 @@ public class sql {
             + "left join facility r on (c.healthfacility_id = r.id)\n"
             + "group by c.caseclassification, c.healthfacility_id, c.classificationdate::date";
 
-    public static String sync_send_all_matched_My = "update sormas_local set synced = 1 where idx = ?;";
+    public static String sync_send_all_matched_My = "update raw_ set synced = 1 where idx = ?;";
 
     //public static String dup_count_matched_no = "SELECT count(*) FROM raw_ r inner JOIN sormas_local d ON (r.UUID = d.externalid) WHERE r.`level` = 2";
     // public static String dup_count_all_from_source_no= "SELECT count(*) FROM raw_ r WHERE r.`level` = 2;";

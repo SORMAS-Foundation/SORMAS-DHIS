@@ -29,9 +29,13 @@ import static com.mirabilia.org.hzi.Util.dbResolvers.getAllOrgFromDB;
 import static com.mirabilia.org.hzi.Util.dhis.DHIS2resolver.getDemAllfromFHIR;
 import com.mirabilia.org.hzi.Util.sourceDTO;
 import static com.mirabilia.org.hzi.Util.sourceDTO.updateSourcesPairs;
+import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import com.mirabilia.org.hzi.sormas.switchHandlers;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -109,24 +113,19 @@ public class sourceControllergettersetter extends HttpServlet {
         }
 
         if (request.getParameter("getAllList") != null) {
-            
+
             String multi_ = request.getParameter("getAllList");
-            
-        
+
             try {
-               
 
                 String jsonRaw = sourceDTO.ListSourcestoJSON(multi_);
 
-          
-                
-           //     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+jsonRaw.toString());
-
+                //     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+jsonRaw.toString());
                 response.setContentType("text/plain;charset=UTF-8");
                 response.setStatus(200);
                 ServletOutputStream sout = response.getOutputStream();
                 String content = "" + jsonRaw;
-             //      System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>"+jsonRaw);
+                //      System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>"+jsonRaw);
 
                 sout.print(content);
 
@@ -135,38 +134,36 @@ public class sourceControllergettersetter extends HttpServlet {
             }
 
         }
-        
-         //This method syncs orgunits into fhir server.
-         //TO-DO Implement method to sort last update
 
+        //This method syncs orgunits into fhir server.
+        //TO-DO Implement method to sort last update
         if (request.getParameter("getAllListfromDBtoFHIR") != null) {
 
             String dxd = "tyui";
 
             try {
 
-               System.out.println("I am here o");
-                 //This method syncs orgunits into fhir server.
-            //send 1 to create and 2 to update.
+                System.out.println("I am here o");
+                //This method syncs orgunits into fhir server.
+                //send 1 to create and 2 to update.
                 getAllOrgFromDB(2);
-                
 
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(sourceControllergettersetter.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-        
+
         if (request.getParameter("getAllTotalfromFHIR") != null) {
-            
+
             try {
+                HttpSession sess = request.getSession();
                 JSONParser jsonParser = new JSONParser();
                 JSONObject jsonObjectx;
-                String base_url = "http://172.105.77.79:3447/fhir/Location";
+                String base_url = sess.getAttribute("fhir_url").toString();
+//"http://172.105.77.79:3447/fhir/Location";
                 String json_all = getDemAllfromFHIR(base_url);
-                
-                System.out.println(json_all);
-                
+
+                //  System.out.println(json_all);
                 jsonObjectx = (JSONObject) jsonParser.parse(json_all);
                 Object total_values_onFHIR = jsonObjectx.get("total");
                 ;
@@ -176,47 +173,96 @@ public class sourceControllergettersetter extends HttpServlet {
                 String content = "" + total_values_onFHIR;
 
                 sout.print(content);
-                
+
             } catch (ParseException ex) {
                 Logger.getLogger(sourceControllergettersetter.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if(request.getParameter("getupdateStarted") != null){
-         if (request.getParameter("from") != null && request.getParameter("to") != null) {
-             
-             
-         System.out.println(request.getParameter("from")+" = source and dest = "+request.getParameter("to"));
-         
+
+        if (request.getParameter("getAllTotalfromSRMS") != null) {
+
             try {
-                String from = request.getParameter("from");
-                String to = request.getParameter("to");
-                
-                
-                
-                 ServletOutputStream sout = response.getOutputStream();
-                 
-                String content = "" + updateSourcesPairs(from, to);
-                
-                sout.print(content);
-                
-                
-                
+                ServletOutputStream sout = response.getOutputStream();
+
+                PreparedStatement pstmt = null;
+                ResultSet rx = null;
+
+                Class.forName("org.postgresql.Driver");
+                Connection con = DbConnector.getPgConnection();
+
+                String sq_1 = "select count(*) from region";
+                String sq_2 = "select count(*) from district";
+                String sq_3 = "select count(*) from community";
+                String sq_4 = "select count(*) from facility";
+                int sq1 = 0;
+                int sq2 = 0;
+                int sq3 = 0;
+                int sq4 = 0;
+
+                pstmt = con.prepareStatement(sq_1);
+                rx = pstmt.executeQuery();
+                if (rx.next()) {
+                    sq1 = rx.getInt(1);
+                }
+                pstmt = con.prepareStatement(sq_2);
+                rx = pstmt.executeQuery();
+                if (rx.next()) {
+                    sq2 = rx.getInt(1);
+                }
+                pstmt = con.prepareStatement(sq_3);
+                rx = pstmt.executeQuery();
+                if (rx.next()) {
+                    sq3 = rx.getInt(1);
+                }
+                pstmt = con.prepareStatement(sq_4);
+                rx = pstmt.executeQuery();
+                if (rx.next()) {
+                    sq4 = rx.getInt(1);
+                }
+
+                int tt = sq1 + sq2 + sq3 + sq4;
+
+                System.out.println("SRMS : " + tt);
+
+                sout.print(tt);
+
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(sourceControllergettersetter.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(sourceControllergettersetter.class.getName()).log(Level.SEVERE, null, ex);
             }
-         
-         
-         } else{
-             
-              ServletOutputStream sout = response.getOutputStream();
-                 
+        }
+
+        if (request.getParameter("getupdateStarted") != null) {
+            if (request.getParameter("from") != null && request.getParameter("to") != null) {
+
+                //   System.out.println(request.getParameter("from")+" = source and dest = "+request.getParameter("to"));
+                try {
+                    String from = request.getParameter("from");
+                    String to = request.getParameter("to");
+
+                    ServletOutputStream sout = response.getOutputStream();
+
+                    String content = "" + updateSourcesPairs(from, to);
+
+                    sout.print(content);
+
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(sourceControllergettersetter.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else {
+
+                ServletOutputStream sout = response.getOutputStream();
+
                 String content = "FAILED! please select appropriate pairing";
-                
+
                 sout.print(content);
-             
-         }
-        
-    }}
+
+            }
+
+        }
+    }
 
     /**
      * Handles the HTTP <code>POST</code> method.

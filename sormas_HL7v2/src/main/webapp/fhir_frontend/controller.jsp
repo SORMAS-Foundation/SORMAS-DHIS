@@ -629,7 +629,7 @@
                 })
 
 
-                function start_pushX_(e) {
+                function start_pushX_() {
 
 
                     document.getElementById("overlay").style.display = "block";

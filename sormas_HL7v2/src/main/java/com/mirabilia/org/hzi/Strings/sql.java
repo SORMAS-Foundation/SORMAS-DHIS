@@ -41,9 +41,9 @@ public class sql {
     
     public static String sync_primer_all_matched = "SELECT uuid, level, externalid, idx FROM sormas_local d WHERE (d.duplicate_with is null or d.duplicate_with = '') and (d.externalid != '' or d.externalid is not null);";
     
-    public static String sync_primer_all_fresh = "select path_parent from raw_ where level = ?";
+    public static String sync_primer_all_fresh = "select path_parent from raw_ where level = ? order by idx asc";
     
-    public static String sync_primer_all_fresh_ = "select idx from raw_ where uuid = ?";
+    public static String sync_primer_all_fresh_ = "select idx from raw_ where uuid = ? order by idx asc";
     public static String sync_all_fresh = "select name, uuid, idx, rec_created, level  from raw_ where level = ? and path_parent like '%?%'";
     
     

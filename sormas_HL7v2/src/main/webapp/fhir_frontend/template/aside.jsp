@@ -14,7 +14,7 @@
                         <ul class="nav nav-pills nav-sidebar flex-column  nav-compact" data-widget="treeview" role="menu" data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
                                  with font-awesome or any other icon font library -->
-                            <li class="nav-item has-treeview" id="facl">
+                            <li class="nav-item has-treeview menu-open" id="facl">
                                 <a href="#" class="nav-link" onclick="cases_()">
                                     <p style="font-size:14px">
                                         OrganizationTool Module
@@ -43,7 +43,7 @@
                                     </li>
                                 </ul>
                             </li>   
-                            <li class="nav-item has-treeview" id="caxl">
+                            <li class="nav-item has-treeview menu-open" id="caxl">
                                 <a href="#" class="nav-link" onclick="cases()">
                                     <p style="font-size:14px">
                                         Case Based Module
@@ -52,12 +52,12 @@
                                 </a>
                                 
                                 <ul class="nav nav-treeview">
-                                    <li class="nav-item">
+                                    <!--li class="nav-item">
                                         <a href="#" class="nav-link">
                                             <i class="fas fa-chart-bar nav-icon"></i>
                                             <p style="font-size:12px">Dashboard</p>
                                         </a>
-                                    </li>
+                                    </li-->
                                     <li class="nav-item">
                                         <a href="controller.jsp" class="nav-link">
                                             <i class="fas fa-cogs nav-icon"></i>

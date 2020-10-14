@@ -26,6 +26,7 @@
 package com.mirabilia.org.hzi.sormas.cases;
 
 import com.mirabilia.org.hzi.Strings.sql;
+import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import java.io.BufferedReader;
 import java.io.File;
@@ -68,6 +69,7 @@ public class AggregrateController {
             ResultSet ra = null;
 
             if ("2".equals(lev)) {
+                System.out.println("1111111111111111");
                 pa = cox.prepareStatement(sql.getSROMAS_region_PG);
             }
             if ("3".equals(lev)) {
@@ -84,6 +86,7 @@ public class AggregrateController {
 
             ra = pa.executeQuery();
             while (ra.next()) {
+                System.out.println("I am in DHIS2 pusher AggregrateController");
                 String splitt = update_oneParm("select concat(s.parm2,\",\", s.parm3) from transition_parameters s where s.parm1 = ?", ra.getString(2));
 
                 if (!splitt.isEmpty()) {
@@ -91,7 +94,7 @@ public class AggregrateController {
                         String[] ad = splitt.split(",");
 
                         SendCasesToDHIS(ra.getString(5), ad[0], ra.getString(4), ad[1], ra.getString(1), dtf.format(now), ra.getString(4) + " Aggregate", ra.getString(3));
-                        System.out.println( ra.getString(5) + " - " + ad[0] + " - " + ra.getString(4) + " - " + ad[1] + " - " + ra.getString(1) + " - " + dtf.format(now) );
+                        System.out.println(ra.getString(5) + " - " + ad[0] + " - " + ra.getString(4) + " - " + ad[1] + " - " + ra.getString(1) + " - " + dtf.format(now));
                     }
                 } else {
 
@@ -119,11 +122,14 @@ public class AggregrateController {
 
         // JSONObject json = (JSONObject) parser.parse(vc);
     }
+    private static String[] _url = ConffileCatcher.fileCatcher("passed");
+
+    private static String httpx = _url[10].toString(); //should come from config file
 
     public static void SendCasesToDHIS(String cPer, String dSet, String OrgUnit, String dEle, String val, String tDay, String disC, String org_name) {
         StringBuilder sb = new StringBuilder();
 
-        String http = "http://172.105.77.79:8080/api/dataValueSets";
+        String http = httpx + "/api/dataValueSets";
 
         HttpURLConnection urlConnection = null;
         String name = "admin";
@@ -280,7 +286,7 @@ public class AggregrateController {
 
         StringBuilder sb = new StringBuilder();
         String filePath = "C:\\Intel\\NetBeansProjects\\SORMAS-DHIS\\sormas_HL7v2\\src\\main\\webapp\\dhis_processor";
-        String http = "http://172.105.77.79:8080/api/metadata";
+        String http = httpx+"/api/metadata";
 
         HttpURLConnection urlConnection = null;
         String name = "admin";

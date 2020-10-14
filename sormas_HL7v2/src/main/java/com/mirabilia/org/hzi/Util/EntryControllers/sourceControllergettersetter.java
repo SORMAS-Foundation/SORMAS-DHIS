@@ -204,16 +204,19 @@ public class sourceControllergettersetter extends HttpServlet {
                 if (rx.next()) {
                     sq1 = rx.getInt(1);
                 }
+                rx = null;
                 pstmt = con.prepareStatement(sq_2);
                 rx = pstmt.executeQuery();
                 if (rx.next()) {
                     sq2 = rx.getInt(1);
                 }
+                rx = null;
                 pstmt = con.prepareStatement(sq_3);
                 rx = pstmt.executeQuery();
                 if (rx.next()) {
                     sq3 = rx.getInt(1);
                 }
+                rx = null;
                 pstmt = con.prepareStatement(sq_4);
                 rx = pstmt.executeQuery();
                 if (rx.next()) {

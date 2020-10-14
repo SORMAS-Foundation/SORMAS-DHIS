@@ -2,6 +2,7 @@ package com.mirabilia.org.hzi.Util.dhis;
 
 import static com.mirabilia.org.hzi.Util.dhis.DHIS2resolver.getDemAll;
 import static com.mirabilia.org.hzi.Util.dhis.dhisOrgRetrival.starter;
+import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -25,6 +26,15 @@ import org.json.simple.parser.ParseException;
  */
 @WebServlet(urlPatterns = {"/orggetter"})
 public class orgUnitConn extends HttpServlet {
+    
+        private static String[] _url = ConffileCatcher.fileCatcher("passed");
+        
+       
+
+    private static String urll = _url[10].toString(); //should come from config file
+    
+
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -38,8 +48,12 @@ public class orgUnitConn extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+         System.out.println("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD"+urll);
 
         HttpSession sessionx = request.getSession(false);
+        
+       // urll = sessionx.getAttribute("dhis_url").toString();
 
         int initz = 0;
         int initzx = 0;
@@ -53,7 +67,7 @@ public class orgUnitConn extends HttpServlet {
         }
 
         JSONParser jsonParser = new JSONParser();
-        String base_url = "http://172.105.77.79:8080/api/organisationUnits.json?fields=lastUpdated,id,closedDate,openingDate,name,shortName,level,created,path&paging=true&maxLevel=4";
+        String base_url = urll+"/api/organisationUnits.json?fields=lastUpdated,id,closedDate,openingDate,name,shortName,level,created,path&paging=true&maxLevel=4";
         String json_all = getDemAll(base_url);
      
 
@@ -151,7 +165,7 @@ public class orgUnitConn extends HttpServlet {
             if (initzx > 0) {
 
                 //process each shunk and send the progress back to progress bar.
-                int pg_ = starter(initzx);
+                int pg_ = starter(initzx,urll);
 
                 response.setContentType("text/plain;charset=UTF-8");
                 response.setStatus(200);

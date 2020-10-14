@@ -100,9 +100,9 @@ public class ConffileCatcher {
                 
                 if (data.contains("dhis_url =")) {
                    String val = data.replaceAll("dhis_url", "").replaceAll(" ", "").replaceAll("=", "");
-                //    System.out.println("dhis2>>>>>>" + val);
+                    System.out.println("dhis2>>>>>>" + val);
                     dhis_url = val;
-                    dhis_url = "";
+                  //  dhis_url = "";
                 }
                 
                 if (data.contains("fhir_url =")) {

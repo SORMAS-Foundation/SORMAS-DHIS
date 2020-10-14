@@ -1,4 +1,5 @@
 
+import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -80,10 +81,14 @@ public class jsonController {
             Logger.getLogger(jsonController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+   private static String[] _url = ConffileCatcher.fileCatcher("passed");
+
+    private static String httpx = _url[10].toString(); //should come from config file
+
 
     public static String getDem() {
 
-        String http = "http://172.105.77.79:8080/api/organisationUnits.json?fields=lastUpdated,id,name,shortName,level,created,path&paging=true&maxLevel=1";
+        String http = httpx+"/api/organisationUnits.json?fields=lastUpdated,id,name,shortName,level,created,path&paging=true&maxLevel=1";
 
         HttpURLConnection urlConnection = null;
         String name = "admin";

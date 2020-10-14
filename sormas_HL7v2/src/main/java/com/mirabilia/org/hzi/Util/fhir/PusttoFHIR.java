@@ -25,6 +25,7 @@
  */
 package com.mirabilia.org.hzi.Util.fhir;
 
+import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
@@ -39,8 +40,11 @@ public class PusttoFHIR implements Serializable {
 
     public static HttpURLConnection urlConnection;
     //  public static URL url;
+    
+    private static String[] _url = ConffileCatcher.fileCatcher("passed");
+                                            
 
-    public static String http = "http://172.105.77.79:3447/fhir/Location"; //should come from config file
+    private static String http = _url[10].toString(); //should come from config file
 
 //    String name = "field";
 //    String password = "Passcode1!x";http://172.105.77.79:3447/fhir/Location

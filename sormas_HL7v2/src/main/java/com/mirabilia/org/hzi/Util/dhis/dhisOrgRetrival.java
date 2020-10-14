@@ -36,7 +36,7 @@ import java.util.logging.Logger;
  */
 public class dhisOrgRetrival {
 
-    public static int starter(int pg_counterd) {
+    public static int starter(int pg_counterd, String urll) {
         if (pg_counterd > 1) {
 
             String json_all = "{'pager':'233'}";
@@ -47,7 +47,7 @@ public class dhisOrgRetrival {
             } else {
                 try {
 
-                    String base_urlx = "http://172.105.77.79:8080/api/organisationUnits.json?page=" + pg_counterd + "&maxLevel=4&paging=true&fields=lastUpdated%2Cid%2Cname%2CshortName%2Clevel%2Ccreated%2Cpath";
+                    String base_urlx = urll+"/api/organisationUnits.json?page=" + pg_counterd + "&maxLevel=4&paging=true&fields=lastUpdated%2Cid%2Cname%2CshortName%2Clevel%2Ccreated%2Cpath";
                     System.out.println(base_urlx);
                     String nxtpg_url_val = getDemAll(base_urlx);
 

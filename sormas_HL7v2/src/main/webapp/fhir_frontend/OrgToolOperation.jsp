@@ -962,7 +962,7 @@
                                                                 <div class="timeline-body">
                                                                     <div class="row">
                                                                         <div class="input-group input-group col-3">
-                                                                            <input type="text" onchange="" id="nigeria_x" list="" autocomplete="off" value="Nigeria" disable="true" readonly class="form-control">
+                                                                            <input type="text" onchange="" id="nigeria_x" list="" autocomplete="off" value="${sessionScope.country}" disable="true" readonly class="form-control">
 
                                                                         </div>
                                                                         <div class="col-5">

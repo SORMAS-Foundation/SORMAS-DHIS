@@ -27,6 +27,9 @@
                 body{
                     background-color: #9dbeca;
                 }
+                .locked_0{
+                        pointer-events: none;
+                }
 
             </style>
             <style>
@@ -973,7 +976,7 @@
                                                                             <h3 class="" id="789"></h3>
                                                                         </div>
                                                                         <div class="col-2">
-                                                                            <a onclick="tableloader('nigeria_x')" id="state_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                            <a onclick="tableloader('nigeria_x')" id="state_g_" type="button" class="btn btn-success btn-flat">Show Details</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1000,7 +1003,7 @@
                                                                             <h3 class="" id="789_lga"></h3>
                                                                         </div>
                                                                         <div class="col-2">
-                                                                            <a onclick="tableloader('state_x')" id="lga_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                            <a onclick="tableloader('state_x')" id="lga_g_" type="button" class="btn btn-success btn-flat">Show Details</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1029,7 +1032,7 @@
                                                                             <h3 class="" id="789_ward"></h3>
                                                                         </div>
                                                                         <div class="col-2">
-                                                                            <a onclick="tableloader('lga_x')" id="ward_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                            <a onclick="tableloader('lga_x')" id="ward_g_" type="button" class="btn btn-success btn-flat">Show Details</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1064,7 +1067,7 @@
                                                                             <h3 class="" id="789_hf"></h3>
                                                                         </div>
                                                                         <div class="col-2">
-                                                                            <a onclick="tableloader('ward_x')" id="hf_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                            <a onclick="tableloader('ward_x')" id="hf_g_" type="button" class="btn btn-success btn-flat">Show Details</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1583,7 +1586,10 @@
                                         $('#' + e + 'dfe').css("width", words[0]);
                                         $('#' + e + 'state_g').html(words[0]);
                                         $('#' + e + '789').html('<a href="#">Total ' + e.replace('dup_', 'Duplicate') + ' at States Level on SORMAS </a> = ' + words[1] + ' | <a href="#">Total Matched</a> = ' + words[2])
-                                        $('#state').html(wordsx);
+                                       
+                                        $("#state_g_").addClass("locked_"+words[2]);
+                                         $('#state').html(wordsx);
+                                        
 
                                         //   console.log("Number of chunk been processed currently = " + max);
                                     }
@@ -1609,6 +1615,8 @@
                                         $('#' + gh[1] + 'lga_g').html(words[0]);
                                         $('#' + gh[1] + '789_lga').html('<a href="#">Total LGAs for ' + gh[0] + ' on SORMAS </a> = ' + words[1] + ' | <a href="#"> Total LGAs from Source Server</a> = ' + words[2] + ' | <a href="#">Total ' + gh[1].replace('dup_', 'Duplicates ') + 'Matched</a> = ' + words[3])
                                         $('#lga').html(wordsx);
+                                        
+                                        $("#lga_g_").addClass("locked_"+words[2]);
 
                                         //   console.log("Number of chunk been processed currently = " + max);
                                     }
@@ -1633,6 +1641,8 @@
                                         $('#' + gh[1] + 'ward_g').html(words[0]);
                                         $('#' + gh[1] + '789_ward').html('<a href="#">Total Wards for ' + gh[0] + ' on SORMAS </a> = ' + words[1] + ' | <a href="#"> Total Wards from Source Server</a> = ' + words[2] + ' | <a href="#">Total ' + gh[1].replace('dup_', 'Duplicates ') + 'Matched</a> = ' + words[3])
                                         $('#ward').html(wordsx);
+                                        
+                                        $("#ward_g_").addClass("locked_"+words[2]);
 
                                         //   console.log("Number of chunk been processed currently = " + max);
                                     }

@@ -26,7 +26,7 @@
 package com.mirabilia.org.hzi.Util.dhis;
 
 import static com.mirabilia.org.hzi.Util.dbResolvers.gotoDB;
-import static com.mirabilia.org.hzi.Util.dhis.DHIS2resolver.getDemAll;
+import static com.mirabilia.org.hzi.Util.dhis.DHIS2resolver.getDemAllLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,27 +36,32 @@ import java.util.logging.Logger;
  */
 public class dhisOrgRetrival {
 
-    public static int starter(int pg_counterd, String urll) {
-        if (pg_counterd > 1) {
+    public static int starter(int pg_counterd, String urll, String cnty_code) {
+        if (pg_counterd >= 1) {
 
-            String json_all = "{'pager':'233'}";
+            String json_all = "{'pager':'5'}";
 
             System.out.println("XXXXX<<<<<<<<<<<<<<XXXXXXXXXXX = " + pg_counterd);
-            if (json_all.isEmpty()) {
-                return 0;
-            } else {
-                try {
 
-                    String base_urlx = urll+"/api/organisationUnits.json?page=" + pg_counterd + "&maxLevel=4&paging=true&fields=lastUpdated%2Cid%2Cname%2CshortName%2Clevel%2Ccreated%2Cpath";
-                    System.out.println(base_urlx);
-                    String nxtpg_url_val = getDemAll(base_urlx);
+            try {
+                String base_urlx = "";
+                if ("GH".equals(cnty_code)) {
+                    //GH using code instead of uuid
+                    if (5 == pg_counterd) {
+                       base_urlx = urll + "/api/organisationUnits.json?maxLevel=" + pg_counterd + "&paging=false&fields=lastUpdated%2Ccode%2Cname%2CshortName%2Clevel%2Ccreated%2Cpath";
+                        } else {
+                         base_urlx = urll + "/api/organisationUnits.json?maxLevel=" + pg_counterd + "&paging=false&fields=lastUpdated%2Cid%2Cname%2CshortName%2Clevel%2Ccreated%2Cpath";
+                            }
+                } else {
+                    base_urlx = urll + "/api/organisationUnits.json?maxLevel=" + pg_counterd + "&paging=false&fields=lastUpdated%2Cid%2Cname%2Clevel%2Ccreated%2Cpath";
+                }
+                System.out.println(base_urlx);
+                String nxtpg_url_val = getDemAllLong(base_urlx);
 
-                    gotoDB(nxtpg_url_val);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(dhisOrgRetrival.class.getName()).log(Level.SEVERE, null, ex);
-                } 
+                gotoDB(nxtpg_url_val);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(dhisOrgRetrival.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
 
         return pg_counterd;

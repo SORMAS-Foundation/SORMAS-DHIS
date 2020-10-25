@@ -129,7 +129,7 @@ finally{
 
                                     <div class="info-box-content">
                                         <span class="info-box-text">Total No of Org Unit on DHIS</span>
-                                        <span class="info-box-text"><b id="DHIS">about... ${total_org}</b></span>
+                                        <span class="info-box-text"><b id="DHIS">updating... ${sessionScope.total_org}</b></span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>

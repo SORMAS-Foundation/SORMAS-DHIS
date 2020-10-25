@@ -1,4 +1,4 @@
-
+    
 <%@page import="java.io.PrintWriter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -91,10 +91,41 @@
         </div>
         <h3 class="d_text" id="d_text">working on it...</h3>
         <script src="../fhir_frontend/mira_assets/js/jquery.min.js" type="text/javascript"></script>
+        
         <script>
-            rg_starter();
+           
+             //clear the local tables first
+             deleterXcc();
             
-            function rg_starter() {
+            
+    //    
+      
+            
+            function deleterXcc() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '../localizerz?del_all=true', true);
+                xhr.responseType = 'text';
+                xhr.onload = function () {
+                    if (xhr.readyState === xhr.DONE) {
+                        if (xhr.status === 200) {
+                            maxx = xhr.responseText;
+                            console.log("deleting");
+                            $('#d_text').append("<br>Cached: Local Database cleared successfully");
+                        } else {
+                            $('#d_text').html("Server down: 500");
+                            console.log("Server error while contacting main methods to get total number of chunks");
+                            window.location.replace("../fhir_frontend/OrgToolOperation.jsp?sayfini=false");
+                            return;
+                        }
+                         rg_starter();
+                    }
+                };
+
+                xhr.send("");
+               
+            };
+            
+              function rg_starter() {
                 var xhr = new XMLHttpRequest();
                 xhr.open('GET', '../localizerz?rg=true', true);
                 xhr.responseType = 'text';
@@ -117,6 +148,7 @@
                 xhr.send("");
                
             };
+            
             
             function ds_starter() {
                 var xhr = new XMLHttpRequest();
@@ -158,7 +190,7 @@
                             return;
                         }
                            window.location.replace("../fhir_frontend/OrgToolOperation.jsp?sayfini=true"); //should be removed to allow facility run
-                      //  fc_starter()
+                        fc_starter()
                     }
                 };
 

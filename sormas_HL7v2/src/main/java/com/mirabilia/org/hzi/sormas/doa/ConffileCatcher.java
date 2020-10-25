@@ -31,14 +31,13 @@ public class ConffileCatcher {
             String dhis_url = "";
             String fhir_url = "";
             
+            String instance_country = "";
+            String instance_code = "";
+            String instance_Language = "";
+            
             if(valx.equalsIgnoreCase("passed")){
         try {
-            //retrieving database values from configuration file
-         //         File myObj = new File("/opt/domains/sormas/somars.conf");
             File myObj = new File(System.getProperty("user.home") + File.separator + "somars.conf");
-        //    System.out.println("config file is located at : "+System.getProperty("user.home") + File.separator + "somars.conf");
-            
-            
             if(myObj.exists()){
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
@@ -46,17 +45,14 @@ public class ConffileCatcher {
                 //clearing excesses and setting the values to the dbclass.
                 if (data.contains("db-host")) {
                     String val = data.replaceAll("db-host", "").replaceAll(" ", "").replaceAll("=", "");
-           //         System.out.println("host>>>>>>" + val);
                     val_host = val;
                 }
                 if (data.contains("db-port")) {
                    String val = data.replaceAll("db-port", "").replaceAll(" ", "").replaceAll("=", "");
-            //        System.out.println("host>>>>>>" + val);
                     val_port = val;
                 }
                 if (data.contains("db-name =")) {
                    String val = data.replaceAll("db-name", "").replaceAll(" ", "").replaceAll("=", "");
-             //       System.out.println("host>>>>>>" + val);
                     val_name = val;
                 }
                 if (data.contains("db-user =")) {
@@ -66,7 +62,6 @@ public class ConffileCatcher {
                 }
                 if (data.contains("db-password =")) {
                    String val = data.replaceAll("db-password", "").replaceAll(" ", "").replaceAll("=", "");
-             //       System.out.println("host>>>>>>" + val);
                     val_passw = val;
                 }
                 
@@ -74,46 +69,51 @@ public class ConffileCatcher {
                 //pg pg_values for sormas
                  if (data.contains("pg_db_host")) {
                     String val = data.replaceAll("pg_db_host", "").replaceAll(" ", "").replaceAll("=", "");
-           //         System.out.println("host>>>>>>" + val);
                     pg_val_host = val;
                 }
                 if (data.contains("pg_db_port")) {
                    String val = data.replaceAll("pg_db_port", "").replaceAll(" ", "").replaceAll("=", "");
-            //        System.out.println("host>>>>>>" + val);
                     pg_val_port = val;
                 }
                 if (data.contains("pg_db_name =")) {
                    String val = data.replaceAll("pg_db_name", "").replaceAll(" ", "").replaceAll("=", "");
-             //       System.out.println("host>>>>>>" + val);
                     pg_val_name = val;
                 }
                 if (data.contains("pg_db_user =")) {
                     String val = data.replaceAll("pg_db_user", "").replaceAll(" ", "").replaceAll("=", "");
-              //      System.out.println("host>>>>>>" + val);
                     pg_val_user = val;
                 }
                 if (data.contains("pg_db_password =")) {
                    String val = data.replaceAll("pg_db_password", "").replaceAll(" ", "").replaceAll("=", "");
-             //       System.out.println("host>>>>>>" + val);
                     pg_val_passw = val;
                 }
                 
                 if (data.contains("dhis_url =")) {
                    String val = data.replaceAll("dhis_url", "").replaceAll(" ", "").replaceAll("=", "");
-                    System.out.println("dhis2>>>>>>" + val);
                     dhis_url = val;
-                  //  dhis_url = "";
                 }
+                
+                //instance_country
+                if (data.contains("instance_country =")) {
+                   String val = data.replaceAll("instance_country", "").replaceAll(" ", "").replaceAll("=", "");
+                    instance_country = val;
+                }
+                
+                //instance_code
+                if (data.contains("instance_country_code =")) {
+                   String val = data.replaceAll("instance_country_code", "").replaceAll(" ", "").replaceAll("=", "");
+                    instance_code = val;
+                            }
                 
                 if (data.contains("fhir_url =")) {
                    String val = data.replaceAll("fhir_url", "").replaceAll(" ", "").replaceAll("=", "");
-                //    System.out.println("FHIR>>>>>>" + val);
                     fhir_url = val;
                 }
 
             }
 
             myReader.close();
+            
             }else{
             System.out.println("I need the configuration file to work, cant find it in your home directory");
             return null;
@@ -126,15 +126,7 @@ public class ConffileCatcher {
                 System.out.println("UNAUTHORIZED ACCESS DETECTED");
             }
             
-            
-            
-            
-            
-        //compossing db connection url and pass it back to dbclass
-
-       // val_url = val_host + ":" + val_port + "/" + val_name + ", \'" + val_user + "\', \'" + val_passw + "\'";
-        //System.out.println("jdbc:mysql://" + val_url);
-        String[] arr = new String[12];
+        String[] arr = new String[14];
         arr[0] = val_host;
         arr[1] = val_port;
         arr[2] = val_name;
@@ -148,6 +140,8 @@ public class ConffileCatcher {
         arr[9] = pg_val_passw;
         arr[10] = dhis_url;
         arr[11] = fhir_url;
+        arr[12] = instance_country;
+        arr[13] = instance_code;
         
         return arr;
 

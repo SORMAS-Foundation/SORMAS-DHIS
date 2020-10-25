@@ -73,8 +73,17 @@ finally{
                                         <span class="info-box-icon bg-info elevation-1"><i class="fa fa-hospital"></i></span>
                                         <%
                                             String[] _url = ConffileCatcher.fileCatcher("passed");
+                                            System.out.println("values : "+_url[1].toString() + _url[13].toString());
+                                            
+                                            
                                             session.setAttribute("dhis_url", _url[10].toString());
                                             session.setAttribute("fhir_url", _url[11].toString());
+                                            
+                                            session.setAttribute("country", _url[12].toString());
+                                            session.setAttribute("country_code", _url[13].toString());
+                                            
+                                            //debugger
+                                            System.out.println("WEAREASE + "+_url[12].toString() + _url[13].toString());
 
                                             String totalOrg = sourceDTO.totalORGinDB();
                                             String totalDest = sourceDTO.totalDestDB();
@@ -120,7 +129,7 @@ finally{
 
                                     <div class="info-box-content">
                                         <span class="info-box-text">Total No of Org Unit on DHIS</span>
-                                        <span class="info-box-text"><b id="DHIS">about... ${total_org}</b></span>
+                                        <span class="info-box-text"><b id="DHIS">updating... ${sessionScope.total_org}</b></span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>

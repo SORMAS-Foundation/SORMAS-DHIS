@@ -193,21 +193,47 @@
                                             if (rx.next()){
                                                 
                                               String x1x = "";
-                                              if(rx.getString("r1x") == "ad_2"){
+                                              if("ad_2".equalsIgnoreCase(rx.getString("r1x"))){
                                               x1x = "checked";
                                               }
                                               String x1x1 = "";
-                                              if(rx.getString("r1x") == "ad_3"){
+                                               if("ad_3".equalsIgnoreCase(rx.getString("r1x"))){
                                               x1x1 = "checked";
                                               }
                                               String x1x11 = "";
-                                              if(rx.getString("r1x") == "ad_4"){
+                                               if("ad_4".equalsIgnoreCase(rx.getString("r1x"))){
                                               x1x11 = "checked";
                                               }
                                               String x1x111 = "";
-                                              if(rx.getString("r1x") == "ad_5"){
+                                               if("ad_5".equalsIgnoreCase(rx.getString("r1x"))){
                                               x1x111 = "checked";
                                               }
+                                               
+
+
+
+
+
+                                                String tm = "";
+                                              if("6hr".equalsIgnoreCase(rx.getString("r1"))){
+                                              tm = "checked";
+                                              }
+                                              String tm1 = "";
+                                               if("24hr".equalsIgnoreCase(rx.getString("r1"))){
+                                              tm1 = "checked";
+                                              }
+                                              String tm2 = "";
+                                               if("week".equalsIgnoreCase(rx.getString("r1"))){
+                                              tm2 = "checked";
+                                              }
+                                              String tm3 = "";
+                                               if("month".equalsIgnoreCase(rx.getString("r1"))){
+                                              tm3 = "checked";
+                                              }
+                                               
+
+
+
 
                                     %>
                                     <div class="card-body">
@@ -350,7 +376,7 @@
                                             <div class="row" >
                                                 <div class="col s4" id="non_app">
                                                     <div class="icheck-primary d-inline">
-                                                        <input type="radio" id="radioPrimar" name="r1x" x1x value="ad_2">
+                                                        <input type="radio" id="radioPrimar" name="r1x" <%=x1x%>  value="ad_2">
                                                         <label for="radioPrimar">
                                                             Admin 2 (State / Region)
                                                         </label>
@@ -358,19 +384,19 @@
                                                     <div class="icheck-primary d-inline">
 
 
-                                                        <input type="radio" id="radioPrimary" name="r1x" x1x1 value="ad_3">
+                                                        <input type="radio" id="radioPrimary" name="r1x" <%=x1x1%> value="ad_3">
                                                         <label for="radioPrimary">
                                                             Admin 3 (LGA / District)
                                                         </label>
                                                     </div><p></p>
                                                     <div class="icheck-primary d-inline">
-                                                        <input type="radio" id="radioPrim" name="r1x" x1x11 value="ad_4">
+                                                        <input type="radio" id="radioPrim" name="r1x" <%=x1x11%> value="ad_4">
                                                         <label for="radioPrim">
                                                             Admin 4 (Ward / Community)
                                                         </label>
                                                     </div><p></p>
                                                     <div class="icheck-primary d-inline">
-                                                        <input type="radio" id="radioP" name="r1x" x1x111 value="ad_5">
+                                                        <input type="radio" id="radioP" name="r1x" <%=x1x111%> value="ad_5">
                                                         <label for="radioP">
                                                             Admin 5 (Health Facility / Facility)
                                                         </label>
@@ -398,29 +424,29 @@
                                             <div class="row">
                                                 <div class="col s4">
                                                     <div class="icheck-primary d-inline">
-                                                        <input type="radio" id="radioPrimarx" name="r1" value="hr">
+                                                        <input type="radio" id="radioPrimarx" name="r1" <%=tm%> value="6hr">
                                                         <label for="radioPrimarx">
-                                                            hourly
-                                                        </label>
-                                                    </div><p></p>
-                                                    <div class="icheck-primary d-inline">
-
-
-                                                        <input type="radio" id="radioPrimaryx" name="r1"  value="6hr">
-                                                        <label for="radioPrimaryx">
                                                             6-hour
                                                         </label>
                                                     </div><p></p>
                                                     <div class="icheck-primary d-inline">
-                                                        <input type="radio" id="radioPrimx" name="r1"  value="12hr">
-                                                        <label for="radioPrimx">
-                                                            12-hour
+
+
+                                                        <input type="radio" id="radioPrimaryx" name="r1" <%=tm1%> value="24hr">
+                                                        <label for="radioPrimaryx">
+                                                            daily
                                                         </label>
                                                     </div><p></p>
                                                     <div class="icheck-primary d-inline">
-                                                        <input type="radio" id="radioPx" name="r1"  value="daily">
+                                                        <input type="radio" id="radioPrimx" name="r1" <%=tm2%> value="week">
+                                                        <label for="radioPrimx">
+                                                            weekly
+                                                        </label>
+                                                    </div><p></p>
+                                                    <div class="icheck-primary d-inline">
+                                                        <input type="radio" id="radioPx" name="r1" <%=tm3%> value="month">
                                                         <label for="radioPx">
-                                                            daily
+                                                            monthly
                                                         </label>
                                                     </div>
 

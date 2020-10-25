@@ -27,6 +27,9 @@
                 body{
                     background-color: #9dbeca;
                 }
+                .locked_0{
+                    pointer-events: none;
+                }
 
             </style>
             <style>
@@ -558,7 +561,7 @@
                                                     var max = 0;
                                                     var maz = 0;
                                                     var xhr = new XMLHttpRequest();
-                                                    xhr.open('GET', '../orggetter?pg_counter=1', true);
+                                                    xhr.open('GET', '../orggetter?pg_counter=1989', true);
                                                     xhr.responseType = 'text';
                                                     var maxx = 0;
                                                     //populates the number of chunks from Source 1 (prehead)
@@ -609,12 +612,12 @@
                                                     function starter() {
                                                         maz = maxx;
                                                         //debugger ristricting to ward leve
-                                                        maxx = 233;
+                                                        maxx = 5;
                                                         document.getElementById("overlay").style.display = "none";
                                                         $('#progress_').show();
                                                         $('#progress_x').show();
                                                         servlet_primer(maxx);
-                                                        console.log('running >>> ' + maxx);
+                                                        console.log('running level>>> ' + maxx);
                                                         //  myloader(0);
 
                                                     }
@@ -631,7 +634,7 @@
                                                                     if (xhr.status === 200) {
                                                                         max = xhr.responseText;
                                                                         myloader(max);
-                                                                        //   console.log("Number of chunk been processed currently = " + max);
+                                                                           console.log("Number of chunk been processed currently = " + max);
                                                                     }
                                                                 }
                                                             };
@@ -962,7 +965,7 @@
                                                                 <div class="timeline-body">
                                                                     <div class="row">
                                                                         <div class="input-group input-group col-3">
-                                                                            <input type="text" onchange="" id="nigeria_x" list="" autocomplete="off" value="Nigeria" disable="true" readonly class="form-control">
+                                                                            <input type="text" onchange="" id="nigeria_x" list="" autocomplete="off" value="${sessionScope.country}" disable="true" readonly class="form-control">
 
                                                                         </div>
                                                                         <div class="col-5">
@@ -973,7 +976,7 @@
                                                                             <h3 class="" id="789"></h3>
                                                                         </div>
                                                                         <div class="col-2">
-                                                                            <a onclick="tableloader('nigeria_x')" id="state_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                            <a onclick="tableloader('nigeria_x')" id="state_g_" type="button" class="btn btn-success btn-flat">Show Details</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -989,7 +992,11 @@
                                                                 <div class="timeline-body">
                                                                     <div class="row">
                                                                         <div class="input-group input-group col-3">
-                                                                            <input type="text" onchange="load_lga('')" id="state_x" list="state" autocomplete="off" class="form-control">
+                                                                            <!--<input type="text" onchange="load_lga('')" id="state_x" list="state" autocomplete="off" class="form-control">-->
+                                                                            <select class="form-control js-select2" id="state_x" onchange="load_lga('')">
+                                                                                <option selected>select one</option>
+                                                                            </select>
+
 
                                                                         </div>
                                                                         <div class="col-5">
@@ -1000,7 +1007,7 @@
                                                                             <h3 class="" id="789_lga"></h3>
                                                                         </div>
                                                                         <div class="col-2">
-                                                                            <a onclick="tableloader('state_x')" id="lga_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                            <a onclick="tableloader('state_x')" id="lga_g_" type="button" class="btn btn-success btn-flat">Show Details</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1017,7 +1024,10 @@
                                                                 <div class="timeline-body">
                                                                     <div class="row">
                                                                         <div class="input-group input-group-sm col-3">
-                                                                            <input type="text" list="lga" onchange="load_ward('')" id="lga_x" autocomplete="off" class="form-control">
+                                                                   
+                                                                            <select class="form-control js-select2" id="lga_x" onchange="load_ward('')">
+                                                                                <option selected>select one</option>
+                                                                            </select>
 
                                                                         </div>
                                                                         <div class="col-5">
@@ -1029,7 +1039,7 @@
                                                                             <h3 class="" id="789_ward"></h3>
                                                                         </div>
                                                                         <div class="col-2">
-                                                                            <a onclick="tableloader('lga_x')" id="ward_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                            <a onclick="tableloader('lga_x')" id="ward_g_" type="button" class="btn btn-success btn-flat">Show Details</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1052,7 +1062,11 @@
                                                                 <div class="timeline-body">
                                                                     <div class="row">
                                                                         <div class="input-group input-group-sm col-3">
-                                                                            <input type="text" list="ward" onchange="load_hf('')" id="ward_x" autocomplete="off" class="form-control">
+                                                                            
+                                                                              <select class="form-control js-select2" onchange="load_hf('')" id="ward_x"">
+                                                                                <option selected>select one</option>
+                                                                            </select>
+                                                                            
 
                                                                         </div>
                                                                         <div class="col-5">
@@ -1064,7 +1078,7 @@
                                                                             <h3 class="" id="789_hf"></h3>
                                                                         </div>
                                                                         <div class="col-2">
-                                                                            <a onclick="tableloader('ward_x')" id="hf_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                            <a onclick="tableloader('ward_x')" id="hf_g_" type="button" class="btn btn-success btn-flat">Show Details</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1082,7 +1096,11 @@
                                                                 <div class="timeline-body">
 
                                                                     <div class="input-group input-group-sm col-5">
-                                                                        <input type="text" list="hf" autocomplete="off" class="form-control">
+                                                                        
+                                                                        <select class="form-control js-select2" onchange="tableloader('hf_x')" id="hf_x"">
+                                                                                <option selected>select one</option>
+                                                                            </select>
+                                                                        
                                                                         <span class="input-group-append">
                                                                             <button type="button" class="btn btn-info btn-flat">Next</button>
                                                                         </span>
@@ -1426,7 +1444,7 @@
 
 
 
-                    <datalist id="state">
+                    <datalist >
 
                     </datalist>
 
@@ -1583,7 +1601,10 @@
                                         $('#' + e + 'dfe').css("width", words[0]);
                                         $('#' + e + 'state_g').html(words[0]);
                                         $('#' + e + '789').html('<a href="#">Total ' + e.replace('dup_', 'Duplicate') + ' at States Level on SORMAS </a> = ' + words[1] + ' | <a href="#">Total Matched</a> = ' + words[2])
-                                        $('#state').html(wordsx);
+
+                                        $("#state_g_").addClass("locked_" + words[2]);
+                                        $('#state_x').html(wordsx);
+
 
                                         //   console.log("Number of chunk been processed currently = " + max);
                                     }
@@ -1607,8 +1628,11 @@
 
                                         $('#' + gh[1] + 'dfe_lga').css("width", words[0]);
                                         $('#' + gh[1] + 'lga_g').html(words[0]);
-                                        $('#' + gh[1] + '789_lga').html('<a href="#">Total LGAs for ' + gh[0] + ' on SORMAS </a> = ' + words[1] + ' | <a href="#"> Total LGAs from Source Server</a> = ' + words[2] + ' | <a href="#">Total ' + gh[1].replace('dup_', 'Duplicates ') + 'Matched</a> = ' + words[3])
+                                        $('#' + gh[1] + '789_lga').html('<a href="#">Total LGAs for ' + gh[2] + ' on SORMAS </a> = ' + words[1] + ' | <a href="#"> Total LGAs from Source Server</a> = ' + words[2] + ' | <a href="#">Total ' + gh[1].replace('dup_', 'Duplicates ') + 'Matched</a> = ' + words[3])
                                         $('#lga').html(wordsx);
+
+                                        $("#lga_g_").addClass("locked_" + words[2]);
+                                       $('#lga_x').html(wordsx);
 
                                         //   console.log("Number of chunk been processed currently = " + max);
                                     }
@@ -1631,8 +1655,40 @@
                                         const wordsx = xhr.responseText.split(',@@@');
                                         $('#' + gh[1] + 'dfe_ward').css("width", words[0]);
                                         $('#' + gh[1] + 'ward_g').html(words[0]);
-                                        $('#' + gh[1] + '789_ward').html('<a href="#">Total Wards for ' + gh[0] + ' on SORMAS </a> = ' + words[1] + ' | <a href="#"> Total Wards from Source Server</a> = ' + words[2] + ' | <a href="#">Total ' + gh[1].replace('dup_', 'Duplicates ') + 'Matched</a> = ' + words[3])
+                                        $('#' + gh[1] + '789_ward').html('<a href="#">Total Wards for ' + gh[2] + ' on SORMAS </a> = ' + words[1] + ' | <a href="#"> Total Wards from Source Server</a> = ' + words[2] + ' | <a href="#">Total ' + gh[1].replace('dup_', 'Duplicates ') + 'Matched</a> = ' + words[3])
                                         $('#ward').html(wordsx);
+
+                                        $("#ward_g_").addClass("locked_" + words[2]);
+                                        $('#ward_x').html(wordsx);
+
+                                        //   console.log("Number of chunk been processed currently = " + max);
+                                    }
+                                }
+                            };
+                            xhr.send(null);
+                        }
+                        
+                        
+                        
+                    function dmdmx(e) {
+                            const gh = e.split(',');
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=5', true);
+                            //     console.log('../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=4');
+                            xhr.responseType = 'text';
+                            xhr.onload = function () {
+                                if (xhr.readyState === xhr.DONE) {
+                                    if (xhr.status === 200) {
+                                        //max = xhr.responseText;
+                                        const words = xhr.responseText.split(',');
+                                        const wordsx = xhr.responseText.split(',@@@');
+                                        $('#' + gh[1] + 'dfe_hfd').css("width", words[0]);
+                                        $('#' + gh[1] + 'hf_g').html(words[0]);
+                                        $('#' + gh[1] + '789_hf').html('<a href="#">Total Health Facility for ' + gh[2] + ' on SORMAS </a> = ' + words[1] + ' | <a href="#"> Total HFs from Source Server</a> = ' + words[2] + ' | <a href="#">Total ' + gh[1].replace('dup_', 'Duplicates ') + 'Matched</a> = ' + words[3])
+                                        $('#hf').html(wordsx);
+
+                                        $("#hf_g_").addClass("locked_" + words[2]);
+                                       // $('#ward_x').html(wordsx);
 
                                         //   console.log("Number of chunk been processed currently = " + max);
                                     }
@@ -1643,19 +1699,38 @@
 
 
                         function load_lga(e) {
-                            var ex = $('#' + e + 'state_x').val();
+                            var ex = $('#' + e + 'state_x option:selected').val();
+                            var ex_ = $('#' + e + 'state_x option:selected').text();
+                            console.log(ex);
 
-                            dmds(ex + ',' + e);
+                            dmds(ex + ',' + e+','+ex_);
                             $('#' + e + 'lgax').show();
                             $('#' + e + 'statexx').removeClass("fas fa-bars bg-yellow").addClass("fas fa-check bg-green")
                         }
                         function load_ward(e) {
-                            var ex = $('#' + e + 'lga_x').val();
-                            dmdm(ex + ',' + e);
+                            var ex = $('#' + e + 'lga_x option:selected').val();
+                            var ex_ = $('#' + e + 'lga_x option:selected').text();
+                            console.log(e);
+
+                            dmdm(ex + ',' + e+','+ex_);
                             $('#' + e + 'wardx').show();
                             $('#' + e + 'lgaxx').removeClass("fas fa-bars bg-yellow").addClass("fas fa-check bg-green")
                         }
+                        
+                        
+                        function load_hf(e) {
+                            var ex = $('#' + e + 'ward_x option:selected').val();
+                            var ex_ = $('#' + e + 'ward_x option:selected').text();
+                            console.log(e);
 
+                            dmdmx(ex + ',' + e+','+ex_);
+                            $('#' + e + 'hfx').show();
+                            $('#' + e + 'wardxx').removeClass("fas fa-bars bg-yellow").addClass("fas fa-check bg-green")
+                        }
+                        
+                        
+                        
+                        
                         function statex(e) {
                             var x = $('#controllerx').val();
                             //  alert(e);
@@ -1679,6 +1754,9 @@
 
                         function tableloader(e) {
                             ctbb = e;
+                            
+                            var ex = $('#' + e + 'hf_x option:selected').val();
+                            var ex_ = $('#' + e + 'hf_x option:selected').text();
 
 
                             $('#esef3456n').show();

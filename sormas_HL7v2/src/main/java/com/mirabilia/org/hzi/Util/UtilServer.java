@@ -96,10 +96,12 @@ public class UtilServer extends HttpServlet {
             try {
                 String parentx = request.getParameter("parentx");
                 String levelx = request.getParameter("levelx");
-
+System.err.println("_________+++++++++++++_________"+parentx);
                 int xx = counterXint_withParameters(sql.count_by_level_using_parent, parentx); //total lgas from destination
                 //total lgas from source
+                
                 String sub = counterXString_withParameters(sql.count_by_level_using_parent_source_q1, parentx); //subquery
+             //   System.err.println("_________+++++++++++++_________"+sub);
                 int xc = counterXint_withParameters(sql.count_by_level_using_parent_source_q2, sub);
 
                 int xm = counterXint_withParameters(sql.count_by_level_using_parent_source_name, parentx); //total lgas matched
@@ -129,6 +131,7 @@ public class UtilServer extends HttpServlet {
                 //total lgas from source
                 //    System.out.println(xx);
                 String sub = counterXString_withParameters(sql.L4_count_by_level_using_parent_source_q1, parentx); //subquery
+                System.err.println("2____2_____+++++++++++++_________"+sub);
                 int xc = counterXint_withParameters(sql.L4_count_by_level_using_parent_source_q2, sub);
 
                 int xm = counterXint_withParameters(sql.L4_count_by_level_using_parent_source_name, parentx); //total lgas matched
@@ -146,6 +149,38 @@ public class UtilServer extends HttpServlet {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
+         if (request.getParameter("parentx") != null && "5".contains(request.getParameter("levelx"))) {
+                System.out.println("ddddddddddddddd");
+
+            try {
+                String parentx = request.getParameter("parentx");
+                String levelx = request.getParameter("levelx");
+
+                int xx = counterXint_withParameters(sql.L5_count_by_level_using_parent, parentx); //total lgas from destination
+                //total lgas from source
+                //    System.out.println(xx);
+                String sub = counterXString_withParameters(sql.L5_count_by_level_using_parent_source_q1, parentx); //subquery
+                System.err.println("2____2_____+++++++++++++_________"+sub);
+                int xc = counterXint_withParameters(sql.L5_count_by_level_using_parent_source_q2, sub);
+
+                int xm = counterXint_withParameters(sql.L5_count_by_level_using_parent_source_name, parentx); //total lgas matched
+
+                String vc = counterXString_withParameters_(sql.L5_count_by_level_using_parent_source_name_xx, parentx); //total lgas matched
+
+                float seq = ((float) xm / xc);
+                String str = String.format("%2.02f", (seq * 100));
+                //    System.out.println(vc);
+                mat = str + "%," + xx + "," + xc + "," + xm + ",@@@" + vc;
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+         
+         
 
         //DUPLICATES
         //infrasstructure hirachy controller
@@ -160,6 +195,7 @@ public class UtilServer extends HttpServlet {
 
                 //total lgas from source
                 String sub = counterXString_withParameters(sql.count_by_level_using_parent_source_q1, parentx); //subquery getting uid for ltr
+                System.err.println("____3_____+++++++++++++_________"+sub);
 
                 int xc = counterXint_withParameters(sql.count_by_level_using_parent_source_q2, sub); //number of lga from dhis
 
@@ -190,6 +226,7 @@ public class UtilServer extends HttpServlet {
 
                 //total lgas from source
                 String sub = counterXString_withParameters(sql.L4_count_by_level_using_parent_source_q1, parentx); //subquery getting uid for ltr
+                System.err.println("____4_____+++++++++++++_________"+sub);
 
                 int xc = counterXint_withParameters(sql.L4_count_by_level_using_parent_source_q2, sub); //number of ward from dhis
 
@@ -208,16 +245,19 @@ public class UtilServer extends HttpServlet {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
 
         if (request.getParameter("jsonparentx") != null && request.getParameter("jsonlevelx") != null) {
 
             try {
                 String vc = "";
                 String parentx = request.getParameter("jsonparentx");
+                
+                 System.out.println("nnnnnnnnnnnnnnnnnnnPP"+parentx);
 
                 String leveld = request.getParameter("jsonlevelx");
 
-                //   System.out.println("nnnnnnnnnnnnnnnnnnn"+leveld);
+                  System.out.println("nnnnnnnnnnnnnnnnnnnLL"+leveld);
                 if ("nigeria_x".equalsIgnoreCase(leveld)) {
 
                     vc = counterXString_withParameters_x(sql.L2_count_by_level_using_parent_source_name_details, ""); //tables for states Matched
@@ -230,7 +270,7 @@ public class UtilServer extends HttpServlet {
                     System.out.println("lglglglglglglg");
                 } else if ("state_x".equalsIgnoreCase(leveld)) {
                     vc = counterXString_withParameters_x(sql.L3_count_by_level_using_parent_source_name_details, parentx); //tables for LGA Matched
-                    System.out.println("statatatatatat");
+                    System.out.println("statatatatatat = "+parentx);
                 } else if ("dup_state_x".equalsIgnoreCase(leveld)) {
                     //  System.out.println("dupdupduo______stat dup ________" + parentx);
                     vc = counterXString_withParameters_seeded(sql.dup_L3_count_by_level_using_parent_source_name_details, parentx, sql.dup__SUB_count_by_level_using_parent_source_name_details); //tables for lga Matched
@@ -283,7 +323,7 @@ public class UtilServer extends HttpServlet {
 
                 float seq = ((float) xv / xc);
                 String str = String.format("%2.02f", (seq * 100));
-                //  System.out.println(vc);
+                  System.out.println("matched dup "+vc);
                 mat = str + "%," + xx + "," + xc + "," + xv + ",@@@" + vc;
 
             } catch (ClassNotFoundException ex) {
@@ -305,7 +345,7 @@ public class UtilServer extends HttpServlet {
 
                 float seq = ((float) xx / xc);
                 String str = String.format("%2.02f", (seq * 100));
-                //  System.out.println(vc);
+                  System.out.println("primer_ dup = "+vc);
                 mat = str + "%," + xx + "," + xc + ",@@@" + vc;
 
             } catch (ClassNotFoundException ex) {
@@ -406,7 +446,7 @@ public class UtilServer extends HttpServlet {
             rx = ps.executeQuery();
             while (rx.next()) {
 
-                ret = " <option value=\"" + rx.getString(1) + "\">" + ret;
+                ret = " <option value=\"" + rx.getString(2) + "\">" + rx.getString(1).toUpperCase() + "</option>" + ret;
 
             }
 
@@ -431,7 +471,7 @@ public class UtilServer extends HttpServlet {
             rx = ps.executeQuery();
             while (rx.next()) {
 
-                ret = " <option value=\"" + rx.getString(1) + "\">" + ret;
+                ret = " <option value=\"" + rx.getString(1) + "\">" + rx.getString(1) + "</option>" + ret;
 
             }
 
@@ -540,7 +580,7 @@ public class UtilServer extends HttpServlet {
             ps = conn.prepareStatement(sqq);
             ps.setString(1, "%" + par1 + "%");
 
-            //     System.out.println(ps.toString());
+                 System.out.println("_______"+ps.toString());
             rx = ps.executeQuery();
             if (rx.next()) {
 
@@ -566,7 +606,7 @@ public class UtilServer extends HttpServlet {
             ps = conn.prepareStatement(sqq);
             ps.setString(1, "%" + par1 + "%");
 
-            //    System.out.println(ps.toString());
+                System.out.println("++++++++++++++++---"+ps.toString());
             rx = ps.executeQuery();
             while (rx.next()) {
 
@@ -605,11 +645,11 @@ public class UtilServer extends HttpServlet {
                     if ("2".equals(rx.getString(2))) {
                         dxs = "insert into region set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
                     } else if ("3".equals(rx.getString(2))) {
-                        dxs = "insert into region set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
+                        dxs = "insert into district set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
                     } else if ("4".equals(rx.getString(2))) {
-                        dxs = "insert into region set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
+                        dxs = "insert into community set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
                     } else if ("5".equals(rx.getString(2))) {
-                        dxs = "insert into region set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
+                        dxs = "insert into facility set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
                     }
 
                     ps_pg = conn_pg.prepareStatement(dxs);
@@ -652,7 +692,7 @@ public class UtilServer extends HttpServlet {
             ps = conn.prepareStatement(sqq);
             ps.setString(1, "%" + par1 + "%");
 
-            //    System.out.println(ps.toString());
+               System.out.println("_)))))))))))_________3++++++ "+ps.toString());
             rx = ps.executeQuery();
             String jsonPrimer = "{\n"
                     + "  \"draw\": 1,\n"
@@ -664,7 +704,7 @@ public class UtilServer extends HttpServlet {
             if (sqq.startsWith("SELECT d.uid")) {
                 while (rx.next()) {
 
-                    ret = " <option value=\"" + rx.getString(1) + "\">" + ret;
+                    ret = " <option value=\"" + rx.getString(1) + "\">" + rx.getString(1) + "</option>" + ret;
                     String dd = "[\n"
                             + "      \"" + rx.getString(1) + "\",\n"
                             + "      \"" + rx.getString(2) + "\",\n"
@@ -675,11 +715,13 @@ public class UtilServer extends HttpServlet {
                             + "    ],";
 
                     ret = dd + ret;
+                  //  System.out.println("____________________________>>>>> "+ret);
                 }
             } else {
 
                 while (rx.next()) {
-                    ret = " <option value=\"" + rx.getString(1) + "\">" + ret;
+                    ret = " <option value=\"" + rx.getString(2) + "\">" + rx.getString(1).toUpperCase() + "</option>" + ret;
+                 //    System.out.println("________2____________________>>>>> "+ret);
                 }
             }
 
@@ -701,7 +743,7 @@ public class UtilServer extends HttpServlet {
             ps = conn.prepareStatement(sqq);
             ps.setString(1, "%" + par1 + "%");
 
-            //    System.out.println(ps.toString());
+            //    System.out.println("______________+_+___)+__))+_)+_)(+_) "+ps.toString());
             rx = ps.executeQuery();
             String jsonPrimer = "{\n"
                     + "  \"data\": [";

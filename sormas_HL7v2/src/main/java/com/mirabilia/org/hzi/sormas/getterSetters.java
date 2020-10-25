@@ -61,6 +61,7 @@ public class getterSetters {
         String str = "";
 
         try {
+           
             ps = conn.prepareStatement("SELECT count(*) FROM region;");
             rx = ps.executeQuery();
             if (rx.next()) {
@@ -101,7 +102,7 @@ public class getterSetters {
     }
 
     public static void Localizer(String ch, String cm, String cc, String cx, String co, String gf, String gh, String gb) throws ClassNotFoundException, SQLException {
-        // //System.out.println(ch + "-" + cm + "-" + cc);
+        System.out.println(ch + "-" + cm + "-" + cc);
 
         PreparedStatement ps;
         Class.forName("com.mysql.jdbc.Driver");
@@ -109,7 +110,7 @@ public class getterSetters {
 
         String str = "";
         try {
-            ps = conn.prepareStatement("insert ignore into sormas_local set changedate = ?, uuid = ?, externalid = ?, level = ?, namex = ?, uid = ?, parent_id = ?,  ext_cdate = ?;");
+            ps = conn.prepareStatement("insert into sormas_local set changedate = ?, uuid = ?, externalid = ?, level = ?, namex = ?, uid = ?, parent_id = ?,  ext_cdate = ?;");
             ps.setString(1, ch);
             ps.setString(2, cm);
             ps.setString(3, cc);
@@ -117,8 +118,24 @@ public class getterSetters {
             ps.setString(5, co);
             ps.setString(6, gf);
             ps.setString(7, gh);
-             ps.setString(8, gb);
+            ps.setString(8, gb);
+            System.out.println(ps.toString());
+            ps.execute();
+        } finally {
+            conn.close();
+        }
 
+    }
+
+    public static void Localizer_Deleter() throws ClassNotFoundException, SQLException {
+
+        PreparedStatement ps;
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DbConnector.getConnection();
+
+        String str = "";
+        try {
+            ps = conn.prepareStatement("delete from sormas_local");
             ps.execute();
         } finally {
             conn.close();

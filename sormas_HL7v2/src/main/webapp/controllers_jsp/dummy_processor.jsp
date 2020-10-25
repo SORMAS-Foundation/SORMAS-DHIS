@@ -1,24 +1,30 @@
 <%@page import="com.mirabilia.org.hzi.Util.analysisDTO"%>
 <%
-    //int seq = 1;
-   int seq = analysisDTO.Cutter(); //this cuts the total into 500 per batch to manage server resources
-    
+
     int frs = 0;
-    int lst = 500;
+    for (int t = 1; t < 6;) {
 
-  
+        frs = 0;
+        int lst = 500;
 
-    for (int i = 0; i < seq; i++) {
-          analysisDTO.fastSender(frs, lst); //we are pushing the sync to server in batches incrementally
-        frs = lst;
-        lst = lst + 500;
-       
+        System.out.println(t);
+
+        int seq = analysisDTO.Cutter(t); //this cuts the total into 500 per batch to manage server resources
+
+        for (int i = 0; i < seq; i++) {
+            analysisDTO.fastSender(frs, lst, t, session.getAttribute("country_code").toString());
+            frs = lst;
+            lst = lst + 500;
+
+        }
+
+        t++;
     }
-analysisDTO.Deduplicate();
+    analysisDTO.Deduplicate();
 
 %>
 <h3>Total processed...<%=frs%></h3>
 <script>
-    
-location.replace("../fhir_frontend/OrgToolOperation.jsp?doneanalyse=true");
+
+    location.replace("../fhir_frontend/OrgToolOperation.jsp?doneanalyse=true");
 </script>

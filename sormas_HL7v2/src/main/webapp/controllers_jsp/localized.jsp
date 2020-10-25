@@ -190,7 +190,7 @@
                             return;
                         }
                            window.location.replace("../fhir_frontend/OrgToolOperation.jsp?sayfini=true"); //should be removed to allow facility run
-                        fc_starter()
+                        fc_starter();
                     }
                 };
 
@@ -210,6 +210,7 @@
                              $('#d_text').append("Cached: facility data successfully");
                         } else {
                             $('#d_text').html("Server down: 500");
+                            window.location.replace("../fhir_frontend/OrgToolOperation.jsp?sayfini=false");
                             return;
                         }
                          window.location.replace("../fhir_frontend/OrgToolOperation.jsp?sayfini=true");

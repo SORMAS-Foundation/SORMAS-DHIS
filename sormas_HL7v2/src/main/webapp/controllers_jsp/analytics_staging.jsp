@@ -70,10 +70,7 @@
     <body>
         <div id="dvi1">
             <%
-                int seq = analysisDTO.Cutter(); //this cuts the total into 500 per batch to manage server resources
-
-                int frs = 0;
-                int lst = 500;
+                int seq = analysisDTO.Cutter_(); //this cuts the total into 500 per batch to manage server resources
 
                 int total_cnt = seq * 500;
 

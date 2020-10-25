@@ -612,7 +612,7 @@
                                                     function starter() {
                                                         maz = maxx;
                                                         //debugger ristricting to ward leve
-                                                        maxx = 5;
+                                                        maxx = 6;
                                                         document.getElementById("overlay").style.display = "none";
                                                         $('#progress_').show();
                                                         $('#progress_x').show();

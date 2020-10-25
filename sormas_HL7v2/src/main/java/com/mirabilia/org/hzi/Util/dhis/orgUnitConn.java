@@ -5,6 +5,7 @@ import static com.mirabilia.org.hzi.Util.dhis.dhisOrgRetrival.starter;
 import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -163,16 +164,20 @@ public class orgUnitConn extends HttpServlet {
 
         if (initzx > 0) {
 
-            //process each shunk and send the progress back to progress bar.
-            String ct_code = sessionx.getAttribute("country_code").toString();
-            int pg_ = starter(initzx, urll, ct_code);
-
-            response.setContentType("text/plain;charset=UTF-8");
-            response.setStatus(200);
-            ServletOutputStream sout = response.getOutputStream();
-            String content = "" + pg_;
-            sout.print(content);
-            // System.out.println("percentage been sent back to frontend"+content+"%");
+            try {
+                //process each shunk and send the progress back to progress bar.
+                String ct_code = sessionx.getAttribute("country_code").toString();
+                int pg_ = starter(initzx, urll, ct_code);
+                
+                response.setContentType("text/plain;charset=UTF-8");
+                response.setStatus(200);
+                ServletOutputStream sout = response.getOutputStream();
+                String content = "" + pg_;
+                sout.print(content);
+                // System.out.println("percentage been sent back to frontend"+content+"%");
+            } catch (SQLException ex) {
+                Logger.getLogger(orgUnitConn.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }

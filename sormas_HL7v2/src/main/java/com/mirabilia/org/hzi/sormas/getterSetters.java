@@ -141,6 +141,22 @@ public class getterSetters {
             conn.close();
         }
     }
+    
+    public static void Localizer_DHIS_Deleter() throws ClassNotFoundException, SQLException {
+
+        PreparedStatement ps;
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DbConnector.getConnection();
+
+        String str = "";
+        try {
+            ps = conn.prepareStatement("delete from raw_");
+            ps.execute();
+        } finally {
+            conn.close();
+        }
+    }
+            
 
     public static String getNoGeoPoints() {
         String ret = "";

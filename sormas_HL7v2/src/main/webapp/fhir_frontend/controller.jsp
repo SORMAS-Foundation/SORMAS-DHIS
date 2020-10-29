@@ -1,3 +1,11 @@
+<%@page import="com.mirabilia.org.hzi.test.tester_"%>
+<%@page import="java.io.InputStreamReader"%>
+<%@page import="java.io.BufferedReader"%>
+<%@page import="com.mirabilia.org.hzi.sormas.cases.AggregrateController"%>
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="org.json.simple.parser.JSONParser"%>
+<%@page import="sun.misc.IOUtils"%>
+<%@page import="java.io.InputStream"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="com.mirabilia.org.hzi.Util.dhis.optionFiler"%>
 <%@page import="java.util.logging.Logger"%>
@@ -190,49 +198,41 @@
                                             Connection conn = DbConnector.getConnection();
                                             ps = conn.prepareStatement("select * from optionfiles;");
                                             rx = ps.executeQuery();
-                                            if (rx.next()){
-                                                
-                                              String x1x = "";
-                                              if("ad_2".equalsIgnoreCase(rx.getString("r1x"))){
-                                              x1x = "checked";
-                                              }
-                                              String x1x1 = "";
-                                               if("ad_3".equalsIgnoreCase(rx.getString("r1x"))){
-                                              x1x1 = "checked";
-                                              }
-                                              String x1x11 = "";
-                                               if("ad_4".equalsIgnoreCase(rx.getString("r1x"))){
-                                              x1x11 = "checked";
-                                              }
-                                              String x1x111 = "";
-                                               if("ad_5".equalsIgnoreCase(rx.getString("r1x"))){
-                                              x1x111 = "checked";
-                                              }
-                                               
+                                            if (rx.next()) {
 
-
-
-
+                                                String x1x = "";
+                                                if ("ad_2".equalsIgnoreCase(rx.getString("r1x"))) {
+                                                    x1x = "checked";
+                                                }
+                                                String x1x1 = "";
+                                                if ("ad_3".equalsIgnoreCase(rx.getString("r1x"))) {
+                                                    x1x1 = "checked";
+                                                }
+                                                String x1x11 = "";
+                                                if ("ad_4".equalsIgnoreCase(rx.getString("r1x"))) {
+                                                    x1x11 = "checked";
+                                                }
+                                                String x1x111 = "";
+                                                if ("ad_5".equalsIgnoreCase(rx.getString("r1x"))) {
+                                                    x1x111 = "checked";
+                                                }
 
                                                 String tm = "";
-                                              if("6hr".equalsIgnoreCase(rx.getString("r1"))){
-                                              tm = "checked";
-                                              }
-                                              String tm1 = "";
-                                               if("24hr".equalsIgnoreCase(rx.getString("r1"))){
-                                              tm1 = "checked";
-                                              }
-                                              String tm2 = "";
-                                               if("week".equalsIgnoreCase(rx.getString("r1"))){
-                                              tm2 = "checked";
-                                              }
-                                              String tm3 = "";
-                                               if("month".equalsIgnoreCase(rx.getString("r1"))){
-                                              tm3 = "checked";
-                                              }
-                                               
-
-
+                                                if ("6hr".equalsIgnoreCase(rx.getString("r1"))) {
+                                                    tm = "checked";
+                                                }
+                                                String tm1 = "";
+                                                if ("24hr".equalsIgnoreCase(rx.getString("r1"))) {
+                                                    tm1 = "checked";
+                                                }
+                                                String tm2 = "";
+                                                if ("week".equalsIgnoreCase(rx.getString("r1"))) {
+                                                    tm2 = "checked";
+                                                }
+                                                String tm3 = "";
+                                                if ("month".equalsIgnoreCase(rx.getString("r1"))) {
+                                                    tm3 = "checked";
+                                                }
 
 
                                     %>
@@ -503,7 +503,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="far fa-user"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" required>
+                                                            <input name="admin_uname" id="usn" type="text" class="form-control"  im-insert="false" required>
                                                         </div>
 
                                                         <label>Administrator Password</label>
@@ -512,7 +512,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="far fa-check"></i></span>
                                                             </div>
-                                                            <input type="password" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" required>
+                                                            <input name="admin_upass" id="ups" type="password" class="form-control"  im-insert="false" required>
                                                         </div>
                                                         <!-- /.input group -->
                                                     </div>
@@ -542,15 +542,14 @@
                                         <!-- /.card -->
                                     </div>
                                 </form>
-                                    <%
-                                    
-                                      
-                                            }
-                                            
-                                        } finally {
+                                <%
+
                                         }
-                                    
-                                    %>
+
+                                    } finally {
+                                    }
+
+                                %>
                         </section> 
 
                     </div>             
@@ -593,117 +592,137 @@
             <jsp:include page="template/scripts_footer.jsp"></jsp:include>
 
 
-            <script>
+                <script>
 
-                function step(e) {
-                    $("#" + e).addClass("disabledbutton");
-                    $("#" + e).toggleClass("callout-success");
-                    // alert("#2_" + e);
-                    $("#2_" + e).show(500);
-                    checker();
-                }
-                function checker() {
-                    if ($("#only_").prop("checked") === true) {
-                        $(".only_").prop("checked", false);
-                        $('#non_app').show();
-                        $('#non_app_').html('Please select the lowest level you will like the sync with DHIS2');
-                        // alert("You have selected Aggregate only, hence, all other options are disabled");
-                    } else {
-                        //  alert("You have selected Aggregate only");
-                        $('#non_app').hide();
-                        $('#non_app_').html('Not applicable... please click on next');
+                    function step(e) {
+                        $("#" + e).addClass("disabledbutton");
+                        $("#" + e).toggleClass("callout-success");
+                        // alert("#2_" + e);
+                        $("#2_" + e).show(500);
+                        checker();
                     }
-                    ;
-
-                    if ($("#maintenance").prop("checked") === true) {
-
-                    } else {
-
-                        $('#p_maintenance').show(100);
-                        $('#2_stepx').remove();
-                    }
-                    ;
-
-                }
-
-
-
-//maintenance
-
-                function checkerX() {
-                    if ($("#instll").prop("checked") === true) {
-                        $("#instllx").show(1000);
-                        $("#instllx_").hide(1000);
-
-
-                    } else {
-                        $("#instllx").hide(1000);
-                        $("#instllx_").show(1000);
-                    }
-
-                }
-
-
-
-
-
-
-                ;
-
-                $('a.nope').click(function () {
-                    return false;
-                })
-
-
-                function start_pushX_() {
-
-
-                    document.getElementById("overlay").style.display = "block";
-                    $('#text').html("Pushing all available matched data to sormas...");
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?aggregatToDHIS=true', true);
-                    xhr.responseType = 'text';
-                    xhr.onload = function () {
-
-                        if (xhr.readyState === xhr.DONE) {
-                            if (xhr.status === 200) {
-
-                                document.getElementById("overlay").style.display = "none";
-
-                                alert('response from server  : ' + xhr.responseText);
-
-                            }
+                    function checker() {
+                        if ($("#only_").prop("checked") === true) {
+                            $(".only_").prop("checked", false);
+                            $('#non_app').show();
+                            $('#non_app_').html('Please select the lowest level you will like the sync with DHIS2');
+                            // alert("You have selected Aggregate only, hence, all other options are disabled");
+                        } else {
+                            //  alert("You have selected Aggregate only");
+                            $('#non_app').hide();
+                            $('#non_app_').html('Not applicable... please click on next');
                         }
-                    };
-                    xhr.send(null);
+                        ;
 
-                }
-                ;
+                        if ($("#maintenance").prop("checked") === true) {
 
+                        } else {
 
+                            $('#p_maintenance').show(100);
+                            $('#2_stepx').remove();
+                        }
+                        ;
 
-
-
-
-                function get() {
-                    $('#fomX').submit();
-                    req = new XMLHttpRequest();
-                    req.open("GET", '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?PUSHRESULTS=true', true);
-                    req.send();
-                    req.onload = function () {
-
-                        json = JSON.parse(req.responseText);
-                        var jsonViewer = new JSONViewer();
-                        document.querySelector("#xdb").appendChild(jsonViewer.getContainer());
+                    }
 
 
-                        jsonViewer.showJSON(json, -1, -1);
 
-                    };
+                    //maintenance
+
+                    function checkerX() {
+                        if ($("#instll").prop("checked") === true) {
+                            $("#instllx").show(1000);
+                            $("#instllx_").hide(1000);
 
 
-                    $('#RespondX').modal('show');
-                }
+                        } else {
+                            $("#instllx").hide(1000);
+                            $("#instllx_").show(1000);
+                        }
+
+                    }
+
+
+
+
+
+
+                    ;
+
+                    $('a.nope').click(function () {
+                        return false;
+                    })
+
+
+                    function start_pushX_() {
+
+
+                        document.getElementById("overlay").style.display = "block";
+                        $('#text').html("Pushing all available matched data to sormas...");
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?aggregatToDHIS=true', true);
+                        xhr.responseType = 'text';
+                        xhr.onload = function () {
+
+                            if (xhr.readyState === xhr.DONE) {
+                                if (xhr.status === 200) {
+
+                                    document.getElementById("overlay").style.display = "none";
+
+                                    alert('response from server  : ' + xhr.responseText);
+
+                                }
+                            }
+                        };
+                        xhr.send(null);
+
+                    }
+                    ;
+
+
+
+
+                <%                    InputStream intput = getServletContext().getResourceAsStream("dhis_processor");
+                    //creating an InputStreamReader object
+                    InputStreamReader isReader = new InputStreamReader(intput);
+                    //Creating a BufferedReader object
+                    BufferedReader reader = new BufferedReader(isReader);
+                    StringBuffer sb = new StringBuffer();
+                    String str;
+                    while ((str = reader.readLine()) != null) {
+                        sb.append(str);
+                    }
+                    // System.out.println(sb.toString());
+
+                    tester_.setJson(sb.toString());
+
+                    //  session.setAttribute("heavyjson", sb.toString());
+                    intput.close();
+                    isReader.close();
+                    reader.close();
+
+
+                %>
+
+                    function get() {
+                        $('#fomX').submit();
+                        req = new XMLHttpRequest();
+                        req.open("GET", '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?PUSHRESULTS=true', true);
+                        req.send();
+                        req.onload = function () {
+
+                            json = JSON.parse(req.responseText);
+                            var jsonViewer = new JSONViewer();
+                            document.querySelector("#xdb").appendChild(jsonViewer.getContainer());
+
+
+                            jsonViewer.showJSON(json, -1, -1);
+
+                        };
+
+
+                        $('#RespondX').modal('show');
+                    }
 
 
 

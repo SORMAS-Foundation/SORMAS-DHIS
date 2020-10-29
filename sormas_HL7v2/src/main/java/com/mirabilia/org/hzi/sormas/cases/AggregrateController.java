@@ -281,7 +281,7 @@ public class AggregrateController {
 
     }
 
-    public static String MetadaJsonSender(String paths_) throws ParseException {
+    public static String MetadaJsonSender(String paths_, String usn, String psw) throws ParseException {
         
         String ret = "opps... Something not right";
 
@@ -289,8 +289,8 @@ public class AggregrateController {
         String http = httpx+"/api/metadata";
 
         HttpURLConnection urlConnection = null;
-        String name = "admidn";
-        String password = "district";
+        String name = usn;
+        String password = psw;
 
         String authString = name + ":" + password;
 
@@ -339,8 +339,10 @@ public class AggregrateController {
                 System.out.println("finally Code : " + HttpResult);
                 if (HttpResult == 401) {
                     System.out.println("Username and Pass not working");
+                    
+                    ret = "Username and Pass not working";
 
-                    // return;
+                     return ret;
                 }
             }
         } catch (MalformedURLException localMalformedURLException) {

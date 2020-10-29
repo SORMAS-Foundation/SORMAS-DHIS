@@ -263,7 +263,7 @@ public class UtilServer extends HttpServlet {
                 System.out.println(xc + "vc_____xm" + xm + "______" + sub + "_______" + vc);
                 mat = str + "%," + xx + "," + xc + "," + xm + ",@@@" + vc;
                 System.err.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++" + mat);
-                
+
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -430,21 +430,6 @@ public class UtilServer extends HttpServlet {
 
             AggregrateController.SormasAggregrator("2");
             mat = "Job done";
-        }
-
-        if (request.getParameter(
-                "PUSHRESULTS") != null) {
-
-            try {
-                // System.out.println(filecont);
-
-                mat = AggregrateController.MetadaJsonSender(sess.getAttribute("heavyjson").toString());
-
-                // mat = "Job done";
-            } catch (ParseException ex) {
-                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
         }
 
         response.setContentType(
@@ -989,6 +974,41 @@ public class UtilServer extends HttpServlet {
             conn_pg.close();
             conn.close();
         }
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession sess = request.getSession(false);
+        if (request.getParameter("PUSHRESULTS") != null && request.getParameter("usn") != null && request.getParameter("psn") != null) {
+
+            try {
+                // System.out.println(filecont);
+
+                mat = AggregrateController.MetadaJsonSender(sess.getAttribute("heavyjson").toString(), request.getParameter("usn"), request.getParameter("psn"));
+
+                // mat = "Job done";
+                 System.out.println(mat);
+            } catch (ParseException ex) {
+                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+          //  System.out.println("Error!");
+            mat = "{\"Error\":\"Username or/and password is not correct\"}";
+            System.out.println(mat);
+        }
+        
+        response.setContentType(
+                "text/plain;charset=UTF-8");
+        response.setStatus(
+                200);
+        ServletOutputStream sout = response.getOutputStream();
+
+        sout.print(mat);
+        mat = "";
+     //   System.out.println("Done...");
 
     }
 }

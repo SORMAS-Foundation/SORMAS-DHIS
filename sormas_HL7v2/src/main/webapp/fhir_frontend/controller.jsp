@@ -517,9 +517,9 @@
                                                         <!-- /.input group -->
                                                     </div>
 
-                                                    <a class="btn btn-app" onclick="get()">
+                                                    <div class="btn btn-app" id="stop_a" >
                                                         <i class="fa fa-sign-in-alt"></i> Save Setting & Perform selected Action
-                                                    </a>
+                                                    </div>
 
                                                 </div>
 
@@ -692,11 +692,8 @@
                     while ((str = reader.readLine()) != null) {
                         sb.append(str);
                     }
-                    // System.out.println(sb.toString());
 
-                    tester_.setJson(sb.toString());
-
-                    //  session.setAttribute("heavyjson", sb.toString());
+                    session.setAttribute("heavyjson", sb.toString());
                     intput.close();
                     isReader.close();
                     reader.close();
@@ -704,14 +701,31 @@
 
                 %>
 
-                    function get() {
-                        $('#fomX').submit();
-                        req = new XMLHttpRequest();
-                        req.open("GET", '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?PUSHRESULTS=true', true);
-                        req.send();
-                        req.onload = function () {
+                 //   function get(e) {
+                        $('#stop_a').click(function (event) {
+                           event.preventDefault()
+                       
 
-                            json = JSON.parse(req.responseText);
+                       // $('#fomX').submit();
+                        var usn = $('#usn').val();
+                        var psn = $('#ups').val()
+                        req = new XMLHttpRequest()
+                      //  console.log('../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?PUSHRESULTS=true&usn=' + usn + '&ups=' + psn);
+                        req.open("POST", '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?PUSHRESULTS=true&usn=' + usn + '&ups=' + psn + '', true);
+
+                       req.send();
+                        
+                        req.onload = function () {
+                           // alert(req.responseText);
+                           
+                           //var djson = '{"Error":3}';
+                           
+                           console.log(req.responseText);
+
+                            var json = JSON.parse(req.responseText);
+                            
+                            console.log(json);
+                            
                             var jsonViewer = new JSONViewer();
                             document.querySelector("#xdb").appendChild(jsonViewer.getContainer());
 
@@ -722,7 +736,9 @@
 
 
                         $('#RespondX').modal('show');
-                    }
+                    
+                     });
+
 
 
 

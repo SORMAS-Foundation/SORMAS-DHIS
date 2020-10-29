@@ -365,13 +365,13 @@
 
 
                         <section class="col-lg-12 connectedSortable" style="display: none;" id="openxx1">
-                            <div class="row">
+                            <div class="row" >
                                 <!-- Source creator -->
                                 <section class="col-lg-12 connectedSortable">
                                     <!-- TO DO List -->
-                                    <div class="card">
+                                    <div class="card" id="addit">
 
-                                        <div class="card-header" id="addit">
+                                        <div class="card-header" >
 
 
 
@@ -479,6 +479,7 @@
 
                                     <div class="card card-success card-outline" id="body_wx">
                                         <div class="card-header">
+
                                             <h3 class="card-title" data-togg="tooltip" title="NOTE: This is using local SORMAS Server as a baseline">
                                                 <i class="fas fa-search"></i>
                                                 Infrastructure Match Results
@@ -491,6 +492,7 @@
 
 
                                             <div class="row input-group">
+
                                                 <div onclick="dmd('')" class="col-xs-6 col-md-3 text-center clickables" data-togg="tooltip" title="Click here to view the Matched Data!" data-toggle="modal" data-target="#modal-xl" style="border-right: 1px solid #f4f4f4">
                                                     <div style="display:inline;width:60px;height:60px;">
                                                         <input type="text" class="knob" data-readonly="true" value="20" id="dtt" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;">
@@ -500,7 +502,7 @@
                                                 </div>
 
                                                 <!-- ./col -->
-                                                <div onclick="dmd('pat_mat')" class="col-xs-6 col-md-3 text-center" style="border-right: 1px solid #f4f4f4" data-toggle="modal" data-target="#">
+                                                <div onclick="dmd('pat_mat')" class="col-xs-6 col-md-3 text-center clickables" style="border-right: 1px solid #f4f4f4" data-toggle="modal" data-target="#">
                                                     <div style="display:inline;width:60px;height:60px;"><input type="text" class="knob" data-readonly="true" id="ctt"  value="50" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;"></div>
 
                                                     <div class="knob-label" id="fullx" ></div>
@@ -511,7 +513,7 @@
 
                                                     <div class="knob-label" id="fullxxx"></div>
                                                 </div>
-                                                <div class="col-xs-6 col-md-3 text-center" onclick="dmd('_mat')" data-toggle="modal"  data-target="#modal-warning"> 
+                                                <div class="col-xs-6 col-md-3 text-center clickables" onclick="dmd('_mat')" data-toggle="modal"  data-target="#modal-warning"> 
                                                     <div style="display:inline;width:60px;height:60px;"><input type="text" id="att" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;"></div>
 
                                                     <div class="knob-label" id="fullxxxx"></div>
@@ -539,15 +541,15 @@
                         </section>
                     </div>
 
+                </section>
+
+                <jsp:include page="template/scripts_footer.jsp"></jsp:include>
+                    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
 
-                    <jsp:include page="template/scripts_footer.jsp"></jsp:include>
-                        <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
 
-
-
-                        <script>
+                    <script>
 
 
                                                     var ctbb = '';
@@ -634,7 +636,7 @@
                                                                     if (xhr.status === 200) {
                                                                         max = xhr.responseText;
                                                                         myloader(max);
-                                                                           console.log("Number of chunk been processed currently = " + max);
+                                                                        console.log("Number of chunk been processed currently = " + max);
                                                                     }
                                                                 }
                                                             };
@@ -666,1085 +668,64 @@
                                                         }
                                                     }
                                                     ;
-                        </script>
-
-
-
-                        <script type="text/javascript">
-
-
-                            function dd() {
-                                document.getElementById("overlay").style.display = "block";
-                                setTimeout(function () {
-                                    if (confirm("DANGER! \nThis action will Purge all MASTER Source Infrastructure Data already on the Adapter and reimport it afresh. \nDo you want to do that?")) {
-
-                                        starter();
-
-                                    } else {
-                                        document.getElementById("overlay").style.display = "none";
-
-                                    }
-
-
-                                }, 1000);
-                            }
-
-                            function ana() {
-                                document.getElementById("overlay").style.display = "block";
-                                setTimeout(function () {
-                                    if (confirm("WARNING! \nLong Processing Action, you are about to run the match processor... This will take time. \nDo you want to do that?")) {
-                                        location.replace("../controllers_jsp/analytics_staging.jsp");
-                                    } else {
-                                        document.getElementById("overlay").style.display = "none";
-
-                                    }
-
-
-                                }, 1000);
-                            }
-
-                            function resx() {
-
-                                var xhr = new XMLHttpRequest();
-                                xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?count=10', true);
-                                xhr.responseType = 'text';
-                                xhr.onload = function () {
-                                    if (xhr.readyState === xhr.DONE) {
-                                        if (xhr.status === 200) {
-
-                                            //    console.log("Number of 100 percent machedprocessed currently = " + xhr.responseText);
-
-                                            const words = xhr.responseText.split(',');
-                                            $('#fullxxxx').html("100% Not Matchable = " + words[0]);
-                                            $('#fullxxx').html("Duplicates = " + words[1]);
-                                            $('#fullx').html("Partial Duplicates = " + words[2]);
-                                            $('#full').html("Matched = " + words[3]);
-                                            intPerser(xhr.responseText);
-
-                                        } else {
-                                            alert("There is a problem retreiving analytics from server, please rerun Analytics 'Analyse' button");
-                                            return;
-                                        }
-                                    }
-                                };
-                                xhr.send(null);
-
-                            }
-
-                            function intPerser(e) {
-                                const words = e.split(',');
-                                var a = parseInt(words[0]);
-                                var b = parseInt(words[1]);
-                                var c = parseInt(words[2]);
-                                var d = parseInt(words[3]);
-
-                                var tt = a + b + c + d;
-
-                                $('#att').val(Math.floor((a / tt) * 100) + '%');
-                                $('#btt').val(Math.floor((b / tt) * 100) + '%');
-                                $('#ctt').val(Math.floor((c / tt) * 100) + '%');
-                                $('#dtt').val(Math.floor((d / tt) * 100) + '%');
-                                //   alert(Math.floor((c / tt) * 100));
-                                $('#body_wx').show();
-                                triggerKnob();
-
-                            }
-
-
-
-
-                            function ds() {
-                                // window.location("./controllers/localizer.jsp");
-                            }
-
-                            function servlet_primer_fhir(stat) {
-
-                                if (stat > 0) {
-                                    var xhr = new XMLHttpRequest();
-                                    xhr.open('GET', '../controller?getAllListfromDBtoFHIR=' + stat, true);
-                                    xhr.responseType = 'text';
-                                    xhr.onload = function () {
-                                        if (xhr.readyState === xhr.DONE) {
-                                            if (xhr.status === 200) {
-                                                cleaner();
-                                            }
-                                        }
-                                    };
-                                    xhr.send(null);
-                                    success: servlet_primer(stat - 1);
-                                }
-
-                            }
-                            ;
-                            function cleaner() {
-                                $('#progress_').hide();
-                                $('#progress_x').hide();
-                                $('#progress_Fhir').hide();
-                            }
-                            ;
-                            function alertxx() {
-                                const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'top-end',
-                                    showConfirmButton: false,
-                                    timer: 3000
-                                });
-                                Toast.fire({
-                                    type: 'success',
-                                    title: 'Server now ready!.'
-                                });
-                            }
-                            ;
-
-                            function alertx(e) {
-                                const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'top-end',
-                                    showConfirmButton: false,
-                                    timer: 3000
-                                });
-                                Toast.fire({
-                                    type: 'success',
-                                    title: e
-                                });
-                            }
-                            ;
-                            function alerterr(e) {
-                                const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'top-end',
-                                    showConfirmButton: false,
-                                    timer: 3000
-                                });
-                                Toast.fire({
-                                    type: 'error',
-                                    title: e
-                                });
-                            }
-                            ;
-
-
-
-
-
-                        </script>
-
-                    <%                if (request.getParameter("sayfini") != null) {
-                            String sta = request.getParameter("sayfini");
-
-                            switch (sta) {
-                                case "true":
-                    %>
-
-                    <script>
-
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: true,
-                            timer: 6000
-                        });
-                        Toast.fire({
-                            type: 'success',
-                            title: 'Server completed.'
-                        });
                     </script>
 
 
 
-                    <%
-                            break;
-                        case "false":
-                    %>
+                    <script type="text/javascript">
 
-                    <script>
 
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: true,
-                            timer: 6000
-                        });
-                        Toast.fire({
-                            type: 'error',
-                            title: 'Server could not complete Operation!'
-                        });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </script>
-
-
-
-                    <%
-                                    break;
-                                default:
-                                // code block
-                            }
-
-                        }
-
-
-                    %>
-                    <style>
-                        #overlay {
-                            position: fixed;
-                            display: none;
-                            width: 100%;
-                            height: 100%;
-                            top: 0;
-                            left: 0;
-                            right: 0;
-                            bottom: 0;
-                            background-color: rgba(0,0,0,0.5);
-                            z-index: 2;
-                            cursor: pointer;
-                        }
-
-
-                    </style>
-                    <script>
-                        document.getElementById("overlay").style.display = "none";
-
-                    </script>
-                    <!--MODALS BASIN-->  
-                    <div class="modal fade" id="modal-xl" style="display: none;" aria-hidden="true">
-                        <div class="" style="padding-left: 20px;padding-right: 10px;margin-top: 20px;margin-bottom: 20px;">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <div class="container-fluid">
-                                        <div class="row mb-2">
-                                            <div class="col-sm-6">
-                                                <h1>Infrastructure Reconciliation Analytics for Matched Data</h1>
-                                            </div>
-
-                                        </div>
-                                    </div><!-- /.container-fluid -->
-                                    <button type="button" onclick="window.location.reload();" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-
-                                <div class="">
-
-
-                                    <!-- Main content -->
-                                    <section class="content">
-                                        <div class="container-fluid">
-
-                                            <!-- Timelime example  -->
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <!-- The time line -->
-                                                    <div class="timeline">
-                                                        <!-- timeline time label -->
-                                                        <div class="time-label">
-                                                            <span class="bg-blue">Organisation Unit Selection</span>
-                                                        </div>
-                                                        <!-- /.timeline-label -->
-
-                                                        <!-- timeline item -->
-                                                        <div>
-                                                            <i class="fas fa-user bg-green"></i>
-                                                            <div class="timeline-item">
-                                                                <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
-                                                                <h3 class="timeline-header no-border"><a href="#"></a> Parent organisation unit</h3>
-                                                                <div class="timeline-body">
-                                                                    <div class="row">
-                                                                        <div class="input-group input-group col-3">
-                                                                            <input type="text" onchange="" id="nigeria_x" list="" autocomplete="off" value="${sessionScope.country}" disable="true" readonly class="form-control">
-
-                                                                        </div>
-                                                                        <div class="col-5">
-                                                                            <div class="progress progress-xs" style="height: 30%;">
-                                                                                <div class="progress-bar progress-bar-warning" id="dfe" style="width: 0%"> 
-                                                                                    <a onclick="statex('state_x')" id="state_g" type="button" class="btn btn-warning btn-flat"></a>
-                                                                                </div></div>
-                                                                            <h3 class="" id="789"></h3>
-                                                                        </div>
-                                                                        <div class="col-2">
-                                                                            <a onclick="tableloader('nigeria_x')" id="state_g_" type="button" class="btn btn-success btn-flat">Show Details</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- END timeline item -->
-                                                        <!-- timeline item -->
-                                                        <div>
-                                                            <i id="statexx" class="fas fa-bars bg-yellow"></i>
-                                                            <div class="timeline-item">
-                                                                <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-                                                                <h3 class="timeline-header"><a href="#">Select</a> State / Region</h3>
-                                                                <div class="timeline-body">
-                                                                    <div class="row">
-                                                                        <div class="input-group input-group col-3">
-                                                                            <!--<input type="text" onchange="load_lga('')" id="state_x" list="state" autocomplete="off" class="form-control">-->
-                                                                            <select class="form-control js-select2" id="state_x" onchange="load_lga('')">
-                                                                                <option selected>select one</option>
-                                                                            </select>
-
-
-                                                                        </div>
-                                                                        <div class="col-5">
-                                                                            <div class="progress progress-xs" style="height: 30%;">
-                                                                                <div class="progress-bar progress-bar-warning" id="dfe_lga" style="width: 0%"> 
-                                                                                    <a onclick="tableloader('state_x')" id="lga_g" type="button" class="btn btn-warning btn-flat"></a>
-                                                                                </div></div>
-                                                                            <h3 class="" id="789_lga"></h3>
-                                                                        </div>
-                                                                        <div class="col-2">
-                                                                            <a onclick="tableloader('state_x')" id="lga_g_" type="button" class="btn btn-success btn-flat">Show Details</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- END timeline item -->
-
-                                                        <!-- timeline item -->
-                                                        <div id="lgax" style="display: none">
-                                                            <i id="lgaxx" class="fas fa-bars bg-yellow"></i>
-                                                            <div class="timeline-item">
-                                                                <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-                                                                <h3 class="timeline-header"><a href="#">Select</a> Local Government Area / District</h3>
-                                                                <div class="timeline-body">
-                                                                    <div class="row">
-                                                                        <div class="input-group input-group-sm col-3">
-                                                                   
-                                                                            <select class="form-control js-select2" id="lga_x" onchange="load_ward('')">
-                                                                                <option selected>select one</option>
-                                                                            </select>
-
-                                                                        </div>
-                                                                        <div class="col-5">
-                                                                            <div class="progress progress-xs" style="height: 30%;">
-                                                                                <div class="progress-bar progress-bar-warning" id="dfe_ward" style="width: 0%"> 
-                                                                                    <a onclick="tableloader('lga_x')" id="ward_g" type="button" class="btn btn-warning btn-flat"></a>
-                                                                                </div>
-                                                                            </div>
-                                                                            <h3 class="" id="789_ward"></h3>
-                                                                        </div>
-                                                                        <div class="col-2">
-                                                                            <a onclick="tableloader('lga_x')" id="ward_g_" type="button" class="btn btn-success btn-flat">Show Details</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- END timeline item -->
-
-
-
-
-
-
-
-                                                        <!-- timeline item -->
-                                                        <div id="wardx" style="display: none">
-                                                            <i id="wardxx" class="fas fa-bars bg-yellow"></i>
-                                                            <div class="timeline-item">
-                                                                <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-                                                                <h3 class="timeline-header"><a href="#">Select</a> Ward / Community</h3>
-                                                                <div class="timeline-body">
-                                                                    <div class="row">
-                                                                        <div class="input-group input-group-sm col-3">
-                                                                            
-                                                                              <select class="form-control js-select2" onchange="load_hf('')" id="ward_x"">
-                                                                                <option selected>select one</option>
-                                                                            </select>
-                                                                            
-
-                                                                        </div>
-                                                                        <div class="col-5">
-                                                                            <div class="progress progress-xs" style="height: 30%;">
-                                                                                <div class="progress-bar progress-bar-warning" id="dfe_hf" style="width: 0%"> 
-                                                                                    <a onclick="tableloader('ward_x')" id="hf_g" type="button" class="btn btn-warning btn-flat"></a>
-                                                                                </div>
-                                                                            </div>
-                                                                            <h3 class="" id="789_hf"></h3>
-                                                                        </div>
-                                                                        <div class="col-2">
-                                                                            <a onclick="tableloader('ward_x')" id="hf_g_" type="button" class="btn btn-success btn-flat">Show Details</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- END timeline item -->
-
-
-                                                        <!-- timeline item -->
-                                                        <div id="hfx" style="display: none">
-                                                            <i id="hfxx" class="fas fa-bars bg-yellow"></i>
-                                                            <div class="timeline-item">
-                                                                <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-                                                                <h3 class="timeline-header"><a href="#">Select</a> Health Facilities</h3>
-                                                                <div class="timeline-body">
-
-                                                                    <div class="input-group input-group-sm col-5">
-                                                                        
-                                                                        <select class="form-control js-select2" onchange="tableloader('hf_x')" id="hf_x"">
-                                                                                <option selected>select one</option>
-                                                                            </select>
-                                                                        
-                                                                        <span class="input-group-append">
-                                                                            <button type="button" class="btn btn-info btn-flat">Next</button>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- END timeline item -->
-                                                        <!-- timeline time label -->
-                                                        <div class="time-label">
-                                                            <span class="">Please click "Show Details" button to expand details of the corresponding value</span>
-
-                                                        </div>
-                                                        <!-- /.timeline-label -->
-
-                                                        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-
-                                                        <!-- timeline item -->
-                                                        <div id="esef3456n" style="display: none;">
-                                                            <i class="fa fa-bars bg-purple"></i>
-                                                            <div class="timeline-item">
-                                                                <span class="time"><i class="fas fa-clock"></i> 2 days ago</span>
-
-
-                                                                <div class="timeline-body">
-                                                                    <table id="detailer" class="display" style="width:100%">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>SN</th>
-                                                                                <th>SOMRAS UUID</th>
-                                                                                <th>SOURCE UUID</th>
-                                                                                <th>SORMAS NAME</th>
-                                                                                <th>SOURCE NAME</th>
-                                                                                <th>LAST MATCHED</th>
-                                                                            </tr>
-                                                                        </thead>
-
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- END timeline item -->
-                                                        <!-- timeline item -->
-
-                                                        <!-- END timeline item -->
-
-                                                    </div>
-                                                </div>
-                                                <!-- /.col -->
-                                            </div>
-                                        </div>
-                                        <!-- /.timeline -->
-
-                                    </section>
-                                    <!-- /.content -->
-                                </div>
-
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
-
-
-
-
-
-
-                    <!--MODALS BASIN-->  
-                    <div class="modal fade" id="dup_modal-xl" style="display: none;" aria-hidden="true">
-                        <div class="" style="padding-left: 20px;padding-right: 10px;margin-top: 20px;margin-bottom: 20px;">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <div class="container-fluid">
-                                        <div class="row mb-2">
-                                            <div class="col-sm-6">
-                                                <h1>Infrastructure Reconciliation Analytics for DUPLICATE Data</h1>
-                                            </div>
-
-                                        </div>
-                                    </div><!-- /.container-fluid -->
-                                    <button type="button" onclick="window.location.reload();" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-
-                                <div class="" style="">
-                                    <!-- Content Header (Page header) -->
-                                    <section class="content-header">
-
-                                    </section>
-
-                                    <!-- Main content -->
-                                    <section class="content">
-                                        <div class="container-fluid">
-
-                                            <!-- Timelime example  -->
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <!-- The time line -->
-                                                    <div class="timeline">
-                                                        <!-- timeline time label -->
-                                                        <div class="time-label">
-                                                            <span class="bg-blue">Organisation Unit Selection</span>
-                                                        </div>
-                                                        <!-- /.timeline-label -->
-
-                                                        <!-- timeline item -->
-                                                        <div>
-                                                            <i class="fas fa-user bg-green"></i>
-                                                            <div class="timeline-item">
-                                                                <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
-                                                                <h3 class="timeline-header no-border"><a href="#"></a> Parent organisation unit</h3>
-                                                                <div class="timeline-body">
-                                                                    <div class="row">
-                                                                        <div class="input-group input-group col-3">
-                                                                            <input type="text" onchange="" id="dup_nigeria_x" list="" autocomplete="off" value="Nigeria" disable="true" readonly class="form-control">
-
-                                                                        </div>
-                                                                        <div class="col-5">
-                                                                            <div class="progress progress-xs" style="height: 30%;">
-                                                                                <div class="progress-bar progress-bar-warning" id="dup_dfe" style="width: 0%"> 
-                                                                                    <a onclick="statex('dup_state_x')" id="dup_state_g" type="button" class="btn btn-warning btn-flat"></a>
-                                                                                </div></div>
-                                                                            <h3 class="" id="dup_789"></h3>
-                                                                        </div>
-                                                                        <div class="col-2">
-                                                                            <a onclick="tableloader('dup_nigeria_x')" id="dup_state_g" type="button" class="btn btn-success btn-flat">Show Details</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- END timeline item -->
-                                                        <!-- timeline item -->
-                                                        <div>
-                                                            <i id="dup_statexx" class="fas fa-bars bg-yellow"></i>
-                                                            <div class="timeline-item">
-                                                                <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-                                                                <h3 class="timeline-header"><a href="#">Select</a> State / Region</h3>
-                                                                <div class="timeline-body">
-                                                                    <div class="row">
-                                                                        <div class="input-group input-group col-3">
-                                                                            <input type="text" onchange="load_lga('dup_')" id="dup_state_x" list="state" autocomplete="off" class="form-control">
-
-                                                                        </div>
-                                                                        <div class="col-5">
-                                                                            <div class="progress progress-xs" style="height: 30%;">
-                                                                                <div class="progress-bar progress-bar-warning" id="dup_dfe_lga" style="width: 0%"> 
-                                                                                    <a onclick="tableloader('dup_state_x')" id="dup_lga_g" type="button" class="btn btn-warning btn-flat"></a>
-                                                                                </div></div>
-                                                                            <h3 class="" id="dup_789_lga"></h3>
-                                                                        </div>
-                                                                        <div class="col-2">
-                                                                            <a onclick="tableloader('dup_state_x')" id="dup_lga_g" type="button" class="btn btn-success btn-flat">Show Details</a>
-                                                                        </div>
-                                                                        <div class="col-xs-2 col-md-1 text-center clickables">
-                                                                            <div style="display:inline;width:60px;height:60px;"><div style="display:inline;width:60px;height:60px;">
-                                                                                    `<input type="text" id="btt_state" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="knob-label" id="fullxxx">Total Left = 23</div>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- END timeline item -->
-
-                                                        <!-- timeline item -->
-                                                        <div id="dup_lgax" style="display: none">
-                                                            <i id="dup_lgaxx" class="fas fa-bars bg-yellow"></i>
-                                                            <div class="timeline-item">
-                                                                <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-                                                                <h3 class="timeline-header"><a href="#">Select</a> Local Government Area / District</h3>
-                                                                <div class="timeline-body">
-                                                                    <div class="row">
-                                                                        <div class="input-group input-group-sm col-3">
-                                                                            <input type="text" list="lga" onchange="load_ward('dup_')" id="dup_lga_x" autocomplete="off" class="form-control">
-
-                                                                        </div>
-                                                                        <div class="col-5">
-                                                                            <div class="progress progress-xs" style="height: 30%;">
-                                                                                <div class="progress-bar progress-bar-warning" id="dup_dfe_ward" style="width: 0%"> 
-                                                                                    <a onclick="tableloader('dup_lga_x')" id="dup_ward_g" type="button" class="btn btn-warning btn-flat"></a>
-                                                                                </div>
-                                                                            </div>
-                                                                            <h3 class="" id="dup_789_ward"></h3>
-                                                                        </div>
-                                                                        <div class="col-2">
-                                                                            <a onclick="tableloader('dup_lga_x')" id="dup_ward_g" type="button" class="btn btn-success btn-flat">Show Details</a>
-                                                                        </div>
-
-                                                                        <div class="col-xs-2 col-md-1 text-center clickables">
-                                                                            <div style="display:inline;width:60px;height:60px;"><div style="display:inline;width:60px;height:60px;">
-                                                                                    `<input type="text" id="btt_lga" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="knob-label" id="fullxxx">Total Left = 423</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- END timeline item -->
-
-
-
-
-
-
-
-                                                        <!-- timeline item -->
-                                                        <div id="dup_wardx" style="display: none">
-                                                            <i id="dup_wardxx" class="fas fa-bars bg-yellow"></i>
-                                                            <div class="timeline-item">
-                                                                <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-                                                                <h3 class="timeline-header"><a href="#">Select</a> Ward / Community</h3>
-                                                                <div class="timeline-body">
-                                                                    <div class="row">
-                                                                        <div class="input-group input-group-sm col-3">
-                                                                            <input type="text" list="ward" onchange="load_hf('dup_')" id="dup_ward_x" autocomplete="off" class="form-control">
-
-                                                                        </div>
-                                                                        <div class="col-5">
-                                                                            <div class="progress progress-xs" style="height: 30%;">
-                                                                                <div class="progress-bar progress-bar-warning" id="dup_dfe_hf" style="width: 0%"> 
-                                                                                    <a onclick="tableloader('dup_ward_x')" id="dup_hf_g" type="button" class="btn btn-warning btn-flat"></a>
-                                                                                </div>
-                                                                            </div>
-                                                                            <h3 class="" id="dup_789_hf"></h3>
-                                                                        </div>
-                                                                        <div class="col-2">
-                                                                            <a onclick="tableloader('dup_ward_x')" id="dup_hf_g" type="button" class="btn btn-success btn-flat">Show Details</a>
-                                                                        </div>
-                                                                        <div class="col-xs-2 col-md-1 text-center clickables">
-                                                                            <div style="display:inline;width:60px;height:60px;"><div style="display:inline;width:60px;height:60px;">
-                                                                                    `<input type="text" id="btt_ward" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="knob-label" id="fullxxx">Total Left = 223</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- END timeline item -->
-
-
-                                                        <!-- timeline item -->
-                                                        <div id="dup_hfx" style="display: none">
-                                                            <i id="dup_hfxx" class="fas fa-bars bg-yellow"></i>
-                                                            <div class="timeline-item">
-                                                                <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-                                                                <h3 class="timeline-header"><a href="#">Select</a> Health Facilities</h3>
-                                                                <div class="timeline-body">
-
-                                                                    <div class="input-group input-group-sm col-5">
-                                                                        <input type="text" list="hf" autocomplete="off" class="form-control">
-                                                                        <span class="input-group-append">
-                                                                            <button type="button" class="btn btn-info btn-flat">Next</button>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- END timeline item -->
-                                                        <!-- timeline time label -->
-                                                        <div class="time-label">
-                                                            <span class="">Please click "Show Details" button to expand details of the corresponding value</span>
-
-                                                        </div>
-                                                        <!-- /.timeline-label -->
-
-                                                        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-
-                                                        <!-- timeline item -->
-                                                        <div id="dup_esef3456n" style="display: none;">
-                                                            <i class="fa fa-bars bg-purple"></i>
-                                                            <div class="timeline-item">
-                                                                <span class="time"><i class="fas fa-clock"></i> 2 days ago</span>
-
-
-                                                                <div class="timeline-body">
-                                                                    <table id="dup_detailer" class="display" style="width:100%">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>SN</th>
-                                                                                <th>SOMRAS UUID</th>
-                                                                                <th>SORMAS NAME</th>
-                                                                                <th>DUPLICATE WITH</th>
-                                                                                <th>DUPLICATE UUID</th>
-                                                                                <th>SOURCE CURRENTLY MATCHED</th>
-                                                                                <th>SOURCE MATHCED UUID</th>
-                                                                                <th>MODIFIED</th>
-                                                                                <th>RESOLVE</th>
-                                                                            </tr>
-                                                                        </thead>
-
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- END timeline item -->
-                                                        <!-- timeline item -->
-
-                                                        <!-- END timeline item -->
-
-                                                    </div>
-                                                </div>
-                                                <!-- /.col -->
-                                            </div>
-                                        </div>
-                                        <!-- /.timeline -->
-
-                                    </section>
-                                    <!-- /.content -->
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                </div>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
-
-                    <datalist id="dup_state">
-
-                    </datalist>
-
-                    <datalist id="dup_lga">
-                    </datalist>
-
-                    <datalist id="dup_ward">
-                    </datalist>
-
-                    <datalist id="dup_hf">
-                    </datalist>
-
-
-
-                    <datalist >
-
-                    </datalist>
-
-                    <datalist id="lga">
-                    </datalist>
-
-                    <datalist id="ward">
-                    </datalist>
-
-                    <datalist id="hf">
-                    </datalist>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="deduplicate" role="dialog">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-
-                                <div class="modal-body">
-
-                                    <i>Please mouse over each action to understand them before performing this operation. Note that this operation cannot be undone.</i>
-                                    <br/><div class="btn-group btn-group-justified" style="width: 100%;">
-                                        <a href="#" id="acp_dup" class="btn btn-info">Accept Duplicate</a>
-                                        <a href="#" id="acp_cur"  class="btn btn-success">Accept Current Match</a>
-                                        <a href="#" id="acp_res"  class="btn btn-warning">Remove all Matched Elements</a>
-                                    </div>
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <script>
-                        function bcknxx() {
-                            $("#openxx1").hide();
-                            $("#cade").show();
-                            $("#openxx_").hide();
-
-                        }
-                        ;
-
-
-                        function openxx() {
-                            // $("#openxx1").show();
-
-                            var checked = $('#maintenance:checkbox:checked').length > 0;
-
-                            if (checked == true) {
-                                // $('#overlay').show();
-                                $("#openxx_").show();
-                                $("#openxx1").hide();
-
-                            } else {
-
-                                $("#openxx1").show();
-                                // $("#cade").hide();
-                                $("#openxx_").hide();
-
-                            }
-
-                        }
-                        ;
-                        function start_pushX_X() {
-                            document.getElementById("overlay").style.display = "block";
-                            $('#text').html("Pushing all available matched data to sormas...");
-                            var xhr = new XMLHttpRequest();
-                            xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?pushfreshavailable=true', true);
-                            xhr.responseType = 'text';
-                            xhr.onload = function () {
-
-                                if (xhr.readyState === xhr.DONE) {
-                                    if (xhr.status === 200) {
-
-                                        document.getElementById("overlay").style.display = "none";
-
-                                        alertx(xhr.responseText);
-
-                                    }
-                                }
-                            };
-                            xhr.send(null);
-
-                        }
-
-
-
-                        //buttons
-                        function lc() {
+                        function dd() {
                             document.getElementById("overlay").style.display = "block";
                             setTimeout(function () {
-                                if (confirm("DANGER! \nThis action will Purge all SORMAS Infrastructure Data already on the Adapter and reimport it afresh. \nDo you want to do that?")) {
-                                    location.href = '../controllers_jsp/localized.jsp';
+                                if (confirm("DANGER! \nThis action will Purge all MASTER Source Infrastructure Data already on the Adapter and reimport it afresh. \nDo you want to do that?")) {
+
+                                    starter();
+
                                 } else {
                                     document.getElementById("overlay").style.display = "none";
 
                                 }
 
+
                             }, 1000);
                         }
-                        ;
-                        function fhir_() {
 
-                            alert("This action require all duplicates to be resuloved.");
-
-
-                        }
-                        function start_pushX_() {
+                        function ana() {
                             document.getElementById("overlay").style.display = "block";
-                            $('#text').html("Pushing all available matched data to sormas...");
-                            var xhr = new XMLHttpRequest();
-                            xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?pushavailable=true', true);
-                            xhr.responseType = 'text';
-                            xhr.onload = function () {
+                            setTimeout(function () {
+                                if (confirm("WARNING! \nLong Processing Action, you are about to run the match processor... This will take time. \nDo you want to do that?")) {
+                                    location.replace("../controllers_jsp/analytics_staging.jsp");
+                                } else {
+                                    document.getElementById("overlay").style.display = "none";
 
-                                if (xhr.readyState === xhr.DONE) {
-                                    if (xhr.status === 200) {
-
-                                        document.getElementById("overlay").style.display = "none";
-
-                                        alertx(xhr.responseText);
-
-                                    }
                                 }
-                            };
-                            xhr.send(null);
 
+
+                            }, 1000);
                         }
-                        ;
 
-
-
-
-                    </script>
-
-                    <script>
-                        function dmd(e) {
-                            //e = dup_
-                            $('#controllerx').val(e); //=dup_
-                            //var v = document.getElementById(e).value;
+                        function resx() {
 
                             var xhr = new XMLHttpRequest();
-                            xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + e + 'primer=' + e, true);
+                            xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?count=10', true);
                             xhr.responseType = 'text';
                             xhr.onload = function () {
                                 if (xhr.readyState === xhr.DONE) {
                                     if (xhr.status === 200) {
-                                        //max = xhr.responseText;
+
+                                        //    console.log("Number of 100 percent machedprocessed currently = " + xhr.responseText);
+
                                         const words = xhr.responseText.split(',');
-                                        const wordsx = xhr.responseText.split(',@@@');
-                                        //alert(xhr.responseText);
-                                        $('#' + e + 'dfe').css("width", words[0]);
-                                        $('#' + e + 'state_g').html(words[0]);
-                                        $('#' + e + '789').html('<a href="#">Total ' + e.replace('dup_', 'Duplicate') + ' at States Level on SORMAS </a> = ' + words[1] + ' | <a href="#">Total Matched</a> = ' + words[2])
+                                        $('#fullxxxx').html("100% Not Matchable = " + words[0]);
+                                        $('#fullxxx').html("Duplicates = " + words[1]);
+                                        $('#fullx').html("Partial Duplicates = " + words[2]);
+                                        $('#full').html("Matched = " + words[3]);
+                                        intPerser(xhr.responseText);
 
-                                        $("#state_g_").addClass("locked_" + words[2]);
-                                        $('#state_x').html(wordsx);
-
-
-                                        //   console.log("Number of chunk been processed currently = " + max);
-                                    }
-                                }
-                            };
-                            xhr.send(null);
-                        }
-
-                        function dmds(e) {
-                            const gh = e.split(',');
-                            var xhr = new XMLHttpRequest();
-                            xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=3', true);
-                            xhr.responseType = 'text';
-                            xhr.onload = function () {
-                                if (xhr.readyState === xhr.DONE) {
-                                    if (xhr.status === 200) {
-                                        //max = xhr.responseText;
-                                        const words = xhr.responseText.split(',');
-                                        const wordsx = xhr.responseText.split(',@@@');
-                                        //   alert(words);
-
-                                        $('#' + gh[1] + 'dfe_lga').css("width", words[0]);
-                                        $('#' + gh[1] + 'lga_g').html(words[0]);
-                                        $('#' + gh[1] + '789_lga').html('<a href="#">Total LGAs for ' + gh[2] + ' on SORMAS </a> = ' + words[1] + ' | <a href="#"> Total LGAs from Source Server</a> = ' + words[2] + ' | <a href="#">Total ' + gh[1].replace('dup_', 'Duplicates ') + 'Matched</a> = ' + words[3])
-                                        $('#lga').html(wordsx);
-
-                                        $("#lga_g_").addClass("locked_" + words[2]);
-                                       $('#lga_x').html(wordsx);
-
-                                        //   console.log("Number of chunk been processed currently = " + max);
-                                    }
-                                }
-                            };
-                            xhr.send(null);
-                        }
-
-                        function dmdm(e) {
-                            const gh = e.split(',');
-                            var xhr = new XMLHttpRequest();
-                            xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=4', true);
-                            //     console.log('../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=4');
-                            xhr.responseType = 'text';
-                            xhr.onload = function () {
-                                if (xhr.readyState === xhr.DONE) {
-                                    if (xhr.status === 200) {
-                                        //max = xhr.responseText;
-                                        const words = xhr.responseText.split(',');
-                                        const wordsx = xhr.responseText.split(',@@@');
-                                        $('#' + gh[1] + 'dfe_ward').css("width", words[0]);
-                                        $('#' + gh[1] + 'ward_g').html(words[0]);
-                                        $('#' + gh[1] + '789_ward').html('<a href="#">Total Wards for ' + gh[2] + ' on SORMAS </a> = ' + words[1] + ' | <a href="#"> Total Wards from Source Server</a> = ' + words[2] + ' | <a href="#">Total ' + gh[1].replace('dup_', 'Duplicates ') + 'Matched</a> = ' + words[3])
-                                        $('#ward').html(wordsx);
-
-                                        $("#ward_g_").addClass("locked_" + words[2]);
-                                        $('#ward_x').html(wordsx);
-
-                                        //   console.log("Number of chunk been processed currently = " + max);
-                                    }
-                                }
-                            };
-                            xhr.send(null);
-                        }
-                        
-                        
-                        
-                    function dmdmx(e) {
-                            const gh = e.split(',');
-                            var xhr = new XMLHttpRequest();
-                            xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=5', true);
-                            //     console.log('../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=4');
-                            xhr.responseType = 'text';
-                            xhr.onload = function () {
-                                if (xhr.readyState === xhr.DONE) {
-                                    if (xhr.status === 200) {
-                                        //max = xhr.responseText;
-                                        const words = xhr.responseText.split(',');
-                                        const wordsx = xhr.responseText.split(',@@@');
-                                        $('#' + gh[1] + 'dfe_hfd').css("width", words[0]);
-                                        $('#' + gh[1] + 'hf_g').html(words[0]);
-                                        $('#' + gh[1] + '789_hf').html('<a href="#">Total Health Facility for ' + gh[2] + ' on SORMAS </a> = ' + words[1] + ' | <a href="#"> Total HFs from Source Server</a> = ' + words[2] + ' | <a href="#">Total ' + gh[1].replace('dup_', 'Duplicates ') + 'Matched</a> = ' + words[3])
-                                        $('#hf').html(wordsx);
-
-                                        $("#hf_g_").addClass("locked_" + words[2]);
-                                       // $('#ward_x').html(wordsx);
-
-                                        //   console.log("Number of chunk been processed currently = " + max);
-                                    }
-                                }
-                            };
-                            xhr.send(null);
-                        }
-
-
-                        function load_lga(e) {
-                            var ex = $('#' + e + 'state_x option:selected').val();
-                            var ex_ = $('#' + e + 'state_x option:selected').text();
-                            console.log(ex);
-
-                            dmds(ex + ',' + e+','+ex_);
-                            $('#' + e + 'lgax').show();
-                            $('#' + e + 'statexx').removeClass("fas fa-bars bg-yellow").addClass("fas fa-check bg-green")
-                        }
-                        function load_ward(e) {
-                            var ex = $('#' + e + 'lga_x option:selected').val();
-                            var ex_ = $('#' + e + 'lga_x option:selected').text();
-                            console.log(e);
-
-                            dmdm(ex + ',' + e+','+ex_);
-                            $('#' + e + 'wardx').show();
-                            $('#' + e + 'lgaxx').removeClass("fas fa-bars bg-yellow").addClass("fas fa-check bg-green")
-                        }
-                        
-                        
-                        function load_hf(e) {
-                            var ex = $('#' + e + 'ward_x option:selected').val();
-                            var ex_ = $('#' + e + 'ward_x option:selected').text();
-                            console.log(e);
-
-                            dmdmx(ex + ',' + e+','+ex_);
-                            $('#' + e + 'hfx').show();
-                            $('#' + e + 'wardxx').removeClass("fas fa-bars bg-yellow").addClass("fas fa-check bg-green")
-                        }
-                        
-                        
-                        
-                        
-                        function statex(e) {
-                            var x = $('#controllerx').val();
-                            //  alert(e);
-                            // alert(x);
-                            var v = document.getElementById(e).value;
-                            //  alert(v);
-                            var xhr = new XMLHttpRequest();
-                            xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?parentx=' + v + '&methodx' + x, true);
-                            xhr.responseType = 'text';
-                            xhr.onload = function () {
-                                if (xhr.readyState === xhr.DONE) {
-                                    if (xhr.status === 200) {
-
-                                        //   console.log("Number of chunk been processed currently = " + max);
+                                    } else {
+                                        alert("There is a problem retreiving analytics from server, please rerun Analytics 'Analyse' button");
+                                        return;
                                     }
                                 }
                             };
@@ -1752,148 +733,1195 @@
 
                         }
 
-                        function tableloader(e) {
-                            ctbb = e;
-                            
-                            var ex = $('#' + e + 'hf_x option:selected').val();
-                            var ex_ = $('#' + e + 'hf_x option:selected').text();
+                        function intPerser(e) {
+                            const words = e.split(',');
+                            var a = parseInt(words[0]);
+                            var b = parseInt(words[1]);
+                            var c = parseInt(words[2]);
+                            var d = parseInt(words[3]);
+
+                            var tt = a + b + c + d;
+
+                            $('#att').val(Math.floor((a / tt) * 100) + '%');
+                            $('#btt').val(Math.floor((b / tt) * 100) + '%');
+                            $('#ctt').val(Math.floor((c / tt) * 100) + '%');
+                            $('#dtt').val(Math.floor((d / tt) * 100) + '%');
+                            //   alert(Math.floor((c / tt) * 100));
+                            $('#body_wx').show();
+                            triggerKnob();
+
+                        }
 
 
-                            $('#esef3456n').show();
-                            $('#dup_esef3456n').show();
-
-                            var pd = document.getElementById(e).value;
 
 
-                            if (e.includes('dup_')) {
-                                //       console.log("../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?jsonparentx=" + pd + "&jsonlevelx=" + e);
-                                var table = $('#dup_detailer').DataTable({
-                                    "destroy": true,
-                                    "paging": true,
-                                    "processing": true,
+                        function ds() {
+                            // window.location("./controllers/localizer.jsp");
+                        }
 
-                                    "ajax": {
-                                        "url": "../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?jsonparentx=" + pd + "&jsonlevelx=" + e,
-                                        "dataType": "json"
+                        function servlet_primer_fhir(stat) {
+
+                            if (stat > 0) {
+                                var xhr = new XMLHttpRequest();
+                                xhr.open('GET', '../controller?getAllListfromDBtoFHIR=' + stat, true);
+                                xhr.responseType = 'text';
+                                xhr.onload = function () {
+                                    if (xhr.readyState === xhr.DONE) {
+                                        if (xhr.status === 200) {
+                                            cleaner();
+                                        }
                                     }
-                                });
-                            } else {
-                                var table = $('#detailer').DataTable({
-                                    "destroy": true,
-                                    "paging": true,
-                                    "processing": true,
-
-                                    "ajax": {
-                                        "url": "../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?jsonparentx=" + pd + "&jsonlevelx=" + e,
-                                        "dataType": "json"
-                                    }
-                                });
+                                };
+                                xhr.send(null);
+                                success: servlet_primer(stat - 1);
                             }
-                            ;
-                            table.rows().every(function (rowIdx, tableLoop, rowLoop) {
-                                var cell = table.cell({row: rowIdx, column: 0}).node();
-                                $(cell).addClass('warningwwwwww');
+
+                        }
+                        ;
+                        function cleaner() {
+                            $('#progress_').hide();
+                            $('#progress_x').hide();
+                            $('#progress_Fhir').hide();
+                        }
+                        ;
+                        function alertxx() {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000
                             });
+                            Toast.fire({
+                                type: 'success',
+                                title: 'Server now ready!.'
+                            });
+                        }
+                        ;
 
+                        function alertx(e) {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                            Toast.fire({
+                                type: 'success',
+                                title: e
+                            });
+                        }
+                        ;
+                        function alerterr(e) {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                            Toast.fire({
+                                type: 'error',
+                                title: e
+                            });
                         }
                         ;
 
 
 
 
-                        $(function () {
-                            $(".knob").knob();
-                        });
-
-                        function triggerKnob() {
-                            $("input.knob").trigger('change');
-                        }
-                        ;
-
-                        $('#deduplicate').on('show.bs.modal', function (e) {
-                            //dmd('dup_')
-
-                            var uri_ = $(e.relatedTarget).data('uri');
-
-                            const uri = uri_.split('@@');
-                            $('#acp_dup').prop("href", "../4a24cf8b-fbcb-4554-b676-2b54a239be62?accept=" + uri[1] + "&wht=" + uri[0]);
-                            $('#acp_cur').prop("href", "../4a24cf8b-fbcb-4554-b676-2b54a239be62?current=" + uri[2] + "&wht=" + uri[0]);
-                            $('#acp_res').prop("href", "../4a24cf8b-fbcb-4554-b676-2b54a239be62?reset=true&wht=" + uri[0]);
-                        });
-
-
-                        $('#acp_dup').click(function (event) {
-                            event.preventDefault();
-                            var href = $(this).attr('href');
-
-                            var xhr = new XMLHttpRequest();
-                            xhr.open('GET', href, true);
-                            xhr.responseType = 'text';
-                            xhr.onload = function () {
-                                if (xhr.readyState === xhr.DONE) {
-                                    if (xhr.status === 200) {
-                                        alertx(xhr.responseText)
-                                    } else {
-                                        alerterr(xhr.responseText)
-                                    }
-                                    $('#deduplicate').modal().hide();
-                                    ;
-
-                                    tableloader(ctbb);
-
-                                }
-                            };
-                            xhr.send(null);
-                        });
-
-                        $('#acp_cur').click(function (event) {
-                            event.preventDefault();
-                            var href = $(this).attr('href');
-
-                            var xhr = new XMLHttpRequest();
-                            xhr.open('GET', href, true);
-                            xhr.responseType = 'text';
-                            xhr.onload = function () {
-                                if (xhr.readyState === xhr.DONE) {
-                                    if (xhr.status === 200) {
-                                        alertx(xhr.responseText)
-                                    } else {
-                                        alerterr(xhr.responseText)
-                                    }
-                                    $('#deduplicate').modal().hide();
-                                    ;
-
-                                    tableloader(ctbb);
-
-                                }
-                            };
-                            xhr.send(null);
-                        });
-
-                        $('#acp_res').click(function (event) {
-                            event.preventDefault();
-                            var href = $(this).attr('href');
-
-                            var xhr = new XMLHttpRequest();
-                            xhr.open('GET', href, true);
-                            xhr.responseType = 'text';
-                            xhr.onload = function () {
-                                if (xhr.readyState === xhr.DONE) {
-                                    if (xhr.status === 200) {
-                                        alertx(xhr.responseText)
-                                    } else {
-                                        alerterr(xhr.responseText)
-                                    }
-                                    $('#deduplicate').modal().hide();
-                                    ;
-
-                                    tableloader(ctbb);
-
-                                }
-                            };
-                            xhr.send(null);
-                        });
 
                     </script>
-                    </body>
-                    </html>
+
+                <%                if (request.getParameter("sayfini") != null) {
+                        String sta = request.getParameter("sayfini");
+
+                        switch (sta) {
+                            case "true":
+                %>
+
+                <script>
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: true,
+                        timer: 6000
+                    });
+                    Toast.fire({
+                        type: 'success',
+                        title: 'Server completed.'
+                    });
+                </script>
+
+
+
+                <%
+                        break;
+                    case "false":
+                %>
+
+                <script>
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: true,
+                        timer: 6000
+                    });
+                    Toast.fire({
+                        type: 'error',
+                        title: 'Server could not complete Operation!'
+                    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </script>
+
+
+
+                <%
+                                break;
+                            default:
+                            // code block
+                        }
+
+                    }
+
+
+                %>
+                <style>
+                    #overlay {
+                        position: fixed;
+                        display: none;
+                        width: 100%;
+                        height: 100%;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background-color: rgba(0,0,0,0.5);
+                        z-index: 2;
+                        cursor: pointer;
+                    }
+
+
+                </style>
+                <script>
+                    document.getElementById("overlay").style.display = "none";
+
+                </script>
+
+                <!--MODALS BASIN-->  
+                <div class="" id="modal-xl_" style="display: none;">
+                    <div class="" style="padding-left: 20px;padding-right: 10px;margin-top: 20px;margin-bottom: 20px;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="container-fluid">
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6">
+                                            <h1>Infrastructure Reconciliation Analytics for Matched Data</h1>
+                                        </div>
+
+                                    </div>
+                                </div><!-- /.container-fluid -->
+                                <button type="button" onclick="window.location.reload();" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="">
+
+
+                                <!-- Main content -->
+                                <section class="content">
+                                    <div class="container-fluid">
+
+                                        <!-- Timelime example  -->
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <!-- The time line -->
+                                                <div class="timeline">
+                                                    <!-- timeline time label -->
+                                                    <div class="time-label">
+                                                        <span class="bg-blue">Organisation Unit Selection</span>
+                                                    </div>
+                                                    <!-- /.timeline-label -->
+
+                                                    <!-- timeline item -->
+                                                    <div>
+                                                        <i class="fas fa-user bg-green"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
+                                                            <h3 class="timeline-header no-border"><a href="#"></a> Parent organisation unit</h3>
+                                                            <div class="timeline-body">
+                                                                <div class="row">
+                                                                    <div class="input-group input-group col-3">
+                                                                        <input type="text" onchange="" id="nigeria_x" list="" autocomplete="off" value="${sessionScope.country}" disable="true" readonly class="form-control">
+
+                                                                    </div>
+                                                                    <div class="col-5">
+                                                                        <div class="progress progress-xs" style="height: 30%;">
+                                                                            <div class="progress-bar progress-bar-warning" id="dfe" style="width: 0%"> 
+                                                                                <a onclick="statex('state_x')" id="state_g" type="button" class="btn btn-warning btn-flat"></a>
+                                                                            </div></div>
+                                                                        <h3 class="" id="789"></h3>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <a onclick="tableloader('nigeria_x')" id="state_g_" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END timeline item -->
+                                                    <!-- timeline item -->
+                                                    <div>
+                                                        <i id="statexx" class="fas fa-bars bg-yellow"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
+                                                            <h3 class="timeline-header"><a href="#">Select</a> State / Region</h3>
+                                                            <div class="timeline-body">
+                                                                <div class="row">
+                                                                    <div class="input-group input-group col-3">
+                                                                        <!--<input type="text" onchange="load_lga('')" id="state_x" list="state" autocomplete="off" class="form-control">-->
+                                                                        <select class="form-control js-select2" id="state_x" onchange="load_lga('')">
+                                                                            <option selected>select one</option>
+                                                                        </select>
+
+
+                                                                    </div>
+                                                                    <div class="col-5">
+                                                                        <div class="progress progress-xs" style="height: 30%;">
+                                                                            <div class="progress-bar progress-bar-warning" id="dfe_lga" style="width: 0%"> 
+                                                                                <a onclick="tableloader('state_x')" id="lga_g" type="button" class="btn btn-warning btn-flat"></a>
+                                                                            </div></div>
+                                                                        <h3 class="" id="789_lga"></h3>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <a onclick="tableloader('state_x')" id="lga_g_" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END timeline item -->
+
+                                                    <!-- timeline item -->
+                                                    <div id="lgax" style="display: none">
+                                                        <i id="lgaxx" class="fas fa-bars bg-yellow"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
+                                                            <h3 class="timeline-header"><a href="#">Select</a> Local Government Area / District</h3>
+                                                            <div class="timeline-body">
+                                                                <div class="row">
+                                                                    <div class="input-group input-group-sm col-3">
+
+                                                                        <select class="form-control js-select2" id="lga_x" onchange="load_ward('')">
+                                                                            <option selected>select one</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                    <div class="col-5">
+                                                                        <div class="progress progress-xs" style="height: 30%;">
+                                                                            <div class="progress-bar progress-bar-warning" id="dfe_ward" style="width: 0%"> 
+                                                                                <a onclick="tableloader('lga_x')" id="ward_g" type="button" class="btn btn-warning btn-flat"></a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <h3 class="" id="789_ward"></h3>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <a onclick="tableloader('lga_x')" id="ward_g_" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END timeline item -->
+
+
+
+
+
+
+
+                                                    <!-- timeline item -->
+                                                    <div id="wardx" style="display: none">
+                                                        <i id="wardxx" class="fas fa-bars bg-yellow"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
+                                                            <h3 class="timeline-header"><a href="#">Select</a> Ward / Community</h3>
+                                                            <div class="timeline-body">
+                                                                <div class="row">
+                                                                    <div class="input-group input-group-sm col-3">
+
+                                                                        <select class="form-control js-select2" onchange="load_hf('')" id="ward_x"">
+                                                                            <option selected>select one</option>
+                                                                        </select>
+
+
+                                                                    </div>
+                                                                    <div class="col-5">
+                                                                        <div class="progress progress-xs" style="height: 30%;">
+                                                                            <div class="progress-bar progress-bar-warning" id="dfe_hf" style="width: 0%"> 
+                                                                                <a onclick="tableloader('ward_x')" id="hf_g" type="button" class="btn btn-warning btn-flat"></a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <h3 class="" id="789_hf"></h3>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <a onclick="tableloader('ward_x')" id="hf_g_" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END timeline item -->
+
+
+                                                    <!-- timeline item -->
+                                                    <div id="hfx" style="display: none">
+                                                        <i id="hfxx" class="fas fa-bars bg-yellow"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
+                                                            <h3 class="timeline-header"><a href="#">Select</a> Health Facilities</h3>
+                                                            <div class="timeline-body">
+
+                                                                <div class="input-group input-group-sm col-5">
+
+                                                                    <select class="form-control js-select2" onchange="tableloader('hf_x')" id="hf_x"">
+                                                                        <option selected>select one</option>
+                                                                    </select>
+
+                                                                    <span class="input-group-append">
+                                                                        <button type="button" class="btn btn-info btn-flat">Next</button>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END timeline item -->
+                                                    <!-- timeline time label -->
+                                                    <div class="time-label">
+                                                        <span class="">Please click "Show Details" button to expand details of the corresponding value</span>
+
+                                                    </div>
+                                                    <!-- /.timeline-label -->
+
+                                                    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+
+                                                    <!-- timeline item -->
+                                                    <div id="esef3456n" style="display: none;">
+                                                        <i class="fa fa-bars bg-purple"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time"><i class="fas fa-clock"></i> 2 days ago</span>
+
+
+                                                            <div class="timeline-body">
+                                                                <table id="detailer" class="display" style="width:100%">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>SN</th>
+                                                                            <th>SOMRAS UUID</th>
+                                                                            <th>SOURCE UUID</th>
+                                                                            <th>SORMAS NAME</th>
+                                                                            <th>SOURCE NAME</th>
+                                                                            <th>LAST MATCHED</th>
+                                                                        </tr>
+                                                                    </thead>
+
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END timeline item -->
+                                                    <!-- timeline item -->
+
+                                                    <!-- END timeline item -->
+
+                                                </div>
+                                            </div>
+                                            <!-- /.col -->
+                                        </div>
+                                    </div>
+                                    <!-- /.timeline -->
+
+                                </section>
+                                <!-- /.content -->
+                            </div>
+
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!--MODALS BASIN-->  
+               
+                    
+                <div id="dup_now_closed" style="display: none">
+                    
+                    <div class="" style="padding-left: 20px;padding-right: 10px;margin-top: 20px;margin-bottom: 20px;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="container-fluid">
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6">
+                                            <h1>Infrastructure Reconciliation Analytics for DUPLICATE Data</h1>
+                                        </div>
+
+                                    </div>
+                                </div><!-- /.container-fluid -->
+                                <button type="button" onclick="window.location.reload();" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="">
+
+
+                                <!-- Main content -->
+                                <section class="content">
+                                    <div class="container-fluid">
+
+                                        <!-- Timelime example  -->
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <!-- The time line -->
+                                                <div class="timeline">
+                                                    <!-- timeline time label -->
+                                                    <div class="time-label">
+                                                        <span class="bg-blue">Organisation Unit Selection</span>
+                                                    </div>
+                                                    <!-- /.timeline-label -->
+
+                                                    <!-- timeline item -->
+                                                    <div>
+                                                        <i class="fas fa-user bg-green"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
+                                                            <h3 class="timeline-header no-border"><a href="#"></a> Parent organisation unit</h3>
+                                                            <div class="timeline-body">
+                                                                <div class="row">
+                                                                    <div class="input-group input-group col-3">
+                                                                        <input type="text" onchange="" id="dup_nigeria_x" list="" autocomplete="off" value="${sessionScope.country}" disable="true" readonly class="form-control">
+
+
+                                                                    </div>
+                                                                    <div class="col-5">
+                                                                        <div class="progress progress-xs" style="height: 30%;">
+                                                                            <div class="progress-bar progress-bar-warning" id="dup_dfe" style="width: 0%"> 
+                                                                                <a onclick="statex('dup_state_x')" id="dup_state_g" type="button" class="btn btn-warning btn-flat"></a>
+                                                                            </div></div>
+
+
+
+                                                                        <h3 class="" id="dup_789"></h3>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <a onclick="tableloader('dup_nigeria_x')" id="dup_state_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END timeline item -->
+                                                    <!-- timeline item -->
+                                                    <div>
+                                                        <i id="dup_statexx" class="fas fa-bars bg-yellow"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
+                                                            <h3 class="timeline-header"><a href="#">Select</a> State / Region</h3>
+                                                            <div class="timeline-body">
+                                                                <div class="row">
+                                                                    <div class="input-group input-group col-3">
+
+                                                                        <select class="form-control js-select2" id="dup_state_x" onchange="load_lga('dup_')">
+                                                                            <option selected>select one</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                    <div class="col-5">
+                                                                        <div class="progress progress-xs" style="height: 30%;">
+                                                                            <div class="progress-bar progress-bar-warning" id="dup_dfe_lga" style="width: 0%"> 
+                                                                                <a onclick="tableloader('dup_state_x')" id="dup_lga_g" type="button" class="btn btn-warning btn-flat"></a>
+                                                                            </div></div>
+                                                                        <h3 class="" id="dup_789_lga"></h3>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <a onclick="tableloader('dup_state_x')" id="dup_lga_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                    </div>
+                                                                    <div class="col-xs-2 col-md-1 text-center clickables" style="display: none">
+                                                                        <div style="display:inline;width:60px;height:60px;"><div style="display:inline;width:60px;height:60px;">
+                                                                                `<input type="text" id="btt_state" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="knob-label" id="fullxxx" >Total Left = 23</div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END timeline item -->
+
+                                                    <!-- timeline item -->
+                                                    <div id="dup_lgax" style="display: none">
+                                                        <i id="dup_lgaxx" class="fas fa-bars bg-yellow"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
+                                                            <h3 class="timeline-header"><a href="#">Select</a> Local Government Area / District</h3>
+                                                            <div class="timeline-body">
+                                                                <div class="row">
+                                                                    <div class="input-group input-group-sm col-3">
+                                                                        <select class="form-control js-select2" id="dup_lga_x" onchange="load_ward('dup_')">
+                                                                            <option selected>select one</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                    <div class="col-5">
+                                                                        <div class="progress progress-xs" style="height: 30%;">
+                                                                            <div class="progress-bar progress-bar-warning" id="dup_dfe_ward" style="width: 0%"> 
+                                                                                <a onclick="tableloader('dup_lga_x')" id="dup_ward_g" type="button" class="btn btn-warning btn-flat"></a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <h3 class="" id="dup_789_ward"></h3>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <a onclick="tableloader('dup_lga_x')" id="dup_ward_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                    </div>
+
+                                                                    <div class="col-xs-2 col-md-1 text-center clickables"  style="display: none">
+                                                                        <div style="display:inline;width:60px;height:60px;"><div style="display:inline;width:60px;height:60px;">
+                                                                                `<input type="text" id="btt_lga" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="knob-label" id="fullxxx">Total Left = 423</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END timeline item -->
+
+
+
+
+
+
+
+                                                    <!-- timeline item -->
+                                                    <div id="dup_wardx" style="display: none">
+                                                        <i id="dup_wardxx" class="fas fa-bars bg-yellow"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
+                                                            <h3 class="timeline-header"><a href="#">Select</a> Ward / Community</h3>
+                                                            <div class="timeline-body">
+                                                                <div class="row">
+                                                                    <div class="input-group input-group-sm col-3">
+                                                                        <select class="form-control js-select2" id="dup_ward_x" onchange="load_hf('dup_')">
+                                                                            <option selected>select one</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                    <div class="col-5">
+                                                                        <div class="progress progress-xs" style="height: 30%;">
+                                                                            <div class="progress-bar progress-bar-warning" id="dup_dfe_hf" style="width: 0%"> 
+                                                                                <a onclick="tableloader('dup_ward_x')" id="dup_hf_g" type="button" class="btn btn-warning btn-flat"></a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <h3 class="" id="dup_789_hf"></h3>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <a onclick="tableloader('dup_ward_x')" id="dup_hf_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                    </div>
+                                                                    <div class="col-xs-2 col-md-1 text-center clickables"  style="display: none">
+                                                                        <div style="display:inline;width:60px;height:60px;"><div style="display:inline;width:60px;height:60px;">
+                                                                                `<input type="text" id="btt_ward" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="knob-label" id="fullxxx">Total Left = 223</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END timeline item -->
+
+
+                                                    <!-- timeline item -->
+                                                    <div id="dup_hfx" style="display: none">
+                                                        <i id="dup_hfxx" class="fas fa-bars bg-yellow"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
+                                                            <h3 class="timeline-header"><a href="#">Select</a> Health Facilities</h3>
+                                                            <div class="timeline-body">
+
+                                                                <div class="input-group input-group-sm col-5">
+                                                                    <input type="text" list="hf" autocomplete="off" class="form-control">
+                                                                    <span class="input-group-append">
+                                                                        <button type="button" class="btn btn-info btn-flat">Next</button>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END timeline item -->
+                                                    <!-- timeline time label -->
+                                                    <div class="time-label">
+                                                        <span class="">Please click "Show Details" button to expand details of the corresponding value</span>
+
+                                                    </div>
+                                                    <!-- /.timeline-label -->
+
+                                                    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+
+                                                    <!-- timeline item -->
+                                                    <div id="dup_esef3456n" style="display: none;">
+                                                        <i class="fa fa-bars bg-purple"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time"><i class="fas fa-clock"></i> 2 days ago</span>
+
+
+                                                            <div class="timeline-body">
+                                                                <table id="dup_detailer" class="display" style="width:100%">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>SN</th>
+                                                                            <th>SOMRAS UUID</th>
+                                                                            <th>SORMAS NAME</th>
+                                                                            <th>DUPLICATE WITH</th>
+                                                                            <th>DUPLICATE UUID</th>
+                                                                            <th>SOURCE CURRENTLY MATCHED</th>
+                                                                            <th>SOURCE MATHCED UUID</th>
+                                                                            <th>MODIFIED</th>
+                                                                            <th>RESOLVE</th>
+                                                                        </tr>
+                                                                    </thead>
+
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END timeline item -->
+                                                    <!-- timeline item -->
+
+                                                    <!-- END timeline item -->
+
+                                                </div>
+                                            </div>
+                                            <!-- /.col -->
+                                        </div>
+                                    </div>
+                                    <!-- /.timeline -->
+
+                                </section>
+                                <!-- /.content -->
+                            </div>
+
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="deduplicate" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                            <div class="modal-body">
+
+                                <i>Please mouse over each action to understand them before performing this operation. Note that this operation cannot be undone.</i>
+                                <br/><div class="btn-group btn-group-justified" style="width: 100%;">
+                                    <a href="#" id="acp_dup" class="btn btn-info">Accept Duplicate</a>
+                                    <a href="#" id="acp_cur"  class="btn btn-success">Accept Current Match</a>
+                                    <a href="#" id="acp_res"  class="btn btn-warning">Remove all Matched Elements</a>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">rastructure Reconciliation An
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <script>
+                    function bcknxx() {
+                        $("#openxx1").hide();
+                        $("#cade").show();
+                        $("#openxx_").hide();
+                        $("#modal-xl_").hide();
+                        $("#dup_modal-xl").hide();
+
+                    }
+                    ;
+
+
+                    function openxx() {
+                        var checked = $('#maintenance:checkbox:checked').length > 0;
+
+                        if (checked == true) {
+                            // $('#overlay').show();
+                            $("#openxx_").show();
+                            $("#openxx1").hide();
+
+                        } else {
+
+                            $("#openxx1").show();
+                            // $("#cade").hide();
+                            $("#openxx_").hide();
+
+                        }
+
+                    }
+                    ;
+                    function start_pushX_X() {
+                        document.getElementById("overlay").style.display = "block";
+                        $('#text').html("Pushing all available matched data to sormas...");
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?pushfreshavailable=true', true);
+                        xhr.responseType = 'text';
+                        xhr.onload = function () {
+
+                            if (xhr.readyState === xhr.DONE) {
+                                if (xhr.status === 200) {
+
+                                    document.getElementById("overlay").style.display = "none";
+
+                                    alertx(xhr.responseText);
+
+                                }
+                            }
+                        };
+                        xhr.send(null);
+
+                    }
+
+
+
+                    //buttons
+                    function lc() {
+                        document.getElementById("overlay").style.display = "block";
+                        setTimeout(function () {
+                            if (confirm("DANGER! \nThis action will Purge all SORMAS Infrastructure Data already on the Adapter and reimport it afresh. \nDo you want to do that?")) {
+                                location.href = '../controllers_jsp/localized.jsp';
+                            } else {
+                                document.getElementById("overlay").style.display = "none";
+
+                            }
+
+                        }, 1000);
+                    }
+                    ;
+                    function fhir_() {
+
+                        alert("This action require all duplicates to be resuloved.");
+
+
+                    }
+                    function start_pushX_() {
+                        document.getElementById("overlay").style.display = "block";
+                        $('#text').html("Pushing all available matched data to sormas...");
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?pushavailable=true', true);
+                        xhr.responseType = 'text';
+                        xhr.onload = function () {
+
+                            if (xhr.readyState === xhr.DONE) {
+                                if (xhr.status === 200) {
+
+                                    document.getElementById("overlay").style.display = "none";
+
+                                    alertx(xhr.responseText);
+
+                                }
+                            }
+                        };
+                        xhr.send(null);
+
+                    }
+                    ;
+
+
+
+
+                </script>
+
+                <script>
+                    function dmd(e) {
+                        //e = dup_
+                        $('#controllerx').val(e); //=dup_
+                        //var v = document.getElementById(e).value;
+
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + e + 'primer=' + e, true);
+                        xhr.responseType = 'text';
+                        xhr.onload = function () {
+                            if (xhr.readyState === xhr.DONE) {
+                                if (xhr.status === 200) {
+                                    //max = xhr.responseText;
+                                    const words = xhr.responseText.split(',');
+                                    const wordsx = xhr.responseText.split(',@@@');
+                                    //alert(xhr.responseText);
+                                    $('#' + e + 'dfe').css("width", words[0]);
+                                    $('#' + e + 'state_g').html(words[0]);
+                                    $('#' + e + '789').html('<a href="#">Total ' + e.replace('dup_', 'Duplicate') + ' at States Level on SORMAS </a> = ' + words[1] + ' | <a href="#">Total Matched</a> = ' + words[2])
+
+                                    $("#state_g_").addClass("locked_" + words[2]);
+                                    $('#' + e + 'state_x').html(wordsx);
+
+                                    $("#cade").hide();
+                                    $("#addit").hide();
+                                    if (e === "dup_") {
+
+                                       $("#dup_now_closed").show();
+                                        $("#modal-xl_").hide();
+
+                                    } else {
+
+                                        $("#modal-xl_").show();
+                                       $("#dup_now_closed").hide();
+
+                                    }
+
+
+                                    //   console.log("Number of chunk been processed currently = " + max);
+                                }
+                            }
+                        };
+                        xhr.send(null);
+                    }
+
+                    function dmds(e) {
+                        const gh = e.split(',');
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=3', true);
+                        xhr.responseType = 'text';
+                        xhr.onload = function () {
+                            if (xhr.readyState === xhr.DONE) {
+                                if (xhr.status === 200) {
+                                    //max = xhr.responseText;
+                                    const words = xhr.responseText.split(',');
+                                    const wordsx = xhr.responseText.split(',@@@');
+                                    //   alert(words);
+
+                                    $('#' + gh[1] + 'dfe_lga').css("width", words[0]);
+                                    $('#' + gh[1] + 'lga_g').html(words[0]);
+                                    $('#' + gh[1] + '789_lga').html('<a href="#">Total LGAs for ' + gh[2] + ' on SORMAS </a> = ' + words[1] + ' | <a href="#"> Total LGAs from Source Server</a> = ' + words[2] + ' | <a href="#">Total ' + gh[1].replace('dup_', 'Duplicates ') + 'Matched</a> = ' + words[3])
+                                    $('#lga').html(wordsx);
+
+                                    $('#' + gh[1] + 'lga_g_').addClass("locked_" + words[2]);
+                                    $('#' + gh[1] + 'lga_x').html(wordsx);
+
+                                      // console.log(wordsx+"Number of chunk been processed currently = "  + gh[1]);
+                                }
+                            }
+                        };
+                        xhr.send(null);
+                    }
+
+                    function dmdm(e) {
+                        const gh = e.split(',');
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=4', true);
+                        //     console.log('../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=4');
+                        xhr.responseType = 'text';
+                        xhr.onload = function () {
+                            if (xhr.readyState === xhr.DONE) {
+                                if (xhr.status === 200) {
+                                    //max = xhr.responseText;
+                                    const words = xhr.responseText.split(',');
+                                    const wordsx = xhr.responseText.split(',@@@');
+                                    $('#' + gh[1] + 'dfe_ward').css("width", words[0]);
+                                    $('#' + gh[1] + 'ward_g').html(words[0]);
+                                    $('#' + gh[1] + '789_ward').html('<a href="#">Total Wards for ' + gh[2] + ' on SORMAS </a> = ' + words[1] + ' | <a href="#"> Total Wards from Source Server</a> = ' + words[2] + ' | <a href="#">Total ' + gh[1].replace('dup_', 'Duplicates ') + 'Matched</a> = ' + words[3])
+                                    $('#ward').html(wordsx);
+
+                                    $('#' + gh[1] + 'ward_g_').addClass("locked_" + words[2]);
+                                    $('#' + gh[1] + 'ward_x').html(wordsx);
+
+                                    //   console.log("Number of chunk been processed currently = " + max);
+                                }
+                            }
+                        };
+                        xhr.send(null);
+                    }
+
+
+
+                    function dmdmx(e) {
+                        const gh = e.split(',');
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=5', true);
+                             console.log('../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=5');
+                        xhr.responseType = 'text';
+                        xhr.onload = function () {
+                            if (xhr.readyState === xhr.DONE) {
+                                if (xhr.status === 200) {
+                                    //max = xhr.responseText;
+                                    const words = xhr.responseText.split(',');
+                                    const wordsx = xhr.responseText.split(',@@@');
+                                    $('#' + gh[1] + 'dfe_hfd').css("width", words[0]);
+                                    $('#' + gh[1] + 'hf_g').html(words[0]);
+                                    $('#' + gh[1] + '789_hf').html('<a href="#">Total Health Facility for ' + gh[2] + ' on SORMAS </a> = ' + words[1] + ' | <a href="#"> Total HFs from Source Server</a> = ' + words[2] + ' | <a href="#">Total ' + gh[1].replace('dup_', 'Duplicates ') + 'Matched</a> = ' + words[3])
+                                    $('#hf').html(wordsx);
+
+                                    $('#' + gh[1] + 'hf_g_').addClass("locked_" + words[2]);
+                                     $('#' + gh[1] + 'ward_x').html(wordsx);
+
+                                    //   console.log("Number of chunk been processed currently = " + max);
+                                }
+                            }
+                        };
+                        xhr.send(null);
+                    }
+
+
+                    function load_lga(e) {
+                        var ex = $('#' + e + 'state_x option:selected').val();
+                        var ex_ = $('#' + e + 'state_x option:selected').text();
+                        console.log(ex);
+
+                        dmds(ex + ',' + e + ',' + ex_);
+                        $('#' + e + 'lgax').show();
+                        $('#' + e + 'statexx').removeClass("fas fa-bars bg-yellow").addClass("fas fa-check bg-green")
+                    }
+                    function load_ward(e) {
+                        var ex = $('#' + e + 'lga_x option:selected').val();
+                        var ex_ = $('#' + e + 'lga_x option:selected').text();
+                        console.log(e);
+
+                        dmdm(ex + ',' + e + ',' + ex_);
+                        $('#' + e + 'wardx').show();
+                        $('#' + e + 'lgaxx').removeClass("fas fa-bars bg-yellow").addClass("fas fa-check bg-green")
+                    }
+
+
+                    function load_hf(e) {
+                        var ex = $('#' + e + 'ward_x option:selected').val();
+                        var ex_ = $('#' + e + 'ward_x option:selected').text();
+                        console.log(e);
+
+                        dmdmx(ex + ',' + e + ',' + ex_);
+                        $('#' + e + 'hfx').show();
+                        $('#' + e + 'wardxx').removeClass("fas fa-bars bg-yellow").addClass("fas fa-check bg-green")
+                    }
+
+
+
+
+                    function statex(e) {
+                        var x = $('#controllerx').val();
+                        //  alert(e);
+                        // alert(x);
+                        var v = document.getElementById(e).value;
+                        console.log(v);
+                        //  alert(v);
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?parentx=' + v + '&methodx' + x, true);
+                        xhr.responseType = 'text';
+                        xhr.onload = function () {
+                            if (xhr.readyState === xhr.DONE) {
+                                if (xhr.status === 200) {
+
+                                    console.log("Number of chunk been processed currently = " + max);
+                                }
+                            }
+                        };
+                        xhr.send(null);
+
+                    }
+
+                    function tableloader(e) {
+                        ctbb = e;
+
+                        var ex = $('#' + e + 'hf_x option:selected').val();
+                        var ex_ = $('#' + e + 'hf_x option:selected').text();
+
+
+                        $('#esef3456n').show();
+                        $('#dup_esef3456n').show();
+
+                        var pd = document.getElementById(e).value;
+
+
+                        if (e.includes('dup_')) {
+                            console.log("../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?jsonparentx=" + pd + "&jsonlevelx=" + e);
+                            var table = $('#dup_detailer').DataTable({
+                                "destroy": true,
+                                "paging": true,
+                                "processing": true,
+
+                                "ajax": {
+                                    "url": "../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?jsonparentx=" + pd + "&jsonlevelx=" + e,
+                                    "dataType": "json"
+                                }
+                            });
+                        } else {
+                            console.log("../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?jsonparentx=" + pd + "&jsonlevelx=" + e);
+                            var table = $('#detailer').DataTable({
+                                "destroy": true,
+                                "paging": true,
+                                "processing": true,
+
+                                "ajax": {
+                                    "url": "../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?jsonparentx=" + pd + "&jsonlevelx=" + e,
+                                    "dataType": "json"
+                                }
+                            });
+                        }
+                        ;
+                        table.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                            var cell = table.cell({row: rowIdx, column: 0}).node();
+                            $(cell).addClass('warningwwwwww');
+                        });
+
+                    }
+                    ;
+
+
+
+
+                    $(function () {
+                        $(".knob").knob();
+                    });
+
+                    function triggerKnob() {
+                        $("input.knob").trigger('change');
+                    }
+                    ;
+
+                    $('#deduplicate').on('show.bs.modal', function (e) {
+                        //dmd('dup_')
+
+                        var uri_ = $(e.relatedTarget).data('uri');
+
+                        const uri = uri_.split('@@');
+                        $('#acp_dup').prop("href", "../4a24cf8b-fbcb-4554-b676-2b54a239be62?accept=" + uri[1] + "&wht=" + uri[0]);
+                        $('#acp_cur').prop("href", "../4a24cf8b-fbcb-4554-b676-2b54a239be62?current=" + uri[2] + "&wht=" + uri[0]);
+                        $('#acp_res').prop("href", "../4a24cf8b-fbcb-4554-b676-2b54a239be62?reset=true&wht=" + uri[0]);
+                        //    $('#deduplicate').modal().show();
+
+                    });
+
+
+                    $('#acp_dup').click(function (event) {
+                        event.preventDefault();
+                        var href = $(this).attr('href');
+
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', href, true);
+                        xhr.responseType = 'text';
+                        xhr.onload = function () {
+                            if (xhr.readyState === xhr.DONE) {
+                                if (xhr.status === 200) {
+                                    alertx(xhr.responseText)
+                                } else {
+                                    alerterr(xhr.responseText)
+                                }
+                                $('#deduplicate').modal().hide();
+                                ;
+
+                                tableloader(ctbb);
+
+                            }
+                        };
+                        xhr.send(null);
+                    });
+
+                    $('#acp_cur').click(function (event) {
+                        event.preventDefault();
+                        var href = $(this).attr('href');
+
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', href, true);
+                        xhr.responseType = 'text';
+                        xhr.onload = function () {
+                            if (xhr.readyState === xhr.DONE) {
+                                if (xhr.status === 200) {
+                                    alertx(xhr.responseText)
+                                } else {
+                                    alerterr(xhr.responseText)
+                                }
+                                $('#deduplicate').modal().hide();
+                                ;
+
+                                tableloader(ctbb);
+
+                            }
+                        };
+                        xhr.send(null);
+                    });
+
+                    $('#acp_res').click(function (event) {
+                        event.preventDefault();
+                        var href = $(this).attr('href');
+
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', href, true);
+                        xhr.responseType = 'text';
+                        xhr.onload = function () {
+                            if (xhr.readyState === xhr.DONE) {
+                                if (xhr.status === 200) {
+                                    alertx(xhr.responseText)
+                                } else {
+                                    alerterr(xhr.responseText)
+                                }
+                                $('#deduplicate').modal().hide();
+                                ;
+
+                                tableloader(ctbb);
+
+                            }
+                        };
+                        xhr.send(null);
+                    });
+
+                </script>
+
+            </div>
+    </body>
+</html>

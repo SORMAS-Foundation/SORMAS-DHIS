@@ -34,8 +34,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -95,13 +93,12 @@ public class UtilServer extends HttpServlet {
 
             try {
                 String parentx = request.getParameter("parentx");
-                String levelx = request.getParameter("levelx");
-System.err.println("_________+++++++++++++_________"+parentx);
+                System.err.println("_________+++++++++++++_________" + parentx);
                 int xx = counterXint_withParameters(sql.count_by_level_using_parent, parentx); //total lgas from destination
                 //total lgas from source
-                
+
                 String sub = counterXString_withParameters(sql.count_by_level_using_parent_source_q1, parentx); //subquery
-             //   System.err.println("_________+++++++++++++_________"+sub);
+                //   System.err.println("_________+++++++++++++_________"+sub);
                 int xc = counterXint_withParameters(sql.count_by_level_using_parent_source_q2, sub);
 
                 int xm = counterXint_withParameters(sql.count_by_level_using_parent_source_name, parentx); //total lgas matched
@@ -112,7 +109,7 @@ System.err.println("_________+++++++++++++_________"+parentx);
                 String str = String.format("%2.02f", (seq * 100));
                 //    System.out.println(vc);
                 mat = str + "%," + xx + "," + xc + "," + xm + ",@@@" + vc;
-
+                System.err.println("3____3_____+++++++++++++_________" + mat);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
@@ -131,7 +128,7 @@ System.err.println("_________+++++++++++++_________"+parentx);
                 //total lgas from source
                 //    System.out.println(xx);
                 String sub = counterXString_withParameters(sql.L4_count_by_level_using_parent_source_q1, parentx); //subquery
-                System.err.println("2____2_____+++++++++++++_________"+sub);
+                System.err.println("2____2_____+++++++++++++_________" + sub);
                 int xc = counterXint_withParameters(sql.L4_count_by_level_using_parent_source_q2, sub);
 
                 int xm = counterXint_withParameters(sql.L4_count_by_level_using_parent_source_name, parentx); //total lgas matched
@@ -149,9 +146,9 @@ System.err.println("_________+++++++++++++_________"+parentx);
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-         if (request.getParameter("parentx") != null && "5".contains(request.getParameter("levelx"))) {
-                System.out.println("ddddddddddddddd");
+
+        if (request.getParameter("parentx") != null && "5".contains(request.getParameter("levelx"))) {
+            //      System.out.println("ddddddddddddddd");
 
             try {
                 String parentx = request.getParameter("parentx");
@@ -161,7 +158,7 @@ System.err.println("_________+++++++++++++_________"+parentx);
                 //total lgas from source
                 //    System.out.println(xx);
                 String sub = counterXString_withParameters(sql.L5_count_by_level_using_parent_source_q1, parentx); //subquery
-                System.err.println("2____2_____+++++++++++++_________"+sub);
+                System.err.println("2____2_____+++++++++++++_________" + sub);
                 int xc = counterXint_withParameters(sql.L5_count_by_level_using_parent_source_q2, sub);
 
                 int xm = counterXint_withParameters(sql.L5_count_by_level_using_parent_source_name, parentx); //total lgas matched
@@ -169,7 +166,7 @@ System.err.println("_________+++++++++++++_________"+parentx);
                 String vc = counterXString_withParameters_(sql.L5_count_by_level_using_parent_source_name_xx, parentx); //total lgas matched
 
                 float seq = ((float) xm / xc);
-                String str = String.format("%2.02f", (seq * 100));
+                String str = String.format("%2.02f", 100 - (seq * 100));
                 //    System.out.println(vc);
                 mat = str + "%," + xx + "," + xc + "," + xm + ",@@@" + vc;
 
@@ -179,13 +176,11 @@ System.err.println("_________+++++++++++++_________"+parentx);
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-         
-         
 
         //DUPLICATES
         //infrasstructure hirachy controller
         if (request.getParameter("dup_parentx") != null && "3".contains(request.getParameter("levelx"))) {
-            //   System.out.println("ddddddddddddddddddddddd"+request.getParameter("levelx"));
+            System.out.println("ddddddddddddddddddddddd" + request.getParameter("dup_parentx"));
 
             try {
                 String parentx = request.getParameter("dup_parentx");
@@ -195,7 +190,7 @@ System.err.println("_________+++++++++++++_________"+parentx);
 
                 //total lgas from source
                 String sub = counterXString_withParameters(sql.count_by_level_using_parent_source_q1, parentx); //subquery getting uid for ltr
-                System.err.println("____3_____+++++++++++++_________"+sub);
+                //   System.err.println("____3_____+++++++++++++_________"+sub);
 
                 int xc = counterXint_withParameters(sql.count_by_level_using_parent_source_q2, sub); //number of lga from dhis
 
@@ -204,7 +199,7 @@ System.err.println("_________+++++++++++++_________"+parentx);
                 String vc = counterXString_withParameters_(sql.cdup_ount_by_level_using_parent_source_name_xx, parentx); //lgas from state
 
                 float seq = ((float) xm / xc);
-                String str = String.format("%2.02f", (seq * 100));
+                String str = String.format("%2.02f", 100 - (seq * 100));
                 //  System.out.println(xc+"vc_____xm"+xm+"______"+sub+"_______"+vc);
                 mat = str + "%," + xx + "," + xc + "," + xm + ",@@@" + vc;
 
@@ -226,7 +221,6 @@ System.err.println("_________+++++++++++++_________"+parentx);
 
                 //total lgas from source
                 String sub = counterXString_withParameters(sql.L4_count_by_level_using_parent_source_q1, parentx); //subquery getting uid for ltr
-                System.err.println("____4_____+++++++++++++_________"+sub);
 
                 int xc = counterXint_withParameters(sql.L4_count_by_level_using_parent_source_q2, sub); //number of ward from dhis
 
@@ -238,39 +232,67 @@ System.err.println("_________+++++++++++++_________"+parentx);
                 String str = String.format("%2.02f", (seq * 100));
                 //  System.out.println(xc+"vc_____xm"+xm+"______"+sub+"_______"+vc);
                 mat = str + "%," + xx + "," + xc + "," + xm + ",@@@" + vc;
-
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
+        if (request.getParameter("dup_parentx") != null && "5".contains(request.getParameter("levelx"))) {
+            //   System.out.println("ddddddddddddddddddddddd"+request.getParameter("levelx"));
+
+            try {
+                String parentx = request.getParameter("dup_parentx");
+                String levelx = request.getParameter("levelx");
+
+                int xx = counterXint_withParameters(sql.L5_count_by_level_using_parent, parentx); //total ward from sormas
+
+                //total lgas from source
+                String sub = counterXString_withParameters(sql.L5_count_by_level_using_parent_source_q1, parentx); //subquery getting uid for ltr
+                System.err.println("____4_____+++++++++++++_________" + sub);
+
+                int xc = counterXint_withParameters(sql.L5_count_by_level_using_parent_source_q2, sub); //number of ward from dhis
+
+                int xm = counterXint_withParameters(sql.L5_dup_count_by_level_using_parent_source_name, parentx); //total 100% duplicates
+
+                String vc = counterXString_withParameters_(sql.L5_cdup_ount_by_level_using_parent_source_name_xx, parentx); //wards from state 
+
+                float seq = ((float) xm / xc);
+                String str = String.format("%2.02f", (seq * 100));
+                System.out.println(xc + "vc_____xm" + xm + "______" + sub + "_______" + vc);
+                mat = str + "%," + xx + "," + xc + "," + xm + ",@@@" + vc;
+                System.err.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++" + mat);
+                
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
         if (request.getParameter("jsonparentx") != null && request.getParameter("jsonlevelx") != null) {
 
             try {
                 String vc = "";
                 String parentx = request.getParameter("jsonparentx");
-                
-                 System.out.println("nnnnnnnnnnnnnnnnnnnPP"+parentx);
+
+                System.out.println("nnnnnnnnnnnnnnnnnnnPP" + parentx);
 
                 String leveld = request.getParameter("jsonlevelx");
 
-                  System.out.println("nnnnnnnnnnnnnnnnnnnLL"+leveld);
+                System.out.println("nnnnnnnnnnnnnnnnnnnLL" + leveld);
                 if ("nigeria_x".equalsIgnoreCase(leveld)) {
 
                     vc = counterXString_withParameters_x(sql.L2_count_by_level_using_parent_source_name_details, ""); //tables for states Matched
 
                 } else if ("dup_nigeria_x".equalsIgnoreCase(leveld)) {
-                    vc = counterXString_withParameters_x(sql.dup_L2_count_by_level_using_parent_source_name_details, ""); //tables for states Matched
-                    System.out.println("nnnnnnnnnnnnnnnnnnn" + vc);
+                    vc = counterXString_withParameters_seeded(sql.dup_L2_count_by_level_using_parent_source_name_details, "", sql.dup__SUB_count_by_level_using_parent_source_name_details); //tables for states Duplicate
+                    System.out.println("nnnnnnnnnnnnnnnnnnnJSON" + vc);
                 } else if ("lga_x".equalsIgnoreCase(leveld)) {
                     vc = counterXString_withParameters_x(sql.L4_count_by_level_using_parent_source_name_details, parentx); //tables for Ward Matched
                     System.out.println("lglglglglglglg");
                 } else if ("state_x".equalsIgnoreCase(leveld)) {
                     vc = counterXString_withParameters_x(sql.L3_count_by_level_using_parent_source_name_details, parentx); //tables for LGA Matched
-                    System.out.println("statatatatatat = "+parentx);
+                    System.out.println("statatatatatat = " + parentx);
                 } else if ("dup_state_x".equalsIgnoreCase(leveld)) {
                     //  System.out.println("dupdupduo______stat dup ________" + parentx);
                     vc = counterXString_withParameters_seeded(sql.dup_L3_count_by_level_using_parent_source_name_details, parentx, sql.dup__SUB_count_by_level_using_parent_source_name_details); //tables for lga Matched
@@ -323,7 +345,7 @@ System.err.println("_________+++++++++++++_________"+parentx);
 
                 float seq = ((float) xv / xc);
                 String str = String.format("%2.02f", (seq * 100));
-                  System.out.println("matched dup "+vc);
+                System.out.println("matched dup " + vc);
                 mat = str + "%," + xx + "," + xc + "," + xv + ",@@@" + vc;
 
             } catch (ClassNotFoundException ex) {
@@ -344,9 +366,11 @@ System.err.println("_________+++++++++++++_________"+parentx);
                 String vc = counterXmany(sql.dup_count_matched_name);
 
                 float seq = ((float) xx / xc);
-                String str = String.format("%2.02f", (seq * 100));
-                  System.out.println("primer_ dup = "+vc);
+                String str = String.format("%2.02f", 100 - (seq * 100));
+
+                System.out.println("primer_ dup = " + vc);
                 mat = str + "%," + xx + "," + xc + ",@@@" + vc;
+                System.out.println("primer_ complete return = " + mat);
 
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
@@ -388,10 +412,10 @@ System.err.println("_________+++++++++++++_________"+parentx);
                 // System.out.print("Even Numbers from 1 to " + n + " are: ");
                 for (int i = 2; i < n; i++) {
                     sendDataX_(i);
-                    sess.setAttribute("jobber", "Region Progress: "+re_g);
-                    sess.setAttribute("jobber1", "District Progress: "+ds_c);
-                    sess.setAttribute("jobber2", "Community Progress: "+com_m);
-                    sess.setAttribute("jobber3", "Health Facility Progress: "+fac_l);
+                    sess.setAttribute("jobber", "Region Progress: " + re_g);
+                    sess.setAttribute("jobber1", "District Progress: " + ds_c);
+                    sess.setAttribute("jobber2", "Community Progress: " + com_m);
+                    sess.setAttribute("jobber3", "Health Facility Progress: " + fac_l);
                 }
                 mat = ("done");
             } catch (ClassNotFoundException ex) {
@@ -412,9 +436,9 @@ System.err.println("_________+++++++++++++_________"+parentx);
                 "PUSHRESULTS") != null) {
 
             try {
-                // System.out.println("Yes... hit the Sevlets DEBUG");
+                // System.out.println(filecont);
 
-                mat = AggregrateController.MetadaJsonSender();
+                mat = AggregrateController.MetadaJsonSender(sess.getAttribute("heavyjson").toString());
 
                 // mat = "Job done";
             } catch (ParseException ex) {
@@ -580,11 +604,12 @@ System.err.println("_________+++++++++++++_________"+parentx);
             ps = conn.prepareStatement(sqq);
             ps.setString(1, "%" + par1 + "%");
 
-                 System.out.println("_______"+ps.toString());
+            System.out.println("_______" + ps.toString());
             rx = ps.executeQuery();
             if (rx.next()) {
 
                 ret = rx.getInt(1);
+                System.out.println("_______RESULT" + rx.getInt(1));
 
             }
 
@@ -606,7 +631,7 @@ System.err.println("_________+++++++++++++_________"+parentx);
             ps = conn.prepareStatement(sqq);
             ps.setString(1, "%" + par1 + "%");
 
-                System.out.println("++++++++++++++++---"+ps.toString());
+            System.out.println("++++++++++++++++---" + ps.toString());
             rx = ps.executeQuery();
             while (rx.next()) {
 
@@ -692,7 +717,7 @@ System.err.println("_________+++++++++++++_________"+parentx);
             ps = conn.prepareStatement(sqq);
             ps.setString(1, "%" + par1 + "%");
 
-               System.out.println("_)))))))))))_________3++++++ "+ps.toString());
+            System.out.println("_)))))))))))_________3++++++ " + ps.toString());
             rx = ps.executeQuery();
             String jsonPrimer = "{\n"
                     + "  \"draw\": 1,\n"
@@ -715,13 +740,13 @@ System.err.println("_________+++++++++++++_________"+parentx);
                             + "    ],";
 
                     ret = dd + ret;
-                  //  System.out.println("____________________________>>>>> "+ret);
+                    //  System.out.println("____________________________>>>>> "+ret);
                 }
             } else {
 
                 while (rx.next()) {
                     ret = " <option value=\"" + rx.getString(2) + "\">" + rx.getString(1).toUpperCase() + "</option>" + ret;
-                 //    System.out.println("________2____________________>>>>> "+ret);
+                    //    System.out.println("________2____________________>>>>> "+ret);
                 }
             }
 
@@ -739,6 +764,9 @@ System.err.println("_________+++++++++++++_________"+parentx);
         Connection conn = DbConnector.getConnection();
         String ret = "";
         try {
+
+            System.out.println("Current statement : " + sqq);
+            System.out.println("<br>Current parameter = : " + par1);
 
             ps = conn.prepareStatement(sqq);
             ps.setString(1, "%" + par1 + "%");
@@ -790,7 +818,7 @@ System.err.println("_________+++++++++++++_________"+parentx);
             ps = conn.prepareStatement(sqq);
             ps.setString(1, "%" + par1 + "%");
 
-            //   System.out.println(ps.toString());
+            System.out.println(ps.toString());
             rx = ps.executeQuery();
             String jsonPrimer = "{\n"
                     + "  \"data\": [";
@@ -804,7 +832,7 @@ System.err.println("_________+++++++++++++_________"+parentx);
                 ps_ = conn.prepareStatement(sss);
                 //    ps_.setString(1, dimp.replaceAll(" ", "").replaceAll(",", "\",\""));
 
-                //  System.out.println(ps_.toString());
+                System.out.println(ps_.toString());
                 rx_ = ps_.executeQuery();
                 while (rx_.next()) {
 
@@ -860,7 +888,7 @@ System.err.println("_________+++++++++++++_________"+parentx);
             ps = conn.prepareStatement(sql.sync_primer_all_fresh);
             ps.setString(1, i + "");
             rx = ps.executeQuery();
-               System.out.println("deugging fresh pusher >>>>>>>>>>>>>>>>>>>>>>>.."+ps);
+            System.out.println("deugging fresh pusher >>>>>>>>>>>>>>>>>>>>>>>.." + ps);
 
             while (rx.next()) {
                 String abx = rx.getString(1);
@@ -875,7 +903,7 @@ System.err.println("_________+++++++++++++_________"+parentx);
 
                 //  System.out.println(ps_g);
                 if (s_x.next()) {
-                       System.out.println(ab[ddx_] + "   ____   " + rx.getString(1)+" >>>>>>>>>  "+s_x.getString(1)+"");
+                    System.out.println(ab[ddx_] + "   ____   " + rx.getString(1) + " >>>>>>>>>  " + s_x.getString(1) + "");
 
                     sendDataX_a(s_x.getString(1), ab[ddx_], i + "");
 

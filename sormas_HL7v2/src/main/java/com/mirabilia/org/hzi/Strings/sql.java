@@ -36,19 +36,14 @@ public class sql {
     public static String dup_count_all_from_sorma_local = "SELECT count(*) FROM sormas_local d WHERE d.`level` = 2 and d.duplicate_with is not null and d.duplicate_with != '';";
 
     public static String sync_count_all_synced = "SELECT count(*) FROM sormas_local d WHERE synced = 1;";
-    
-    
-    
+
     public static String sync_primer_all_matched = "SELECT uuid, level, externalid, idx FROM sormas_local d WHERE (d.duplicate_with is null or d.duplicate_with = '') and (d.externalid != '' or d.externalid is not null);";
-    
+
     public static String sync_primer_all_fresh = "select path_parent from raw_ where level = ? order by idx asc";
-    
+
     public static String sync_primer_all_fresh_ = "select idx from raw_ where uuid = ? order by idx asc";
     public static String sync_all_fresh = "select name, uuid, idx, rec_created, level  from raw_ where level = ? and path_parent like '%?%'";
-    
-    
-    
-    
+
     public static String sync_primer_all_new_matched = "SELECT name, level, externalid, idx, rec_created FROM sormas_local d WHERE (d.duplicate_with is null or d.duplicate_with = '') and (d.externalid != '' or d.externalid is not null);";
 
     public static String getSROMAS_district_PG = "select count(*), c.disease, (select name from district where id = c.district_id), (select externalid from district where id = c.district_id), c.creationdate::date\n"
@@ -116,17 +111,20 @@ public class sql {
     //public static String dup_count_matched_no = "SELECT count(*) FROM raw_ r inner JOIN sormas_local d ON (r.UUID = d.externalid) WHERE r.`level` = 2";
     // public static String dup_count_all_from_source_no= "SELECT count(*) FROM raw_ r WHERE r.`level` = 2;";
     public static String dup_count_matched_name = "select namex, uuid from sormas_local where level = 2;";
-    public static String dup_L2_count_by_level_using_parent_source_name_details = "select * from sormas_local s where  s.duplicate_with is not null and s.duplicate_with != '' and level = 2";
-    public static String dup_L3_count_by_level_using_parent_source_name_details = "select * from sormas_local s where  s.duplicate_with is not null and s.duplicate_with != '' and level = 3 and parent_id = (select uid from sormas_local where level = 2 and namex like ?)";
+    public static String dup_L2_count_by_level_using_parent_source_name_details = "select * from sormas_local s where  s.duplicate_with is not null and s.duplicate_with != '' and level = 2 and namex like ?";
+    public static String dup_L3_count_by_level_using_parent_source_name_details = "select * from sormas_local s where  s.duplicate_with is not null and s.duplicate_with != '' and level = 3 and parent_id = (select uid from sormas_local where level = 2 and uuid like ?)";
     public static String L4_dup_L3_count_by_level_using_parent_source_name_details = "select * from sormas_local s where  s.duplicate_with is not null and s.duplicate_with != '' and level = 4 and parent_id = (select uid from sormas_local where level = 3 and namex like ?)";
     public static String dup__SUB_count_by_level_using_parent_source_name_details = "select * from raw_ r where r.uuid in ";
 
-    public static String dup_count_by_level_using_parent_source_name = " SELECT count(*) FROM sormas_local WHERE level = 3 and parent_id = (select sx.uid from sormas_local sx where sx.namex like ?  and level = 2) and duplicate_with is not null and duplicate_with != ''";
-    public static String L4_dup_count_by_level_using_parent_source_name = " SELECT count(*) FROM sormas_local WHERE level = 4 and parent_id = (select sx.uid from sormas_local sx where sx.namex like ?  and level = 3) and duplicate_with is not null and duplicate_with != ''";
+    public static String dup_count_by_level_using_parent_source_name = " SELECT count(*) FROM sormas_local WHERE level = 3 and parent_id = (select sx.uid from sormas_local sx where sx.uuid like ?  and level = 2) and duplicate_with is not null and duplicate_with != ''";
+    public static String L4_dup_count_by_level_using_parent_source_name = " SELECT count(*) FROM sormas_local WHERE level = 4 and parent_id = (select sx.uid from sormas_local sx where sx.uuid like ?  and level = 3) and duplicate_with is not null and duplicate_with != ''";
+    public static String L5_dup_count_by_level_using_parent_source_name = " SELECT count(*) FROM sormas_local WHERE level = 5 and parent_id = (select sx.uid from sormas_local sx where sx.uuid like ?  and level = 4) and duplicate_with is not null and duplicate_with != ''";
 
-//SELECT count(*) FROM raw_ r inner JOIN sormas_local d ON (r.UUID = d.externalid) WHERE r.`level` = 3 and d.parent_id = (select sx.uid from sormas_local sx where sx.namex like ?  and level = 2) and (d.duplicate_with is null or d.duplicate_with = '');
-    public static String cdup_ount_by_level_using_parent_source_name_xx = "SELECT d.namex, d.uuid from sormas_local d WHERE d.`level` = 3 and d.parent_id = (select sx.uid from sormas_local sx where sx.namex like ?  and level = 2)";
-    public static String L4_cdup_ount_by_level_using_parent_source_name_xx = "SELECT d.namex from sormas_local d WHERE d.`level` = 4 and d.parent_id = (select sx.uid from sormas_local sx where sx.namex like ?  and level = 3)";
+//SELECT count(*) FROM raw_ r inner JOIN sormas_local d ON (r.UUID = d.externalid) WHERE r.`level` = 3 and d.parent_id = (select sx.uid from sormas_local sx where sx.uuid like ?  and level = 2) and (d.duplicate_with is null or d.duplicate_with = '');
+    public static String cdup_ount_by_level_using_parent_source_name_xx = "SELECT d.namex, d.uuid from sormas_local d WHERE d.`level` = 3 and d.parent_id = (select sx.uid from sormas_local sx where sx.uuid like ?  and level = 2)";
+    public static String L4_cdup_ount_by_level_using_parent_source_name_xx = "SELECT d.namex, d.uuid from sormas_local d WHERE d.`level` = 4 and d.parent_id = (select sx.uid from sormas_local sx where sx.uuid like ?  and level = 3)";
+
+    public static String L5_cdup_ount_by_level_using_parent_source_name_xx = "SELECT d.namex, d.uuid from sormas_local d WHERE d.`level` = 5 and d.parent_id = (select sx.uid from sormas_local sx where sx.uuid like ?  and level = 4)";
 
     public static String count_all_from_source = "SELECT * FROM raw_ r WHERE r.`level` = 2;";
     public static String count_all_from_destination = "SELECT * FROM sormas_local d WHERE d.`level` = 2";
@@ -154,7 +152,6 @@ public class sql {
     public static String L4_count_by_level_using_parent_source_name = "SELECT count(*) FROM raw_ r inner JOIN sormas_local d ON (r.UUID = d.externalid) WHERE r.`level` =4 and d.parent_id = (select sx.uid from sormas_local sx where sx.uuid like ?  and level = 3)";
     public static String L4_count_by_level_using_parent_source_name_xx = "SELECT d.namex, d.uuid FROM raw_ r inner JOIN sormas_local d ON (r.UUID = d.externalid) WHERE r.`level` = 4 and d.parent_id = (select sx.uid from sormas_local sx where sx.uuid like ?  and level = 3)";
 
-    
     //HF
     public static String L5_count_by_level_using_parent = "select count(*) from sormas_local s where s.parent_id = (select s.uid from sormas_local s where s.uuid like ?  and level = 4) and level = 5";
     public static String L5_count_by_level_using_parent_source_q1 = "select s.externalid from sormas_local s where s.uuid like ?  and level = 4";
@@ -162,9 +159,6 @@ public class sql {
     public static String L5_count_by_level_using_parent_source_name = "SELECT count(*) FROM raw_ r inner JOIN sormas_local d ON (r.UUID = d.externalid) WHERE r.`level` =5 and d.parent_id = (select sx.uid from sormas_local sx where sx.uuid like ?  and level = 4)";
     public static String L5_count_by_level_using_parent_source_name_xx = "SELECT d.namex, d.uuid FROM raw_ r inner JOIN sormas_local d ON (r.UUID = d.externalid) WHERE r.`level` = 5 and d.parent_id = (select sx.uid from sormas_local sx where sx.uuid like ?  and level = 4)";
 
-
-    
-    
     public static String L4_count_by_level_using_parent_source_name_details = "SELECT d.uid, d.uuid, r.uuid, d.namex,  r.name, d.adapter_cdate FROM raw_ r inner JOIN sormas_local d ON (r.UUID = d.externalid) WHERE r.`level` = 4 and d.parent_id = (select sx.uid from sormas_local sx where sx.uuid like ?  and level = 3)";
     public static String L3_count_by_level_using_parent_source_name_details = "SELECT d.uid, d.uuid, r.uuid, d.namex,  r.name, d.adapter_cdate FROM raw_ r inner JOIN sormas_local d ON (r.UUID = d.externalid) WHERE r.`level` = 3 and d.parent_id = (select sx.uid from sormas_local sx where sx.uuid like ?  and level = 2)";
     public static String L2_count_by_level_using_parent_source_name_details = "SELECT   d.uid, d.uuid, r.uuid, d.namex,  r.name, d.adapter_cdate FROM raw_ r inner JOIN sormas_local d ON (r.UUID = d.externalid) WHERE r.`level` = 2 and r.name like ?";
@@ -188,9 +182,8 @@ public class sql {
     public static String Get_all_Confirmed_Community_Transmitted_CASES_today = "select count(*), region_id, (select externalid from region where id = region_id) from samples s left join cases c on (s.associatedcase_id = c.id)\n"
             + "where  s.pathogentestresult = 'POSITIVE' and s.changedate::date = '2020-06-15' and c.id not in (select id from cases where pointofentry_id is not null and creationdate::date = '2020-06-15') group by region_id";
 
-   // public static String Get_all_Isolated_today = "";
-   // public static String Get_all_Isolated_today = "";
-   // public static String Get_all_Isolated_today = "";
-   // public static String Get_all_Isolated_today = "";
-
+    // public static String Get_all_Isolated_today = "";
+    // public static String Get_all_Isolated_today = "";
+    // public static String Get_all_Isolated_today = "";
+    // public static String Get_all_Isolated_today = "";
 }

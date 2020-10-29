@@ -388,7 +388,7 @@ public class analysisDTO {
 
                 int all = Integer.parseInt(rx.getString(1));
                 if (all > 499) {
-                    how_many = all / 500;
+                    how_many = all;
                 } else {
                     how_many = 1;
                 }
@@ -400,7 +400,7 @@ public class analysisDTO {
         } finally {
             conn.close();
         }
-        return how_many + 1;
+        return how_many;
     }
 
     public static void Deduplicate() throws ClassNotFoundException, SQLException {

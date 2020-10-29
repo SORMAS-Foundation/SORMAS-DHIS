@@ -225,7 +225,7 @@ public class sourceControllergettersetter extends HttpServlet {
 
                 int tt = sq1 + sq2 + sq3 + sq4;
 
-                System.out.println("SRMS : " + tt);
+               // System.out.println("SRMS : " + tt);
 
                 sout.print(tt);
 

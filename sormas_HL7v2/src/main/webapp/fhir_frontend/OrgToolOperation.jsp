@@ -1464,6 +1464,294 @@
                     <!-- /.modal-dialog -->
                 </div>
 
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                <!--MODALS BASIN UNMATCHABLES-->  
+               
+                    
+                <div id="dup_now_closed" style="display: none">
+                    
+                    <div class="" style="padding-left: 20px;padding-right: 10px;margin-top: 20px;margin-bottom: 20px;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="container-fluid">
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6">
+                                            <h1>Infrastructure Reconciliation Analytics for DUPLICATE Data</h1>
+                                        </div>
+
+                                    </div>
+                                </div><!-- /.container-fluid -->
+                                <button type="button" onclick="window.location.reload();" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="">
+
+
+                                <!-- Main content -->
+                                <section class="content">
+                                    <div class="container-fluid">
+
+                                        <!-- Timelime example  -->
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <!-- The time line -->
+                                                <div class="timeline">
+                                                    <!-- timeline time label -->
+                                                    <div class="time-label">
+                                                        <span class="bg-blue">Organisation Unit Selection</span>
+                                                    </div>
+                                                    <!-- /.timeline-label -->
+
+                                                    <!-- timeline item -->
+                                                    <div>
+                                                        <i class="fas fa-user bg-green"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
+                                                            <h3 class="timeline-header no-border"><a href="#"></a> Parent organisation unit</h3>
+                                                            <div class="timeline-body">
+                                                                <div class="row">
+                                                                    <div class="input-group input-group col-3">
+                                                                        <input type="text" onchange="" id="dup_nigeria_x" list="" autocomplete="off" value="${sessionScope.country}" disable="true" readonly class="form-control">
+
+
+                                                                    </div>
+                                                                    <div class="col-5">
+                                                                        <div class="progress progress-xs" style="height: 30%;">
+                                                                            <div class="progress-bar progress-bar-warning" id="dup_dfe" style="width: 0%"> 
+                                                                                <a onclick="statex('dup_state_x')" id="dup_state_g" type="button" class="btn btn-warning btn-flat"></a>
+                                                                            </div></div>
+
+
+
+                                                                        <h3 class="" id="dup_789"></h3>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <a onclick="tableloader('dup_nigeria_x')" id="dup_state_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END timeline item -->
+                                                    <!-- timeline item -->
+                                                    <div>
+                                                        <i id="dup_statexx" class="fas fa-bars bg-yellow"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
+                                                            <h3 class="timeline-header"><a href="#">Select</a> State / Region</h3>
+                                                            <div class="timeline-body">
+                                                                <div class="row">
+                                                                    <div class="input-group input-group col-3">
+
+                                                                        <select class="form-control js-select2" id="dup_state_x" onchange="load_lga('dup_')">
+                                                                            <option selected>select one</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                    <div class="col-5">
+                                                                        <div class="progress progress-xs" style="height: 30%;">
+                                                                            <div class="progress-bar progress-bar-warning" id="dup_dfe_lga" style="width: 0%"> 
+                                                                                <a onclick="tableloader('dup_state_x')" id="dup_lga_g" type="button" class="btn btn-warning btn-flat"></a>
+                                                                            </div></div>
+                                                                        <h3 class="" id="dup_789_lga"></h3>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <a onclick="tableloader('dup_state_x')" id="dup_lga_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                    </div>
+                                                                    <div class="col-xs-2 col-md-1 text-center clickables" style="display: none">
+                                                                        <div style="display:inline;width:60px;height:60px;"><div style="display:inline;width:60px;height:60px;">
+                                                                                `<input type="text" id="btt_state" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="knob-label" id="fullxxx" >Total Left = 23</div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END timeline item -->
+
+                                                    <!-- timeline item -->
+                                                    <div id="dup_lgax" style="display: none">
+                                                        <i id="dup_lgaxx" class="fas fa-bars bg-yellow"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
+                                                            <h3 class="timeline-header"><a href="#">Select</a> Local Government Area / District</h3>
+                                                            <div class="timeline-body">
+                                                                <div class="row">
+                                                                    <div class="input-group input-group-sm col-3">
+                                                                        <select class="form-control js-select2" id="dup_lga_x" onchange="load_ward('dup_')">
+                                                                            <option selected>select one</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                    <div class="col-5">
+                                                                        <div class="progress progress-xs" style="height: 30%;">
+                                                                            <div class="progress-bar progress-bar-warning" id="dup_dfe_ward" style="width: 0%"> 
+                                                                                <a onclick="tableloader('dup_lga_x')" id="dup_ward_g" type="button" class="btn btn-warning btn-flat"></a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <h3 class="" id="dup_789_ward"></h3>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <a onclick="tableloader('dup_lga_x')" id="dup_ward_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                    </div>
+
+                                                                    <div class="col-xs-2 col-md-1 text-center clickables"  style="display: none">
+                                                                        <div style="display:inline;width:60px;height:60px;"><div style="display:inline;width:60px;height:60px;">
+                                                                                `<input type="text" id="btt_lga" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="knob-label" id="fullxxx">Total Left = 423</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END timeline item -->
+
+
+
+
+
+
+
+                                                    <!-- timeline item -->
+                                                    <div id="dup_wardx" style="display: none">
+                                                        <i id="dup_wardxx" class="fas fa-bars bg-yellow"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
+                                                            <h3 class="timeline-header"><a href="#">Select</a> Ward / Community</h3>
+                                                            <div class="timeline-body">
+                                                                <div class="row">
+                                                                    <div class="input-group input-group-sm col-3">
+                                                                        <select class="form-control js-select2" id="dup_ward_x" onchange="load_hf('dup_')">
+                                                                            <option selected>select one</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                    <div class="col-5">
+                                                                        <div class="progress progress-xs" style="height: 30%;">
+                                                                            <div class="progress-bar progress-bar-warning" id="dup_dfe_hf" style="width: 0%"> 
+                                                                                <a onclick="tableloader('dup_ward_x')" id="dup_hf_g" type="button" class="btn btn-warning btn-flat"></a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <h3 class="" id="dup_789_hf"></h3>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <a onclick="tableloader('dup_ward_x')" id="dup_hf_g" type="button" class="btn btn-success btn-flat">Show Details</a>
+                                                                    </div>
+                                                                    <div class="col-xs-2 col-md-1 text-center clickables"  style="display: none">
+                                                                        <div style="display:inline;width:60px;height:60px;"><div style="display:inline;width:60px;height:60px;">
+                                                                                `<input type="text" id="btt_ward" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="knob-label" id="fullxxx">Total Left = 223</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END timeline item -->
+
+
+                                                    <!-- timeline item -->
+                                                    <div id="dup_hfx" style="display: none">
+                                                        <i id="dup_hfxx" class="fas fa-bars bg-yellow"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
+                                                            <h3 class="timeline-header"><a href="#">Select</a> Health Facilities</h3>
+                                                            <div class="timeline-body">
+
+                                                                <div class="input-group input-group-sm col-5">
+                                                                    <input type="text" list="hf" autocomplete="off" class="form-control">
+                                                                    <span class="input-group-append">
+                                                                        <button type="button" class="btn btn-info btn-flat">Next</button>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END timeline item -->
+                                                    <!-- timeline time label -->
+                                                    <div class="time-label">
+                                                        <span class="">Please click "Show Details" button to expand details of the corresponding value</span>
+
+                                                    </div>
+                                                    <!-- /.timeline-label -->
+
+                                                    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+
+                                                    <!-- timeline item -->
+                                                    <div id="dup_esef3456n" style="display: none;">
+                                                        <i class="fa fa-bars bg-purple"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time"><i class="fas fa-clock"></i> 2 days ago</span>
+
+
+                                                            <div class="timeline-body">
+                                                                <table id="dup_detailer" class="display" style="width:100%">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>SN</th>
+                                                                            <th>SOMRAS UUID</th>
+                                                                            <th>SORMAS NAME</th>
+                                                                            <th>DUPLICATE WITH</th>
+                                                                            <th>DUPLICATE UUID</th>
+                                                                            <th>SOURCE CURRENTLY MATCHED</th>
+                                                                            <th>SOURCE MATHCED UUID</th>
+                                                                            <th>MODIFIED</th>
+                                                                            <th>RESOLVE</th>
+                                                                        </tr>
+                                                                    </thead>
+
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END timeline item -->
+                                                    <!-- timeline item -->
+
+                                                    <!-- END timeline item -->
+
+                                                </div>
+                                            </div>
+                                            <!-- /.col -->
+                                        </div>
+                                    </div>
+                                    <!-- /.timeline -->
+
+                                </section>
+                                <!-- /.content -->
+                            </div>
+
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
 
                 <!-- Modal -->
                 <div class="modal fade" id="deduplicate" role="dialog">

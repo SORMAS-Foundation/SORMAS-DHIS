@@ -682,62 +682,84 @@
 
 
 
-                <%                    InputStream intput = getServletContext().getResourceAsStream("dhis_processor");
-                    //creating an InputStreamReader object
-                    InputStreamReader isReader = new InputStreamReader(intput);
-                    //Creating a BufferedReader object
-                    BufferedReader reader = new BufferedReader(isReader);
-                    StringBuffer sb = new StringBuffer();
-                    String str;
-                    while ((str = reader.readLine()) != null) {
-                        sb.append(str);
-                    }
+                <%   //processing dhis_ control metadata from static file
+                    String couty = session.getAttribute("country").toString();
+                    if ("Nigeria".equalsIgnoreCase(couty)) {
+                        InputStream intput = getServletContext().getResourceAsStream("dhis_processor");
+                        //creating an InputStreamReader object
+                        InputStreamReader isReader = new InputStreamReader(intput);
+                        //Creating a BufferedReader object
+                        BufferedReader reader = new BufferedReader(isReader);
+                        StringBuffer sb = new StringBuffer();
+                        String str;
+                        while ((str = reader.readLine()) != null) {
+                            sb.append(str);
+                        }
 
-                    session.setAttribute("heavyjson", sb.toString());
-                    intput.close();
-                    isReader.close();
-                    reader.close();
+                        session.setAttribute("heavyjson", sb.toString());
+                        intput.close();
+                        isReader.close();
+                        reader.close();
+                    }
+                    if ("Ghana".equalsIgnoreCase(couty)) {
+                        InputStream intput = getServletContext().getResourceAsStream("dhis_processor_gh");
+                        //creating an InputStreamReader object
+                        InputStreamReader isReader = new InputStreamReader(intput);
+                        //Creating a BufferedReader object
+                        BufferedReader reader = new BufferedReader(isReader);
+                        StringBuffer sb = new StringBuffer();
+                        String str;
+                        while ((str = reader.readLine()) != null) {
+                            sb.append(str);
+                        }
+
+                        session.setAttribute("heavyjson", sb.toString());
+                        intput.close();
+                        isReader.close();
+                        reader.close();
+                    }
 
 
                 %>
 
-                 //   function get(e) {
-                        $('#stop_a').click(function (event) {
-                           event.preventDefault()
-                       
+                    //   function get(e) {
+                    $('#stop_a').click(function (event) {
+                        event.preventDefault()
 
-                       // $('#fomX').submit();
+
+                        // $('#fomX').submit();
                         var usn = $('#usn').val();
                         var psn = $('#ups').val()
                         req = new XMLHttpRequest()
-                      //  console.log('../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?PUSHRESULTS=true&usn=' + usn + '&ups=' + psn);
+                        //  console.log('../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?PUSHRESULTS=true&usn=' + usn + '&ups=' + psn);
                         req.open("POST", '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?PUSHRESULTS=true&usn=' + usn + '&ups=' + psn + '', true);
 
-                       req.send();
-                        
+                        req.send();
+
                         req.onload = function () {
-                           // alert(req.responseText);
-                           
-                           //var djson = '{"Error":3}';
-                           
-                           console.log(req.responseText);
+                            // alert(req.responseText);
+
+                            //var djson = '{"Error":3}';
+
+                            console.log(req.responseText);
 
                             var json = JSON.parse(req.responseText);
-                            
+
                             console.log(json);
-                            
+
                             var jsonViewer = new JSONViewer();
                             document.querySelector("#xdb").appendChild(jsonViewer.getContainer());
 
 
                             jsonViewer.showJSON(json, -1, -1);
+                            var json = "";
 
                         };
 
 
                         $('#RespondX').modal('show');
-                    
-                     });
+
+                    });
 
 
 

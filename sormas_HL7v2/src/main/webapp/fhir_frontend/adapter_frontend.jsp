@@ -8,6 +8,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
+    if(session.getAttribute("xloggedx") == null || session.getAttribute("xloggedx") != "true" ){
+    response.sendRedirect(request.getContextPath());
+    }
         PreparedStatement ps;
         ResultSet rx;
         Class.forName("com.mysql.jdbc.Driver");

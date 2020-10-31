@@ -1,4 +1,4 @@
 <%
-response.sendRedirect("fhir_frontend/adapter_frontend.jsp");
+response.sendRedirect("fhir_frontend/lockpage.jsp");
 
 %>

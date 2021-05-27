@@ -38,11 +38,12 @@ pipeline {
             }
         }
         stage('Deploy') {
-            node {
-                def pom = readMavenPom file: 'sormas_HL7v2/pom.xml'
+            steps {
+ ]
                 echo 'Deploying....'
                 
                 dir('sormas_HL7v2') {
+                    def pom = readMavenPom file: 'pom.xml'
                     sh """cp target/sormas_HL7v2-${pom.version}.war DockerController/sormas_HL7v2.war
                     sudo buildah bud --pull-always --no-cache -t sormas-dhis2 DockerController/
                     sudo buildah login -u '${DOCKERHUB_CREDS_USR}' -p '${DOCKERHUB_CREDS_PSW}' docker.io

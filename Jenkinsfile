@@ -39,7 +39,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
- ]
+ 
                 echo 'Deploying....'
                 
                 dir('sormas_HL7v2') {

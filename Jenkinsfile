@@ -42,9 +42,10 @@ pipeline {
                 dir('sormas_HL7v2') {
                     sh "cp target/sormas_HL7v2-1.0.0.war DockerController/sormas_HL7v2.war"
                     sh """
-                    sudo buildah bud --pull-always --no-cache -t sorams-dhis2 DockerController/
-                    #sudo buildah login -u $DOCKERHUB_CREDS_USR -p $DOCKERHUB_CREDS_PSW docker.io
-                    #sudo buildah push -f v2s2 sorams-dhis2p hzibraunschweig/sorams-dhis2:latest
+                    sudo buildah bud --pull-always --no-cache -t sormas-dhis2 DockerController/
+                    echo "Finished Build"
+                    sudo buildah login -u ${DOCKERHUB_CREDS_USR} -p ${DOCKERHUB_CREDS_PSW} docker.io
+                    sudo buildah push -f v2s2 sormas-dhis2 hzibraunschweig/sormas-dhis2:latest
                     """
                 }
             }

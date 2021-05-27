@@ -5,28 +5,29 @@
 node {
     
     environment {
-        MVNHOME = tool 'Maven'
+        
         DOCKERHUB_CREDS = credentials('dockerhub')
     }
 
     def pom = readMavenPom file: 'sormas_HL7v2/pom.xml'
+    def mvn = tool 'Maven'
         
     stage('Build') {
         echo 'Building..'
         dir('sormas_HL7v2') {
-            sh "${MVNHOME}/bin/mvn clean compile"
+            sh "${mvn}/bin/mvn clean compile"
         }
     }
     stage('Test') {
         echo 'Testing..'
         dir('sormas_HL7v2') {
-            sh "${MVNHOME}/bin/mvn clean compile test"
+            sh "${mvn}/bin/mvn clean compile test"
         }
     }
     stage('Package') {
         echo 'Packaging....'
         dir('sormas_HL7v2') {
-            sh "${MVNHOME}/bin/mvn clean compile package"
+            sh "${mvn}/bin/mvn clean compile package"
         }
     }
     stage('Deploy') {

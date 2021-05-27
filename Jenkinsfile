@@ -21,11 +21,18 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
+                dir('sormas_HL7v2') {
+                    sh "${MVNHOME}/bin/mvn clean compile test"
+                }
+                
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                dir('sormas_HL7v2') {
+                    sh "${MVNHOME}/bin/mvn clean compile package"
+                }
             }
         }
     }

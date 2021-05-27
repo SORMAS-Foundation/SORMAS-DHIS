@@ -1,6 +1,6 @@
 
    
-def pom = readMavenPom file: 'sormas_HL7v2/pom.xml'
+
 
 pipeline {
     agent any
@@ -10,6 +10,7 @@ pipeline {
     }
 
     stages {
+        
         stage('Build') {
             steps {
                 echo 'Building..'
@@ -37,7 +38,8 @@ pipeline {
             }
         }
         stage('Deploy') {
-            steps {
+            node {
+                def pom = readMavenPom file: 'sormas_HL7v2/pom.xml'
                 echo 'Deploying....'
                 
                 dir('sormas_HL7v2') {

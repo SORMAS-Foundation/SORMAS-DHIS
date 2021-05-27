@@ -44,7 +44,7 @@ pipeline {
                     sh """
                     sudo buildah bud --pull-always --no-cache -t sormas-dhis2 DockerController/
                     echo "Finished Build"
-                    sudo buildah login -u ${DOCKERHUB_CREDS_USR} -p ${DOCKERHUB_CREDS_PSW} docker.io
+                    sudo buildah login -u "${DOCKERHUB_CREDS_USR}" -p "${DOCKERHUB_CREDS_PSW}" docker.io
                     sudo buildah push -f v2s2 sormas-dhis2 hzibraunschweig/sormas-dhis2:latest
                     """
                 }

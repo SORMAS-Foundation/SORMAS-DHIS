@@ -27,14 +27,25 @@ pipeline {
                 
             }
         }
-        stage('Deploy') {
+        stage('Package') {
             steps {
-                echo 'Deploying....'
+                echo 'Packaging....'
                 dir('sormas_HL7v2') {
                     sh "${MVNHOME}/bin/mvn clean compile package"
                 }
             }
         }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+                dir('sormas_HL7v2') {
+                    sh "cp target/sormas_HL7v2-1.0.0.war DockerController/sormas_HL7v2.war"
+                    sh "sudo buildah bud --pull-always --no-cache -t sorams-dhis2 DockerController/"
+                }
+            }
+
+        }
+
     }
 }
 

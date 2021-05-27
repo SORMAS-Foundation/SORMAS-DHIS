@@ -1,4 +1,5 @@
 
+import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -80,14 +81,18 @@ public class jsonController {
             Logger.getLogger(jsonController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+   private static String[] _url = ConffileCatcher.fileCatcher("passed");
+
+    private static String httpx = _url[10].toString(); //should come from config file
+
 
     public static String getDem() {
 
-        String http = "http://172.105.77.79:8080/dhis/api/organisationUnits.json?fields=lastUpdated,id,name,shortName,level,created,path&paging=true&maxLevel=1";
+        String http = httpx+"/api/organisationUnits.json?fields=lastUpdated,id,name,shortName,level,created,path&paging=true&maxLevel=1";
 
         HttpURLConnection urlConnection = null;
-        String name = "field";
-        String password = "Passcode1!x";
+        String name = "admin";
+        String password = "district";
         StringBuilder sb = new StringBuilder();
 
         String authString = name + ":" + password;
@@ -106,7 +111,7 @@ public class jsonController {
             urlConnection.connect();
 
             int HttpResult = urlConnection.getResponseCode();
-            System.out.println("######cccccccccccc####Outreach Session HTTP Return Code = " + HttpResult);
+            //System.out.println("######cccccccccccc####Outreach Session HTTP Return Code = " + HttpResult);
 
             if (HttpResult == 200) {
                 BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));

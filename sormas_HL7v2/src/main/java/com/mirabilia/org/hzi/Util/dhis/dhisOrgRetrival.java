@@ -25,56 +25,61 @@
  */
 package com.mirabilia.org.hzi.Util.dhis;
 
-
 import static com.mirabilia.org.hzi.Util.dbResolvers.gotoDB;
-import static com.mirabilia.org.hzi.Util.dhis.DHIS2resolver.getDemAll;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import static com.mirabilia.org.hzi.Util.dhis.DHIS2resolver.getDemAllLong;
+import static com.mirabilia.org.hzi.sormas.getterSetters.Localizer_DHIS_Deleter;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 /**
  *
  * @author Mathew Official
  */
 public class dhisOrgRetrival {
-    public static int starter(int pg_counterd){
-     if (pg_counterd > 1) {
-         
-        JSONParser jsonParser = new JSONParser();
-        String base_url = "http://172.105.77.79:8080/dhis/api/organisationUnits.json?fields=lastUpdated,id,name,shortName,level,created,path&paging=true&maxLevel=4";
-        String json_all = getDemAll(base_url);
-        PreparedStatement pstmt;
-        ResultSet rx;
 
-        JSONObject jsonObjectx;
+    public static int starter(int pg_counterd, String urll, String cnty_code) throws SQLException {
+        if (pg_counterd >= 1) {
 
-      //  System.out.println("XXXXX<<<<<<<<<<<<<<XXXXXXXXXXX = " + pg_counterd);
-         
+            String json_all = "{'pager':'5'}";
+
+            System.out.println("XXXXX<<<<<<<<<<<<<<XXXXXXXXXXX = " + pg_counterd);
+
             try {
-                jsonObjectx = (JSONObject) jsonParser.parse(json_all);
-                Object pager_values = jsonObjectx.get("pager");
 
-                JSONObject jsonObjectxx = (JSONObject) pager_values;
+                String base_urlx = "";
+                if (6 == pg_counterd) {
+                    Localizer_DHIS_Deleter();
 
-              
-              
-                    String base_urlx = "http://172.105.77.79:8080/dhis/api/organisationUnits.json?page=" + pg_counterd + "&maxLevel=4&paging=true&fields=lastUpdated%2Cid%2Cname%2CshortName%2Clevel%2Ccreated%2Cpath";
-                    String nxtpg_url_val = getDemAll(base_urlx);
-                    
-                    gotoDB(nxtpg_url_val);
-            } catch (ClassNotFoundException ex) { 
-             Logger.getLogger(dhisOrgRetrival.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (ParseException ex) {
-             Logger.getLogger(dhisOrgRetrival.class.getName()).log(Level.SEVERE, null, ex);
-         } 
+                }
+                if ("GH".equals(cnty_code)) {
+                    //GH using code instead of uuid
+                    if (5 == pg_counterd) {
+                        base_urlx = urll + "/api/organisationUnits.json?maxLevel=" + pg_counterd + "&paging=false&fields=lastUpdated%2Ccode%2Cname%2CshortName%2Clevel%2Ccreated%2Cpath";
+                        System.out.println(base_urlx);
+                        String nxtpg_url_val = getDemAllLong(base_urlx);
+
+                        String db_ = gotoDB(nxtpg_url_val);
+                    } else if (6 != pg_counterd) {
+                        base_urlx = urll + "/api/organisationUnits.json?maxLevel=" + pg_counterd + "&paging=false&fields=lastUpdated%2Cid%2Cname%2CshortName%2Clevel%2Ccreated%2Cpath";
+                        System.out.println(base_urlx);
+                        String nxtpg_url_val = getDemAllLong(base_urlx);
+
+                        String db_ = gotoDB(nxtpg_url_val);
+                    }
+                } else {
+                    base_urlx = urll + "/api/organisationUnits.json?maxLevel=" + pg_counterd + "&paging=false&fields=lastUpdated%2Cid%2Cname%2Clevel%2Ccreated%2Cpath";
+                    System.out.println(base_urlx);
+                    String nxtpg_url_val = getDemAllLong(base_urlx);
+
+                    String db_ = gotoDB(nxtpg_url_val);
+                }
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(dhisOrgRetrival.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-     
-     
-    
-    return pg_counterd;
+
+        return pg_counterd;
     }
 }

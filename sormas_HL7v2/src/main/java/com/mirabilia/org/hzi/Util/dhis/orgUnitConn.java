@@ -1,13 +1,11 @@
 package com.mirabilia.org.hzi.Util.dhis;
 
-
-
 import static com.mirabilia.org.hzi.Util.dhis.DHIS2resolver.getDemAll;
 import static com.mirabilia.org.hzi.Util.dhis.dhisOrgRetrival.starter;
+import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -28,6 +26,10 @@ import org.json.simple.parser.ParseException;
 @WebServlet(urlPatterns = {"/orggetter"})
 public class orgUnitConn extends HttpServlet {
 
+    private static String[] _url = ConffileCatcher.fileCatcher("passed");
+
+    private static String urll = _url[10].toString(); //should come from config file
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -40,40 +42,44 @@ public class orgUnitConn extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-         HttpSession sessionx = request.getSession(false);  
+
+        HttpSession sessionx = request.getSession(false);
 
         int initz = 0;
         int initzx = 0;
-       
 
         if (request.getParameter("pg_counter") != null) {
             initz = Integer.parseInt((String) request.getParameter("pg_counter"));
         }
-        
+
         if (request.getParameter("pg_counterx") != null) {
+
             initzx = Integer.parseInt((String) request.getParameter("pg_counterx"));
+
         }
-       
 
-        JSONParser jsonParser = new JSONParser();
-        String base_url = "http://172.105.77.79:8080/dhis/api/organisationUnits.json?fields=lastUpdated,id,closedDate,openingDate,name,shortName,level,created,path&paging=true&maxLevel=4";
-        String json_all = getDemAll(base_url);
-        PreparedStatement pstmt;
-        ResultSet rx;
+        if (initz == 1989) {
+            JSONParser jsonParser = new JSONParser();
 
-        JSONObject jsonObjectx;
+            String base_url = urll + "/api/organisationUnits.json?fields=name&maxLevel=1";
 
-        //System.out.println("initial target = " + initz);
-        //System.out.println("number to process = " + initzx);
+            String json_all = getDemAll(base_url);
 
-        if (initz == 1) {
-            //getting initializer
+            JSONObject jsonObjectx;
+            if (json_all.isEmpty()) {
+
+                response.setContentType("text/plain;charset=UTF-8");
+                response.setStatus(500);
+                ServletOutputStream sout = response.getOutputStream();
+                String content = "DHIS2 Not Responding";
+                sout.print(content);
+                return;
+            }
 
             try {
                 jsonObjectx = (JSONObject) jsonParser.parse(json_all);
                 Object pager_values = jsonObjectx.get("pager");
-                
+
                 System.out.println(pager_values);
 
                 JSONObject jsonObjectxx = (JSONObject) pager_values;
@@ -83,19 +89,16 @@ public class orgUnitConn extends HttpServlet {
 
                 int page_count = Integer.parseInt((String) conv);
                 int counter = 1;
-                
-                
+
                 response.setContentType("text/plain;charset=UTF-8");
                 response.setStatus(200);
                 ServletOutputStream sout = response.getOutputStream();
-                String content = ""+page_count;
-                
-                //returning total number of available pages
-              //  sessionx.setAttribute("total_org", content);
+                String content = "" + page_count;
 
+                //returning total number of available pages
+                sessionx.setAttribute("total_org", content);
                 sout.print(content);
 
-            //    System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                 return;
 
             } catch (ParseException ex) {
@@ -104,38 +107,52 @@ public class orgUnitConn extends HttpServlet {
             }
 
         }
-        
-        
-        
-         if (initz == 5050) {
-            //getting initializer
- 
+
+        if (initz == 5050) {
+            JSONParser jsonParser = new JSONParser();
+
+            String base_url = urll + "/api/organisationUnits.json?fields=name&maxLevel=1";
+
+            String json_all = getDemAll(base_url);
+
+            JSONObject jsonObjectx;
+            if (json_all.isEmpty()) {
+
+                response.setContentType("text/plain;charset=UTF-8");
+                response.setStatus(500);
+                ServletOutputStream sout = response.getOutputStream();
+                String content = "DHIS2 Not Responding";
+                sout.print(content);
+                return;
+            }
+
             try {
                 jsonObjectx = (JSONObject) jsonParser.parse(json_all);
                 Object pager_values = jsonObjectx.get("pager");
-                
-                System.out.println(pager_values);
-
                 JSONObject jsonObjectxx = (JSONObject) pager_values;
+                Long org_ttl = (Long) jsonObjectxx.get("total");
+                String conv = org_ttl + "";
 
-                Long level = (Long) jsonObjectxx.get("total");
-                String conv = level + "";
+                Object org_values = jsonObjectx.get("organisationUnits");
+                String nn = org_values.toString();
+                String cnty_set = sessionx.getAttribute("country").toString();
+                System.out.println(cnty_set);
+
+                if (!nn.contains(cnty_set)) {
+                    sessionx.setAttribute("err", "<div class=\"alert alert-danger\" role=\"alert\">  DHIS Instance Country is different from the one set in control file or not set properly? please fix this problem!</div>");
+                } else {
+                    sessionx.setAttribute("err", "");
+                }
 
                 int page_count = Integer.parseInt((String) conv);
-                int counter = 1;
-                
-                
+
                 response.setContentType("text/plain;charset=UTF-8");
                 response.setStatus(200);
                 ServletOutputStream sout = response.getOutputStream();
-                String content = ""+page_count;
-                
-                //returning total number of available pages
+                String content = "" + page_count;
+
                 sessionx.setAttribute("total_org", content);
-
                 sout.print(content);
-
-            //    System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                 return;
 
             } catch (ParseException ex) {
@@ -144,22 +161,25 @@ public class orgUnitConn extends HttpServlet {
             }
 
         }
-        
-        
-        
-        if(initzx > 0){
-            
-        //process each shunk and send the progress back to progress bar.
-        int pg_ = starter(initzx);
-        
-        response.setContentType("text/plain;charset=UTF-8");
+
+        if (initzx > 0) {
+
+            try {
+                //process each shunk and send the progress back to progress bar.
+                String ct_code = sessionx.getAttribute("country_code").toString();
+                int pg_ = starter(initzx, urll, ct_code);
+                
+                response.setContentType("text/plain;charset=UTF-8");
                 response.setStatus(200);
                 ServletOutputStream sout = response.getOutputStream();
-                String content = ""+pg_;
+                String content = "" + pg_;
                 sout.print(content);
-       // System.out.println("percentage been sent back to frontend"+content+"%");
+                // System.out.println("percentage been sent back to frontend"+content+"%");
+            } catch (SQLException ex) {
+                Logger.getLogger(orgUnitConn.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-     
+
     }
 
     /**

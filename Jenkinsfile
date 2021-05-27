@@ -44,9 +44,7 @@ pipeline {
                     sh """
                     sudo buildah bud --pull-always --no-cache -t sorams-dhis2 DockerController/
                     sudo buildah login -u $DOCKERHUB_CREDS_USR -p $DOCKERHUB_CREDS_PSW docker.io
-                    
-                    sudo buildah push -f v2s2 sorams-dhis2p hzibraunschweig/sorams-dhis2:latest
-                    
+                    #sudo buildah push -f v2s2 sorams-dhis2p hzibraunschweig/sorams-dhis2:latest
                     """
                 }
             }

@@ -3,7 +3,7 @@
 
 
 node {
-    agent any
+    
     environment {
         MVNHOME = tool 'Maven'
         DOCKERHUB_CREDS = credentials('dockerhub')

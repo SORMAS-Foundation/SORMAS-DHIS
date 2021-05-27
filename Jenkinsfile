@@ -9,7 +9,7 @@ node {
         DOCKERHUB_CREDS = credentials('dockerhub')
     }
 
-    def pom = readMavenPom file: 'pom.xml'
+    def pom = readMavenPom file: 'sormas_HL7v2/pom.xml'
         
     stage('Build') {
         steps {

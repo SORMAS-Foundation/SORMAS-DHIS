@@ -1,14 +1,4 @@
-
-   
-
-
 node {
-    
-    environment {
-        
-        DOCKERHUB_CREDS = credentials('dockerhub')
-    }
-
     def pom = readMavenPom file: 'sormas_HL7v2/pom.xml'
     def mvn = tool 'Maven'
         
@@ -45,4 +35,3 @@ node {
         }
     }
 }
-

@@ -1,5 +1,5 @@
 # we are extending everything from tomcat:8.0 image ...
-FROM tomcat:10.0.6
+FROM tomcat:9.0.46
 
 MAINTAINER your_name
 

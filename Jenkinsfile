@@ -2,6 +2,11 @@ node {
     def pom = readMavenPom file: 'sormas_HL7v2/pom.xml'
     def mvn = tool 'Maven'
         
+    stage('checkout') {
+        git branch: 'SORGEN-87', url: 'https://github.com/hzi-braunschweig/SORMAS-DHIS.git'
+    }
+    
+        
     stage('Build') {
         echo 'Building..'
         dir('sormas_HL7v2') {

@@ -26,17 +26,16 @@ public class DbConnector {
             String d4 = url[3];
             String d5 = url[4];
 
-           // System.out.println("jdbc:mysql://" + d1 + ":" + d2 + "/" + d3 + ", " + d4 + ", " + d5);
-
-            return DriverManager.getConnection("jdbc:mysql://" + d1 + ":" + d2 + "/" + d3,  d4, d5);
+            // System.out.println("jdbc:mysql://" + d1 + ":" + d2 + "/" + d3 + ", " + d4 + ", " + d5);
+            return DriverManager.getConnection("jdbc:mysql://" + d1 + ":" + d2 + "/" + d3 + "?useSSL=false", d4, d5);
 
         } catch (Exception ex) {
             System.out.println("Several!, Database mysql getConnection() has an Error -->" + ex.getMessage());
         }
         return null;
     }
-    
-     public static Connection getPgConnection() {
+
+    public static Connection getPgConnection() {
 
         String[] url = ConffileCatcher.fileCatcher("passed");
 
@@ -47,9 +46,14 @@ public class DbConnector {
             String d3 = url[7];
             String d4 = url[8];
             String d5 = url[9];
-           // System.out.println("jdbc:postgresql://" + d1 + ":" + d2 + "/" + d3 +","+  d4+",_"+ d5);
 
-           return DriverManager.getConnection("jdbc:postgresql://" + d1 + ":" + d2 + "/" + d3,  d4, d5);
+            String MySQLURL = "jdbc:mysql://localhost:3306/web?useSSL=false";
+            String databseUserName = "root";
+            String databasePassword = "123456";
+            Connection con = null;
+
+            // System.out.println("jdbc:postgresql://" + d1 + ":" + d2 + "/" + d3 +","+  d4+",_"+ d5);
+            return DriverManager.getConnection("jdbc:postgresql://" + d1 + ":" + d2 + "/" + d3, d4, d5);
 
         } catch (Exception ex) {
             System.out.println("Several!, Postgresql Database getConnection() has an Error -->" + ex.getMessage());

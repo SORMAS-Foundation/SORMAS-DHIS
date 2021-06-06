@@ -57,6 +57,12 @@ public class sql {
             + "left join region r on (c.region_id = r.id)\n"
             + "group by c.disease, c.region_id, c.reportdate::date";
 
+    // Unknown/Missing
+    public static String all_Casses = "select count(*), c.disease, c.reportdate::date\n"
+            + "from cases c\n"
+            + "where c.region_id = ?\n"
+            + "group by c.disease, c.reportdate::date";
+
 //no of cases in country
     public static String getSORMAS_INCOUNTRY = "select count(*), c.disease, (select name from region where id = c.region_id), (select externalid from region where id = c.region_id), c.reportdate::date\n"
             + "from cases c\n"
@@ -133,8 +139,6 @@ public class sql {
             + "where c.caseage is null and c.region_id = ?\n"
             + "group by c.disease, c.region_id, c.reportdate::date, c.quarantine, c.caseage";
 
-    
-    
     //occupation health worker
     public static String Occupation_Health_Worker = "select count(*), c.disease, (select firstname from person where id = c.person_id), (select lastname from person where id = c.person_id), c.reportdate::date, p.occupationtype\n"
             + "from cases c\n"
@@ -150,10 +154,10 @@ public class sql {
             + "group by c.disease, c.person_id, c.reportdate::date, p.occupationtype";
 
     //occupation missing unknown
-    public static String Occupation_unknow_missing = "select count(*), c.disease, (select firstname from person where id = c.person_id), (select lastname from person where id = c.person_id), c.reportdate::date, p.occupationtype\n"
+    public static String Occupation_unknow_missing = "select count(*),c.person_id, c.disease, c.reportdate::date, p.occupationtype\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
-            + "where (p.occupationtype is null and c.region_id = ?\n"
+            + "where p.occupationtype is null and c.region_id = ?\n"
             + "group by c.disease, c.person_id, c.reportdate::date, p.occupationtype";
 
     //occupation health worker
@@ -177,20 +181,48 @@ public class sql {
             + "group by c.disease, c.person_id, c.reportdate::date, c.laboratorydiagnosticconfirmation";
 
     //confirmed_others
-    public static String confirm_others = "select count(*), c.disease, (select firstname from person where id = c.person_id), (select lastname from person where id = c.person_id), c.reportdate::date, p.sex\n"
+    public static String gender_others = "select count(*), c.disease, (select firstname from person where id = c.person_id), (select lastname from person where id = c.person_id), c.reportdate::date, p.sex\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
             + "where p.sex != 'FEMALE' and p.sex != 'MALE' and p.sex is not null and c.region_id = ?\n"
             + "group by c.disease, c.person_id, c.reportdate::date, p.sex";
 
     // Unknown/Missing
-    public static String confirm_missing = "select count(*), c.disease, (select firstname from person where id = c.person_id), (select lastname from person where id = c.person_id), c.reportdate::date, p.sex\n"
+    public static String gender_missing = "select count(*), c.disease, c.reportdate::date, p.sex\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
             + "where p.sex='MALE' and c.region_id = ?\n"
-            + "group by c.disease, c.person_id, c.reportdate::date, p.sex"; 
-    
+            + "group by c.disease, c.person_id, c.reportdate::date, p.sex";
 
+//suspected cases
+    public static String Get_all_Suspect_CASES
+            = "select count(*), c.disease, c.reportdate::date\n"
+            + "from cases c\n";
+
+    //suspected cases
+    public static String Get_all_Propable_CASES
+            = "select count(*), c.disease, c.reportdate::date\n"
+            + "from cases c\n";
+
+    //suspected cases
+    public static String Get_all_suspected_CASES
+            = "select count(*), c.disease, c.reportdate::date\n"
+            + "from cases c\n";
+
+    //suspected cases
+    public static String Get_all_not_yet_classified_CASES
+            = "select count(*), c.disease, c.reportdate::date\n"
+            + "from cases c\n";
+
+    //occupation others 
+    public static String Occupation_others = "select count(*), c.disease, c.reportdate::date, p.occupationtype, c.person_id\n"
+            + "from cases c\n"
+            + "left join person p on (c.person_id = p.id)\n"
+            + "where p.occupationtype != 'laboratory staff'  and p.occupationtype != 'healthworker'  and c.region_id = ?\n"
+            + "group by c.disease, c.person_id, c.reportdate::date, p.occupationtype";
+
+    
+    
     public static String getSROMAS_community_PG = "select count(*), c.disease, (select name from community where id = c.community_id), (select externalid from community where id = c.community_id), c.creationdate::date\n"
             + "from cases c\n"
             + "left join community r on (c.community_id = r.id)\n"

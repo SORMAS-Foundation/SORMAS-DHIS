@@ -68,6 +68,9 @@ public class AggregrateController {
             PreparedStatement pa = null;
             ResultSet ra = null;
 
+            PreparedStatement pa_0 = null;
+            ResultSet ra_0 = null;
+            
             PreparedStatement pa_1 = null;
             ResultSet ra_1 = null;
 
@@ -82,8 +85,8 @@ public class AggregrateController {
 
             PreparedStatement pa_5 = null;
             ResultSet ra_5 = null;
-            
-              PreparedStatement pa_6 = null;
+
+            PreparedStatement pa_6 = null;
             ResultSet ra_6 = null;
 
             PreparedStatement pa_7 = null;
@@ -97,15 +100,75 @@ public class AggregrateController {
 
             PreparedStatement pa_10 = null;
             ResultSet ra_10 = null;
-            
+
             PreparedStatement pa_11 = null;
             ResultSet ra_11 = null;
-            
+
             PreparedStatement pa_12 = null;
             ResultSet ra_12 = null;
-            
+
             PreparedStatement pa_13 = null;
             ResultSet ra_13 = null;
+
+            PreparedStatement pa_14 = null;
+            ResultSet ra_14 = null;
+
+            PreparedStatement pa_15 = null;
+            ResultSet ra_15 = null;
+
+            PreparedStatement pa_16 = null;
+            ResultSet ra_16 = null;
+
+            PreparedStatement pa_17 = null;
+            ResultSet ra_17 = null;
+
+            PreparedStatement pa_18 = null;
+            ResultSet ra_18 = null;
+
+            PreparedStatement pa_19 = null;
+            ResultSet ra_19 = null;
+
+            PreparedStatement pa_20 = null;
+            ResultSet ra_20 = null;
+
+            PreparedStatement pa_21 = null;
+            ResultSet ra_21 = null;
+
+            PreparedStatement pa_22 = null;
+            ResultSet ra_22 = null;
+
+            PreparedStatement pa_23 = null;
+            ResultSet ra_23 = null;
+
+            PreparedStatement pa_24 = null;
+            ResultSet ra_24 = null;
+
+            PreparedStatement pa_25 = null;
+            ResultSet ra_25 = null;
+
+            PreparedStatement pa_26 = null;
+            ResultSet ra_26 = null;
+
+            PreparedStatement pa_27 = null;
+            ResultSet ra_27 = null;
+
+            PreparedStatement pa_28 = null;
+            ResultSet ra_28 = null;
+
+            PreparedStatement pa_29 = null;
+            ResultSet ra_29 = null;
+
+            PreparedStatement pa_30 = null;
+            ResultSet ra_30 = null;
+
+            PreparedStatement pa_31 = null;
+            ResultSet ra_31 = null;
+
+            PreparedStatement pa_32 = null;
+            ResultSet ra_32 = null;
+
+            PreparedStatement pa_33 = null;
+            ResultSet ra_33 = null;
 
             if ("2".equals(lev)) {
                 System.out.println("1111111111111111");
@@ -130,6 +193,7 @@ public class AggregrateController {
                     if (ra.getString(4) != null) {
                         String region_id = ra.getString(6);
                         String[] ad = splitt.split(",");
+                        String all_cast = "0";
                         String incountry = "0";
                         String imported = "0";
                         String death = "0";
@@ -143,10 +207,38 @@ public class AggregrateController {
                         String age_5 = "0";
                         String age_6 = "0";
                         String age_7 = "0";
-                        String age_8 = "0";
-                       
+                        String Occupation_Health_Worker = "0";
+                        String Occupation_Lab_Staff = "0";
+                        String Occupation_unknow_missing = "0";
+                        String Occupation_others = "0";
+                        String Male = "0";
+                        String female = "0";
+                        String not_confirmed_lab = "0";
+                        String gender_others = "0";
+                        String gender_missing = "0";
+                        
+                        String SROMAS_community_PG = "0";
+                        String SROMAS_hf_PG = "0";
+                        String SROMAS_district_PG_outc = "0";
+                        String SROMAS_region_PG_outc = "0";
+                        String SROMAS_community_PG_outc = "0";
+                        String SROMAS_hf_PG_outc = "0";
+                        String SROMAS_district_PG_class = "0";
+                        String SROMAS_region_PG_class = "0";
+                        String SROMAS_community_PG_class = "0";
+                        String SROMAS_hf_PG_class = "0";
 
                         System.out.println("E3432221_:" + ra.getString(6));
+                        
+                        pa_0 = cox.prepareStatement(sql.all_Casses);
+                        pa_0.setInt(1, Integer.parseInt(region_id));
+                        ra_0 = pa_0.executeQuery();
+                        if (ra_0.next()) {
+                            all_cast = ra_0.getString(1);
+                            System.out.println("E3432220000:" + ra_0.getString(1));
+                        }
+                        
+                        
                         // String incountry = "";
 
                         pa_1 = cox.prepareStatement(sql.getSORMAS_INCOUNTRY);
@@ -187,7 +279,7 @@ public class AggregrateController {
                             not_det_rec = ra_5.getString(1);
                             System.out.println("E34325:" + ra_5.getString(1));
                         }
-                        
+
                         //AGE Disaggregation
                         pa_6 = cox.prepareStatement(sql.Age_LESS_5);
                         pa_6.setInt(1, Integer.parseInt(region_id));
@@ -196,7 +288,7 @@ public class AggregrateController {
                             age_1 = ra_6.getString(1);
                             System.out.println("E34326:" + ra_6.getString(1));
                         }
-                        
+
                         pa_7 = cox.prepareStatement(sql.Age_LESS5_GREATER_14);
                         pa_7.setInt(1, Integer.parseInt(region_id));
                         ra_7 = pa_7.executeQuery();
@@ -204,7 +296,7 @@ public class AggregrateController {
                             age_2 = ra_7.getString(1);
                             System.out.println("E34327:" + ra_7.getString(1));
                         }
-                        
+
                         pa_8 = cox.prepareStatement(sql.Age_greater_14_and_less_40);
                         pa_8.setInt(1, Integer.parseInt(region_id));
                         ra_8 = pa_8.executeQuery();
@@ -212,7 +304,7 @@ public class AggregrateController {
                             age_3 = ra_8.getString(1);
                             System.out.println("E34328:" + ra_8.getString(1));
                         }
-                        
+
                         pa_9 = cox.prepareStatement(sql.Age__grat40_less65);
                         pa_9.setInt(1, Integer.parseInt(region_id));
                         ra_9 = pa_9.executeQuery();
@@ -220,7 +312,7 @@ public class AggregrateController {
                             age_4 = ra_9.getString(1);
                             System.out.println("E34325:" + ra_9.getString(1));
                         }
-                        
+
                         pa_10 = cox.prepareStatement(sql.Age_grater65_less80yr);
                         pa_10.setInt(1, Integer.parseInt(region_id));
                         ra_10 = pa_10.executeQuery();
@@ -228,7 +320,7 @@ public class AggregrateController {
                             age_5 = ra_10.getString(1);
                             System.out.println("E3432_10:" + ra_10.getString(1));
                         }
-                        
+
                         pa_11 = cox.prepareStatement(sql.Age_above_80);
                         pa_11.setInt(1, Integer.parseInt(region_id));
                         ra_11 = pa_11.executeQuery();
@@ -236,7 +328,7 @@ public class AggregrateController {
                             age_6 = ra_11.getString(1);
                             System.out.println("E34325:" + ra_11.getString(1));
                         }
-                        
+
                         pa_12 = cox.prepareStatement(sql.Age_Missing_Unknown);
                         pa_12.setInt(1, Integer.parseInt(region_id));
                         ra_12 = pa_12.executeQuery();
@@ -244,20 +336,117 @@ public class AggregrateController {
                             age_7 = ra_12.getString(1);
                             System.out.println("E34325:" + ra_12.getString(1));
                         }
-                        
+
                         pa_13 = cox.prepareStatement(sql.Occupation_Health_Worker);
                         pa_13.setInt(1, Integer.parseInt(region_id));
                         ra_13 = pa_13.executeQuery();
                         if (ra_13.next()) {
-                            age_8 = ra_13.getString(1);
+                            Occupation_Health_Worker = ra_13.getString(1);
                             System.out.println("E34323++++++++++++++++:" + ra_13.getString(1));
+                        }
+
+                        pa_14 = cox.prepareStatement(sql.Occupation_Lab_Staff);
+                        pa_14.setInt(1, Integer.parseInt(region_id));
+                        ra_14 = pa_13.executeQuery();
+                        if (ra_14.next()) {
+                            Occupation_Lab_Staff = ra_14.getString(1);
+                            System.out.println("E34323++++++++++++++++:" + ra_14.getString(1));
+                        }
+
+                        pa_15 = cox.prepareStatement(sql.Occupation_unknow_missing);
+                        pa_15.setInt(1, Integer.parseInt(region_id));
+                        ra_15 = pa_15.executeQuery();
+                        if (ra_15.next()) {
+                            Occupation_unknow_missing = ra_15.getString(1);
+                            System.out.println("E34323++++++++++++++++:" + ra_15.getString(1));
+                        }
+                        
+                        pa_20 = cox.prepareStatement(sql.Occupation_others);
+                        pa_20.setInt(1, Integer.parseInt(region_id));
+                        ra_20 = pa_20.executeQuery();
+                        if (ra_20.next()) {
+                            Occupation_unknow_missing = ra_20.getString(1);
+                            System.out.println("E34323++++++++++++++++:" + ra_20.getString(1));
+                        }
+
+                        pa_16 = cox.prepareStatement(sql.Male);
+                        pa_16.setInt(1, Integer.parseInt(region_id));
+                        ra_16 = pa_16.executeQuery();
+                        if (ra_16.next()) {
+                            Male = ra_16.getString(1);
+                            System.out.println("E34323++++++++++++++++:" + ra_16.getString(1));
+                        }
+
+                        pa_17 = cox.prepareStatement(sql.female);
+                        pa_17.setInt(1, Integer.parseInt(region_id));
+                        ra_17 = pa_17.executeQuery();
+                        if (ra_17.next()) {
+                            female = ra_17.getString(1);
+                            System.out.println("E34323++++++++++++++++:" + ra_17.getString(1));
+                        }
+                          pa_19 = cox.prepareStatement(sql.gender_others);
+                        pa_19.setInt(1, Integer.parseInt(region_id));
+                        ra_19 = pa_19.executeQuery();
+                        if (ra_19.next()) {
+                            gender_others = ra_19.getString(1);
+                            System.out.println("E34323++++++++++++++++:" + ra_19.getString(1));
+                        }
+
+                        pa_20 = cox.prepareStatement(sql.gender_missing);
+                        pa_20.setInt(1, Integer.parseInt(region_id));
+                        ra_20 = pa_20.executeQuery();
+                        if (ra_20.next()) {
+                            gender_missing = ra_20.getString(1);
+                            System.out.println("E34323++++++++++++++++:" + ra_20.getString(1));
                         }
                         
                         
                         
+                        pa_18 = cox.prepareStatement(sql.not_confirmed_lab);
+                        pa_18.setInt(1, Integer.parseInt(region_id));
+                        ra_18 = pa_18.executeQuery();
+                        if (ra_18.next()) {
+                            not_confirmed_lab = ra_18.getString(1);
+                            System.out.println("E34323++++++++++++++++:" + ra_18.getString(1));
+                        }
+                        
+                         /* Iyanu to fix confirmed_lab*/
+
+                      
+
                         System.out.println(ra.getString(5) + " " + ad[0] + " " + ra.getString(4) + " " + ad[1] + " " + ra.getString(1) + " " + dtf.format(now) + " " + ra.getString(4) + " " + ra.getString(3) + " " + imported + " " + incountry);
 
-                        SendCasesToDHIS(ra.getString(5), ad[0], ra.getString(4), ad[1], ra.getString(1), dtf.format(now), ra.getString(4) + " Aggregate", ra.getString(3), imported, incountry,death, recover, not_det_rec, age_1);
+                        SendCasesToDHIS(ra.getString(5), ad[0], ra.getString(4), ad[1], ra.getString(1), dtf.format(now), ra.getString(4) + " Aggregate", ra.getString(3), imported, incountry, death, recover, not_det_rec, age_1,age_2, age_3, age_4, age_5, age_6, age_7, Occupation_Health_Worker, Occupation_Lab_Staff, Occupation_unknow_missing,Male, female, not_confirmed_lab, gender_others, gender_missing, SROMAS_community_PG, SROMAS_hf_PG, SROMAS_district_PG_outc, SROMAS_region_PG_outc,            SROMAS_community_PG_outc, SROMAS_hf_PG_outc, SROMAS_district_PG_class, SROMAS_region_PG_class, SROMAS_community_PG_class, SROMAS_hf_PG_class);
+//imported
+// incountry
+// death
+// recover
+// not_det_rec
+// age_1
+//age_2
+// age_3
+// age_4
+// age_5
+// age_6
+// age_7
+// age_8
+// Occupation_Lab_Staff
+// Occupation_unknow_missing
+//Male
+// female
+// not_confirmed_lab
+// confirm_others
+// confirm_missing
+// SROMAS_community_PG
+// SROMAS_hf_PG
+// SROMAS_district_PG_outc
+// SROMAS_region_PG_outc
+//            SROMAS_community_PG_outc
+// SROMAS_hf_PG_outc
+// SROMAS_district_PG_class
+// SROMAS_region_PG_class
+// SROMAS_community_PG_class
+// SROMAS_hf_PG_class
 
                         System.out.println("1______date:" + ra.getString(5) + " , dataset" + ad[0] + " , org_" + ra.getString(4) + " , element" + ad[1] + " , count" + ra.getString(1) + " , pero" + dtf.format(now) + " , " + ra.getString(4) + " Aggregate" + " , " + ra.getString(3));
                     }
@@ -291,7 +480,11 @@ public class AggregrateController {
 
     private static String httpx = _url[10].toString(); //should come from config file
 
-    public static void SendCasesToDHIS(String cPer, String dSet, String OrgUnit, String dEle, String val, String tDay, String disC, String org_name, String incount, String impor, String death, String recover, String no_outcome, String age_1) {
+    public static void SendCasesToDHIS(String cPer, String dSet, String OrgUnit, String dEle, String val, String tDay, String disC, String org_name, String incount, String impor, String death, String recover, String no_outcome,
+            String age_1, String age_2, String age_3, String age_4, String age_5, String age_6, String age_7, String age_8, String Occupation_Lab_Staff, String Occupation_unknow_missing,
+            String Male, String female, String not_confirmed_lab, String gender_others, String gender_missing, String SROMAS_community_PG, String SROMAS_hf_PG, String SROMAS_district_PG_outc, String SROMAS_region_PG_outc,
+            String SROMAS_community_PG_outc, String SROMAS_hf_PG_outc, String SROMAS_district_PG_class, String SROMAS_region_PG_class, String SROMAS_community_PG_class, String SROMAS_hf_PG_class) {
+
         StringBuilder sb = new StringBuilder();
         System.out.println("URI in use: " + httpx);
 
@@ -342,55 +535,110 @@ public class AggregrateController {
             item2.put("dataElement", "LwLDycsBaSC");
             item2.put("value", Integer.valueOf(impor));
             array.add(item2);
-            
+
             //OUTCOME
             JSONObject item3 = new JSONObject();
             item3.put("categoryOptionCombo", "HEVkjakWadt");
             item3.put("dataElement", "ObwbuybGqev");
             item3.put("value", Integer.valueOf(death));
             array.add(item3);
-            
+
             JSONObject item4 = new JSONObject();
             item4.put("categoryOptionCombo", "SNwVO65yKLD");
             item4.put("dataElement", "ObwbuybGqev");
             item4.put("value", Integer.valueOf(recover));
             array.add(item4);
-            
+
             JSONObject item5 = new JSONObject();
-            item5.put("categoryOptionCombo", "ziGYcHoUlxG");
-            item5.put("dataElement", "ObwbuybGqev");
-            item5.put("value", Integer.valueOf(no_outcome));
+            item5.put("categoryOptionCombo", "zYy56QC7AMh");
+            item5.put("dataElement", "M2lh3zVT85m");
+            item5.put("value", Integer.valueOf(not_confirmed_lab));
             array.add(item5);
             
-            //AGE
+            
+//GENDER
             JSONObject item6 = new JSONObject();
-            item6.put("categoryOptionCombo", "ziGYcHoUlxG");
-            item6.put("dataElement", "ObwbuybGqev");
-            item6.put("value", Integer.valueOf(no_outcome));
+            item6.put("categoryOptionCombo", "WuSqzHEx8zh");
+                item6.put("dataElement", "p5lUq0nikYc");
+            item6.put("value", Integer.valueOf(gender_others));
             array.add(item6);
+
             
             JSONObject item7 = new JSONObject();
-            item7.put("categoryOptionCombo", "ziGYcHoUlxG");
-            item7.put("dataElement", "ObwbuybGqev");
-            item7.put("value", Integer.valueOf(no_outcome));
+            item7.put("categoryOptionCombo", "XqVYgyPkDDD");
+            item7.put("dataElement", "p5lUq0nikYc");
+            item7.put("value", Integer.valueOf(Male));
             array.add(item7);
-            
-             JSONObject item8 = new JSONObject();
-            item8.put("categoryOptionCombo", "ziGYcHoUlxG");
-            item8.put("dataElement", "ObwbuybGqev");
-            item8.put("value", Integer.valueOf(no_outcome));
+
+            JSONObject item8 = new JSONObject();
+            item8.put("categoryOptionCombo", "hzuy9TV8MEW");
+            item8.put("dataElement", "p5lUq0nikYc");
+            item8.put("value", Integer.valueOf(female));
             array.add(item8);
-            
-            //age_1
-             JSONObject item9 = new JSONObject();
-            item9.put("categoryOptionCombo", "ziGYcHoUlxG");
-            item9.put("dataElement", "ObwbuybGqev");
-            item9.put("value", Integer.valueOf(age_1));
+
+            JSONObject item9 = new JSONObject();
+            item9.put("categoryOptionCombo", "X6mISFBGX0t");
+            item9.put("dataElement", "p5lUq0nikYc");
+            item9.put("value", Integer.valueOf(gender_missing));
             array.add(item9);
             
-            
-            
-            
+
+            JSONObject item10 = new JSONObject();
+            item10.put("categoryOptionCombo", "ADVU5rDCqdL");
+            item10.put("dataElement", "XUAtpFmcDTN");
+            item10.put("value", Integer.valueOf(Occupation_Lab_Staff));
+            array.add(item10);
+
+            JSONObject item11 = new JSONObject();
+            item11.put("categoryOptionCombo", "Tfjs297bieK");
+            item11.put("dataElement", "XUAtpFmcDTN");
+            item11.put("value", Integer.valueOf(Occupation_unknow_missing));
+            array.add(item11);
+
+            //AGE
+            JSONObject item12 = new JSONObject();
+            item12.put("categoryOptionCombo", "fBXLtsRhjmL");
+            item12.put("dataElement", "WZNgywrtQsl");
+            item12.put("value", Integer.valueOf(age_1));
+            array.add(item12);
+
+            JSONObject item13 = new JSONObject();
+            item13.put("categoryOptionCombo", "v7YmpmfRfTj");
+            item13.put("dataElement", "WZNgywrtQsl");
+            item13.put("value", Integer.valueOf(age_2));
+            array.add(item13);
+
+            JSONObject item14 = new JSONObject();
+            item14.put("categoryOptionCombo", "aZR8OrZdxy1");
+            item14.put("dataElement", "WZNgywrtQsl");
+            item14.put("value", Integer.valueOf(age_3));
+            array.add(item14);
+
+            JSONObject item15 = new JSONObject();
+            item15.put("categoryOptionCombo", "qK08trg18Wr");
+            item15.put("dataElement", "WZNgywrtQsl");
+            item15.put("value", Integer.valueOf(age_4));
+            array.add(item15);
+
+            JSONObject item16 = new JSONObject();
+            item16.put("categoryOptionCombo", "gI6hobBK0Fv");
+            item16.put("dataElement", "WZNgywrtQsl");
+            item16.put("value", Integer.valueOf(age_5));
+            array.add(item16);
+
+            JSONObject item17 = new JSONObject();
+            item17.put("categoryOptionCombo", "NZzOXySPLdW");
+            item17.put("dataElement", "WZNgywrtQsl");
+            item17.put("value", Integer.valueOf(age_6
+            ));
+            array.add(item17);
+
+            JSONObject item18 = new JSONObject();
+            item18.put("categoryOptionCombo", "FY8ksWTLuFp");
+            item18.put("dataElement", "WZNgywrtQsl");
+            item18.put("value", Integer.valueOf(age_7
+            ));
+            array.add(item18);
 
             /*  JSONObject item2 = new JSONObject();
             item1.put("categoryOptionCombo", "CqhKacjKIyG");
@@ -400,6 +648,10 @@ public class AggregrateController {
             json.put("dataValues", array);
 
             System.out.println("E8765: " + json.toString());
+            
+            if(1 == 2){
+                return;
+            }
 
             OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
             out.write(json.toString());

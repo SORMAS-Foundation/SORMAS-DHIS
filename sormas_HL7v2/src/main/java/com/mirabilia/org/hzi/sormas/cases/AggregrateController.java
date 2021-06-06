@@ -81,8 +81,12 @@ public class AggregrateController {
     private static String gender_others = "0";
     private static String gender_missing = "0";
     private static String not_confirmed_lab = "0";
+    
+    private static String[] _url = ConffileCatcher.fileCatcher("passed");
 
-    public static void SormasAggregrator(String lev) {
+    private static String httpx = _url[10].toString(); //should come from config file
+    
+    public static void SormasAggregrator(String lev) throws ClassNotFoundException {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
@@ -214,7 +218,7 @@ public class AggregrateController {
             ra = pa.executeQuery();
             while (ra.next()) {
                 ////System.out.println("I am in DHIS2 pusher AggregrateController");
-                String splitt = update_oneParm("select concat(s.parm2,\",\", s.parm3) from transition_parameters s where s.parm1 = ?", ra.getString(2));
+                String splitt = SendToDHISServer.update_oneParm("select concat(s.parm2,\",\", s.parm3) from transition_parameters s where s.parm1 = ?", ra.getString(2));
 
                 if (!splitt.isEmpty()) {
                     if (ra.getString(4) != null) {
@@ -460,39 +464,8 @@ public class AggregrateController {
 
                         //System.out.println(ra.getString(5) + " " + ad[0] + " " + ra.getString(4) + " " + ad[1] + " " + ra.getString(1) + " " + dtf.format(now) + " " + ra.getString(4) + " " + ra.getString(3) + " " + imported + " " + incountry);
 
-                        SendCasesToDHIS(ra.getString(4), ad[0], ra.getString(3), ad[1], ra.getString(1), dtf.format(now), ra.getString(4) + " Aggregate", ra.getString(6), imported, incountry, death, recover, not_det_rec, age_1, age_2, age_3, age_4, age_5, age_6, age_7, Occupation_Health_Worker, Occupation_Lab_Staff, Occupation_unknow_missing, Male, female, not_confirmed_lab, gender_others, gender_missing, confirmed_lab, confirmed_missing);
-//imported
-// incountry
-// death
-// recover
-// not_det_rec
-// age_1
-//age_2
-// age_3
-// age_4
-// age_5
-// age_6
-// age_7
-// age_8
-// Occupation_Lab_Staff
-// Occupation_unknow_missing
-//Male
-// female
-// not_confirmed_lab
-// confirm_others
-// confirm_missing
-// SROMAS_community_PG
-// SROMAS_hf_PG
-// SROMAS_district_PG_outc
-// SROMAS_region_PG_outc
-//            SROMAS_community_PG_outc
-// SROMAS_hf_PG_outc
-// SROMAS_district_PG_class
-// SROMAS_region_PG_class
-// SROMAS_community_PG_class
-// SROMAS_hf_PG_class
+                        SendToDHISServer.SendCasesToDHIS(ra.getString(4), ad[0], ra.getString(3), ad[1], ra.getString(1), dtf.format(now), ra.getString(4) + " Aggregate", ra.getString(6), imported, incountry, death, recover, not_det_rec, age_1, age_2, age_3, age_4, age_5, age_6, age_7, Occupation_Health_Worker, Occupation_Lab_Staff, Occupation_unknow_missing, Male, female, not_confirmed_lab, gender_others, gender_missing, confirmed_lab, confirmed_missing);
 
-                        //System.out.println("1______date:" + ra.getString(5) + " , dataset" + ad[0] + " , org_" + ra.getString(4) + " , element" + ad[1] + " , count" + ra.getString(1) + " , pero" + dtf.format(now) + " , " + ra.getString(4) + " Aggregate" + " , " + ra.getString(3));
                     }
                 } else {
 
@@ -501,331 +474,11 @@ public class AggregrateController {
 
         } catch (SQLException ex) {
             Logger.getLogger(AggregrateController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AggregrateController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    public static void JsonPerser() {
-        //$$dis$$ = disease_count
-        //$$dis_sh$$ = disease_countshort
-
-        //$$disX$$ = disease_name
-        //$$dis_shX$$ = disease_shortname
-        //$$dis_sh_x$$  = SRM Module Aggregate D1 Form
-        //$$dis_sh_freq$$  =  freques(Daily, Weekly, Montly)
-        //$$dis_sh_sec$$  =  section name
-        JSONParser parser = new JSONParser();
-
-        // JSONObject json = (JSONObject) parser.parse(vc);
-    }
-    private static String[] _url = ConffileCatcher.fileCatcher("passed");
-
-    private static String httpx = _url[10].toString(); //should come from config file
-
-    public static void SendCasesToDHIS(String cPer, String dSet, String OrgUnit, String dEle, String val, String tDay, String disC, String org_name, String incount, String impor, String death, String recover, String no_outcome,
-            String age_1, String age_2, String age_3, String age_4, String age_5, String age_6, String age_7, String age_8, String Occupation_Lab_Staff, String Occupation_unknow_missing,
-            String Male, String female, String not_confirmed_lab, String gender_others, String gender_missing, String confirmed_lab, String comfrimed_missing) {
-
-        StringBuilder sb = new StringBuilder();
-        System.out.println("URI in use: " + httpx);
-
-        String http = httpx + "/api/dataValueSets";
-
-        HttpURLConnection urlConnection = null;
-        String name = "admin";
-        String password = "district";
-
-        String authString = name + ":" + password;
-
-        byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
-        String authStringEnc = new String(authEncBytes);
-        try {
-            URL url = new URL(http);
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestProperty("Authorization", "Basic " + authStringEnc);
-            urlConnection.setDoOutput(true);
-            urlConnection.setRequestMethod("POST");
-            urlConnection.setUseCaches(true);
-            urlConnection.setConnectTimeout(10000);
-            urlConnection.setReadTimeout(10000);
-            urlConnection.setRequestProperty("Content-Type", "application/json");
-            urlConnection.connect();
-
-            JSONObject json = new JSONObject();
-            json.put("dataSet", dSet);
-            json.put("completeDate", tDay);
-
-            json.put("period", cPer.replaceAll("-", ""));
-            json.put("orgUnit", OrgUnit);
-
-            JSONArray array = new JSONArray();
- if (!"0".equals(val)){
-            JSONObject item = new JSONObject();
-            item.put("dataElement", dEle);
-            item.put("value", Integer.parseInt(val));
-            array.add(item);
- }
-  if (!"0".equals(incount)){
-            JSONObject item1 = new JSONObject();
-            item1.put("categoryOptionCombo", "yr9KCcp24dI");
-            item1.put("dataElement", "LwLDycsBaSC");
-            item1.put("value", Integer.valueOf(incount));
-            array.add(item1);
-  }
-   if (!"0".equals(impor)){
-            JSONObject item2 = new JSONObject();
-            item2.put("categoryOptionCombo", "CqhKacjKIyG");
-            item2.put("dataElement", "LwLDycsBaSC");
-            item2.put("value", Integer.valueOf(impor));
-            array.add(item2);
-   }
-            //OUTCOME
-             if (!"0".equals(death)){
-            JSONObject item3 = new JSONObject();
-            item3.put("categoryOptionCombo", "HEVkjakWadt");
-            item3.put("dataElement", "ObwbuybGqev");
-            item3.put("value", Integer.valueOf(death));
-            array.add(item3);
-             }
-              if (!"0".equals(recover)){
-            JSONObject item4 = new JSONObject();
-            item4.put("categoryOptionCombo", "SNwVO65yKLD");
-            item4.put("dataElement", "ObwbuybGqev");
-            item4.put("value", Integer.valueOf(recover));
-            array.add(item4);
-              }
-               if (!"0".equals(not_confirmed_lab)){
-            JSONObject item5 = new JSONObject();
-            item5.put("categoryOptionCombo", "znFDz5MUKFU");
-            item5.put("dataElement", "M2lh3zVT85m");
-            item5.put("value", Integer.valueOf(not_confirmed_lab));
-            array.add(item5);
-               }
-                if (!"0".equals(confirmed_lab)){
-            JSONObject item5_a = new JSONObject();
-            item5_a.put("categoryOptionCombo", "zYy56QC7AMh");
-            item5_a.put("dataElement", "M2lh3zVT85m");
-            item5_a.put("value", Integer.valueOf(confirmed_lab));
-            array.add(item5_a);
-                }
-//GENDER
-if (!"0".equals(gender_others)){
-            JSONObject item6 = new JSONObject();
-            item6.put("categoryOptionCombo", "WuSqzHEx8zh");
-            item6.put("dataElement", "p5lUq0nikYc");
-            item6.put("value", Integer.valueOf(gender_others));
-            array.add(item6);
-}
-if (!"0".equals(Male)){
-            JSONObject item7 = new JSONObject();
-            item7.put("categoryOptionCombo", "XqVYgyPkDDD");
-            item7.put("dataElement", "p5lUq0nikYc");
-            item7.put("value", Integer.valueOf(Male));
-            array.add(item7);
-}
-if (!"0".equals(female)){
-            JSONObject item8 = new JSONObject();
-            item8.put("categoryOptionCombo", "hzuy9TV8MEW");
-            item8.put("dataElement", "p5lUq0nikYc");
-            item8.put("value", Integer.valueOf(female));
-            array.add(item8);
-}
-if (!"0".equals(gender_missing)){
-            JSONObject item9 = new JSONObject();
-            item9.put("categoryOptionCombo", "X6mISFBGX0t");
-            item9.put("dataElement", "p5lUq0nikYc");
-            item9.put("value", Integer.valueOf(gender_missing));
-            array.add(item9);
-}
-if (!"0".equals(Occupation_Lab_Staff)){
-            JSONObject item10 = new JSONObject();
-            item10.put("categoryOptionCombo", "ADVU5rDCqdL");
-            item10.put("dataElement", "XUAtpFmcDTN");
-            item10.put("value", Integer.valueOf(Occupation_Lab_Staff));
-            array.add(item10);
-}
-if (!"0".equals(Occupation_unknow_missing)){
-            JSONObject item11 = new JSONObject();
-            item11.put("categoryOptionCombo", "Tfjs297bieK");
-            item11.put("dataElement", "XUAtpFmcDTN");
-            item11.put("value", Integer.valueOf(Occupation_unknow_missing));
-            array.add(item11);
-}
-            //AGE
-  if (!"0".equals(age_1)){
-            JSONObject item12 = new JSONObject();
-            item12.put("categoryOptionCombo", "fBXLtsRhjmL");
-            item12.put("dataElement", "WZNgywrtQsl");
-            item12.put("value", Integer.valueOf(age_1));
-            array.add(item12);
-  }
-   if (!"0".equals(age_2)){
-            JSONObject item13 = new JSONObject();
-            item13.put("categoryOptionCombo", "v7YmpmfRfTj");
-            item13.put("dataElement", "WZNgywrtQsl");
-            item13.put("value", Integer.valueOf(age_2));
-            array.add(item13);
-}
-   if (!"0".equals(age_3)){
-            JSONObject item14 = new JSONObject();
-            item14.put("categoryOptionCombo", "aZR8OrZdxy1");
-            item14.put("dataElement", "WZNgywrtQsl");
-            item14.put("value", Integer.valueOf(age_3));
-            array.add(item14);
-}
-   if (!"0".equals(age_4)){
-            JSONObject item15 = new JSONObject();
-            item15.put("categoryOptionCombo", "qK08trg18Wr");
-            item15.put("dataElement", "WZNgywrtQsl");
-            item15.put("value", Integer.valueOf(age_4));
-            array.add(item15);
-}
-   if (!"0".equals(age_5)){
-            JSONObject item16 = new JSONObject();
-            item16.put("categoryOptionCombo", "gI6hobBK0Fv");
-            item16.put("dataElement", "WZNgywrtQsl");
-            item16.put("value", Integer.valueOf(age_5));
-            array.add(item16);
-}
-   if (!"0".equals(age_6)){
-            JSONObject item17 = new JSONObject();
-            item17.put("categoryOptionCombo", "NZzOXySPLdW");
-            item17.put("dataElement", "WZNgywrtQsl");
-            item17.put("value", Integer.valueOf(age_6
-            ));
-            array.add(item17);
-}
-   if (!"0".equals(age_7)){
-            JSONObject item18 = new JSONObject();
-            item18.put("categoryOptionCombo", "FY8ksWTLuFp");
-            item18.put("dataElement", "WZNgywrtQsl");
-            item18.put("value", Integer.valueOf(age_7
-            ));
-            array.add(item18);
-   }
-            /*  JSONObject item2 = new JSONObject();
-            item1.put("categoryOptionCombo", "CqhKacjKIyG");
-             item1.put("dataElement", "LwLDycsBaSC");
-            item1.put("value", Integer.valueOf(impor));
-            array.add(item2);*/
-            json.put("dataValues", array);
-
-            System.out.println("E8765: " + json.toString());
-
-            if (1 == 2) {
-               return;
-            }
-
-            OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
-            out.write(json.toString());
-            out.close();
-
-            int HttpResult = urlConnection.getResponseCode();
-
-            System.out.println(HttpResult);
-
-            if (HttpResult == 200) {
-                BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
-                String line = null;
-                while ((line = br.readLine()) != null) {
-                    sb.append(line + "\n");
-                }
-                br.close();
-
-                if (sb.toString().contains("SUCCESS")) {
-                    // response.setStatus(200);
-                    String[] wx = sb.toString().split("description\":\"");
-                    System.err.println("Response: Successful! " + wx[1]);
-                    update_oneParm_X("insert into sync_tracker set json_response = ?, datasource= '" + org_name + "', dataperiod = '" + cPer + "', case_specific_detail = '" + disC + "', status = 'ok', created = now()", wx[1]);
-                    return;
-                }
-
-                if (sb.toString().contains("WARNING")) {
-                    // response.setStatus(300);
-                    String[] wx = sb.toString().split("conflicts");
-                    System.err.println("WARNING/CONFLICT Found " + sb.toString());
-                    update_oneParm_X("insert into sync_tracker set json_response = ?, datasource= '" + org_name + "', dataperiod = '" + cPer + "', case_specific_detail = '" + disC + "', status = 'WARNING', created = now()", sb.toString());
-                    return;
-                }
-
-                if (sb.toString().contains("ERROR")) {
-                    // response.setStatus(300);
-                    String[] wx = sb.toString().split("ERROR");
-                    System.err.println("ERROR Found " + wx[1]);
-                    update_oneParm_X("insert into sync_tracker set json_response = ?, datasource= '" + org_name + "', dataperiod = '" + cPer + "', case_specific_detail = '" + disC + "',  status = 'ERROR', created = now()", wx[1]);
-                    return;
-                }
-
-            } else {
-                System.out.println(urlConnection.getResponseMessage());
-
-                return;
-            }
-        } catch (MalformedURLException localMalformedURLException) {
-        } catch (IOException e) {
-            System.err.println("Pushers says..... DHIS2 not found or not working.");
-            return;
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AggregrateController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(AggregrateController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if (urlConnection != null) {
-                urlConnection.disconnect();
-            }
-
-        }
-
-    }
-
-    public static String update_oneParm(String sqq, String sqq_) throws ClassNotFoundException, SQLException {
-
-        PreparedStatement ps = null;
-        ResultSet rx = null;
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DbConnector.getConnection();
-        String ret = "";
-        try {
-
-            ps = conn.prepareStatement(sqq);
-            ps.setString(1, sqq_);
-
-            //System.out.println("E234: " + ps.toString());
-            rx = ps.executeQuery();
-
-            if (rx.next()) {
-                ret = rx.getString(1);
-            }
-
-        } finally {
-            conn.close();
-        }
-        //System.out.println("ddddddd"+ret);
-        return ret;
-    }
-
-    public static void update_oneParm_X(String sqq, String sqq_) throws ClassNotFoundException, SQLException {
-
-        PreparedStatement ps = null;
-
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DbConnector.getConnection();
-
-        try {
-
-            ps = conn.prepareStatement(sqq);
-            ps.setString(1, sqq_);
-
-            ps.executeUpdate();
-
-        } finally {
-            conn.close();
-        }
-
-    }
-
+   
     public static String MetadaJsonSender(String paths_, String usn, String psw) throws ParseException {
 
         String ret = "opps... Something not right";

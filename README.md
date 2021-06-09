@@ -16,22 +16,22 @@ ZenHub browser extension can be downloaded here: https://www.zenhub.com/extensio
 SORMAS DHIS2 ADAPTER is a java web application program built on simple java logics and algorithm. The best way to get up and running is to download the released war file and deploy it in a web container. However, if you would like to make some changes, follow the following steps.
 
 1. Clone this repository 
-    `$ git clone https://github.com/hzi-braunschweig/SORMAS-DHIS.git
+    $ git clone https://github.com/hzi-braunschweig/SORMAS-DHIS.git
 2. Install Maven if not already installed
-    `$ sudo apt-get install maven
+    $ sudo apt-get install maven
 3. Navigate to the adapter source directory and package the application
-    `$ cd SORMAS-DHIS/sormas_HL7v2`
-    `$ mvn package`
+    $ cd SORMAS-DHIS/sormas_HL7v2
+    $ mvn package
     The above action will download all required dependencies and package the application in a war file. If this is successful it would create a sormas_HL7v2-{version}.war
 
 ### Installing the application
   1. Download and install Java and MySql server
-      `$ sudo apt-get install openjdk-9-jdk`
-      `$ sudo apt-get install mysql-server`
-      `$ sudo mysql`
-      `$ create database {adapter database name}`
-      `$ CREATE USER 'username'@'localhost' IDENTIFIED WITH authentication_plugin BY 'password';`
-      `$ GRANT ALL ON database.table TO 'username'@'localhost';
+      $ sudo apt-get install openjdk-9-jdk
+      $ sudo apt-get install mysql-server
+      $ sudo mysql
+      $ create database {adapter database name};
+      $ CREATE USER 'username'@'localhost' IDENTIFIED WITH authentication_plugin BY 'password';
+      $ GRANT ALL ON database.table TO 'username'@'localhost';
       
   2. Verify java is correctly installed 
       `$ java -version`

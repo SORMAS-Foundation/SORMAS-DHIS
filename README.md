@@ -5,23 +5,26 @@ District Health Information Software 2 (DHIS2- https://www.dhis2.org) is a flexi
 ## Project Objectives
 DHIS2 has been adopted by more than 60 African countries as a National Health Information System. All relevant data should be stored and managed on this system. DHIS2 can receive, store and share data from various data sources to other systems and reporting platforms. DHIS2 can exchange data with other software applications and platforms. This interoperability enables collaboration with various software platforms and the integration of data sources from other applications. SORMAS and DHIS2 will be connected to provide a data exchange between these systems. The purpose of data exchange is to improve the control and management of infectious diseases and to allow timely initiation of disease control. The goal of this software project is to create a dynamic, custom API that is specifically designed to transfer data between SORMAS and DHIS2. 
 
-## Project Management
-
-### ZenHub
-We are using the ZenHub-Plugin to track progess on this project. You can get the Plugin here: https://github.com/marketplace/zenhub. In the bottom of the page select the free pricing plan and install the app and the browser plugin according to the installation guide. 
-ZenHub browser extension can be downloaded here: https://www.zenhub.com/extension
 
 ## Build from sources
 
 SORMAS DHIS2 ADAPTER is a java web application program built on simple java logics and algorithm. The best way to get up and running is to download the released war file and deploy it in a web container. However, if you would like to make some changes, follow the following steps.
 
 1. Clone this repository 
-    `$ git clone https://github.com/hzi-braunschweig/SORMAS-DHIS.git
+    ```
+    $ git clone https://github.com/hzi-braunschweig/SORMAS-DHIS.git
+    ```
 2. Install Maven if not already installed
-    `$ sudo apt-get install maven
+    ```
+    $ sudo apt-get install maven
+    ```
 3. Navigate to the adapter source directory and package the application
-    `$ cd SORMAS-DHIS/sormas_HL7v2`
-    `$ mvn package`
+    ```
+    $ cd SORMAS-DHIS/sormas_HL7v2
+    ```
+    ```
+    $ mvn package
+    ```
     The above action will download all required dependencies and package the application in a war file. If this is successful it would create a sormas_HL7v2-{version}.war
 
 ### Installing the application
@@ -74,4 +77,10 @@ SORMAS DHIS2 ADAPTER is a java web application program built on simple java logi
       $ localhost:8080/adapter
       ```
       
+      ## Project Management
+
+### ZenHub
+We are using the ZenHub-Plugin to track progess on this project. You can get the Plugin here: https://github.com/marketplace/zenhub. In the bottom of the page select the free pricing plan and install the app and the browser plugin according to the installation guide. 
+ZenHub browser extension can be downloaded here: https://www.zenhub.com/extension
+
  

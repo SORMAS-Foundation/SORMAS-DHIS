@@ -25,7 +25,10 @@ if(session.getAttribute("xloggedx") == null || session.getAttribute("xloggedx") 
         <!--link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"-->
       
         <link href="./mira_assets/css/slider.css" rel="stylesheet" type="text/css"/>
+        
         <link href="./mira_assets/css/json-viewer.css" rel="stylesheet" type="text/css"/>
+        
+        <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
         
         
         

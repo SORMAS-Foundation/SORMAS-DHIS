@@ -19,7 +19,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <jsp:include page="template/head.jsp"></jsp:include>
-
         <body class="sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed control-sidebar-slide-open accent-purple">
             <div class="wrapper">
 
@@ -155,6 +154,7 @@
                         -ms-transform: translate(-50%,-50%);
                     }
                 </style>
+             
                 <!-- Content Wrapper. Contains page content -->
                 <div class="content-wrapper">
                     <!-- Content Header (Page header) -->
@@ -197,12 +197,13 @@
                                                 <table id="oplog" class="display" style="width:100%">
                                                     <thead>
                                                         <tr>
-                                                            <th>Name</th>
-                                                            <th>Position</th>
-                                                            <th>Office</th>
-                                                            <th>Extn.</th>
-                                                            <th>Start date</th>
-                                                            <th>Salary</th>
+                                                            <th>Body</th>
+                                                            <th>Status</th>
+                                                            <th>Created</th>
+                                                            <th>Data Source</th>
+                                                            <th>Data Period</th>
+                                                            <th>Case Detail</th>
+                                                            <th>Last Updated</th>
                                                         </tr>
                                                     </thead>
                                                     <tfoot>

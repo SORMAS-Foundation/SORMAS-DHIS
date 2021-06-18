@@ -7,7 +7,7 @@
     <version>1.0.0</version>
     <packaging>war</packaging>
 
-    <name>sormas_HL7v2</name>
+    <name>sormas_HL7v2_</name>
  <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

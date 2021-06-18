@@ -64,12 +64,12 @@
                                             <p style="font-size:12px">Maintenance</p>
                                         </a>
                                     </li>
-                                    <!--li class="nav-item">
-                                        <a href="sormas2.html" class="nav-link">
+                                    <li class="nav-item">
+                                        <a href="datalog.jsp" class="nav-link">
                                             <i class="fas fa-exchange-alt nav-icon"></i>
-                                            <p style="font-size:12px">Operations</p>
+                                            <p style="font-size:12px">Operation Logs</p>
                                         </a>
-                                    </li-->
+                                </li>
                                 </ul>
                             </li>
 

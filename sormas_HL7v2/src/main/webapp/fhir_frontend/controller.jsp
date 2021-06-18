@@ -267,7 +267,7 @@
                                         <div class="callout" style="display: none;" id="p_maintenance">
                                             <h5>Maintenance Options</h5>
 
-                                            <p>Please click on any of the available options to perform mainatnace, you may want to refer to the user manual on this
+                                            <p>Please click on any of the available options to perform maintenance, you may want to refer to the user manual on this
                                             </p>
                                             <div class="row">
 

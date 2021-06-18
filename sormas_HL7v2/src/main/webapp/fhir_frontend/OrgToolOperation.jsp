@@ -833,9 +833,8 @@
 
                 <%                if (request.getParameter("sayfini") != null) {
                         String sta = request.getParameter("sayfini");
-
-                        switch (sta) {
-                            case "true":
+                     
+                        if ("true".equals(sta)) {
                 %>
 
                 <script>
@@ -855,8 +854,8 @@
 
 
                 <%
-                        break;
-                    case "false":
+
+                       }else{
                 %>
 
                 <script>
@@ -892,12 +891,11 @@
 
 
                 <%
-                                break;
-                            default:
-                            // code block
+
+                            }
                         }
 
-                    }
+                    
 
 
                 %>

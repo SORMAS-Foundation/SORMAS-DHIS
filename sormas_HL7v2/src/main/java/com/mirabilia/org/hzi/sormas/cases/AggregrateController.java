@@ -39,7 +39,10 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
+<<<<<<< HEAD
+=======
 import java.sql.Date;
+>>>>>>> origin/dev_trunk
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,6 +61,7 @@ import org.json.simple.parser.ParseException;
  * @author Mathew
  */
 public class AggregrateController {
+
 
     private static String confirmed_missing = "0";
     private static String confirmed_lab = "0";
@@ -87,6 +91,7 @@ public class AggregrateController {
     private static String httpx = _url[10].toString(); //should come from config file
     
     public static void SormasAggregrator(String lev) throws ClassNotFoundException {
+
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
@@ -511,6 +516,7 @@ public class AggregrateController {
 
             JSONObject json = (JSONObject) parser.parse(paths_);
 
+
             System.out.println(json.toString());
             //  File file = new File(this.getClass().getClassLoader().getResource("someName.json").getFile());
             OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
@@ -537,6 +543,7 @@ public class AggregrateController {
                 System.out.println("finally Code : " + HttpResult);
                 if (HttpResult == 401) {
                     System.out.println("Username and Pass not working");
+
 
                     ret = "Username and Pass not working";
 

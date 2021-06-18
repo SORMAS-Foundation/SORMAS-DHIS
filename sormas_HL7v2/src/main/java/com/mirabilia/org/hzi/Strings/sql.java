@@ -200,9 +200,6 @@ public class sql {
             + "where c.laboratorydiagnosticconfirmation !='NO' and c.region_id = ? and c.reportdate::date = ?\n"
             + "group by c.disease, c.person_id, c.reportdate::date, c.laboratorydiagnosticconfirmation";
 
-   
-
-    
 
     public static String getSROMAS_community_PG = "select count(*), c.disease, (select name from community where id = c.community_id), (select externalid from community where id = c.community_id), c.creationdate::date\n"
             + "from cases c\n"
@@ -345,4 +342,3 @@ public class sql {
     // public static String Get_all_Isolated_today = "";
     // public static String Get_all_Isolated_today = "";
 }
-

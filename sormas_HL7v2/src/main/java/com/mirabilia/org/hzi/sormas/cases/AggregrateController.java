@@ -39,10 +39,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
-<<<<<<< HEAD
-=======
 import java.sql.Date;
->>>>>>> origin/dev_trunk
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -65,7 +65,7 @@ public class credentialAccess extends HttpServlet {
 
         if (request.getParameter("usern") != null && request.getParameter("upass") != null) {
 
-            if (request.getParameter("usern").equals("Administator")) {
+            if (request.getParameter("usern").equals("Administrator")) {
                  System.out.println("Get Method in use...");
 
                 if (request.getParameter("upass").equals("qwerty")) {

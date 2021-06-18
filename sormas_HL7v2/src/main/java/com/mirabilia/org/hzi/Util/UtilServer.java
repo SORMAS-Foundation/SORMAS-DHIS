@@ -428,7 +428,11 @@ public class UtilServer extends HttpServlet {
         if (request.getParameter(
                 "aggregatToDHIS") != null) {
 
-            AggregrateController.SormasAggregrator("2");
+            try {
+                AggregrateController.SormasAggregrator("2");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
             mat = "Job done";
         }
 

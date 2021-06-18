@@ -91,6 +91,7 @@ public class ConffileCatcher {
                 if (data.contains("dhis_url =")) {
                    String val = data.replaceAll("dhis_url", "").replaceAll(" ", "").replaceAll("=", "");
                     dhis_url = val;
+                    System.out.println(dhis_url);
                 }
                 
                 //instance_country

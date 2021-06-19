@@ -1,0 +1,1846 @@
+
+{
+    "date": "2020-10-20T11:58:26.188",
+    "categoryCombos": [
+        {
+            "created": "2020-07-30T21:13:57.567",
+            "lastUpdated": "2020-07-30T21:13:57.628",
+            "name": "COVID-19 Age Group and Gender",
+            "id": "WObHJ975y9T",
+            "dataDimensionType": "DISAGGREGATION",
+            "publicAccess": "rw------",
+            "skipTotal": false,
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "userGroupAccesses": [],
+            "translations": [],
+            "userAccesses": [],
+            "categories": [
+                {
+                    "id": "zxBuVVUlXsg"
+                },
+                {
+                    "id": "dgUEtV4tkcv"
+                }
+            ]
+        },
+        {
+            "created": "2014-09-24T15:40:26.481",
+            "lastUpdated": "2014-09-25T11:36:52.078",
+            "name": "default",
+            "id": "iH4rjgvDrRn",
+            "dataDimensionType": "DISAGGREGATION",
+            "publicAccess": "rw------",
+            "skipTotal": false,
+            "userGroupAccesses": [],
+            "translations": [],
+            "userAccesses": [],
+            "categories": [
+                {
+                    "id": "wxjAvVbLWH6"
+                }
+            ]
+        }
+    ],
+    "dataSets": [
+        {
+            "lastUpdated": "2020-10-18T14:48:26.129",
+            "id": "Ot2EIMoCtuJ",
+            "created": "2020-07-30T20:35:32.155",
+            "name": "Monthly COVID-19 Report",
+            "shortName": "Monthly COVID-19 Report",
+            "validCompleteOnly": false,
+            "dataElementDecoration": false,
+            "publicAccess": "rwrw----",
+            "notifyCompletingUser": false,
+            "noValueRequiresComment": false,
+            "skipOffline": false,
+            "compulsoryFieldsCompleteOnly": false,
+            "fieldCombinationRequired": false,
+            "renderHorizontally": false,
+            "renderAsTabs": false,
+            "mobile": false,
+            "version": 19,
+            "timelyDays": 16,
+            "periodType": "Monthly",
+            "openFuturePeriods": 0,
+            "expiryDays": 0,
+            "dataEntryForm": {
+                "id": "HR3AddlfaYe"
+            },
+            "categoryCombo": {
+                "id": "iH4rjgvDrRn"
+            },
+            "lastUpdatedBy": {
+                "id": "m77IiB3pTQf"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "dataSetElements": [
+                {
+                    "dataElement": {
+                        "id": "ouOn4KYL9JY"
+                    },
+                    "dataSet": {
+                        "id": "Ot2EIMoCtuJ"
+                    }
+                },
+                {
+                    "dataElement": {
+                        "id": "tLXtycv8mUh"
+                    },
+                    "dataSet": {
+                        "id": "Ot2EIMoCtuJ"
+                    }
+                },
+                {
+                    "dataElement": {
+                        "id": "K9nmTxAOmZx"
+                    },
+                    "dataSet": {
+                        "id": "Ot2EIMoCtuJ"
+                    }
+                },
+                {
+                    "dataElement": {
+                        "id": "cw4v7izzo7L"
+                    },
+                    "dataSet": {
+                        "id": "Ot2EIMoCtuJ"
+                    }
+                },
+                {
+                    "dataElement": {
+                        "id": "lNlEfwFEoZV"
+                    },
+                    "dataSet": {
+                        "id": "Ot2EIMoCtuJ"
+                    }
+                },
+                {
+                    "dataElement": {
+                        "id": "Mbty4SXtpxg"
+                    },
+                    "dataSet": {
+                        "id": "Ot2EIMoCtuJ"
+                    }
+                },
+                {
+                    "dataElement": {
+                        "id": "KOEB1VJ2Tf4"
+                    },
+                    "dataSet": {
+                        "id": "Ot2EIMoCtuJ"
+                    }
+                },
+                {
+                    "dataElement": {
+                        "id": "iUYqseHElNb"
+                    },
+                    "dataSet": {
+                        "id": "Ot2EIMoCtuJ"
+                    }
+                },
+                {
+                    "dataElement": {
+                        "id": "aQ8B5d4K35h"
+                    },
+                    "dataSet": {
+                        "id": "Ot2EIMoCtuJ"
+                    }
+                },
+                {
+                    "dataElement": {
+                        "id": "OgN0gpmQScF"
+                    },
+                    "dataSet": {
+                        "id": "Ot2EIMoCtuJ"
+                    }
+                },
+                {
+                    "dataElement": {
+                        "id": "MLWvGWMYfvl"
+                    },
+                    "dataSet": {
+                        "id": "Ot2EIMoCtuJ"
+                    }
+                },
+                {
+                    "dataElement": {
+                        "id": "pppW1UbL0JL"
+                    },
+                    "dataSet": {
+                        "id": "Ot2EIMoCtuJ"
+                    }
+                },
+                {
+                    "dataElement": {
+                        "id": "mvZaCAISwWW"
+                    },
+                    "dataSet": {
+                        "id": "Ot2EIMoCtuJ"
+                    }
+                },
+                {
+                    "dataElement": {
+                        "id": "UPKwAOWlnfT"
+                    },
+                    "dataSet": {
+                        "id": "Ot2EIMoCtuJ"
+                    }
+                },
+                {
+                    "dataElement": {
+                        "id": "rEj9VQ2kPJW"
+                    },
+                    "dataSet": {
+                        "id": "Ot2EIMoCtuJ"
+                    }
+                },
+                {
+                    "dataElement": {
+                        "id": "ws1Zf3jodFM"
+                    },
+                    "dataSet": {
+                        "id": "Ot2EIMoCtuJ"
+                    }
+                },
+                {
+                    "dataElement": {
+                        "id": "Q9PdHoD68L5"
+                    },
+                    "dataSet": {
+                        "id": "Ot2EIMoCtuJ"
+                    }
+                },
+                {
+                    "dataElement": {
+                        "id": "UIbgJ9wH2C6"
+                    },
+                    "dataSet": {
+                        "id": "Ot2EIMoCtuJ"
+                    }
+                },
+                {
+                    "dataElement": {
+                        "id": "KmzXt7SEY5d"
+                    },
+                    "dataSet": {
+                        "id": "Ot2EIMoCtuJ"
+                    }
+                }
+            ],
+            "compulsoryDataElementOperands": [],
+            "translations": [],
+            "dataInputPeriods": [],
+            "organisationUnits": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "indicators": [
+                {
+                    "id": "UYXZh5xXeVq"
+                },
+                {
+                    "id": "zNwhxAVN2lj"
+                },
+                {
+                    "id": "wk0kekdcE0M"
+                },
+                {
+                    "id": "FUOP1MKiiMo"
+                },
+                {
+                    "id": "LeG96r2r0wg"
+                },
+                {
+                    "id": "Bo79gSPlQyu"
+                },
+                {
+                    "id": "ugLuKEVkMYY"
+                },
+                {
+                    "id": "cGTTcYWiHHL"
+                },
+                {
+                    "id": "NTDgCJmPBSs"
+                },
+                {
+                    "id": "JyaR6jhMgcB"
+                },
+                {
+                    "id": "FexDuowmbCX"
+                },
+                {
+                    "id": "GA7ZZhkJPee"
+                },
+                {
+                    "id": "UvizV07Quc1"
+                },
+                {
+                    "id": "txgfa6DCxRc"
+                },
+                {
+                    "id": "KtBQ1IWB2Dc"
+                }
+            ],
+            "userAccesses": [],
+            "legendSets": []
+        }
+    ],
+    "dataEntryForms": [
+        {
+            "lastUpdated": "2020-10-14T10:27:35.951",
+            "created": "2020-07-30T20:51:18.002",
+            "id": "HR3AddlfaYe",
+            "htmlCode": "<p>&nbsp;</p>\n\n<p>&nbsp;</p>\n\n<table border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:600px;\">\n\t<caption><strong><span style=\"font-size:20px;\">Monthly COVID-19 Report</span></strong></caption>\n\t<tbody>\n\t\t<tr>\n\t\t\t<td colspan=\"1\" rowspan=\"2\" style=\"text-align: center;\"><strong>Age Group</strong></td>\n\t\t\t<td colspan=\"2\" rowspan=\"1\" style=\"text-align: center;\"><strong>Number of new Suspected &nbsp;cases</strong></td>\n\t\t\t<td colspan=\"2\" rowspan=\"1\" style=\"text-align: center;\"><strong>Number of new confirmed cases</strong></td>\n\t\t\t<td colspan=\"2\" rowspan=\"1\" style=\"text-align: center;\"><strong>Number of recovered cases</strong></td>\n\t\t\t<td colspan=\"2\" rowspan=\"1\" style=\"text-align: center;\"><strong>Number of new deaths</strong></td>\n\t\t\t<td colspan=\"2\" rowspan=\"1\" style=\"text-align: center;\"><strong>Number of cases tested</strong></td>\n\t\t\t<td colspan=\"2\" rowspan=\"1\" style=\"text-align: center;\"><strong>Number of new cases hospitalised</strong></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td style=\"text-align: center;\"><strong>Male</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Female</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Male</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Female</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Male</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Female</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Male</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Female</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Male</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Female</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Male</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Female</strong></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td style=\"text-align: center;\">0-1</td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ouOn4KYL9JY-DFarWJgBUzs-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ouOn4KYL9JY-s9jIoEZfhis-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"MLWvGWMYfvl-DFarWJgBUzs-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"MLWvGWMYfvl-s9jIoEZfhis-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"pppW1UbL0JL-DFarWJgBUzs-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"pppW1UbL0JL-s9jIoEZfhis-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"cw4v7izzo7L-DFarWJgBUzs-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"cw4v7izzo7L-s9jIoEZfhis-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ws1Zf3jodFM-DFarWJgBUzs-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ws1Zf3jodFM-s9jIoEZfhis-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"K9nmTxAOmZx-DFarWJgBUzs-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"K9nmTxAOmZx-s9jIoEZfhis-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td style=\"text-align: center;\">2-4</td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ouOn4KYL9JY-u4qovKOiWp3-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ouOn4KYL9JY-tjHJPYaKDw5-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"MLWvGWMYfvl-u4qovKOiWp3-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"MLWvGWMYfvl-tjHJPYaKDw5-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"pppW1UbL0JL-u4qovKOiWp3-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"pppW1UbL0JL-tjHJPYaKDw5-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"cw4v7izzo7L-u4qovKOiWp3-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"cw4v7izzo7L-tjHJPYaKDw5-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ws1Zf3jodFM-u4qovKOiWp3-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ws1Zf3jodFM-tjHJPYaKDw5-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"K9nmTxAOmZx-u4qovKOiWp3-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"K9nmTxAOmZx-tjHJPYaKDw5-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td style=\"text-align: center;\">5-14</td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ouOn4KYL9JY-GPdx8dY2rUQ-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ouOn4KYL9JY-wIJGxmWx77w-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"MLWvGWMYfvl-GPdx8dY2rUQ-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"MLWvGWMYfvl-wIJGxmWx77w-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"pppW1UbL0JL-GPdx8dY2rUQ-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"pppW1UbL0JL-wIJGxmWx77w-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"cw4v7izzo7L-GPdx8dY2rUQ-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"cw4v7izzo7L-wIJGxmWx77w-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ws1Zf3jodFM-GPdx8dY2rUQ-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ws1Zf3jodFM-wIJGxmWx77w-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"K9nmTxAOmZx-GPdx8dY2rUQ-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"K9nmTxAOmZx-wIJGxmWx77w-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td style=\"text-align: center;\">15-49</td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ouOn4KYL9JY-yHxBhsyra0s-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ouOn4KYL9JY-j1rXiqATlZ0-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"MLWvGWMYfvl-yHxBhsyra0s-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"MLWvGWMYfvl-j1rXiqATlZ0-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"pppW1UbL0JL-yHxBhsyra0s-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"pppW1UbL0JL-j1rXiqATlZ0-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"cw4v7izzo7L-yHxBhsyra0s-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"cw4v7izzo7L-j1rXiqATlZ0-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ws1Zf3jodFM-yHxBhsyra0s-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ws1Zf3jodFM-j1rXiqATlZ0-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"K9nmTxAOmZx-yHxBhsyra0s-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"K9nmTxAOmZx-j1rXiqATlZ0-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td style=\"text-align: center;\">50-64</td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ouOn4KYL9JY-n5xLnGJxdSY-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ouOn4KYL9JY-Ys9vFeSqLTr-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"MLWvGWMYfvl-n5xLnGJxdSY-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"MLWvGWMYfvl-Ys9vFeSqLTr-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"pppW1UbL0JL-n5xLnGJxdSY-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"pppW1UbL0JL-Ys9vFeSqLTr-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"cw4v7izzo7L-n5xLnGJxdSY-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"cw4v7izzo7L-Ys9vFeSqLTr-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ws1Zf3jodFM-n5xLnGJxdSY-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ws1Zf3jodFM-Ys9vFeSqLTr-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"K9nmTxAOmZx-n5xLnGJxdSY-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"K9nmTxAOmZx-Ys9vFeSqLTr-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td style=\"text-align: center;\">65-79</td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ouOn4KYL9JY-E19zZXrQicF-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ouOn4KYL9JY-MCfMP9XnUFb-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"MLWvGWMYfvl-E19zZXrQicF-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"MLWvGWMYfvl-MCfMP9XnUFb-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"pppW1UbL0JL-E19zZXrQicF-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"pppW1UbL0JL-MCfMP9XnUFb-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"cw4v7izzo7L-E19zZXrQicF-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"cw4v7izzo7L-MCfMP9XnUFb-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ws1Zf3jodFM-E19zZXrQicF-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ws1Zf3jodFM-MCfMP9XnUFb-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"K9nmTxAOmZx-E19zZXrQicF-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"K9nmTxAOmZx-MCfMP9XnUFb-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td style=\"text-align: center;\">80+</td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ouOn4KYL9JY-Cizo3NsSYtl-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ouOn4KYL9JY-cYoRyk1HDXR-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"MLWvGWMYfvl-Cizo3NsSYtl-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"MLWvGWMYfvl-cYoRyk1HDXR-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"pppW1UbL0JL-Cizo3NsSYtl-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"pppW1UbL0JL-cYoRyk1HDXR-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"cw4v7izzo7L-Cizo3NsSYtl-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"cw4v7izzo7L-cYoRyk1HDXR-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ws1Zf3jodFM-Cizo3NsSYtl-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"ws1Zf3jodFM-cYoRyk1HDXR-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"K9nmTxAOmZx-Cizo3NsSYtl-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"K9nmTxAOmZx-cYoRyk1HDXR-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td style=\"text-align: center;\">Total&nbsp;</td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"indicatorwk0kekdcE0M\" indicatorid=\"wk0kekdcE0M\" name=\"indicator\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"indicatorFexDuowmbCX\" indicatorid=\"FexDuowmbCX\" name=\"indicator\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"indicatorJyaR6jhMgcB\" indicatorid=\"JyaR6jhMgcB\" name=\"indicator\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"indicatorFUOP1MKiiMo\" indicatorid=\"FUOP1MKiiMo\" name=\"indicator\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"indicatorGA7ZZhkJPee\" indicatorid=\"GA7ZZhkJPee\" name=\"indicator\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"indicatorUYXZh5xXeVq\" indicatorid=\"UYXZh5xXeVq\" name=\"indicator\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"indicatorcGTTcYWiHHL\" indicatorid=\"cGTTcYWiHHL\" name=\"indicator\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"indicatorBo79gSPlQyu\" indicatorid=\"Bo79gSPlQyu\" name=\"indicator\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"indicatorugLuKEVkMYY\" indicatorid=\"ugLuKEVkMYY\" name=\"indicator\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"indicatorzNwhxAVN2lj\" indicatorid=\"zNwhxAVN2lj\" name=\"indicator\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"indicatorKtBQ1IWB2Dc\" indicatorid=\"KtBQ1IWB2Dc\" name=\"indicator\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"indicatorNTDgCJmPBSs\" indicatorid=\"NTDgCJmPBSs\" name=\"indicator\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td style=\"text-align: center;\">Grand Total</td>\n\t\t\t<td colspan=\"2\" rowspan=\"1\" style=\"text-align: center;\"><input dataelementid=\"ouOn4KYL9JY\" id=\"totalouOn4KYL9JY\" name=\"total\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td colspan=\"2\" rowspan=\"1\" style=\"text-align: center;\"><input dataelementid=\"MLWvGWMYfvl\" id=\"totalMLWvGWMYfvl\" name=\"total\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td colspan=\"2\" rowspan=\"1\" style=\"text-align: center;\"><input dataelementid=\"pppW1UbL0JL\" id=\"totalpppW1UbL0JL\" name=\"total\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td colspan=\"2\" rowspan=\"1\" style=\"text-align: center;\"><input dataelementid=\"cw4v7izzo7L\" id=\"totalcw4v7izzo7L\" name=\"total\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td colspan=\"2\" rowspan=\"1\" style=\"text-align: center;\"><input dataelementid=\"ws1Zf3jodFM\" id=\"totalws1Zf3jodFM\" name=\"total\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td colspan=\"2\" rowspan=\"1\" style=\"text-align: center;\"><input dataelementid=\"K9nmTxAOmZx\" id=\"totalK9nmTxAOmZx\" name=\"total\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t</tr>\n\t</tbody>\n</table>\n\n<p style=\"text-align: center;\">&nbsp;</p>\n\n<table border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:800px;\">\n\t<tbody>\n\t\t<tr>\n\t\t\t<td colspan=\"4\" rowspan=\"1\" style=\"text-align: center;\"><strong>New cases by treatment type</strong></td>\n\t\t\t<td colspan=\"5\" rowspan=\"1\" style=\"text-align: center;\"><strong>Suspected cases by transmission classification</strong></td>\n\t\t\t<td colspan=\"5\" rowspan=\"1\" style=\"text-align: center;\"><strong>Confirmed cases by transmission classification</strong></td>\n\t\t\t<td colspan=\"2\" rowspan=\"1\" style=\"text-align: center;\"><strong>Laboratory details&nbsp;</strong></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td style=\"text-align: center;\"><strong>Mechanical ventilation</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>ECMO</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Admitted into ICU</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Total</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Imported</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Known cluster</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Community Transmission</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Unknown</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Total</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Imported</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Known cluster</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Community Transmission</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Unknown</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Total</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Total Laboratory results received&nbsp;</strong></td>\n\t\t\t<td style=\"text-align: center;\"><strong>Total laboaratory results pending</strong></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td style=\"text-align: center;\"><input id=\"UPKwAOWlnfT-Joer6DI3Xaf-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"OgN0gpmQScF-Joer6DI3Xaf-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"UIbgJ9wH2C6-Joer6DI3Xaf-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"indicatorUvizV07Quc1\" indicatorid=\"UvizV07Quc1\" name=\"indicator\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"mvZaCAISwWW-Joer6DI3Xaf-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"KOEB1VJ2Tf4-Joer6DI3Xaf-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"iUYqseHElNb-Joer6DI3Xaf-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"Q9PdHoD68L5-Joer6DI3Xaf-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"indicatorLeG96r2r0wg\" indicatorid=\"LeG96r2r0wg\" name=\"indicator\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"KmzXt7SEY5d-Joer6DI3Xaf-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"rEj9VQ2kPJW-Joer6DI3Xaf-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"aQ8B5d4K35h-Joer6DI3Xaf-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"lNlEfwFEoZV-Joer6DI3Xaf-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"indicatortxgfa6DCxRc\" indicatorid=\"txgfa6DCxRc\" name=\"indicator\" readonly=\"readonly\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td style=\"text-align: center;\"><input id=\"Mbty4SXtpxg-Joer6DI3Xaf-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t\t<td><input id=\"tLXtycv8mUh-Joer6DI3Xaf-val\" name=\"entryfield\" size=\"6\" title=\"\" value=\"\" /></td>\n\t\t</tr>\n\t</tbody>\n</table>\n\n<p>&nbsp;</p>\n",
+            "format": 2,
+            "name": "Monthly COVID-19 Report",
+            "style": "COMPACT",
+            "lastUpdatedBy": {
+                "id": "hcgnEfOri2Q"
+            },
+            "translations": []
+        }
+    ],
+    "categories": [
+        {
+            "created": "2012-01-24T09:43:26.893",
+            "lastUpdated": "2015-10-04T12:50:15.008",
+            "name": "Gender",
+            "id": "dgUEtV4tkcv",
+            "dataDimensionType": "DISAGGREGATION",
+            "dataDimension": true,
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "translations": [],
+            "userAccesses": [],
+            "categoryOptions": [
+                {
+                    "id": "oOUJbmwmYAZ"
+                },
+                {
+                    "id": "TLgCuDXN41x"
+                }
+            ]
+        },
+        {
+            "created": "2020-07-30T21:08:19.662",
+            "lastUpdated": "2020-07-30T21:08:56.170",
+            "name": "COVID-19 Age Group",
+            "id": "zxBuVVUlXsg",
+            "dataDimensionType": "DISAGGREGATION",
+            "publicAccess": "rw------",
+            "dataDimension": false,
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "translations": [],
+            "userAccesses": [],
+            "categoryOptions": [
+                {
+                    "id": "OPansWaiEtF"
+                },
+                {
+                    "id": "mfrB1LW9bny"
+                },
+                {
+                    "id": "lxkIGr0Dz3T"
+                },
+                {
+                    "id": "eQZRAkDuCCu"
+                },
+                {
+                    "id": "PrYLM1cEiy2"
+                },
+                {
+                    "id": "kdXA9ZOVbQ8"
+                },
+                {
+                    "id": "q64nvYJQkpm"
+                }
+            ]
+        },
+        {
+            "created": "2014-09-24T15:40:26.467",
+            "lastUpdated": "2020-10-16T14:46:46.624",
+            "name": "default",
+            "id": "wxjAvVbLWH6",
+            "dataDimensionType": "DISAGGREGATION",
+            "publicAccess": "rw------",
+            "dataDimension": false,
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "translations": [],
+            "userAccesses": [],
+            "categoryOptions": [
+                {
+                    "id": "D4I8C8gG8KL"
+                }
+            ]
+        }
+    ],
+    "indicatorTypes": [
+        {
+            "lastUpdated": "2018-12-19T13:58:07.936",
+            "created": "2015-03-23T01:42:43.716",
+            "name": "Numerator only (number)",
+            "id": "JovNP4V7tPI",
+            "number": true,
+            "factor": 1,
+            "lastUpdatedBy": {
+                "id": "hcgnEfOri2Q"
+            },
+            "translations": []
+        }
+    ],
+    "dataElements": [
+        {
+            "lastUpdated": "2020-07-30T21:56:56.132",
+            "id": "rEj9VQ2kPJW",
+            "created": "2020-07-30T21:56:56.132",
+            "name": "Confirmed cases by transmission classification (Known cluster)",
+            "shortName": "Confirmed case transmission (Known cluster)",
+            "aggregationType": "SUM",
+            "domainType": "AGGREGATE",
+            "publicAccess": "rw------",
+            "valueType": "NUMBER",
+            "zeroIsSignificant": false,
+            "categoryCombo": {
+                "id": "iH4rjgvDrRn"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": [],
+            "aggregationLevels": []
+        },
+        {
+            "lastUpdated": "2020-07-30T21:45:33.348",
+            "id": "UPKwAOWlnfT",
+            "created": "2020-07-30T21:45:33.348",
+            "name": "New cases by treatment type (Mechanical ventilation)",
+            "shortName": "New case treatment type (Mechanical ventilation)",
+            "aggregationType": "SUM",
+            "domainType": "AGGREGATE",
+            "publicAccess": "rw------",
+            "valueType": "NUMBER",
+            "zeroIsSignificant": false,
+            "categoryCombo": {
+                "id": "iH4rjgvDrRn"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": [],
+            "aggregationLevels": []
+        },
+        {
+            "lastUpdated": "2020-07-30T21:59:13.861",
+            "id": "lNlEfwFEoZV",
+            "created": "2020-07-30T21:59:13.861",
+            "name": "Confirmed cases by transmission classification (Unknown)",
+            "shortName": "Confirmed cases transmission (Unknown)",
+            "aggregationType": "SUM",
+            "domainType": "AGGREGATE",
+            "publicAccess": "rw------",
+            "valueType": "NUMBER",
+            "zeroIsSignificant": false,
+            "categoryCombo": {
+                "id": "iH4rjgvDrRn"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": [],
+            "aggregationLevels": []
+        },
+        {
+            "lastUpdated": "2020-07-30T21:52:22.965",
+            "id": "mvZaCAISwWW",
+            "created": "2020-07-30T21:48:02.260",
+            "name": "Suspected cases by transmission classification (Imported)",
+            "shortName": "Suspected cases transmission (Imported)",
+            "aggregationType": "SUM",
+            "domainType": "AGGREGATE",
+            "publicAccess": "rw------",
+            "valueType": "NUMBER",
+            "zeroIsSignificant": false,
+            "categoryCombo": {
+                "id": "iH4rjgvDrRn"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": [],
+            "aggregationLevels": []
+        },
+        {
+            "lastUpdated": "2020-07-30T21:56:02.966",
+            "id": "KmzXt7SEY5d",
+            "created": "2020-07-30T21:55:29.117",
+            "name": "Confirmed cases by transmission classification (Imported)",
+            "shortName": "Confirmed case transmission classificat (Imported)",
+            "aggregationType": "SUM",
+            "domainType": "AGGREGATE",
+            "publicAccess": "rw------",
+            "valueType": "NUMBER",
+            "zeroIsSignificant": false,
+            "categoryCombo": {
+                "id": "iH4rjgvDrRn"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": [],
+            "aggregationLevels": []
+        },
+        {
+            "lastUpdated": "2020-07-30T21:46:33.424",
+            "id": "UIbgJ9wH2C6",
+            "created": "2020-07-30T21:46:33.424",
+            "name": "New cases by treatment type (Admitted into ICU)",
+            "shortName": "New cases by treatment type (Admitted into ICU)",
+            "aggregationType": "SUM",
+            "domainType": "AGGREGATE",
+            "publicAccess": "rw------",
+            "valueType": "NUMBER",
+            "zeroIsSignificant": false,
+            "categoryCombo": {
+                "id": "iH4rjgvDrRn"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": [],
+            "aggregationLevels": []
+        },
+        {
+            "lastUpdated": "2020-07-30T21:54:01.171",
+            "id": "Q9PdHoD68L5",
+            "created": "2020-07-30T21:54:01.171",
+            "name": "Suspected cases by transmission classification (Unknown)",
+            "shortName": "Suspected case transmission classificatio (Unknown",
+            "aggregationType": "SUM",
+            "domainType": "AGGREGATE",
+            "publicAccess": "rw------",
+            "valueType": "NUMBER",
+            "zeroIsSignificant": false,
+            "categoryCombo": {
+                "id": "iH4rjgvDrRn"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": [],
+            "aggregationLevels": []
+        },
+        {
+            "lastUpdated": "2020-07-30T21:17:06.900",
+            "id": "ouOn4KYL9JY",
+            "created": "2020-07-30T21:17:06.900",
+            "name": "Number of new Suspected cases",
+            "shortName": "Number of new Suspected cases",
+            "aggregationType": "SUM",
+            "domainType": "AGGREGATE",
+            "publicAccess": "rw------",
+            "valueType": "NUMBER",
+            "zeroIsSignificant": false,
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": [],
+            "aggregationLevels": []
+        },
+        {
+            "lastUpdated": "2020-07-30T21:18:28.229",
+            "id": "cw4v7izzo7L",
+            "created": "2020-07-30T21:18:28.229",
+            "name": "Number of new deaths",
+            "shortName": "Number of new deaths",
+            "aggregationType": "SUM",
+            "domainType": "AGGREGATE",
+            "publicAccess": "rw------",
+            "valueType": "NUMBER",
+            "zeroIsSignificant": false,
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": [],
+            "aggregationLevels": []
+        },
+        {
+            "lastUpdated": "2020-07-30T21:58:21.372",
+            "id": "aQ8B5d4K35h",
+            "created": "2020-07-30T21:58:21.372",
+            "name": "Confirmed cases by transmission classification (Community Transmission)",
+            "shortName": "Confirmed case transmission (Community)",
+            "aggregationType": "SUM",
+            "domainType": "AGGREGATE",
+            "publicAccess": "rw------",
+            "valueType": "NUMBER",
+            "zeroIsSignificant": false,
+            "categoryCombo": {
+                "id": "iH4rjgvDrRn"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": [],
+            "aggregationLevels": []
+        },
+        {
+            "lastUpdated": "2020-07-30T21:17:39.478",
+            "id": "MLWvGWMYfvl",
+            "created": "2020-07-30T21:17:39.478",
+            "name": "Number of new confirmed cases",
+            "shortName": "Number of new confirmed cases",
+            "aggregationType": "SUM",
+            "domainType": "AGGREGATE",
+            "publicAccess": "rw------",
+            "valueType": "NUMBER",
+            "zeroIsSignificant": false,
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": [],
+            "aggregationLevels": []
+        },
+        {
+            "lastUpdated": "2020-07-30T21:19:47.378",
+            "id": "K9nmTxAOmZx",
+            "created": "2020-07-30T21:19:47.378",
+            "name": "Number of new cases hospitalised",
+            "shortName": "Number of new cases hospitalised",
+            "aggregationType": "SUM",
+            "domainType": "AGGREGATE",
+            "publicAccess": "rw------",
+            "valueType": "NUMBER",
+            "zeroIsSignificant": false,
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": [],
+            "aggregationLevels": []
+        },
+        {
+            "lastUpdated": "2020-07-30T22:01:35.457",
+            "id": "tLXtycv8mUh",
+            "created": "2020-07-30T22:01:35.457",
+            "name": "Laboratory results pending ",
+            "shortName": "Laboratory results pending ",
+            "aggregationType": "SUM",
+            "domainType": "AGGREGATE",
+            "publicAccess": "rw------",
+            "valueType": "NUMBER",
+            "zeroIsSignificant": false,
+            "categoryCombo": {
+                "id": "iH4rjgvDrRn"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": [],
+            "aggregationLevels": []
+        },
+        {
+            "lastUpdated": "2020-07-30T21:18:07.075",
+            "id": "pppW1UbL0JL",
+            "created": "2020-07-30T21:18:07.075",
+            "name": "Number of recovered cases",
+            "shortName": "Number of recovered cases",
+            "aggregationType": "SUM",
+            "domainType": "AGGREGATE",
+            "publicAccess": "rw------",
+            "valueType": "NUMBER",
+            "zeroIsSignificant": false,
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": [],
+            "aggregationLevels": []
+        },
+        {
+            "lastUpdated": "2020-07-30T21:52:43.681",
+            "id": "KOEB1VJ2Tf4",
+            "created": "2020-07-30T21:49:05.561",
+            "name": "Suspected cases by transmission classification (Known cluster)",
+            "shortName": "Suspected cases transmission(Known cluster)",
+            "aggregationType": "SUM",
+            "domainType": "AGGREGATE",
+            "publicAccess": "rw------",
+            "valueType": "NUMBER",
+            "zeroIsSignificant": false,
+            "categoryCombo": {
+                "id": "iH4rjgvDrRn"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": [],
+            "aggregationLevels": []
+        },
+        {
+            "lastUpdated": "2020-07-30T21:52:03.139",
+            "id": "iUYqseHElNb",
+            "created": "2020-07-30T21:51:27.876",
+            "name": "Suspected cases by transmission classification (Community Transmission)",
+            "shortName": "Suspected case transmission Community Transmission",
+            "aggregationType": "SUM",
+            "domainType": "AGGREGATE",
+            "publicAccess": "rw------",
+            "valueType": "NUMBER",
+            "zeroIsSignificant": false,
+            "categoryCombo": {
+                "id": "iH4rjgvDrRn"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": [],
+            "aggregationLevels": []
+        },
+        {
+            "lastUpdated": "2020-07-30T21:19:20.539",
+            "id": "ws1Zf3jodFM",
+            "created": "2020-07-30T21:19:20.539",
+            "name": "Number of cases tested",
+            "shortName": "Number of cases tested",
+            "aggregationType": "SUM",
+            "domainType": "AGGREGATE",
+            "publicAccess": "rw------",
+            "valueType": "NUMBER",
+            "zeroIsSignificant": false,
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": [],
+            "aggregationLevels": []
+        },
+        {
+            "lastUpdated": "2020-07-30T21:46:09.080",
+            "id": "OgN0gpmQScF",
+            "created": "2020-07-30T21:46:09.080",
+            "name": "New cases by treatment type (ECMO)",
+            "shortName": "New cases by treatment type (ECMO)",
+            "aggregationType": "SUM",
+            "domainType": "AGGREGATE",
+            "publicAccess": "rw------",
+            "valueType": "NUMBER",
+            "zeroIsSignificant": false,
+            "categoryCombo": {
+                "id": "iH4rjgvDrRn"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": [],
+            "aggregationLevels": []
+        },
+        {
+            "lastUpdated": "2020-07-30T22:00:04.115",
+            "id": "Mbty4SXtpxg",
+            "created": "2020-07-30T22:00:04.115",
+            "name": "Laboratory results received ",
+            "shortName": "Laboratory results received ",
+            "aggregationType": "SUM",
+            "domainType": "AGGREGATE",
+            "publicAccess": "rw------",
+            "valueType": "NUMBER",
+            "zeroIsSignificant": false,
+            "categoryCombo": {
+                "id": "iH4rjgvDrRn"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": [],
+            "aggregationLevels": []
+        }
+    ],
+    "categoryOptions": [
+        {
+            "created": "2020-07-30T21:04:10.576",
+            "lastUpdated": "2020-08-28T18:59:55.650",
+            "name": "65-79 years",
+            "id": "kdXA9ZOVbQ8",
+            "shortName": "65-79 years",
+            "publicAccess": "rwrw----",
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "translations": [],
+            "userAccesses": [],
+            "organisationUnits": []
+        },
+        {
+            "created": "2012-01-24T09:43:24.673",
+            "lastUpdated": "2018-10-15T13:14:02.275",
+            "name": "15-49 years",
+            "id": "eQZRAkDuCCu",
+            "shortName": "15-49 years",
+            "publicAccess": "r-rw----",
+            "user": {
+                "id": "Qqd0WbU0xiG"
+            },
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "translations": [],
+            "userAccesses": [],
+            "organisationUnits": []
+        },
+        {
+            "created": "2020-07-30T21:01:30.392",
+            "lastUpdated": "2020-08-28T18:58:26.081",
+            "name": "0-1 years",
+            "id": "OPansWaiEtF",
+            "shortName": "0-1 years",
+            "publicAccess": "rwrw----",
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "translations": [],
+            "userAccesses": [],
+            "organisationUnits": []
+        },
+        {
+            "created": "2020-07-30T21:04:41.575",
+            "lastUpdated": "2020-08-28T18:49:20.993",
+            "name": "80+ years",
+            "id": "q64nvYJQkpm",
+            "shortName": "80+ years",
+            "publicAccess": "rwrw----",
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "translations": [],
+            "userAccesses": [],
+            "organisationUnits": []
+        },
+        {
+            "created": "2020-07-30T21:02:03.042",
+            "lastUpdated": "2020-08-28T18:58:44.853",
+            "name": "2-4 years",
+            "id": "mfrB1LW9bny",
+            "shortName": "2-4 years",
+            "publicAccess": "rwrw----",
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "translations": [],
+            "userAccesses": [],
+            "organisationUnits": []
+        },
+        {
+            "created": "2020-07-30T21:03:38.274",
+            "lastUpdated": "2020-08-28T18:48:44.409",
+            "name": "50-64 years",
+            "id": "PrYLM1cEiy2",
+            "shortName": "50-64 years",
+            "publicAccess": "rwrw----",
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "translations": [],
+            "userAccesses": [],
+            "organisationUnits": []
+        },
+        {
+            "created": "2012-01-24T09:43:24.673",
+            "lastUpdated": "2018-10-15T13:01:58.105",
+            "name": "Male  ",
+            "id": "oOUJbmwmYAZ",
+            "shortName": "Male  ",
+            "publicAccess": "r-rw----",
+            "user": {
+                "id": "Qqd0WbU0xiG"
+            },
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "translations": [],
+            "userAccesses": [],
+            "organisationUnits": []
+        },
+        {
+            "created": "2012-01-24T09:43:24.673",
+            "lastUpdated": "2018-10-15T13:05:19.895",
+            "name": "Female",
+            "id": "TLgCuDXN41x",
+            "shortName": "Female",
+            "publicAccess": "r-rw----",
+            "user": {
+                "id": "Qqd0WbU0xiG"
+            },
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "translations": [],
+            "userAccesses": [],
+            "organisationUnits": []
+        },
+        {
+            "created": "2014-09-25T09:22:42.218",
+            "lastUpdated": "2014-09-25T11:36:51.931",
+            "name": "default",
+            "id": "D4I8C8gG8KL",
+            "shortName": "default",
+            "publicAccess": "rwrw----",
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "translations": [],
+            "userAccesses": [],
+            "organisationUnits": []
+        },
+        {
+            "created": "2020-07-30T21:02:34.994",
+            "lastUpdated": "2020-08-28T18:59:34.899",
+            "name": "5-14 years",
+            "id": "lxkIGr0Dz3T",
+            "shortName": "5-14 years",
+            "publicAccess": "rwrw----",
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "translations": [],
+            "userAccesses": [],
+            "organisationUnits": []
+        }
+    ],
+    "categoryOptionCombos": [
+        {
+            "lastUpdated": "2020-07-30T21:13:57.609",
+            "created": "2020-07-30T21:13:57.609",
+            "name": "2-4 years, Female",
+            "id": "tjHJPYaKDw5",
+            "ignoreApproval": false,
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "translations": [],
+            "attributeValues": [],
+            "categoryOptions": [
+                {
+                    "id": "TLgCuDXN41x"
+                },
+                {
+                    "id": "mfrB1LW9bny"
+                }
+            ]
+        },
+        {
+            "lastUpdated": "2020-07-30T21:13:57.625",
+            "created": "2020-07-30T21:13:57.625",
+            "name": "80+ years, Male  ",
+            "id": "Cizo3NsSYtl",
+            "ignoreApproval": false,
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "translations": [],
+            "attributeValues": [],
+            "categoryOptions": [
+                {
+                    "id": "q64nvYJQkpm"
+                },
+                {
+                    "id": "oOUJbmwmYAZ"
+                }
+            ]
+        },
+        {
+            "lastUpdated": "2020-07-30T21:13:57.617",
+            "created": "2020-07-30T21:13:57.617",
+            "name": "15-49 years, Female",
+            "id": "j1rXiqATlZ0",
+            "ignoreApproval": false,
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "translations": [],
+            "attributeValues": [],
+            "categoryOptions": [
+                {
+                    "id": "TLgCuDXN41x"
+                },
+                {
+                    "id": "eQZRAkDuCCu"
+                }
+            ]
+        },
+        {
+            "lastUpdated": "2020-07-30T21:13:57.619",
+            "created": "2020-07-30T21:13:57.619",
+            "name": "50-64 years, Male  ",
+            "id": "n5xLnGJxdSY",
+            "ignoreApproval": false,
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "translations": [],
+            "attributeValues": [],
+            "categoryOptions": [
+                {
+                    "id": "oOUJbmwmYAZ"
+                },
+                {
+                    "id": "PrYLM1cEiy2"
+                }
+            ]
+        },
+        {
+            "lastUpdated": "2020-07-30T21:13:57.610",
+            "created": "2020-07-30T21:13:57.610",
+            "name": "5-14 years, Male  ",
+            "id": "GPdx8dY2rUQ",
+            "ignoreApproval": false,
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "translations": [],
+            "attributeValues": [],
+            "categoryOptions": [
+                {
+                    "id": "oOUJbmwmYAZ"
+                },
+                {
+                    "id": "lxkIGr0Dz3T"
+                }
+            ]
+        },
+        {
+            "lastUpdated": "2020-07-30T21:13:57.614",
+            "created": "2020-07-30T21:13:57.614",
+            "name": "15-49 years, Male  ",
+            "id": "yHxBhsyra0s",
+            "ignoreApproval": false,
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "translations": [],
+            "attributeValues": [],
+            "categoryOptions": [
+                {
+                    "id": "oOUJbmwmYAZ"
+                },
+                {
+                    "id": "eQZRAkDuCCu"
+                }
+            ]
+        },
+        {
+            "lastUpdated": "2020-07-30T21:13:57.622",
+            "created": "2020-07-30T21:13:57.622",
+            "name": "65-79 years, Male  ",
+            "id": "E19zZXrQicF",
+            "ignoreApproval": false,
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "translations": [],
+            "attributeValues": [],
+            "categoryOptions": [
+                {
+                    "id": "kdXA9ZOVbQ8"
+                },
+                {
+                    "id": "oOUJbmwmYAZ"
+                }
+            ]
+        },
+        {
+            "lastUpdated": "2020-07-30T21:13:57.627",
+            "created": "2020-07-30T21:13:57.627",
+            "name": "80+ years, Female",
+            "id": "cYoRyk1HDXR",
+            "ignoreApproval": false,
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "translations": [],
+            "attributeValues": [],
+            "categoryOptions": [
+                {
+                    "id": "q64nvYJQkpm"
+                },
+                {
+                    "id": "TLgCuDXN41x"
+                }
+            ]
+        },
+        {
+            "lastUpdated": "2020-07-30T21:13:57.612",
+            "created": "2020-07-30T21:13:57.612",
+            "name": "5-14 years, Female",
+            "id": "wIJGxmWx77w",
+            "ignoreApproval": false,
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "translations": [],
+            "attributeValues": [],
+            "categoryOptions": [
+                {
+                    "id": "TLgCuDXN41x"
+                },
+                {
+                    "id": "lxkIGr0Dz3T"
+                }
+            ]
+        },
+        {
+            "lastUpdated": "2020-07-30T21:13:57.621",
+            "created": "2020-07-30T21:13:57.621",
+            "name": "50-64 years, Female",
+            "id": "Ys9vFeSqLTr",
+            "ignoreApproval": false,
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "translations": [],
+            "attributeValues": [],
+            "categoryOptions": [
+                {
+                    "id": "TLgCuDXN41x"
+                },
+                {
+                    "id": "PrYLM1cEiy2"
+                }
+            ]
+        },
+        {
+            "lastUpdated": "2020-07-30T21:13:57.603",
+            "created": "2020-07-30T21:13:57.603",
+            "name": "0-1 years, Male  ",
+            "id": "DFarWJgBUzs",
+            "ignoreApproval": false,
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "translations": [],
+            "attributeValues": [],
+            "categoryOptions": [
+                {
+                    "id": "oOUJbmwmYAZ"
+                },
+                {
+                    "id": "OPansWaiEtF"
+                }
+            ]
+        },
+        {
+            "lastUpdated": "2020-07-30T21:13:57.623",
+            "created": "2020-07-30T21:13:57.623",
+            "name": "65-79 years, Female",
+            "id": "MCfMP9XnUFb",
+            "ignoreApproval": false,
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "translations": [],
+            "attributeValues": [],
+            "categoryOptions": [
+                {
+                    "id": "kdXA9ZOVbQ8"
+                },
+                {
+                    "id": "TLgCuDXN41x"
+                }
+            ]
+        },
+        {
+            "lastUpdated": "2020-07-30T21:13:57.606",
+            "created": "2020-07-30T21:13:57.606",
+            "name": "0-1 years, Female",
+            "id": "s9jIoEZfhis",
+            "ignoreApproval": false,
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "translations": [],
+            "attributeValues": [],
+            "categoryOptions": [
+                {
+                    "id": "TLgCuDXN41x"
+                },
+                {
+                    "id": "OPansWaiEtF"
+                }
+            ]
+        },
+        {
+            "lastUpdated": "2020-07-30T21:13:57.607",
+            "created": "2020-07-30T21:13:57.607",
+            "name": "2-4 years, Male  ",
+            "id": "u4qovKOiWp3",
+            "ignoreApproval": false,
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "categoryCombo": {
+                "id": "WObHJ975y9T"
+            },
+            "translations": [],
+            "attributeValues": [],
+            "categoryOptions": [
+                {
+                    "id": "oOUJbmwmYAZ"
+                },
+                {
+                    "id": "mfrB1LW9bny"
+                }
+            ]
+        },
+        {
+            "lastUpdated": "2012-01-24T09:43:27.171",
+            "created": "2012-01-24T09:43:27.171",
+            "name": "default",
+            "id": "Joer6DI3Xaf",
+            "ignoreApproval": false,
+            "categoryCombo": {
+                "id": "iH4rjgvDrRn"
+            },
+            "translations": [],
+            "attributeValues": [],
+            "categoryOptions": [
+                {
+                    "id": "D4I8C8gG8KL"
+                }
+            ]
+        }
+    ],
+    "indicators": [
+        {
+            "lastUpdated": "2020-07-30T23:32:45.163",
+            "id": "UYXZh5xXeVq",
+            "created": "2020-07-30T23:32:45.163",
+            "name": "Total Number of recovered cases (Female)_19",
+            "shortName": "Total Number of recovered cases (Female)",
+            "publicAccess": "rw------",
+            "denominatorDescription": "1",
+            "numeratorDescription": "Total Number of recovered cases (Female)",
+            "numerator": "#{pppW1UbL0JL.s9jIoEZfhis} + #{pppW1UbL0JL.tjHJPYaKDw5} + #{pppW1UbL0JL.wIJGxmWx77w} + #{pppW1UbL0JL.j1rXiqATlZ0} + #{pppW1UbL0JL.Ys9vFeSqLTr} + #{pppW1UbL0JL.MCfMP9XnUFb} + #{pppW1UbL0JL.cYoRyk1HDXR}",
+            "denominator": "1",
+            "annualized": false,
+            "indicatorType": {
+                "id": "JovNP4V7tPI"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": []
+        },
+        {
+            "lastUpdated": "2020-07-30T23:40:13.352",
+            "id": "zNwhxAVN2lj",
+            "created": "2020-07-30T23:40:13.352",
+            "name": "Total Number of cases tested (Female)_19",
+            "shortName": "Total Number of cases tested (Female)",
+            "publicAccess": "rw------",
+            "denominatorDescription": "1",
+            "numeratorDescription": "Total Number of cases tested (Female)",
+            "numerator": "#{ws1Zf3jodFM.s9jIoEZfhis} + #{ws1Zf3jodFM.tjHJPYaKDw5} + #{ws1Zf3jodFM.wIJGxmWx77w} + #{ws1Zf3jodFM.j1rXiqATlZ0} + #{ws1Zf3jodFM.Ys9vFeSqLTr} + #{ws1Zf3jodFM.MCfMP9XnUFb} + #{ws1Zf3jodFM.cYoRyk1HDXR}",
+            "denominator": "1",
+            "annualized": false,
+            "indicatorType": {
+                "id": "JovNP4V7tPI"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": []
+        },
+        {
+            "lastUpdated": "2020-07-30T23:21:58.484",
+            "id": "wk0kekdcE0M",
+            "created": "2020-07-30T23:21:58.484",
+            "name": "Total Number of new Suspected cases (Male)_19",
+            "shortName": "Total Number of new Suspected cases (Male)",
+            "publicAccess": "rw------",
+            "denominatorDescription": "1",
+            "numeratorDescription": "Total Number of new Suspected cases(Male)",
+            "numerator": "#{ouOn4KYL9JY.DFarWJgBUzs} + #{ouOn4KYL9JY.u4qovKOiWp3} + #{ouOn4KYL9JY.GPdx8dY2rUQ} + #{ouOn4KYL9JY.yHxBhsyra0s} + #{ouOn4KYL9JY.n5xLnGJxdSY} + #{ouOn4KYL9JY.E19zZXrQicF} + #{ouOn4KYL9JY.Cizo3NsSYtl}",
+            "denominator": "1",
+            "annualized": false,
+            "indicatorType": {
+                "id": "JovNP4V7tPI"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": []
+        },
+        {
+            "lastUpdated": "2020-07-30T23:28:20.579",
+            "id": "FUOP1MKiiMo",
+            "created": "2020-07-30T23:28:20.579",
+            "name": "Total Number of new confirmed cases (Female)_19",
+            "shortName": "Total Number of new confirmed cases (Female)",
+            "publicAccess": "rw------",
+            "denominatorDescription": "1",
+            "numeratorDescription": "Total Number of new confirmed cases (Female)",
+            "numerator": "#{MLWvGWMYfvl.s9jIoEZfhis} + #{MLWvGWMYfvl.tjHJPYaKDw5} + #{MLWvGWMYfvl.wIJGxmWx77w} + #{MLWvGWMYfvl.j1rXiqATlZ0} + #{MLWvGWMYfvl.Ys9vFeSqLTr} + #{MLWvGWMYfvl.MCfMP9XnUFb} + #{MLWvGWMYfvl.cYoRyk1HDXR}",
+            "denominator": "1",
+            "annualized": false,
+            "indicatorType": {
+                "id": "JovNP4V7tPI"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": []
+        },
+        {
+            "lastUpdated": "2020-07-30T23:14:20.367",
+            "id": "LeG96r2r0wg",
+            "created": "2020-07-30T23:14:20.367",
+            "name": "Total suspected cases by transmission classification_19",
+            "shortName": "suspected cases by transmission classification",
+            "publicAccess": "rw------",
+            "denominatorDescription": "1",
+            "numeratorDescription": "Total suspected cases by transmission classification",
+            "numerator": "#{iUYqseHElNb} + #{mvZaCAISwWW} + #{KOEB1VJ2Tf4} + #{Q9PdHoD68L5}",
+            "denominator": "1",
+            "annualized": false,
+            "indicatorType": {
+                "id": "JovNP4V7tPI"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": []
+        },
+        {
+            "lastUpdated": "2020-07-30T23:36:12.401",
+            "id": "Bo79gSPlQyu",
+            "created": "2020-07-30T23:36:12.401",
+            "name": "Total Number of new deaths (Female)_19",
+            "shortName": "Total Number of new deaths (Female)",
+            "publicAccess": "rw------",
+            "denominatorDescription": "1",
+            "numeratorDescription": "Total Number of new deaths (Female)",
+            "numerator": "#{cw4v7izzo7L.s9jIoEZfhis} + #{cw4v7izzo7L.tjHJPYaKDw5} + #{cw4v7izzo7L.wIJGxmWx77w} + #{cw4v7izzo7L.j1rXiqATlZ0} + #{cw4v7izzo7L.Ys9vFeSqLTr} + #{cw4v7izzo7L.MCfMP9XnUFb} + #{cw4v7izzo7L.cYoRyk1HDXR}",
+            "denominator": "1",
+            "annualized": false,
+            "indicatorType": {
+                "id": "JovNP4V7tPI"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": []
+        },
+        {
+            "lastUpdated": "2020-07-30T23:38:18.833",
+            "id": "ugLuKEVkMYY",
+            "created": "2020-07-30T23:38:18.833",
+            "name": "Total Number of cases tested (Male)_19",
+            "shortName": "Total Number of cases tested (Male)",
+            "publicAccess": "rw------",
+            "denominatorDescription": "1",
+            "numeratorDescription": "Total Number of cases tested (Male)",
+            "numerator": "#{ws1Zf3jodFM.DFarWJgBUzs} + #{ws1Zf3jodFM.u4qovKOiWp3} + #{ws1Zf3jodFM.GPdx8dY2rUQ} + #{ws1Zf3jodFM.yHxBhsyra0s} + #{ws1Zf3jodFM.n5xLnGJxdSY} + #{ws1Zf3jodFM.E19zZXrQicF} + #{ws1Zf3jodFM.Cizo3NsSYtl}",
+            "denominator": "1",
+            "annualized": false,
+            "indicatorType": {
+                "id": "JovNP4V7tPI"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": []
+        },
+        {
+            "lastUpdated": "2020-07-30T23:34:41.458",
+            "id": "cGTTcYWiHHL",
+            "created": "2020-07-30T23:34:41.458",
+            "name": "Total Number of new deaths (Male)_19",
+            "shortName": "Total Number of new deaths (Male)",
+            "publicAccess": "rw------",
+            "denominatorDescription": "1",
+            "numeratorDescription": "Total Number of new deaths (Male)",
+            "numerator": "#{cw4v7izzo7L.DFarWJgBUzs} + #{cw4v7izzo7L.u4qovKOiWp3} + #{cw4v7izzo7L.GPdx8dY2rUQ} + #{cw4v7izzo7L.yHxBhsyra0s} + #{cw4v7izzo7L.n5xLnGJxdSY} + #{cw4v7izzo7L.E19zZXrQicF} + #{cw4v7izzo7L.Cizo3NsSYtl}",
+            "denominator": "1",
+            "annualized": false,
+            "indicatorType": {
+                "id": "JovNP4V7tPI"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": []
+        },
+        {
+            "lastUpdated": "2020-07-30T23:43:44.992",
+            "id": "NTDgCJmPBSs",
+            "created": "2020-07-30T23:43:44.992",
+            "name": "Total Number of new cases hospitalised (Female)_19",
+            "shortName": "Total Number of new cases hospitalised (Female)",
+            "publicAccess": "rw------",
+            "denominatorDescription": "1",
+            "numeratorDescription": "Total Number of new cases hospitalised (Female)",
+            "numerator": "#{K9nmTxAOmZx.s9jIoEZfhis} + #{K9nmTxAOmZx.tjHJPYaKDw5} + #{K9nmTxAOmZx.wIJGxmWx77w} + #{K9nmTxAOmZx.j1rXiqATlZ0} + #{K9nmTxAOmZx.Ys9vFeSqLTr} + #{K9nmTxAOmZx.MCfMP9XnUFb} + #{K9nmTxAOmZx.cYoRyk1HDXR}",
+            "denominator": "1",
+            "annualized": false,
+            "indicatorType": {
+                "id": "JovNP4V7tPI"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": []
+        },
+        {
+            "lastUpdated": "2020-09-24T10:37:09.837",
+            "id": "JyaR6jhMgcB",
+            "created": "2020-07-30T23:26:38.774",
+            "name": "Total Number of new confirmed cases (Male)_19",
+            "shortName": "Total Number of new confirmed cases (Male)",
+            "publicAccess": "rw------",
+            "denominatorDescription": "1",
+            "numeratorDescription": "Total Number of new confirmed cases (Male)",
+            "numerator": "#{MLWvGWMYfvl.DFarWJgBUzs} + #{MLWvGWMYfvl.u4qovKOiWp3} + #{MLWvGWMYfvl.GPdx8dY2rUQ} + #{MLWvGWMYfvl.yHxBhsyra0s} + #{MLWvGWMYfvl.n5xLnGJxdSY} + #{MLWvGWMYfvl.E19zZXrQicF} +  #{MLWvGWMYfvl.Cizo3NsSYtl}",
+            "denominator": "1",
+            "annualized": false,
+            "indicatorType": {
+                "id": "JovNP4V7tPI"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": []
+        },
+        {
+            "lastUpdated": "2020-07-30T23:23:56.177",
+            "id": "FexDuowmbCX",
+            "created": "2020-07-30T23:23:56.177",
+            "name": "Total Number of new Suspected cases (Female)_19",
+            "shortName": "Total Number of new Suspected cases (Female)",
+            "publicAccess": "rw------",
+            "denominatorDescription": "1",
+            "numeratorDescription": "Total Number of new Suspected cases(Female)",
+            "numerator": "#{ouOn4KYL9JY.s9jIoEZfhis} + #{ouOn4KYL9JY.tjHJPYaKDw5} + #{ouOn4KYL9JY.wIJGxmWx77w} + #{ouOn4KYL9JY.j1rXiqATlZ0} + #{ouOn4KYL9JY.Ys9vFeSqLTr} + #{ouOn4KYL9JY.MCfMP9XnUFb} + #{ouOn4KYL9JY.cYoRyk1HDXR}",
+            "denominator": "1",
+            "annualized": false,
+            "indicatorType": {
+                "id": "JovNP4V7tPI"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": []
+        },
+        {
+            "lastUpdated": "2020-07-30T23:30:46.185",
+            "id": "GA7ZZhkJPee",
+            "created": "2020-07-30T23:30:46.185",
+            "name": "Total Number of recovered cases (Male)_19",
+            "shortName": "Total Number of recovered cases (Male)",
+            "publicAccess": "rw------",
+            "denominatorDescription": "1",
+            "numeratorDescription": "Total Number of recovered cases (Male)",
+            "numerator": "#{pppW1UbL0JL.DFarWJgBUzs} + #{pppW1UbL0JL.u4qovKOiWp3} + #{pppW1UbL0JL.GPdx8dY2rUQ} + #{pppW1UbL0JL.yHxBhsyra0s} + #{pppW1UbL0JL.n5xLnGJxdSY} + #{pppW1UbL0JL.E19zZXrQicF} + #{pppW1UbL0JL.Cizo3NsSYtl}",
+            "denominator": "1",
+            "annualized": false,
+            "indicatorType": {
+                "id": "JovNP4V7tPI"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": []
+        },
+        {
+            "lastUpdated": "2020-07-30T23:12:09.005",
+            "id": "UvizV07Quc1",
+            "created": "2020-07-30T23:12:09.005",
+            "name": "Total new cases by treatment type_19",
+            "shortName": "Total new cases by treatment type",
+            "publicAccess": "rw------",
+            "denominatorDescription": "1",
+            "numeratorDescription": "Total new cases by treatment type",
+            "numerator": "#{UIbgJ9wH2C6} + #{OgN0gpmQScF} + #{UPKwAOWlnfT}",
+            "denominator": "1",
+            "annualized": false,
+            "indicatorType": {
+                "id": "JovNP4V7tPI"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": []
+        },
+        {
+            "lastUpdated": "2020-07-30T23:16:19.382",
+            "id": "txgfa6DCxRc",
+            "created": "2020-07-30T23:16:19.382",
+            "name": "Total confirmed cases by transmission classification_19",
+            "shortName": "Confirmed cases by transmission classification",
+            "publicAccess": "rw------",
+            "denominatorDescription": "1",
+            "numeratorDescription": "Total confirmed cases by transmission classification",
+            "numerator": "#{aQ8B5d4K35h} + #{KmzXt7SEY5d} + #{rEj9VQ2kPJW} + #{lNlEfwFEoZV}",
+            "denominator": "1",
+            "annualized": false,
+            "indicatorType": {
+                "id": "JovNP4V7tPI"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": []
+        },
+        {
+            "lastUpdated": "2020-07-30T23:42:09.546",
+            "id": "KtBQ1IWB2Dc",
+            "created": "2020-07-30T23:42:09.546",
+            "name": "Total Number of new cases hospitalised (Male)_19",
+            "shortName": "Total Number of new cases hospitalised (Male)",
+            "publicAccess": "rw------",
+            "denominatorDescription": "1",
+            "numeratorDescription": "Total Number of new cases hospitalised (Male)",
+            "numerator": "#{K9nmTxAOmZx.DFarWJgBUzs} + #{K9nmTxAOmZx.u4qovKOiWp3} + #{K9nmTxAOmZx.GPdx8dY2rUQ} + #{K9nmTxAOmZx.yHxBhsyra0s} + #{K9nmTxAOmZx.n5xLnGJxdSY} + #{K9nmTxAOmZx.E19zZXrQicF} + #{K9nmTxAOmZx.Cizo3NsSYtl}",
+            "denominator": "1",
+            "annualized": false,
+            "indicatorType": {
+                "id": "JovNP4V7tPI"
+            },
+            "lastUpdatedBy": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "user": {
+                "id": "zFYqEEL4Nm7"
+            },
+            "translations": [],
+            "userGroupAccesses": [],
+            "attributeValues": [],
+            "userAccesses": [],
+            "legendSets": []
+        }
+    ]
+}

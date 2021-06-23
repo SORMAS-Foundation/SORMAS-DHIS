@@ -4,7 +4,6 @@
 <%@page import="com.mirabilia.org.hzi.sormas.cases.AggregrateController"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="org.json.simple.parser.JSONParser"%>
-<%@page import="sun.misc.IOUtils"%>
 <%@page import="java.io.InputStream"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="com.mirabilia.org.hzi.Util.dhis.optionFiler"%>

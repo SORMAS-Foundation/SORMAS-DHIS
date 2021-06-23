@@ -196,6 +196,7 @@
                                                 <table id="oplog" class="display col-sm-12" style="table-layout: fixed">
                                                     <thead>
                                                         <tr>
+                                                            
                                                             <th class="wrap">Body</th>
                                                             <th>Status</th>
                                                             <th>Created</th>

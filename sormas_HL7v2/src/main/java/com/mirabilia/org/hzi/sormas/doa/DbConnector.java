@@ -31,6 +31,7 @@ public class DbConnector {
 
         } catch (Exception ex) {
             System.out.println("Several!, Database mysql getConnection() has an Error -->" + ex.getMessage());
+            System.out.println("Several!, Database mysql getConnection() has an Error -->" + ex.toString());
         }
         return null;
     }
@@ -53,7 +54,9 @@ public class DbConnector {
             Connection con = null;
 
             // System.out.println("jdbc:postgresql://" + d1 + ":" + d2 + "/" + d3 +","+  d4+",_"+ d5);
+             System.out.println("Connection Successful : PG using: jdbc:postgresql://" + d1 + ":" + d2 + "/" + d3+","+ d4+","+ d5);
             return DriverManager.getConnection("jdbc:postgresql://" + d1 + ":" + d2 + "/" + d3, d4, d5);
+           
 
         } catch (Exception ex) {
             System.out.println("Several!, Postgresql Database getConnection() has an Error -->" + ex.getMessage());

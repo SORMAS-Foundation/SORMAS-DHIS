@@ -4,7 +4,6 @@
 <%@page import="com.mirabilia.org.hzi.sormas.cases.AggregrateController"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="org.json.simple.parser.JSONParser"%>
-<%@page import="sun.misc.IOUtils"%>
 <%@page import="java.io.InputStream"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="com.mirabilia.org.hzi.Util.dhis.optionFiler"%>
@@ -194,10 +193,10 @@
                                             <p>Please answer "Setup" if this is the first time the adapter is been installed or the adapter service has just been reinstalled. If not, click next to perform maintenance</p>
                                             <div class="row">
 
-                                                <table id="oplog" class="display" style="width:100%">
+                                                <table id="oplog" class="display col-sm-12" style="table-layout: fixed">
                                                     <thead>
                                                         <tr>
-                                                            <th>Body</th>
+                                                            <th class="wrap">Body</th>
                                                             <th>Status</th>
                                                             <th>Created</th>
                                                             <th>Data Source</th>

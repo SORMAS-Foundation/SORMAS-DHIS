@@ -7,7 +7,7 @@
     <version>1.0.0</version>
     <packaging>war</packaging>
 
-    <name>sormas_HL7v2_</name>
+    <name>sormas_HL7v2</name>
  <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -67,7 +67,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.47</version>
+            <version>8.0.22</version>
         </dependency>
 
 <dependency>

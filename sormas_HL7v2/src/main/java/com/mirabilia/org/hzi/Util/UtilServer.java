@@ -26,7 +26,7 @@
 package com.mirabilia.org.hzi.Util;
 
 import com.mirabilia.org.hzi.Strings.sql;
-import com.mirabilia.org.hzi.sormas.cases.AggregrateController;
+import com.mirabilia.org.hzi.sormas.aggregate.AggregrateController;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import java.io.IOException;
 import java.io.PrintWriter;

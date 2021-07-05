@@ -275,7 +275,7 @@
                     $(document).ready(function () {
 
                         $('#oplog').DataTable({
-                                 "ajax": '../OperationLogJson?tran=2',
+                                 "ajax": '../OperationLogJson?tran=1',
                             bAutoWidth: false,
                             aoColumns: [
                                 {sWidth: '50%', BVisible: false, class: 'clickable'},
@@ -300,7 +300,7 @@
                                        LoadJson(this.responseText);
                             }
                         };
-                        xhttp.open("GET", "../OperationLogJson?tran=2", true);
+                        xhttp.open("GET", "../OperationLogJson?tran=1", true);
                         xhttp.send();
                     };
 
@@ -340,15 +340,14 @@
                         setJSON();
 
 
-                        jsonViewer.showJSON(jsonObj, null, 1);
+                        jsonViewer.showJSON(jsonObj, null, null, 1);
                         json = "";
                         
                         $('#RespondX').modal('show');
 
 
 
-                    }
-                    ;
+                    };
 
 
 

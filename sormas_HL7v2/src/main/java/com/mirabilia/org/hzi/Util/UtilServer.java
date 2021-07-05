@@ -27,6 +27,7 @@ package com.mirabilia.org.hzi.Util;
 
 import com.mirabilia.org.hzi.Strings.sql;
 import com.mirabilia.org.hzi.sormas.aggregate.AggregrateController;
+import com.mirabilia.org.hzi.sormas.cases.casesExtractor;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -430,6 +431,17 @@ public class UtilServer extends HttpServlet {
 
             try {
                 AggregrateController.SormasAggregrator("2");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            mat = "Job done";
+        }
+        
+         if (request.getParameter(
+                "personToDHIS") != null) {
+
+            try {
+               casesExtractor.SormasCasePull("2");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             }

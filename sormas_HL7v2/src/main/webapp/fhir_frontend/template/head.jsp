@@ -28,7 +28,6 @@ if(session.getAttribute("xloggedx") == null || session.getAttribute("xloggedx") 
         
         <link href="./mira_assets/css/json-viewer.css" rel="stylesheet" type="text/css"/>
         
-        <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
         
         
         

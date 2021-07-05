@@ -2,6 +2,5 @@
 <%
     session.invalidate();
     request.getSession();
-    response.sendRedirect(request.getContextPath()+"/");
-    
+    response.sendRedirect(request.getContextPath());
 %>

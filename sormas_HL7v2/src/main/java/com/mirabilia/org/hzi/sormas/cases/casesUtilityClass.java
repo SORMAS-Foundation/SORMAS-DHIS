@@ -86,6 +86,8 @@ public class casesUtilityClass {
     private static String Sormas_System_Period = "0";
     private static String SRM_Uuid = "0";
     private static String Symptomjournalstatus = "0";
+    private static String external_id = "0";
+    private static String c_id = "0";
 
     public static String getAddress() {
         return Address;
@@ -526,5 +528,23 @@ public class casesUtilityClass {
     public static void setSymptomjournalstatus(String Symptomjournalstatus) {
         casesUtilityClass.Symptomjournalstatus = Symptomjournalstatus;
     }
+
+    public static String getC_id() {
+        return c_id;
+    }
+
+    public static void setC_id(String c_id) {
+        casesUtilityClass.c_id = c_id;
+    }
+
+    public static String getExternal_id() {
+        return external_id;
+    }
+
+    public static void setExternal_id(String external_id) {
+        casesUtilityClass.external_id = external_id;
+    }
+    
+    
 
 }

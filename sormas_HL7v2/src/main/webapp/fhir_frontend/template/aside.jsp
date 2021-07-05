@@ -46,7 +46,7 @@
                             <li class="nav-item has-treeview menu-close" id="caxl">
                                 <a href="#" class="nav-link" onclick="cases()">
                                     <p style="font-size:14px">
-                                        Aggregate Module
+                                        Admin Console
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
@@ -65,44 +65,21 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a href="datalog1.jsp" class="nav-link">
+                                            <i class="fas fa-exchange-alt nav-icon"></i>
+                                            <p style="font-size:12px">Aggregate Operation Logs</p>
+                                        </a>
+                                </li>
+                                 <li class="nav-item">
                                         <a href="datalog.jsp" class="nav-link">
                                             <i class="fas fa-exchange-alt nav-icon"></i>
-                                            <p style="font-size:12px">Operation Logs</p>
+                                            <p style="font-size:12px">Cases Operation Logs</p>
                                         </a>
                                 </li>
                                 </ul>
                             </li>
                             
-                             <li class="nav-item has-treeview menu-close" id="caxl">
-                                <a href="#" class="nav-link" onclick="cases()">
-                                    <p style="font-size:14px">
-                                        Case Based Module
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                
-                                <ul class="nav nav-treeview">
-                                    <!--li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="fas fa-chart-bar nav-icon"></i>
-                                            <p style="font-size:12px">Dashboard</p>
-                                        </a>
-                                    </li-->
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="fas fa-cogs nav-icon"></i>
-                                            <p style="font-size:12px">Maintenance</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="fas fa-exchange-alt nav-icon"></i>
-                                            <p style="font-size:12px">Operation Logs</p>
-                                        </a>
-                                </li>
-                                </ul>
-                            </li>
-
+                           
                             <li class="nav-header">Settings</li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">

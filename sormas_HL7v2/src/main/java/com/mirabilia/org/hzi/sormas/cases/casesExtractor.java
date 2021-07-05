@@ -32,6 +32,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,53 +43,80 @@ import java.util.logging.Logger;
 public class casesExtractor {
 
     public static void SormasCasePull(String lev) throws ClassNotFoundException {
+        SimpleDateFormat frnmt = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
+
             Connection cox = DbConnector.getPgConnection();
             PreparedStatement pa = null;
             ResultSet ra = null;
 
             if ("2".equals(lev)) {
                 //System.out.println("1111111111111111");
-                pa = cox.prepareStatement("select * from person limit 10");
+                pa = cox.prepareStatement(sql.getPErsons_Record_to_TrackEntity);
             }
             if ("3".equals(lev)) {
-                pa = cox.prepareStatement(sql.getSROMAS_district_Aggregate_AllCases);
+             //   pa = cox.prepareStatement(sql.getSROMAS_district_Aggregate_AllCases);
             }
             if ("4".equals(lev)) {
-                pa = cox.prepareStatement(sql.getSROMAS_community_PG);
+              //  pa = cox.prepareStatement(sql.getSROMAS_community_PG);
             }
             if ("5".equals(lev)) {
-                pa = cox.prepareStatement(sql.getSROMAS_hf_PG);
+             //   pa = cox.prepareStatement(sql.getSROMAS_hf_PG);
             }
 
             ra = pa.executeQuery();
             while (ra.next()) {
-                
-                casesUtilityClass.setAddress(ra.getString("Address_id"));
+
+                casesUtilityClass.setAddress(ra.getString("address_id"));
                 casesUtilityClass.setAddtionaldetails(ra.getString("additionaldetails"));
                 casesUtilityClass.setApproximateage(ra.getString("Approximateage"));
-                casesUtilityClass.setApproximate_Age_Reference_Date(ra.getString("ApproximateAgeReferenceDate"));
+
+                    casesUtilityClass.setApproximate_Age_Reference_Date(ra.getString("ApproximateAgeReferenceDate"));
+                
                 casesUtilityClass.setApproximateagetype(ra.getString("Approximateagetype"));
                 casesUtilityClass.setArmedforcesrelationtype(ra.getString("Armedforcesrelationtype"));
                 casesUtilityClass.setBirthcountry_Id(ra.getString("Birthcountry_id"));
-                casesUtilityClass.setBirthdate(ra.getString("Birthdate_dd"));
-                casesUtilityClass.setBirthdate_Month(ra.getString("Birthdate_mm"));
-                casesUtilityClass.setBirthdate_Year(ra.getString("Birthdate_yyyy"));
+
+                if (null != ra.getString("Birthdate_dd")) {
+                    String dx = ra.getString("Birthdate_dd");
+                    casesUtilityClass.setBirthdate(dx.substring(0, dx.indexOf(" ")));
+                }
+                
+                if (null != ra.getString("Birthdate_mm")) {
+                    String dx = ra.getString("Birthdate_mm");
+                    casesUtilityClass.setBirthdate_Month(dx.substring(0, dx.indexOf(" ")));
+                }
+                
+                if (null != ra.getString("Birthdate_yyyy")) {
+                    String dx = ra.getString("Birthdate_yyyy");
+                    casesUtilityClass.setBirthdate_Year(dx.substring(0, dx.indexOf(" ")));
+                }
                 casesUtilityClass.setBirthname(ra.getString("Birthname"));
                 casesUtilityClass.setBirthweight(ra.getString("Birthweight"));
                 casesUtilityClass.setBurialconductor(ra.getString("Burialconductor"));
-                casesUtilityClass.setBurialdate(ra.getString("Burialdate"));
+                
+                    casesUtilityClass.setBurialdate(ra.getString("Burialdate"));
                 casesUtilityClass.setBurial_Place_Description(ra.getString("BurialPlaceDescription"));
                 casesUtilityClass.setCause_of_Death(ra.getString("CauseofDeath"));
                 casesUtilityClass.setCause_of_Death_Details(ra.getString("CauseofDeathDetails"));
                 casesUtilityClass.setCause_of_Death_Disease(ra.getString("CauseofDeathDisease"));
-                casesUtilityClass.setChangedate(ra.getString("Changedate"));
-                casesUtilityClass.setChangedateofembeddedlists(ra.getString("Changedateofembeddedlists"));
+                if (null != ra.getString("Changedate")) {
+                    String dx = ra.getString("Changedate");
+                    casesUtilityClass.setChangedate(dx.substring(0, dx.indexOf(" ")));
+                }
+                if (null != ra.getString("Changedateofembeddedlists")) {
+                    String dx = ra.getString("Changedateofembeddedlists");
+                    casesUtilityClass.setChangedateofembeddedlists(dx.substring(0, dx.indexOf(" ")));
+                }
                 casesUtilityClass.setCitizenship_Id(ra.getString("Citizenship_id"));
                 casesUtilityClass.setCovidcodedelivered(ra.getString("Covidcodedelivered"));
-                casesUtilityClass.setCreationdate(ra.getString("Creationdate"));
-                casesUtilityClass.setDeathdate(ra.getString("Deathdate"));
+                if (null != ra.getString("Creationdate")) {
+                    String dx = ra.getString("Creationdate");
+                    casesUtilityClass.setCreationdate(dx.substring(0, dx.indexOf(" ")));
+                }
+               
+                    casesUtilityClass.setDeathdate(ra.getString("Deathdate"));
                 casesUtilityClass.setDeath_Place_Description(ra.getString("DeathPlaceDescription"));
                 casesUtilityClass.setDeath_Place_Type(ra.getString("DeathPlaceType"));
                 casesUtilityClass.setEducation_Details(ra.getString("EducationDetails"));
@@ -101,8 +129,8 @@ public class casesExtractor {
                 casesUtilityClass.setHascovidapp(ra.getString("Hascovidapp"));
                 casesUtilityClass.setMothersmaidenname(ra.getString("Mothersmaidenname"));
                 casesUtilityClass.setMothersname(ra.getString("Mothersname"));
-                casesUtilityClass.setNameofguardians(ra.getString("Nameofguardians"));
-                casesUtilityClass.setNationalhealth_Id(ra.getString("Nationalhealth_id"));
+                casesUtilityClass.setNameofguardians(ra.getString("namesofguardians"));
+                casesUtilityClass.setNationalhealth_Id(ra.getString("Nationalhealthid"));
                 casesUtilityClass.setNickname(ra.getString("Nickname"));
                 casesUtilityClass.setOccupationdetails(ra.getString("Occupationdetails"));
                 casesUtilityClass.setOccupationtype(ra.getString("Occupationtype"));
@@ -119,7 +147,12 @@ public class casesExtractor {
                 casesUtilityClass.setSex(ra.getString("Sex"));
                 casesUtilityClass.setSormas_System_Period(ra.getString("sys_Period"));
                 casesUtilityClass.setSRM_Uuid(ra.getString("Uuid"));
-                casesUtilityClass.setSymptomjournalstatus(ra.getString("Symptomjournalstatus"));
+                casesUtilityClass.setSymptomjournalstatus(ra.getString("Symptomjournalstatus"));//r.externalid
+                casesUtilityClass.setExternal_id(ra.getString("externalid_region"));
+                casesUtilityClass.setC_id(ra.getString("id_case"));
+                
+                caseSender.jsonDHISSender();
+                
 
             }
 

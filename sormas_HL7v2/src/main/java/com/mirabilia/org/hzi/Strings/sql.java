@@ -336,7 +336,7 @@ public class sql {
             + "where  s.pathogentestresult = 'POSITIVE' and s.changedate::date = '2020-06-15' and c.id not in (select id from cases where pointofentry_id is not null and creationdate::date = '2020-06-15') group by region_id";
 
     //CASE_BASE_NEW
-    public static String getPErsons_Record_to_TrackEntity = "select p.id, p.approximateage, p.burialconductor, p.burialdate, p.changedate, p.creationdate,\n"
+    public static String getPersons_Record_to_TrackEntity = "select p.id, p.approximateage, p.burialconductor, p.burialdate, p.changedate, p.creationdate,\n"
             + "	p.deathdate, p.firstname, p.lastname, p.occupationdetails, p.occupationtype, p.presentcondition, \n"
             + "	p.sex, p.uuid, p.address_id, p.birthdate_dd, p.birthdate_mm, p.birthdate_yyyy, p.nickname, p.mothersmaidenname,\n"
             + "	p.deathplacetype, p.deathplacedescription, p.sys_period, p.causeofdeath, p.causeofdeathdetails, p.causeofdeathdisease, p.educationtype,\n"
@@ -345,19 +345,23 @@ public class sql {
             + "	p.birthweight, p.passportnumber, p.nationalhealthid, p.placeofbirthfacilitytype, p.changedateofembeddedlists, \n"
             + "	p.symptomjournalstatus, p.hascovidapp, p.covidcodedelivered, p.externalid, p.armedforcesrelationtype,\n"
             + "	p.namesofguardians, p.additionaldetails, p.BurialPlaceDescription, p.salutation,"
-            + " p.othersalutation, p.birthname, p.birthcountry_id, p.citizenship_id, p.externaltoken, r.externalid as externalid_region, c.id as id_case\n"
+            + "      p.othersalutation, p.birthname, p.birthcountry_id, p.citizenship_id, p.externaltoken, r.externalid as externalid_region, c.id as id_case\n"
             + "	from person p\n"
             + "	right join cases c on p.id = c.person_id\n"
-            + "	right join region r on c.region_id = r.id";
+            + "	right join region r on c.region_id = r.id\n"
+            + "      where externalid is null";
 
     public static String getCases = "select c.perosn_id, c.creationdate, c.disease, c.caseclassification,\n"
             + "c.outcome, c.caseage, c.caseorigin\n"
             + "from cases c, person p\n"
-            + "where c.changedate = ?";
+            + "where c.changedate = ?\n"
+            + "      where externalid is null";
 
     public static String getSamples = "select s.samplematerial, s.lab_id, s.pathogentestingrequested, s.pathogentestresult, s.fieldsampleid, s.samplingreason, s.labdetails, s.associatedcase_id\n"
             + "from samples s\n"
-            + "where s.changedate = ?";
+            + "where s.changedate = ?\n"
+            + "      where externalid is null";
+
 
     // public static String Get_all_Isolated_today = "";
     // public static String Get_all_Isolated_today = "";

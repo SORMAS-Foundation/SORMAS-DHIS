@@ -23,13 +23,13 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.mirabilia.org.hzi.sormas.cases;
+package com.mirabilia.org.hzi.sormas.cases.Case;
 
 /**
  *
  * @author Mathew Official
  */
-public class casesUtilityClass {
+public class CasesUtilityClass {
 
     private static String Address = "0";
     private static String Addtionaldetails = "0";
@@ -94,7 +94,7 @@ public class casesUtilityClass {
     }
 
     public static void setAddress(String Address) {
-        casesUtilityClass.Address = Address;
+        CasesUtilityClass.Address = Address;
     }
 
     public static String getAddtionaldetails() {
@@ -102,7 +102,7 @@ public class casesUtilityClass {
     }
 
     public static void setAddtionaldetails(String Addtionaldetails) {
-        casesUtilityClass.Addtionaldetails = Addtionaldetails;
+        CasesUtilityClass.Addtionaldetails = Addtionaldetails;
     }
 
     public static String getApproximateage() {
@@ -110,7 +110,7 @@ public class casesUtilityClass {
     }
 
     public static void setApproximateage(String Approximateage) {
-        casesUtilityClass.Approximateage = Approximateage;
+        CasesUtilityClass.Approximateage = Approximateage;
     }
 
     public static String getApproximate_Age_Reference_Date() {
@@ -118,7 +118,7 @@ public class casesUtilityClass {
     }
 
     public static void setApproximate_Age_Reference_Date(String Approximate_Age_Reference_Date) {
-        casesUtilityClass.Approximate_Age_Reference_Date = Approximate_Age_Reference_Date;
+        CasesUtilityClass.Approximate_Age_Reference_Date = Approximate_Age_Reference_Date;
     }
 
     public static String getApproximateagetype() {
@@ -126,7 +126,7 @@ public class casesUtilityClass {
     }
 
     public static void setApproximateagetype(String Approximateagetype) {
-        casesUtilityClass.Approximateagetype = Approximateagetype;
+        CasesUtilityClass.Approximateagetype = Approximateagetype;
     }
 
     public static String getArmedforcesrelationtype() {
@@ -134,7 +134,7 @@ public class casesUtilityClass {
     }
 
     public static void setArmedforcesrelationtype(String Armedforcesrelationtype) {
-        casesUtilityClass.Armedforcesrelationtype = Armedforcesrelationtype;
+        CasesUtilityClass.Armedforcesrelationtype = Armedforcesrelationtype;
     }
 
     public static String getBirthcountry_Id() {
@@ -142,7 +142,7 @@ public class casesUtilityClass {
     }
 
     public static void setBirthcountry_Id(String Birthcountry_Id) {
-        casesUtilityClass.Birthcountry_Id = Birthcountry_Id;
+        CasesUtilityClass.Birthcountry_Id = Birthcountry_Id;
     }
 
     public static String getBirthdate() {
@@ -150,7 +150,7 @@ public class casesUtilityClass {
     }
 
     public static void setBirthdate(String Birthdate) {
-        casesUtilityClass.Birthdate = Birthdate;
+        CasesUtilityClass.Birthdate = Birthdate;
     }
 
     public static String getBirthdate_Month() {
@@ -158,7 +158,7 @@ public class casesUtilityClass {
     }
 
     public static void setBirthdate_Month(String Birthdate_Month) {
-        casesUtilityClass.Birthdate_Month = Birthdate_Month;
+        CasesUtilityClass.Birthdate_Month = Birthdate_Month;
     }
 
     public static String getBirthdate_Year() {
@@ -166,7 +166,7 @@ public class casesUtilityClass {
     }
 
     public static void setBirthdate_Year(String Birthdate_Year) {
-        casesUtilityClass.Birthdate_Year = Birthdate_Year;
+        CasesUtilityClass.Birthdate_Year = Birthdate_Year;
     }
 
     public static String getBirthname() {
@@ -174,7 +174,7 @@ public class casesUtilityClass {
     }
 
     public static void setBirthname(String Birthname) {
-        casesUtilityClass.Birthname = Birthname;
+        CasesUtilityClass.Birthname = Birthname;
     }
 
     public static String getBirthweight() {
@@ -182,7 +182,7 @@ public class casesUtilityClass {
     }
 
     public static void setBirthweight(String Birthweight) {
-        casesUtilityClass.Birthweight = Birthweight;
+        CasesUtilityClass.Birthweight = Birthweight;
     }
 
     public static String getBurialconductor() {
@@ -190,7 +190,7 @@ public class casesUtilityClass {
     }
 
     public static void setBurialconductor(String Burialconductor) {
-        casesUtilityClass.Burialconductor = Burialconductor;
+        CasesUtilityClass.Burialconductor = Burialconductor;
     }
 
     public static String getBurialdate() {
@@ -198,7 +198,7 @@ public class casesUtilityClass {
     }
 
     public static void setBurialdate(String Burialdate) {
-        casesUtilityClass.Burialdate = Burialdate;
+        CasesUtilityClass.Burialdate = Burialdate;
     }
 
     public static String getBurial_Place_Description() {
@@ -206,7 +206,7 @@ public class casesUtilityClass {
     }
 
     public static void setBurial_Place_Description(String Burial_Place_Description) {
-        casesUtilityClass.Burial_Place_Description = Burial_Place_Description;
+        CasesUtilityClass.Burial_Place_Description = Burial_Place_Description;
     }
 
     public static String getCause_of_Death() {
@@ -214,7 +214,7 @@ public class casesUtilityClass {
     }
 
     public static void setCause_of_Death(String Cause_of_Death) {
-        casesUtilityClass.Cause_of_Death = Cause_of_Death;
+        CasesUtilityClass.Cause_of_Death = Cause_of_Death;
     }
 
     public static String getCause_of_Death_Details() {
@@ -222,7 +222,7 @@ public class casesUtilityClass {
     }
 
     public static void setCause_of_Death_Details(String Cause_of_Death_Details) {
-        casesUtilityClass.Cause_of_Death_Details = Cause_of_Death_Details;
+        CasesUtilityClass.Cause_of_Death_Details = Cause_of_Death_Details;
     }
 
     public static String getCause_of_Death_Disease() {
@@ -230,7 +230,7 @@ public class casesUtilityClass {
     }
 
     public static void setCause_of_Death_Disease(String Cause_of_Death_Disease) {
-        casesUtilityClass.Cause_of_Death_Disease = Cause_of_Death_Disease;
+        CasesUtilityClass.Cause_of_Death_Disease = Cause_of_Death_Disease;
     }
 
     public static String getChangedate() {
@@ -238,7 +238,7 @@ public class casesUtilityClass {
     }
 
     public static void setChangedate(String Changedate) {
-        casesUtilityClass.Changedate = Changedate;
+        CasesUtilityClass.Changedate = Changedate;
     }
 
     public static String getChangedateofembeddedlists() {
@@ -246,7 +246,7 @@ public class casesUtilityClass {
     }
 
     public static void setChangedateofembeddedlists(String Changedateofembeddedlists) {
-        casesUtilityClass.Changedateofembeddedlists = Changedateofembeddedlists;
+        CasesUtilityClass.Changedateofembeddedlists = Changedateofembeddedlists;
     }
 
     public static String getCitizenship_Id() {
@@ -254,7 +254,7 @@ public class casesUtilityClass {
     }
 
     public static void setCitizenship_Id(String Citizenship_Id) {
-        casesUtilityClass.Citizenship_Id = Citizenship_Id;
+        CasesUtilityClass.Citizenship_Id = Citizenship_Id;
     }
 
     public static String getCovidcodedelivered() {
@@ -262,7 +262,7 @@ public class casesUtilityClass {
     }
 
     public static void setCovidcodedelivered(String Covidcodedelivered) {
-        casesUtilityClass.Covidcodedelivered = Covidcodedelivered;
+        CasesUtilityClass.Covidcodedelivered = Covidcodedelivered;
     }
 
     public static String getCreationdate() {
@@ -270,7 +270,7 @@ public class casesUtilityClass {
     }
 
     public static void setCreationdate(String Creationdate) {
-        casesUtilityClass.Creationdate = Creationdate;
+        CasesUtilityClass.Creationdate = Creationdate;
     }
 
     public static String getDeathdate() {
@@ -278,7 +278,7 @@ public class casesUtilityClass {
     }
 
     public static void setDeathdate(String Deathdate) {
-        casesUtilityClass.Deathdate = Deathdate;
+        CasesUtilityClass.Deathdate = Deathdate;
     }
 
     public static String getDeath_Place_Description() {
@@ -286,7 +286,7 @@ public class casesUtilityClass {
     }
 
     public static void setDeath_Place_Description(String Death_Place_Description) {
-        casesUtilityClass.Death_Place_Description = Death_Place_Description;
+        CasesUtilityClass.Death_Place_Description = Death_Place_Description;
     }
 
     public static String getDeath_Place_Type() {
@@ -294,7 +294,7 @@ public class casesUtilityClass {
     }
 
     public static void setDeath_Place_Type(String Death_Place_Type) {
-        casesUtilityClass.Death_Place_Type = Death_Place_Type;
+        CasesUtilityClass.Death_Place_Type = Death_Place_Type;
     }
 
     public static String getEducation_Details() {
@@ -302,7 +302,7 @@ public class casesUtilityClass {
     }
 
     public static void setEducation_Details(String Education_Details) {
-        casesUtilityClass.Education_Details = Education_Details;
+        CasesUtilityClass.Education_Details = Education_Details;
     }
 
     public static String getEducation_Type() {
@@ -310,7 +310,7 @@ public class casesUtilityClass {
     }
 
     public static void setEducation_Type(String Education_Type) {
-        casesUtilityClass.Education_Type = Education_Type;
+        CasesUtilityClass.Education_Type = Education_Type;
     }
 
     public static String getExternalid() {
@@ -318,7 +318,7 @@ public class casesUtilityClass {
     }
 
     public static void setExternalid(String Externalid) {
-        casesUtilityClass.Externalid = Externalid;
+        CasesUtilityClass.Externalid = Externalid;
     }
 
     public static String getExternaltoken() {
@@ -326,7 +326,7 @@ public class casesUtilityClass {
     }
 
     public static void setExternaltoken(String Externaltoken) {
-        casesUtilityClass.Externaltoken = Externaltoken;
+        CasesUtilityClass.Externaltoken = Externaltoken;
     }
 
     public static String getFathersname() {
@@ -334,7 +334,7 @@ public class casesUtilityClass {
     }
 
     public static void setFathersname(String Fathersname) {
-        casesUtilityClass.Fathersname = Fathersname;
+        CasesUtilityClass.Fathersname = Fathersname;
     }
 
     public static String getFirstname() {
@@ -342,7 +342,7 @@ public class casesUtilityClass {
     }
 
     public static void setFirstname(String Firstname) {
-        casesUtilityClass.Firstname = Firstname;
+        CasesUtilityClass.Firstname = Firstname;
     }
 
     public static String getGestationageatbirth() {
@@ -350,7 +350,7 @@ public class casesUtilityClass {
     }
 
     public static void setGestationageatbirth(String Gestationageatbirth) {
-        casesUtilityClass.Gestationageatbirth = Gestationageatbirth;
+        CasesUtilityClass.Gestationageatbirth = Gestationageatbirth;
     }
 
     public static String getHascovidapp() {
@@ -358,7 +358,7 @@ public class casesUtilityClass {
     }
 
     public static void setHascovidapp(String Hascovidapp) {
-        casesUtilityClass.Hascovidapp = Hascovidapp;
+        CasesUtilityClass.Hascovidapp = Hascovidapp;
     }
 
     public static String getMothersmaidenname() {
@@ -366,7 +366,7 @@ public class casesUtilityClass {
     }
 
     public static void setMothersmaidenname(String Mothersmaidenname) {
-        casesUtilityClass.Mothersmaidenname = Mothersmaidenname;
+        CasesUtilityClass.Mothersmaidenname = Mothersmaidenname;
     }
 
     public static String getMothersname() {
@@ -374,7 +374,7 @@ public class casesUtilityClass {
     }
 
     public static void setMothersname(String Mothersname) {
-        casesUtilityClass.Mothersname = Mothersname;
+        CasesUtilityClass.Mothersname = Mothersname;
     }
 
     public static String getNameofguardians() {
@@ -382,7 +382,7 @@ public class casesUtilityClass {
     }
 
     public static void setNameofguardians(String Nameofguardians) {
-        casesUtilityClass.Nameofguardians = Nameofguardians;
+        CasesUtilityClass.Nameofguardians = Nameofguardians;
     }
 
     public static String getNationalhealth_Id() {
@@ -390,7 +390,7 @@ public class casesUtilityClass {
     }
 
     public static void setNationalhealth_Id(String Nationalhealth_Id) {
-        casesUtilityClass.Nationalhealth_Id = Nationalhealth_Id;
+        CasesUtilityClass.Nationalhealth_Id = Nationalhealth_Id;
     }
 
     public static String getNickname() {
@@ -398,7 +398,7 @@ public class casesUtilityClass {
     }
 
     public static void setNickname(String Nickname) {
-        casesUtilityClass.Nickname = Nickname;
+        CasesUtilityClass.Nickname = Nickname;
     }
 
     public static String getOccupationdetails() {
@@ -406,7 +406,7 @@ public class casesUtilityClass {
     }
 
     public static void setOccupationdetails(String Occupationdetails) {
-        casesUtilityClass.Occupationdetails = Occupationdetails;
+        CasesUtilityClass.Occupationdetails = Occupationdetails;
     }
 
     public static String getOccupationtype() {
@@ -414,7 +414,7 @@ public class casesUtilityClass {
     }
 
     public static void setOccupationtype(String Occupationtype) {
-        casesUtilityClass.Occupationtype = Occupationtype;
+        CasesUtilityClass.Occupationtype = Occupationtype;
     }
 
     public static String getOthersalutation() {
@@ -422,7 +422,7 @@ public class casesUtilityClass {
     }
 
     public static void setOthersalutation(String Othersalutation) {
-        casesUtilityClass.Othersalutation = Othersalutation;
+        CasesUtilityClass.Othersalutation = Othersalutation;
     }
 
     public static String getPassportnumber() {
@@ -430,7 +430,7 @@ public class casesUtilityClass {
     }
 
     public static void setPassportnumber(String Passportnumber) {
-        casesUtilityClass.Passportnumber = Passportnumber;
+        CasesUtilityClass.Passportnumber = Passportnumber;
     }
 
     public static String getPlaceofbirthcommunity_Id() {
@@ -438,7 +438,7 @@ public class casesUtilityClass {
     }
 
     public static void setPlaceofbirthcommunity_Id(String Placeofbirthcommunity_Id) {
-        casesUtilityClass.Placeofbirthcommunity_Id = Placeofbirthcommunity_Id;
+        CasesUtilityClass.Placeofbirthcommunity_Id = Placeofbirthcommunity_Id;
     }
 
     public static String getPlaceofbirthdistrict_Id() {
@@ -446,7 +446,7 @@ public class casesUtilityClass {
     }
 
     public static void setPlaceofbirthdistrict_Id(String Placeofbirthdistrict_Id) {
-        casesUtilityClass.Placeofbirthdistrict_Id = Placeofbirthdistrict_Id;
+        CasesUtilityClass.Placeofbirthdistrict_Id = Placeofbirthdistrict_Id;
     }
 
     public static String getPlaceofbirthfacilitydetails() {
@@ -454,7 +454,7 @@ public class casesUtilityClass {
     }
 
     public static void setPlaceofbirthfacilitydetails(String Placeofbirthfacilitydetails) {
-        casesUtilityClass.Placeofbirthfacilitydetails = Placeofbirthfacilitydetails;
+        CasesUtilityClass.Placeofbirthfacilitydetails = Placeofbirthfacilitydetails;
     }
 
     public static String getPlaceofbirthfacility_Id() {
@@ -462,7 +462,7 @@ public class casesUtilityClass {
     }
 
     public static void setPlaceofbirthfacility_Id(String Placeofbirthfacility_Id) {
-        casesUtilityClass.Placeofbirthfacility_Id = Placeofbirthfacility_Id;
+        CasesUtilityClass.Placeofbirthfacility_Id = Placeofbirthfacility_Id;
     }
 
     public static String getPlaceofbirthfacilitytype() {
@@ -470,7 +470,7 @@ public class casesUtilityClass {
     }
 
     public static void setPlaceofbirthfacilitytype(String Placeofbirthfacilitytype) {
-        casesUtilityClass.Placeofbirthfacilitytype = Placeofbirthfacilitytype;
+        CasesUtilityClass.Placeofbirthfacilitytype = Placeofbirthfacilitytype;
     }
 
     public static String getPlaceofbirthregion_Id() {
@@ -478,7 +478,7 @@ public class casesUtilityClass {
     }
 
     public static void setPlaceofbirthregion_Id(String Placeofbirthregion_Id) {
-        casesUtilityClass.Placeofbirthregion_Id = Placeofbirthregion_Id;
+        CasesUtilityClass.Placeofbirthregion_Id = Placeofbirthregion_Id;
     }
 
     public static String getPresentcondition() {
@@ -486,7 +486,7 @@ public class casesUtilityClass {
     }
 
     public static void setPresentcondition(String Presentcondition) {
-        casesUtilityClass.Presentcondition = Presentcondition;
+        CasesUtilityClass.Presentcondition = Presentcondition;
     }
 
     public static String getSalutation() {
@@ -494,7 +494,7 @@ public class casesUtilityClass {
     }
 
     public static void setSalutation(String Salutation) {
-        casesUtilityClass.Salutation = Salutation;
+        CasesUtilityClass.Salutation = Salutation;
     }
 
     public static String getSex() {
@@ -502,7 +502,7 @@ public class casesUtilityClass {
     }
 
     public static void setSex(String Sex) {
-        casesUtilityClass.Sex = Sex;
+        CasesUtilityClass.Sex = Sex;
     }
 
     public static String getSormas_System_Period() {
@@ -510,7 +510,7 @@ public class casesUtilityClass {
     }
 
     public static void setSormas_System_Period(String Sormas_System_Period) {
-        casesUtilityClass.Sormas_System_Period = Sormas_System_Period;
+        CasesUtilityClass.Sormas_System_Period = Sormas_System_Period;
     }
 
     public static String getSRM_Uuid() {
@@ -518,7 +518,7 @@ public class casesUtilityClass {
     }
 
     public static void setSRM_Uuid(String SRM_Uuid) {
-        casesUtilityClass.SRM_Uuid = SRM_Uuid;
+        CasesUtilityClass.SRM_Uuid = SRM_Uuid;
     }
 
     public static String getSymptomjournalstatus() {
@@ -526,15 +526,7 @@ public class casesUtilityClass {
     }
 
     public static void setSymptomjournalstatus(String Symptomjournalstatus) {
-        casesUtilityClass.Symptomjournalstatus = Symptomjournalstatus;
-    }
-
-    public static String getC_id() {
-        return c_id;
-    }
-
-    public static void setC_id(String c_id) {
-        casesUtilityClass.c_id = c_id;
+        CasesUtilityClass.Symptomjournalstatus = Symptomjournalstatus;
     }
 
     public static String getExternal_id() {
@@ -542,8 +534,17 @@ public class casesUtilityClass {
     }
 
     public static void setExternal_id(String external_id) {
-        casesUtilityClass.external_id = external_id;
+        CasesUtilityClass.external_id = external_id;
     }
+
+    public static String getC_id() {
+        return c_id;
+    }
+
+    public static void setC_id(String c_id) {
+        CasesUtilityClass.c_id = c_id;
+    }
+
     
     
 

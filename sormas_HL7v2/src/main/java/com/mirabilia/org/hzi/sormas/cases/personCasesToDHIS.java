@@ -40,7 +40,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Mathew Official
  */
 @WebServlet(name = "extractor_Validatorx", urlPatterns = {"/seRtyTreSDfrEwertrfDrTyuiOlmNbvcdfGhyUiOLKMNbVCxDfgHJkIuytRd"})
-public class casesToDHIS extends HttpServlet {
+public class personCasesToDHIS extends HttpServlet {
 
    
 
@@ -50,10 +50,10 @@ public class casesToDHIS extends HttpServlet {
 
         try {
 
-            casesExtractor.SormasCasePull("2");
+            personCasesExtractor.SormasCasePull("2");
 
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(casesToDHIS.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(personCasesToDHIS.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

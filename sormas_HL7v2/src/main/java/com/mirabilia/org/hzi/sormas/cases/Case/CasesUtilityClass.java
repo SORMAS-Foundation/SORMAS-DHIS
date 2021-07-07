@@ -88,6 +88,20 @@ public class CasesUtilityClass {
     private static String Symptomjournalstatus = "0";
     private static String external_id = "0";
     private static String c_id = "0";
+    private static String person_id="0";
+    private static String creationdate="0";
+    private static String disease="0";
+    private static String caseclassification="0";
+    private static String outcome="0";
+    private static String caseage="0";
+    private static String caseorigin="0";
+    private static String samplematerial="0";
+    private static String lab_id="0";
+    private static String pathogentestingrequested="0";
+    private static String pathogentestresult="0";
+    private static String fieldsampleid="0";
+    private static String samplingreason="0";
+    private static String labdetails="0";
 
     public static String getAddress() {
         return Address;
@@ -543,6 +557,110 @@ public class CasesUtilityClass {
 
     public static void setC_id(String c_id) {
         CasesUtilityClass.c_id = c_id;
+    }
+
+    public static String getPerson_id() {
+        return person_id;
+    }
+
+    public static void setPerson_id(String person_id) {
+        CasesUtilityClass.person_id = person_id;
+    }
+
+    public static String getDisease() {
+        return disease;
+    }
+
+    public static void setDisease(String disease) {
+        CasesUtilityClass.disease = disease;
+    }
+
+    public static String getCaseclassification() {
+        return caseclassification;
+    }
+
+    public static void setCaseclassification(String caseclassification) {
+        CasesUtilityClass.caseclassification = caseclassification;
+    }
+
+    public static String getOutcome() {
+        return outcome;
+    }
+
+    public static void setOutcome(String outcome) {
+        CasesUtilityClass.outcome = outcome;
+    }
+
+    public static String getCaseage() {
+        return caseage;
+    }
+
+    public static void setCaseage(String caseage) {
+        CasesUtilityClass.caseage = caseage;
+    }
+
+    public static String getCaseorigin() {
+        return caseorigin;
+    }
+
+    public static void setCaseorigin(String caseorigin) {
+        CasesUtilityClass.caseorigin = caseorigin;
+    }
+
+    public static String getSamplematerial() {
+        return samplematerial;
+    }
+
+    public static void setSamplematerial(String samplematerial) {
+        CasesUtilityClass.samplematerial = samplematerial;
+    }
+
+    public static String getLab_id() {
+        return lab_id;
+    }
+
+    public static void setLab_id(String lab_id) {
+        CasesUtilityClass.lab_id = lab_id;
+    }
+
+    public static String getPathogentestingrequested() {
+        return pathogentestingrequested;
+    }
+
+    public static void setPathogentestingrequested(String pathogentestingrequested) {
+        CasesUtilityClass.pathogentestingrequested = pathogentestingrequested;
+    }
+
+    public static String getPathogentestresult() {
+        return pathogentestresult;
+    }
+
+    public static void setPathogentestresult(String pathogentestresult) {
+        CasesUtilityClass.pathogentestresult = pathogentestresult;
+    }
+
+    public static String getFieldsampleid() {
+        return fieldsampleid;
+    }
+
+    public static void setFieldsampleid(String fieldsampleid) {
+        CasesUtilityClass.fieldsampleid = fieldsampleid;
+    }
+
+    public static String getSamplingreason() {
+        return samplingreason;
+    }
+
+    public static void setSamplingreason(String samplingreason) {
+        CasesUtilityClass.samplingreason = samplingreason;
+    }
+
+    public static String getLabdetails() {
+        return labdetails;
+    }
+
+    public static void setLabdetails(String labdetails) {
+        CasesUtilityClass.labdetails = labdetails;
     }
 
     

@@ -27,7 +27,7 @@ public class DbConnector {
             String d5 = url[4];
 
             // System.out.println("jdbc:mysql://" + d1 + ":" + d2 + "/" + d3 + ", " + d4 + ", " + d5);
-            return DriverManager.getConnection("jdbc:mysql://" + d1 + ":" + d2 + "/" + d3 + "?useSSL=false", d4, d5);
+            return DriverManager.getConnection("jdbc:mysql://" + d1 + ":" + d2 + "/" + d3 + "?useSSL=false&serverTimezone=UTC", d4, d5);
 
         } catch (Exception ex) {
             System.out.println("Several!, Database mysql getConnection() has an Error -->" + ex.getMessage());

@@ -90,7 +90,7 @@ public class SampleSender {
         try {
             if (!"0".equals(SampleUtilityClass.getSample_id())) {
                 JSONObject item1 = new JSONObject();
-                item1.put("dataElement", "XxNsLxPryII");
+                item1.put("dataElement", "rYWumVJDsmN");
                 item1.put("value", SampleUtilityClass.getSample_id());
                 array.add(item1);
             }

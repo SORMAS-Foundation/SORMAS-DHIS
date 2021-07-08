@@ -23,7 +23,9 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.mirabilia.org.hzi.sormas.cases.Case;
+package com.mirabilia.org.hzi.sormas.cases.Sample;
+
+import com.mirabilia.org.hzi.sormas.cases.Case.*;
 
 /**
  *

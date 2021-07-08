@@ -375,4 +375,31 @@ public class SendToDHISServer {
         }
     }
 
+    public static String get_trackEntity(String sqq, String sqq_) throws ClassNotFoundException, SQLException {
+        PreparedStatement ps = null;
+        ResultSet rx = null;
+        String rett = "0";
+
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DbConnector.getConnection();
+
+        try {
+
+            ps = conn.prepareStatement(sqq);
+            ps.setString(1, sqq_);
+
+            rx = ps.executeQuery();
+
+            while (rx.next()) {
+                rett = rx.getString(1);
+            }
+            ps.executeUpdate();
+
+        } finally {
+            conn.close();
+        }
+        return rett;
+
+    }
+
 }

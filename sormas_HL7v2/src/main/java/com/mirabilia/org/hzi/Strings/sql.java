@@ -351,7 +351,7 @@ public class sql {
             + "	right join region r on c.region_id = r.id\n"
             + "      where externalid is null";
 
-    public static String getCases = "select c.perosn_id, c.creationdate, c.disease, c.caseclassification,\n"
+    public static String getCases = "select c.id, c.perosn_id, c.creationdate, c.disease, c.caseclassification,\n"
             + "c.outcome, c.caseage, c.caseorigin\n"
             + "from cases c, person p\n"
             + "where c.changedate = ?\n"

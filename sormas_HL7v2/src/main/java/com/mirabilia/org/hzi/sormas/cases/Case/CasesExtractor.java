@@ -27,6 +27,7 @@ package com.mirabilia.org.hzi.sormas.cases.Case;
 
 import com.mirabilia.org.hzi.sormas.cases.*;
 import com.mirabilia.org.hzi.Strings.sql;
+import com.mirabilia.org.hzi.sormas.aggregate.SendToDHISServer;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -67,91 +68,23 @@ public class CasesExtractor {
 
             ra = pa.executeQuery();
             while (ra.next()) {
-
-                CasesUtilityClass.setAddress(ra.getString("address_id"));
-                CasesUtilityClass.setAddtionaldetails(ra.getString("additionaldetails"));
-                CasesUtilityClass.setApproximateage(ra.getString("Approximateage"));
-
-                CasesUtilityClass.setApproximate_Age_Reference_Date(ra.getString("ApproximateAgeReferenceDate"));
-
-                CasesUtilityClass.setApproximateagetype(ra.getString("Approximateagetype"));
-                CasesUtilityClass.setArmedforcesrelationtype(ra.getString("Armedforcesrelationtype"));
-                CasesUtilityClass.setBirthcountry_Id(ra.getString("Birthcountry_id"));
-
-                if (null != ra.getString("Birthdate_dd")) {
-                    String dx = ra.getString("Birthdate_dd");
-                    CasesUtilityClass.setBirthdate(dx.substring(0, dx.indexOf(" ")));
-                }
-
-                if (null != ra.getString("Birthdate_mm")) {
-                    String dx = ra.getString("Birthdate_mm");
-                    CasesUtilityClass.setBirthdate_Month(dx.substring(0, dx.indexOf(" ")));
-                }
-
-                if (null != ra.getString("Birthdate_yyyy")) {
-                    String dx = ra.getString("Birthdate_yyyy");
-                    CasesUtilityClass.setBirthdate_Year(dx.substring(0, dx.indexOf(" ")));
-                }
-                CasesUtilityClass.setBirthname(ra.getString("Birthname"));
-                CasesUtilityClass.setBirthweight(ra.getString("Birthweight"));
-                CasesUtilityClass.setBurialconductor(ra.getString("Burialconductor"));
-
-                CasesUtilityClass.setBurialdate(ra.getString("Burialdate"));
-                CasesUtilityClass.setBurial_Place_Description(ra.getString("BurialPlaceDescription"));
-                CasesUtilityClass.setCause_of_Death(ra.getString("CauseofDeath"));
-                CasesUtilityClass.setCause_of_Death_Details(ra.getString("CauseofDeathDetails"));
-                CasesUtilityClass.setCause_of_Death_Disease(ra.getString("CauseofDeathDisease"));
-                if (null != ra.getString("Changedate")) {
-                    String dx = ra.getString("Changedate");
-                    CasesUtilityClass.setChangedate(dx.substring(0, dx.indexOf(" ")));
-                }
-                if (null != ra.getString("Changedateofembeddedlists")) {
-                    String dx = ra.getString("Changedateofembeddedlists");
-                    CasesUtilityClass.setChangedateofembeddedlists(dx.substring(0, dx.indexOf(" ")));
-                }
-                CasesUtilityClass.setCitizenship_Id(ra.getString("Citizenship_id"));
-                CasesUtilityClass.setCovidcodedelivered(ra.getString("Covidcodedelivered"));
-                if (null != ra.getString("Creationdate")) {
-                    String dx = ra.getString("Creationdate");
-                    CasesUtilityClass.setCreationdate(dx.substring(0, dx.indexOf(" ")));
-                }
-
-                CasesUtilityClass.setDeathdate(ra.getString("Deathdate"));
-                CasesUtilityClass.setDeath_Place_Description(ra.getString("DeathPlaceDescription"));
-                CasesUtilityClass.setDeath_Place_Type(ra.getString("DeathPlaceType"));
-                CasesUtilityClass.setEducation_Details(ra.getString("EducationDetails"));
-                CasesUtilityClass.setEducation_Type(ra.getString("EducationType"));
-                CasesUtilityClass.setExternalid(ra.getString("Externalid"));
-                CasesUtilityClass.setExternaltoken(ra.getString("Externaltoken"));
-                CasesUtilityClass.setFathersname(ra.getString("Fathersname"));
-                CasesUtilityClass.setFirstname(ra.getString("Firstname"));
-                CasesUtilityClass.setGestationageatbirth(ra.getString("Gestationageatbirth"));
-                CasesUtilityClass.setHascovidapp(ra.getString("Hascovidapp"));
-                CasesUtilityClass.setMothersmaidenname(ra.getString("Mothersmaidenname"));
-                CasesUtilityClass.setMothersname(ra.getString("Mothersname"));
-                CasesUtilityClass.setNameofguardians(ra.getString("namesofguardians"));
-                CasesUtilityClass.setNationalhealth_Id(ra.getString("Nationalhealthid"));
-                CasesUtilityClass.setNickname(ra.getString("Nickname"));
-                CasesUtilityClass.setOccupationdetails(ra.getString("Occupationdetails"));
-                CasesUtilityClass.setOccupationtype(ra.getString("Occupationtype"));
-                CasesUtilityClass.setOthersalutation(ra.getString("Othersalutation"));
-                CasesUtilityClass.setPassportnumber(ra.getString("Passportnumber"));
-                CasesUtilityClass.setPlaceofbirthcommunity_Id(ra.getString("Placeofbirthcommunity_id"));
-                CasesUtilityClass.setPlaceofbirthdistrict_Id(ra.getString("Placeofbirthdistrict_id"));
-                CasesUtilityClass.setPlaceofbirthfacilitydetails(ra.getString("Placeofbirthfacilitydetails"));
-                CasesUtilityClass.setPlaceofbirthfacility_Id(ra.getString("Placeofbirthfacility_id"));
-                CasesUtilityClass.setPlaceofbirthfacilitytype(ra.getString("Placeofbirthfacilitytype"));
-                CasesUtilityClass.setPlaceofbirthregion_Id(ra.getString("Placeofbirthregion_id"));
-                CasesUtilityClass.setPresentcondition(ra.getString("Presentcondition"));
-                CasesUtilityClass.setSalutation(ra.getString("Salutation"));
-                CasesUtilityClass.setSex(ra.getString("Sex"));
-                CasesUtilityClass.setSormas_System_Period(ra.getString("sys_Period"));
-                CasesUtilityClass.setSRM_Uuid(ra.getString("Uuid"));
-                CasesUtilityClass.setSymptomjournalstatus(ra.getString("Symptomjournalstatus"));//r.externalid
-                CasesUtilityClass.setExternal_id(ra.getString("externalid_region"));
-                CasesUtilityClass.setC_id(ra.getString("id_case"));
-
-                personSender.jsonDHISSender();
+                
+                CasesUtilityClass.setC_id(ra.getString("Id"));
+                CasesUtilityClass.setCaseage(ra.getString("caseage"));
+                CasesUtilityClass.setCaseclassification(ra.getString("caseclassification"));
+                CasesUtilityClass.setCaseorigin(ra.getString("caseorigin"));
+                CasesUtilityClass.setDisease(ra.getString("disease"));
+                CasesUtilityClass.setOutcome(ra.getString("outcome"));
+                
+                //impliment coordinates
+                
+                
+                //implement UUID
+                
+                String rett = SendToDHISServer.get_trackEntity("select external_id from person where id = ?", ra.getString("Id"));
+                CasesUtilityClass.setTrackedentity_id(rett);
+                
+                CaseSender.jsonDHISSender();
 
             }
 

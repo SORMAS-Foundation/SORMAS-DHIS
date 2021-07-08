@@ -85,42 +85,42 @@ public class CaseSender {
         try {
             if (!"0".equals(CasesUtilityClass.getC_id())) {
                 JSONObject item1 = new JSONObject();
-                item1.put("dataElement", "XxNsLxPryII");
+                item1.put("dataElement", "eyoiseFH2aB");
                 item1.put("value", CasesUtilityClass.getC_id());
                 array.add(item1);
             }
 
             if (!"0".equals(CasesUtilityClass.getCaseage())) {
                 JSONObject item2 = new JSONObject();
-                item2.put("dataElement", "VqXyuGhuxuE");
+                item2.put("dataElement", "NtWkt9r3TJu");
                 item2.put("value", CasesUtilityClass.getCaseage());
                 array.add(item2);
             }
 
             if (!"0".equals(CasesUtilityClass.getCaseclassification())) {
                 JSONObject item3 = new JSONObject();
-                item3.put("dataElement", "tsHJlIHk7KX");
+                item3.put("dataElement", "prU4HZDrtYl");
                 item3.put("value", CasesUtilityClass.getCaseclassification());
                 array.add(item3);
             }
 
             if (!"0".equals(CasesUtilityClass.getCaseorigin())) {
                 JSONObject item4 = new JSONObject();
-                item4.put("dataElement", "dfgND0rAxwx");
+                item4.put("dataElement", "x8etmrR5884");
                 item4.put("value", CasesUtilityClass.getCaseorigin());
                 array.add(item4);
             }
 
             if (!"0".equals(CasesUtilityClass.getDisease())) {
                 JSONObject item5 = new JSONObject();
-                item5.put("dataElement", "eYE9Ys4Pv13");
+                item5.put("dataElement", "eKalSNxZYlq");
                 item5.put("value", CasesUtilityClass.getDisease());
                 array.add(item5);
             }
 
             if (!"0".equals(CasesUtilityClass.getOutcome())) {
                 JSONObject item6 = new JSONObject();
-                item6.put("dataElement", "mLZi1qXO2pQ");
+                item6.put("dataElement", "QuvnkUXjRE0");
                 item6.put("value", CasesUtilityClass.getOutcome());
                 array.add(item6);
             }
@@ -130,14 +130,14 @@ public class CaseSender {
             
             if (!"0".equals(CasesUtilityClass.getCaseLat())) {
                 JSONObject item6x = new JSONObject();
-                item6x.put("dataElement", "mLZi1qXO2pQ");
+                item6x.put("dataElement", "VFo2tMYKJuP");
                 item6x.put("value", CasesUtilityClass.getCaseLat());
                 arrayx.add(item6x);
             }
             
             if (!"0".equals(CasesUtilityClass.getCaseLong())) {
                 JSONObject item6n = new JSONObject();
-                item6n.put("dataElement", "mLZi1qXO2pQ");
+                item6n.put("dataElement", "PNqDfIUdBb2");
                 item6n.put("value", CasesUtilityClass.getCaseLong());
                 arrayx.add(item6n);
             }

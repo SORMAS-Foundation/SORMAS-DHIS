@@ -97,55 +97,56 @@ public class SampleSender {
 
             if (!"0".equals(SampleUtilityClass.getLab_id())) {
                 JSONObject item2 = new JSONObject();
-                item2.put("dataElement", "VqXyuGhuxuE");
+                item2.put("dataElement", "HOnk0sV6Zi1");
                 item2.put("value", SampleUtilityClass.getLab_id());
                 array.add(item2);
             }
 
             if (!"0".equals(SampleUtilityClass.getPathogentestingrequested())) {
                 JSONObject item3 = new JSONObject();
-                item3.put("dataElement", "tsHJlIHk7KX");
+                item3.put("dataElement", "ziOHUChRYQf");
                 item3.put("value", SampleUtilityClass.getPathogentestingrequested());
                 array.add(item3);
             }
 
             if (!"0".equals(SampleUtilityClass.getPathogentestresult())) {
                 JSONObject item4 = new JSONObject();
-                item4.put("dataElement", "dfgND0rAxwx");
+                item4.put("dataElement", "KbYjMelF5ef");
                 item4.put("value", SampleUtilityClass.getPathogentestresult());
                 array.add(item4);
             }
 
             if (!"0".equals(SampleUtilityClass.getSamplingreason())) {
                 JSONObject item5 = new JSONObject();
-                item5.put("dataElement", "eYE9Ys4Pv13");
+                item5.put("dataElement", "pPm2544Wc8o");
                 item5.put("value", SampleUtilityClass.getSamplingreason());
                 array.add(item5);
             }
 
             if (!"0".equals(SampleUtilityClass.getLabdetails())) {
                 JSONObject item6 = new JSONObject();
-                item6.put("dataElement", "mLZi1qXO2pQ");
+                item6.put("dataElement", "TfLnoKj941t");
                 item6.put("value", SampleUtilityClass.getLabdetails());
                 array.add(item6);
             }
             
             if (!"0".equals(SampleUtilityClass.getAssociatedcase_id())) {
                 JSONObject item6 = new JSONObject();
-                item6.put("dataElement", "mLZi1qXO2pQ");
+                item6.put("dataElement", "JIUpcDytaBI");
                 item6.put("value", SampleUtilityClass.getAssociatedcase_id());
                 array.add(item6);
             }
             
             if (!"0".equals(SampleUtilityClass.getSampleUuid())) {
                 JSONObject item6 = new JSONObject();
-                item6.put("dataElement", "mLZi1qXO2pQ");
+                item6.put("dataElement", "rYWumVJDsmN");
                 item6.put("value", SampleUtilityClass.getSampleUuid());
                 array.add(item6);
             }
-
-
             json.put("dataValues", array);
+            
+            
+            /*
             
             if (!"0".equals(SampleUtilityClass.getSampleCaseLat())) {
                 JSONObject item6x = new JSONObject();
@@ -164,16 +165,18 @@ public class SampleSender {
             json.put("geometry", arrayx);
 
             
-            
+            */
             
             
             //enrollment data
             json.put("program", "m0lmvyTblN0");
-            json.put("orgUnit", SampleUtilityClass.getExternal_id());
+        //    json.put("orgUnit", SampleUtilityClass.getExternal_id());
             json.put("eventDate", SampleUtilityClass.getCreationdate());
-            json.put("status", "m0lmvyTblN0");
-            json.put("completedDate", "m0lmvyTblN0");
-            json.put("program", "m0lmvyTblN0");
+            json.put("status", "COMPLETED");
+            json.put("completedDate", SampleUtilityClass.getCreationdate());
+            json.put("programStage", "dDv9tXSitXC");
+            json.put("trackedEntityInstance", SampleUtilityClass.getTrackedentity_id());
+
 
         } finally {
 

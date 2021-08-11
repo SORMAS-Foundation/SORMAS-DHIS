@@ -123,7 +123,11 @@ public class orgUnitConn extends HttpServlet {
                 ServletOutputStream sout = response.getOutputStream();
                 String content = "DHIS2 Not Responding";
                 sout.print(content);
+                  sessionx.setAttribute("err", "<div class=\"alert alert-danger\" role=\"alert\">  DHIS Instance Not available or mot responding</div>");
+             
                 return;
+            } else {
+             sessionx.setAttribute("err", "");
             }
 
             try {

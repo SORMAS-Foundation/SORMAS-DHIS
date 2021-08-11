@@ -1,3 +1,4 @@
+<%@page import="com.mirabilia.org.hzi.Util.UtilityAbstracts"%>
 <%@page import="com.mirabilia.org.hzi.Util.sourceDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -190,12 +191,14 @@
                     </section>
 
                     <div id="overlay" onclick="off()">
-                        <div id="text"><h3 style="padding-left:100px;">please wait... configuring SORMAS</h3>
+                        <div id="text"><h2 style="padding-left:100px;">please wait... we are populating/updating your adapter with admin data</h2>
                         </div></div>
 
 
                 <%
                     String sourcesX = sourceDTO.getSourcePaired();
+                    String mastt = UtilityAbstracts.getMasterSpource();
+                    String desss = UtilityAbstracts.getMdestinationSpource();
 
                 %>
 
@@ -278,7 +281,7 @@
 
 
                                             <a onclick="dd();" id="sync_x" class="btn btn-app hvr-icon-buzz-out">
-                                                <i class="fas fa-download hvr-icon"></i> Prime < Master
+                                                <i class="fas fa-download hvr-icon" title="Download Admin data from <%=mastt%>"></i> Prime < Master <%=mastt%>
                                             </a>
 
 
@@ -390,14 +393,14 @@
 
 
                                             <a class="btn btn-app hvr-icon-buzz-out" onclick="lc()">
-                                                <i class="fas fa-download hvr-icon"></i> Prime < Destination
+                                                <i class="fas fa-download hvr-icon" title="Download Admin data from <%=desss%>"></i> Destination >> Adapter
                                             </a>
 
 
 
 
                                             <a onclick="dd();" id="sync_" class="btn btn-app hvr-icon-buzz-out">
-                                                <i class="fas fa-download hvr-icon"></i> Prime < Master
+                                                <i class="fas fa-download hvr-icon" title="Download Admin data from <%=mastt%>"></i> Master >> Adapter
                                             </a>
 
                                             <a onclick="ana();" id="analysedb" class="btn btn-app hvr-icon-buzz-out">

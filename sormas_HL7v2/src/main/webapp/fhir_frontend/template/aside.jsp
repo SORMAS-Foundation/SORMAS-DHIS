@@ -113,7 +113,9 @@
                                     </p>
                                 </a>
                             </li>
+                            
                     </nav>
+                     
                     <!-- /.sidebar-menu -->
                 </div>
                 <!-- /.sidebar -->

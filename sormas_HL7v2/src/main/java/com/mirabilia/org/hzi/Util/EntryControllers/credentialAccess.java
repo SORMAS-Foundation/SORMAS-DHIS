@@ -75,7 +75,7 @@ public class credentialAccess extends HttpServlet {
 
                     Logger.getLogger(credentialAccess.class.getName()).log(Level.INFO, "User Logged in was successful: ADMINISTRATOR");
                     sessionx.setAttribute("xloggedx", "truet_");
-                  //  sessionx.setAttribute("xloggedx_name", request.getParameter("usern"));
+                    sessionx.setAttribute("xloggedx_name", request.getParameter("usern"));
                     response.sendRedirect("fhir_frontend/adapter_frontend.jsp");
                     
                 } else {

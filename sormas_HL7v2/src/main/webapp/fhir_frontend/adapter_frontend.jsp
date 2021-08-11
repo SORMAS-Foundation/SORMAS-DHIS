@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    if(session.getAttribute("xloggedx") == null || session.getAttribute("xloggedx") != "true" ){
+    if(session.getAttribute("xloggedx") == null || session.getAttribute("xloggedx") != "truet_" ){
     response.sendRedirect(request.getContextPath());
     }
         PreparedStatement ps;

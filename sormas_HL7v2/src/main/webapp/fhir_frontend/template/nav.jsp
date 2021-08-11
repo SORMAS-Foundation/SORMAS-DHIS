@@ -43,9 +43,9 @@
                                     <img src="./mira_assets/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                                     <div class="media-body">
                                         <h3 class="dropdown-item-title">
-                                            ADULOJU Mathew
+                                            ${sessionScope.xloggedx_name}
                                         </h3>
-                                        <p class="text-sm">aduloju@gmail.com | 07031252904</p>
+                                        <p class="text-sm">admin@sormas.org </p>
                                          <a class="nav-link"  href="<%=request.getContextPath()%>/logout.jsp" title="log out?"><i
                                 class="fas fa-lock-open"></i> Logout</a>
                                     </div>

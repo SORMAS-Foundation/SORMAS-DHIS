@@ -42,7 +42,7 @@ import java.util.logging.Logger;
  *
  * @author Mathew Official
  */
-public class CasesExtractor {
+public class SampleExtractor {
 
     public static void SormasCasePull(String lev) throws ClassNotFoundException {
         SimpleDateFormat frnmt = new SimpleDateFormat("yyyy-MM-dd");
@@ -54,8 +54,8 @@ public class CasesExtractor {
             ResultSet ra = null;
 
             if ("2".equals(lev)) {
-                //System.out.println("1111111111111111");
-                pa = cox.prepareStatement(sql.getCases);
+                System.out.println("1111111111111111");
+                pa = cox.prepareStatement(sql.getSamples);
             }
             if ("3".equals(lev)) {
                 //   pa = cox.prepareStatement(sql.getSROMAS_district_Aggregate_AllCases);
@@ -70,27 +70,42 @@ public class CasesExtractor {
             ra = pa.executeQuery();
             while (ra.next()) {
                 
-                CasesUtilityClass.setC_id(ra.getString("Id"));
-                CasesUtilityClass.setCaseage(ra.getString("caseage"));
-                CasesUtilityClass.setCaseclassification(ra.getString("caseclassification"));
-                CasesUtilityClass.setCaseorigin(ra.getString("caseorigin"));
-                CasesUtilityClass.setDisease(ra.getString("disease"));
-                CasesUtilityClass.setOutcome(ra.getString("outcome"));
+                //s.samplematerial, s.lab_id, s.pathogentestingrequested, s.pathogentestresult, s.fieldsampleid,
+                //s.samplingreason, s.labdetails, s.associatedcase_id\n"
                 
+                SampleUtilityClass.setSamplematerial(ra.getString("samplematerial"));
+                SampleUtilityClass.setLab_id(ra.getString("lab_id"));
+                SampleUtilityClass.setPathogentestingrequested(ra.getString("pathogentestingrequested"));
+                SampleUtilityClass.setPathogentestresult(ra.getString("pathogentestresult"));
+                SampleUtilityClass.setSamplingreason(ra.getString("samplingreason"));
+                SampleUtilityClass.setLabdetails(ra.getString("labdetails"));
+                SampleUtilityClass.setAssociatedcase_id(ra.getString("associatedcase_id"));
+                
+                SampleUtilityClass.setSample_id(ra.getString("id")); //reg_externalid
+                SampleUtilityClass.setSampleUuid(ra.getString("associatedcase_id"));
+                
+                SampleUtilityClass.setSampleRegionID(ra.getString("reg_externalid"));
+                String ddd = ra.getString("creationdate");
+             //   System.out.println("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd = "+ddd);
+                SampleUtilityClass.setCreationdate(ddd.substring( 0, ddd.indexOf(" ")));
                 //impliment coordinates
                 
-                
+                SampleUtilityClass.setSampleCaseLat(ra.getString("reportlat"));
+                SampleUtilityClass.setSampleCaseLong(ra.getString("reportlon"));
                 //implement UUID
                 
-                String rett = SendToDHISServer.get_trackEntity("select external_id from person where id = ?", ra.getString("Id"));
-                CasesUtilityClass.setTrackedentity_id(rett);
+                String rett = SendToDHISServer.get_trackEntity("select externalid from person where id = ?", ra.getString("pid"));
+                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!TRACKEDINSTANT ID = "+rett);
+          //      String rettx = SendToDHISServer.get_trackEntity("select external_id from person where id = ?", ra.getString("Id"));
+            //    System.out.println("222222");
+                SampleUtilityClass.setTrackedentity_id(rett);
                 
-                CaseSender.jsonDHISSender();
+                SampleSender.jsonDHISSender();
 
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(CasesExtractor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SampleExtractor.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

@@ -61,6 +61,7 @@ public class SampleSender {
     private static String httpx = _url[10].toString();
 
     public static void jsonDHISSender() {
+        System.out.println("llllllllllllllllllllllllllllllllllllllllllllllllllllll");
         StringBuilder sb = new StringBuilder();
 
         //     System.out.println("URI in use: " + httpx);
@@ -170,12 +171,14 @@ public class SampleSender {
             
             //enrollment data
             json.put("program", "m0lmvyTblN0");
-        //    json.put("orgUnit", SampleUtilityClass.getExternal_id());
+            json.put("orgUnit", SampleUtilityClass.getSampleRegionID());
             json.put("eventDate", SampleUtilityClass.getCreationdate());
             json.put("status", "COMPLETED");
             json.put("completedDate", SampleUtilityClass.getCreationdate());
             json.put("programStage", "dDv9tXSitXC");
             json.put("trackedEntityInstance", SampleUtilityClass.getTrackedentity_id());
+            
+            System.out.println("3333333333333dddddddddddddddddddddddddddddddddppp"+json.toString());
 
 
         } finally {
@@ -222,7 +225,8 @@ public class SampleSender {
 
                 String json_all = json.toString();
                 jsn = json_all;
-                //  System.err.println(json_all);
+                
+               System.err.println("pppppppppppppppppppppppppppppppppppppp"+jsn);
 
                 OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
                 out.write(json_all);
@@ -249,7 +253,7 @@ public class SampleSender {
                         System.out.println(du.replaceAll(":", ""));
 
                         ch = du.replaceAll(":", "");
-                        SendToDHISServer.update_PSQL_oneParm_X("update case set externalid = ? where id = ?", ch, SampleUtilityClass.getSample_id());
+                        SendToDHISServer.update_PSQL_oneParm_XINT("update samples set samplingreason = ? where id = ?", ch, SampleUtilityClass.getSample_id());
 
                         String wx = sb.toString();
                         System.err.println("Response: Successful! " + wx);
@@ -349,7 +353,7 @@ public class SampleSender {
             System.out.print("VendorError: " + ex.getErrorCode());
 
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(personCasesToDHIS.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SampleSender.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

@@ -80,9 +80,9 @@ public class OperationLogJson extends HttpServlet {
         
         try {
             if("2".equals(request.getParameter("tran"))){
-            sqq = "Select * from sync_tracker where case_specific_detail = 'Person Table' ORDER BY lastupdated ASC LIMIT 100";
+            sqq = "Select * from sync_tracker where case_specific_detail = 'Person Table' ORDER BY lastupdated desc LIMIT 100";
             } else {
-            sqq = "Select * from sync_tracker where case_specific_detail != 'Person Table' ORDER BY lastupdated ASC LIMIT 100";
+            sqq = "Select * from sync_tracker where case_specific_detail != 'Person Table' ORDER BY lastupdated desc LIMIT 100";
             }
 
             Class.forName("com.mysql.jdbc.Driver");

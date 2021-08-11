@@ -26,6 +26,7 @@
 package com.mirabilia.org.hzi.sormas.cases.Case;
 
 import com.mirabilia.org.hzi.sormas.aggregate.SendToDHISServer;
+import com.mirabilia.org.hzi.sormas.cases.Sample.SampleUtilityClass;
 import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import java.io.BufferedReader;
@@ -127,7 +128,7 @@ public class CaseSender {
 
 
             json.put("dataValues", array);
-            
+            /*
             if (!"0".equals(CasesUtilityClass.getCaseLat())) {
                 JSONObject item6x = new JSONObject();
                 item6x.put("dataElement", "VFo2tMYKJuP");
@@ -144,7 +145,7 @@ public class CaseSender {
             
             json.put("geometry", arrayx);
 
-            
+            */
             
             
             
@@ -155,6 +156,16 @@ public class CaseSender {
             json.put("status", "m0lmvyTblN0");
             json.put("completedDate", "m0lmvyTblN0");
             json.put("program", "m0lmvyTblN0");
+            
+            
+            
+            json.put("program", "m0lmvyTblN0");
+            json.put("orgUnit",  CasesUtilityClass.getRedgion_id());
+            json.put("eventDate", CasesUtilityClass.getCreationdate());
+            json.put("status", "COMPLETED");
+            json.put("completedDate", CasesUtilityClass.getCreationdate());
+            json.put("programStage", "cSlBpW1TXVQ");
+            json.put("trackedEntityInstance", CasesUtilityClass.getTrackedentity_id());
 
         } finally {
 
@@ -200,7 +211,7 @@ public class CaseSender {
 
                 String json_all = json.toString();
                 jsn = json_all;
-                //  System.err.println(json_all);
+                  System.err.println(json_all);
 
                 OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
                 out.write(json_all);
@@ -227,7 +238,7 @@ public class CaseSender {
                         System.out.println(du.replaceAll(":", ""));
 
                         ch = du.replaceAll(":", "");
-                        SendToDHISServer.update_PSQL_oneParm_X("update case set externalid = ? where id = ?", ch, CasesUtilityClass.getC_id());
+                        SendToDHISServer.update_PSQL_oneParm_XINT("update cases set externalid = ? where id = ?", ch, CasesUtilityClass.getC_id());
 
                         String wx = sb.toString();
                         System.err.println("Response: Successful! " + wx);
@@ -327,7 +338,7 @@ public class CaseSender {
             System.out.print("VendorError: " + ex.getErrorCode());
 
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(personCasesToDHIS.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CaseSender.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

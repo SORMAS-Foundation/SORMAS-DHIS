@@ -343,25 +343,31 @@ public class sql {
             + "	p.educationdetails, p.approximateagereferencedate, p.approximateagetype, p.mothersname, p.fathersname, p.placeofbirthregion_id,\n"
             + "	p.placeofbirthdistrict_id, p.placeofbirthcommunity_id, p.placeofbirthfacility_id, p.placeofbirthfacilitydetails, p.gestationageatbirth,\n"
             + "	p.birthweight, p.passportnumber, p.nationalhealthid, p.placeofbirthfacilitytype, p.changedateofembeddedlists, \n"
-            + "	p.symptomjournalstatus, p.hascovidapp, p.covidcodedelivered, p.externalid, p.armedforcesrelationtype,\n"
+            + "	p.symptomjournalstatus, p.hascovidapp, p.covidcodedelivered, p.externalid as PERSONexternalid, p.armedforcesrelationtype,\n"
             + "	p.namesofguardians, p.additionaldetails, p.BurialPlaceDescription, p.salutation,"
             + "      p.othersalutation, p.birthname, p.birthcountry_id, p.citizenship_id, p.externaltoken, r.externalid as externalid_region, c.id as id_case\n"
             + "	from person p\n"
             + "	right join cases c on p.id = c.person_id\n"
             + "	right join region r on c.region_id = r.id\n"
-            + "      where externalid is null";
+            + "      where p.externalid is null";
 
-    public static String getCases = "select c.id, c.perosn_id, c.creationdate, c.disease, c.caseclassification,\n"
+    public static String getCases = "select c.id, c.person_id, r.externalid as reg_externalid, c.creationdate, c.disease, c.caseclassification,\n"
+            + "c.outcome, c.caseage, c.caseorigin,c.uuid, c.reportlon, c.reportlat, c.externalid,\n"
             + "c.outcome, c.caseage, c.caseorigin\n"
-            + "from cases c, person p\n"
-            + "where c.changedate = ?\n"
-            + "      where externalid is null";
+            + "from cases c\n"
+            + "LEFT join person p on (c.person_id = p.id)\n"
+            + "	LEFT join region r on c.region_id = r.id\n"
+            + "where c.externalid is null and p.externalid is not null";
 
-    public static String getSamples = "select s.samplematerial, s.lab_id, s.pathogentestingrequested, s.pathogentestresult, s.fieldsampleid, s.samplingreason, s.labdetails, s.associatedcase_id\n"
-            + "from samples s\n"
-            + "where s.changedate = ?\n"
-            + "      where externalid is null";
-
+    public static String getSamples = "select p.id as pid, r.externalid as reg_externalid, s.creationdate , s.samplematerial, s.lab_id, s.pathogentestingrequested, \n"
+            + "s.pathogentestresult, s.fieldsampleid, s.samplingreason, s.reportlon, s.reportlat, s.labdetails, \n"
+            + "s.associatedcase_id, s.uuid, s.id\n"
+            + "from samples s \n"
+            + "LEFT join cases c on (s.associatedcase_id = c.id)\n"
+            + "LEFT join person p on (c.person_id = p.id)\n"
+            + "	LEFT join region r on c.region_id = r.id\n"
+            //     + "where s.changedate = ?\n"
+            + "      where samplingreason is null and p.externalid is not null limit 2";
 
     // public static String Get_all_Isolated_today = "";
     // public static String Get_all_Isolated_today = "";

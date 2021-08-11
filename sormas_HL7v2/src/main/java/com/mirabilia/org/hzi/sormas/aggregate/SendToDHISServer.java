@@ -283,7 +283,7 @@ public class SendToDHISServer {
                 if (sb.toString().contains("ERROR")) {
                     // response.setStatus(300);
                     String[] wx = sb.toString().split("ERROR");
-                    System.err.println("ERROR Found " + wx[1]);
+                    System.err.println("ERROR Found " + sb.toString());
                     update_oneParm_X("insert into sync_tracker set json_response = ?, datasource= '" + org_name + "', dataperiod = '" + cPer + "', case_specific_detail = '" + disC + "',  status = 'ERROR', created = now()", sb.toString());
                     return;
                 }
@@ -374,27 +374,45 @@ public class SendToDHISServer {
             Logger.getLogger(SendToDHISServer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public static void update_PSQL_oneParm_XINT(String sqq, String sqq_, String sqll__) throws ClassNotFoundException {
+
+        Connection cox = DbConnector.getPgConnection();
+        PreparedStatement ps = null;
+
+        try {
+
+            ps = cox.prepareStatement(sqq);
+            ps.setString(1, sqq_);
+            ps.setInt(2, Integer.parseInt(sqll__));
+
+            ps.executeUpdate();
+            cox.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(SendToDHISServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public static String get_trackEntity(String sqq, String sqq_) throws ClassNotFoundException, SQLException {
         PreparedStatement ps = null;
         ResultSet rx = null;
         String rett = "0";
 
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DbConnector.getConnection();
+        
+        Connection conn = DbConnector.getPgConnection();
 
         try {
 
             ps = conn.prepareStatement(sqq);
-            ps.setString(1, sqq_);
+            ps.setInt(1, Integer.parseInt(sqq_));
 
             rx = ps.executeQuery();
 
             while (rx.next()) {
                 rett = rx.getString(1);
             }
-            ps.executeUpdate();
-
+            
         } finally {
             conn.close();
         }

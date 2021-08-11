@@ -120,7 +120,7 @@ public class personCasesExtractor {
                 personCasesUtilityClass.setDeath_Place_Type(ra.getString("DeathPlaceType"));
                 personCasesUtilityClass.setEducation_Details(ra.getString("EducationDetails"));
                 personCasesUtilityClass.setEducation_Type(ra.getString("EducationType"));
-                personCasesUtilityClass.setExternalid(ra.getString("Externalid"));
+                personCasesUtilityClass.setExternalid(ra.getString("PERSONexternalid"));
                 personCasesUtilityClass.setExternaltoken(ra.getString("Externaltoken"));
                 personCasesUtilityClass.setFathersname(ra.getString("Fathersname"));
                 personCasesUtilityClass.setFirstname(ra.getString("Firstname"));
@@ -146,7 +146,7 @@ public class personCasesExtractor {
                 personCasesUtilityClass.setSex(ra.getString("Sex"));
                 personCasesUtilityClass.setSormas_System_Period(ra.getString("sys_Period"));
                 personCasesUtilityClass.setSRM_Uuid(ra.getString("Uuid"));
-                personCasesUtilityClass.setSymptomjournalstatus(ra.getString("Symptomjournalstatus"));//r.externalid
+                personCasesUtilityClass.setSymptomjournalstatus(ra.getString("Symptomjournalstatus"));
                 personCasesUtilityClass.setExternal_id(ra.getString("externalid_region"));
                 personCasesUtilityClass.setC_id(ra.getString("id_case"));
                 

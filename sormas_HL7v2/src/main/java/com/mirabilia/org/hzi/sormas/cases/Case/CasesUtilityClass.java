@@ -43,17 +43,14 @@ public class CasesUtilityClass {
     private static String caseorigin="0";
     private static String trackedentity_id = "0";//CaseLat
     
-    private static String CaseLat = "0";
-    private static String CaseLong = "0";
+    private static String caseLat = "0";
+    private static String caseLong = "0";
+    
+    private static String caseuuid = "0";
+    
+    private static String redgion_id = "0";
     
     
-    private static String samplematerial="0";
-    private static String lab_id="0";
-    private static String pathogentestingrequested="0";
-    private static String pathogentestresult="0";
-    private static String fieldsampleid="0";
-    private static String samplingreason="0";
-    private static String labdetails="0";
 
     public static String getExternal_id() {
         return external_id;
@@ -116,21 +113,29 @@ public class CasesUtilityClass {
     }
 
     public static String getCaseLat() {
-        return CaseLat;
+        return caseLat;
     }
 
-    public static void setCaseLat(String CaseLat) {
-        CasesUtilityClass.CaseLat = CaseLat;
+    public static void setCaseLat(String caseLat) {
+        CasesUtilityClass.caseLat = caseLat;
     }
 
     public static String getCaseLong() {
-        return CaseLong;
+        return caseLong;
     }
 
-    public static void setCaseLong(String CaseLong) {
-        CasesUtilityClass.CaseLong = CaseLong;
+    public static void setCaseLong(String caseLong) {
+        CasesUtilityClass.caseLong = caseLong;
     }
-    
+
+    public static String getCaseuuid() {
+        return caseuuid;
+    }
+
+    public static void setCaseuuid(String caseuuid) {
+        CasesUtilityClass.caseuuid = caseuuid;
+    }
+
     
     
     
@@ -157,63 +162,13 @@ public class CasesUtilityClass {
         CasesUtilityClass.caseorigin = caseorigin;
     }
 
-    public static String getSamplematerial() {
-        return samplematerial;
+    public static String getRedgion_id() {
+        return redgion_id;
     }
 
-    public static void setSamplematerial(String samplematerial) {
-        CasesUtilityClass.samplematerial = samplematerial;
+    public static void setRedgion_id(String redgion_id) {
+        CasesUtilityClass.redgion_id = redgion_id;
     }
-
-    public static String getLab_id() {
-        return lab_id;
-    }
-
-    public static void setLab_id(String lab_id) {
-        CasesUtilityClass.lab_id = lab_id;
-    }
-
-    public static String getPathogentestingrequested() {
-        return pathogentestingrequested;
-    }
-
-    public static void setPathogentestingrequested(String pathogentestingrequested) {
-        CasesUtilityClass.pathogentestingrequested = pathogentestingrequested;
-    }
-
-    public static String getPathogentestresult() {
-        return pathogentestresult;
-    }
-
-    public static void setPathogentestresult(String pathogentestresult) {
-        CasesUtilityClass.pathogentestresult = pathogentestresult;
-    }
-
-    public static String getFieldsampleid() {
-        return fieldsampleid;
-    }
-
-    public static void setFieldsampleid(String fieldsampleid) {
-        CasesUtilityClass.fieldsampleid = fieldsampleid;
-    }
-
-    public static String getSamplingreason() {
-        return samplingreason;
-    }
-
-    public static void setSamplingreason(String samplingreason) {
-        CasesUtilityClass.samplingreason = samplingreason;
-    }
-
-    public static String getLabdetails() {
-        return labdetails;
-    }
-
-    public static void setLabdetails(String labdetails) {
-        CasesUtilityClass.labdetails = labdetails;
-    }
-
-    
     
 
 }

@@ -25,9 +25,6 @@
  */
 package com.mirabilia.org.hzi.sormas.cases.Sample;
 
-import com.mirabilia.org.hzi.sormas.cases.Case.*;
-import com.mirabilia.org.hzi.sormas.cases.*;
-import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,8 +38,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Mathew Official
  */
-@WebServlet(name = "extractor_Validatorx", urlPatterns = {"/seRtyTreSDfrEwertrfDrTyuiOlmNbvcdfGhyUiOLKMNbVCxDfgHJkIuytRd"})
-public class personCasesToDHIS extends HttpServlet {
+@WebServlet(name = "extractor_Validatorx_wxxx", urlPatterns = {"/seRtyTreSDfrEwertrfDrTyuiOlmNbvcdfGhyUiOLKMNbVCxDfgHJkIuytRd_wwxxxx"})
+public class SampleCasesToDHIS extends HttpServlet {
 
    
 
@@ -52,10 +49,10 @@ public class personCasesToDHIS extends HttpServlet {
 
         try {
 
-            CasesExtractor.SormasCasePull("2");
+            SampleExtractor.SormasCasePull("2");
 
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(personCasesToDHIS.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SampleCasesToDHIS.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

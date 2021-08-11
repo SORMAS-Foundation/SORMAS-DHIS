@@ -31,23 +31,14 @@ import com.mirabilia.org.hzi.sormas.cases.Case.*;
  *
  * @author Mathew Official
  */
-public class CasesUtilityClass {
+public class SampleUtilityClass {
 
-    
     private static String external_id = "0";
-    private static String c_id = "0";
-    private static String person_id="0";
-    private static String creationdate="0";
-    private static String disease="0";
-    private static String caseclassification="0";
-    private static String outcome="0";
-    private static String caseage="0";
-    private static String caseorigin="0";
+    private static String sample_id = "0";
     private static String trackedentity_id = "0";//CaseLat
     
-    private static String CaseLat = "0";
-    private static String CaseLong = "0";
-    
+    private static String sampleCaseLat = "0";
+    private static String sampleCaseLong = "0";
     
     private static String samplematerial="0";
     private static String lab_id="0";
@@ -56,57 +47,31 @@ public class CasesUtilityClass {
     private static String fieldsampleid="0";
     private static String samplingreason="0";
     private static String labdetails="0";
+    
+    private static String associatedcase_id="0";
+    
+    private static String SampleUuid = "0";
 
+    private static String creationdate = "0";
+    
+    private static String sampleRegionID = "0";
+    
+    
+    
     public static String getExternal_id() {
         return external_id;
     }
 
     public static void setExternal_id(String external_id) {
-        CasesUtilityClass.external_id = external_id;
+        SampleUtilityClass.external_id = external_id;
     }
 
-    public static String getC_id() {
-        return c_id;
+    public static String getSample_id() {
+        return sample_id;
     }
 
-    public static void setC_id(String c_id) {
-        CasesUtilityClass.c_id = c_id;
-    }
-
-    public static String getPerson_id() {
-        return person_id;
-    }
-
-    public static void setPerson_id(String person_id) {
-        CasesUtilityClass.person_id = person_id;
-    }
-
-    public static String getDisease() {
-        return disease;
-    }
-
-    public static void setDisease(String disease) {
-        CasesUtilityClass.disease = disease;
-    }
-
-    public static String getCaseclassification() {
-        return caseclassification;
-    }
-
-    public static void setCaseclassification(String caseclassification) {
-        CasesUtilityClass.caseclassification = caseclassification;
-    }
-
-    public static String getOutcome() {
-        return outcome;
-    }
-
-    public static String getCreationdate() {
-        return creationdate;
-    }
-
-    public static void setCreationdate(String creationdate) {
-        CasesUtilityClass.creationdate = creationdate;
+    public static void setSample_id(String sample_id) {
+        SampleUtilityClass.sample_id = sample_id;
     }
 
     public static String getTrackedentity_id() {
@@ -114,49 +79,23 @@ public class CasesUtilityClass {
     }
 
     public static void setTrackedentity_id(String trackedentity_id) {
-        CasesUtilityClass.trackedentity_id = trackedentity_id;
+        SampleUtilityClass.trackedentity_id = trackedentity_id;
     }
 
-    public static String getCaseLat() {
-        return CaseLat;
+    public static String getSampleCaseLat() {
+        return sampleCaseLat;
     }
 
-    public static void setCaseLat(String CaseLat) {
-        CasesUtilityClass.CaseLat = CaseLat;
+    public static void setSampleCaseLat(String sampleCaseLat) {
+        SampleUtilityClass.sampleCaseLat = sampleCaseLat;
     }
 
-    public static String getCaseLong() {
-        return CaseLong;
+    public static String getSampleCaseLong() {
+        return sampleCaseLong;
     }
 
-    public static void setCaseLong(String CaseLong) {
-        CasesUtilityClass.CaseLong = CaseLong;
-    }
-    
-    
-    
-    
-
-    
-
-    public static void setOutcome(String outcome) {
-        CasesUtilityClass.outcome = outcome;
-    }
-
-    public static String getCaseage() {
-        return caseage;
-    }
-
-    public static void setCaseage(String caseage) {
-        CasesUtilityClass.caseage = caseage;
-    }
-
-    public static String getCaseorigin() {
-        return caseorigin;
-    }
-
-    public static void setCaseorigin(String caseorigin) {
-        CasesUtilityClass.caseorigin = caseorigin;
+    public static void setSampleCaseLong(String sampleCaseLong) {
+        SampleUtilityClass.sampleCaseLong = sampleCaseLong;
     }
 
     public static String getSamplematerial() {
@@ -164,7 +103,7 @@ public class CasesUtilityClass {
     }
 
     public static void setSamplematerial(String samplematerial) {
-        CasesUtilityClass.samplematerial = samplematerial;
+        SampleUtilityClass.samplematerial = samplematerial;
     }
 
     public static String getLab_id() {
@@ -172,7 +111,7 @@ public class CasesUtilityClass {
     }
 
     public static void setLab_id(String lab_id) {
-        CasesUtilityClass.lab_id = lab_id;
+        SampleUtilityClass.lab_id = lab_id;
     }
 
     public static String getPathogentestingrequested() {
@@ -180,7 +119,7 @@ public class CasesUtilityClass {
     }
 
     public static void setPathogentestingrequested(String pathogentestingrequested) {
-        CasesUtilityClass.pathogentestingrequested = pathogentestingrequested;
+        SampleUtilityClass.pathogentestingrequested = pathogentestingrequested;
     }
 
     public static String getPathogentestresult() {
@@ -188,7 +127,7 @@ public class CasesUtilityClass {
     }
 
     public static void setPathogentestresult(String pathogentestresult) {
-        CasesUtilityClass.pathogentestresult = pathogentestresult;
+        SampleUtilityClass.pathogentestresult = pathogentestresult;
     }
 
     public static String getFieldsampleid() {
@@ -196,7 +135,7 @@ public class CasesUtilityClass {
     }
 
     public static void setFieldsampleid(String fieldsampleid) {
-        CasesUtilityClass.fieldsampleid = fieldsampleid;
+        SampleUtilityClass.fieldsampleid = fieldsampleid;
     }
 
     public static String getSamplingreason() {
@@ -204,7 +143,7 @@ public class CasesUtilityClass {
     }
 
     public static void setSamplingreason(String samplingreason) {
-        CasesUtilityClass.samplingreason = samplingreason;
+        SampleUtilityClass.samplingreason = samplingreason;
     }
 
     public static String getLabdetails() {
@@ -212,9 +151,43 @@ public class CasesUtilityClass {
     }
 
     public static void setLabdetails(String labdetails) {
-        CasesUtilityClass.labdetails = labdetails;
+        SampleUtilityClass.labdetails = labdetails;
     }
 
+    public static String getAssociatedcase_id() {
+        return associatedcase_id;
+    }
+
+    public static void setAssociatedcase_id(String associatedcase_id) {
+        SampleUtilityClass.associatedcase_id = associatedcase_id;
+    }
+
+    public static String getSampleUuid() {
+        return SampleUuid;
+    }
+
+    public static void setSampleUuid(String SampleUuid) {
+        SampleUtilityClass.SampleUuid = SampleUuid;
+    }
+
+    public static String getCreationdate() {
+        return creationdate;
+    }
+
+    public static void setCreationdate(String creationdate) {
+        SampleUtilityClass.creationdate = creationdate;
+    }
+
+    public static String getSampleRegionID() {
+        return sampleRegionID;
+    }
+
+    public static void setSampleRegionID(String sampleRegionID) {
+        SampleUtilityClass.sampleRegionID = sampleRegionID;
+    }
+
+    
+    
     
     
 

@@ -68,22 +68,24 @@ public class CasesExtractor {
 
             ra = pa.executeQuery();
             while (ra.next()) {
-                
+
                 CasesUtilityClass.setC_id(ra.getString("Id"));
                 CasesUtilityClass.setCaseage(ra.getString("caseage"));
                 CasesUtilityClass.setCaseclassification(ra.getString("caseclassification"));
                 CasesUtilityClass.setCaseorigin(ra.getString("caseorigin"));
                 CasesUtilityClass.setDisease(ra.getString("disease"));
                 CasesUtilityClass.setOutcome(ra.getString("outcome"));
-                
-                //impliment coordinates
-                
-                
-                //implement UUID
-                
-                String rett = SendToDHISServer.get_trackEntity("select external_id from person where id = ?", ra.getString("Id"));
+                CasesUtilityClass.setCaseLat(ra.getString("reportlon"));
+                CasesUtilityClass.setCaseLong(ra.getString("reportlat"));
+                CasesUtilityClass.setCaseuuid(ra.getString("uuid"));
+                CasesUtilityClass.setExternal_id(ra.getString("externalid"));
+                CasesUtilityClass.setRedgion_id(ra.getString("reg_externalid"));
+                String ddd = ra.getString("creationdate");
+                CasesUtilityClass.setCreationdate(ddd.substring(0, ddd.indexOf(" ")));
+
+                String rett = SendToDHISServer.get_trackEntity("select externalid from person where id = ?", ra.getString("person_id"));
                 CasesUtilityClass.setTrackedentity_id(rett);
-                
+
                 CaseSender.jsonDHISSender();
 
             }

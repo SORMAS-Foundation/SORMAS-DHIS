@@ -61,13 +61,14 @@ public class dbResolvers {
             JSONArray jsonArray = (JSONArray) jsonObject.get("organisationUnits");
 
             //Insert a row into the MyPlayers table
-            pstmt = con.prepareStatement("INSERT ignore INTO raw_ (uuid, name, shortname, created, path_parent, level, updated_last, rec_created) values (?, ?, ?, ?, ?, ?,? , now())");
+            pstmt = con.prepareStatement("INSERT ignore INTO raw_ (uuid, name, shortname, created, path_parent, level, updated_last, rec_created,code) values (?, ?, ?, ?, ?, ?,? , now(),?)");
             for (Object object : jsonArray) {
                 JSONObject record = (JSONObject) object;
 
                 String idx = (String) record.get("id");
                 String namex = (String) record.get("name");
                 String created = (String) record.get("created");
+                String codd = (String) record.get("code");
 
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
                 java.sql.Timestamp datetime = new Timestamp(formatter.parse(created.replace("T", " ")).getTime());
@@ -90,6 +91,7 @@ public class dbResolvers {
                 pstmt.setString(5, path);
                 pstmt.setString(6, levelx);
                 pstmt.setTimestamp(7, lastUpdatedx);
+                pstmt.setString(8, codd);
                 //   System.out.println("inserting records..." + pstmt);
                 pstmt.executeUpdate();
             }

@@ -419,9 +419,7 @@ public class UtilServer extends HttpServlet {
                     sess.setAttribute("jobber3", "Health Facility Progress: " + fac_l);
                 }
                 mat = ("done");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

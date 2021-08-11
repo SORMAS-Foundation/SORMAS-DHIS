@@ -55,20 +55,20 @@ public class dhisOrgRetrival {
                 if ("GH".equals(cnty_code)) {
                     //GH using code instead of uuid
                     if (5 == pg_counterd) {
-                        base_urlx = urll + "/api/organisationUnits.json?maxLevel=" + pg_counterd + "&paging=false&fields=lastUpdated%2Ccode%2Cname%2CshortName%2Clevel%2Ccreated%2Cpath";
+                        base_urlx = urll + "/api/organisationUnits.json?maxLevel=" + pg_counterd + "&paging=false&fields=lastUpdated%2Ccode%2Cname%2CshortName%2Clevel%2Ccreated%2Cpath%2Ccode";
                         System.out.println(base_urlx);
                         String nxtpg_url_val = getDemAllLong(base_urlx);
 
                         String db_ = gotoDB(nxtpg_url_val);
                     } else if (6 != pg_counterd) {
-                        base_urlx = urll + "/api/organisationUnits.json?maxLevel=" + pg_counterd + "&paging=false&fields=lastUpdated%2Cid%2Cname%2CshortName%2Clevel%2Ccreated%2Cpath";
+                        base_urlx = urll + "/api/organisationUnits.json?maxLevel=" + pg_counterd + "&paging=false&fields=lastUpdated%2Cid%2Cname%2CshortName%2Clevel%2Ccreated%2Cpath%2Ccode";
                         System.out.println(base_urlx);
                         String nxtpg_url_val = getDemAllLong(base_urlx);
 
                         String db_ = gotoDB(nxtpg_url_val);
                     }
                 } else {
-                    base_urlx = urll + "/api/organisationUnits.json?maxLevel=" + pg_counterd + "&paging=false&fields=lastUpdated%2Cid%2Cname%2Clevel%2Ccreated%2Cpath";
+                    base_urlx = urll + "/api/organisationUnits.json?maxLevel=" + pg_counterd + "&paging=false&fields=lastUpdated%2Cid%2Cname%2Clevel%2Ccreated%2Cpath%2Ccode";
                     System.out.println(base_urlx);
                     String nxtpg_url_val = getDemAllLong(base_urlx);
 

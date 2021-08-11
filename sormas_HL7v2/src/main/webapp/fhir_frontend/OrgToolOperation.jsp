@@ -281,7 +281,7 @@
 
 
                                             <a onclick="dd();" id="sync_x" class="btn btn-app hvr-icon-buzz-out">
-                                                <i class="fas fa-download hvr-icon" title="Download Admin data from <%=mastt%>"></i> Prime < Master <%=mastt%>
+                                                <i class="fas fa-download hvr-icon" title="Download Admin data from <%=mastt%>"></i> Master Data >> Adapter
                                             </a>
 
 
@@ -393,14 +393,14 @@
 
 
                                             <a class="btn btn-app hvr-icon-buzz-out" onclick="lc()">
-                                                <i class="fas fa-download hvr-icon" title="Download Admin data from <%=desss%>"></i> Destination >> Adapter
+                                                <i class="fas fa-download hvr-icon" title="Download Admin data from <%=desss%>"></i> Destination Data >> Adapter
                                             </a>
 
 
 
 
                                             <a onclick="dd();" id="sync_" class="btn btn-app hvr-icon-buzz-out">
-                                                <i class="fas fa-download hvr-icon" title="Download Admin data from <%=mastt%>"></i> Master >> Adapter
+                                                <i class="fas fa-download hvr-icon" title="Download Admin data from <%=mastt%>"></i> Master Data >> Adapter
                                             </a>
 
                                             <a onclick="ana();" id="analysedb" class="btn btn-app hvr-icon-buzz-out">

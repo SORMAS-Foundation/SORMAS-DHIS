@@ -931,7 +931,7 @@ public class UtilServer extends HttpServlet {
 
         try {
 
-            ps = conn.prepareStatement("select name, uuid, idx, rec_created, level  from raw_ where level = ? and path_parent like '%" + prnt + "%'");
+            ps = conn.prepareStatement("select name, uuid, idx, rec_created, level, code  from raw_ where level = ? and path_parent like '%" + prnt + "%'");
             ps.setString(1, numz);
             rx = ps.executeQuery();
 
@@ -945,17 +945,17 @@ public class UtilServer extends HttpServlet {
                     int vk = 1;
 
                     if ("2".equals(rx.getString(5))) {
-                        dxs = "insert into region (uuid,name,externalid,id,changedate,creationdate) values(?,?,?,?,now(),?) ON CONFLICT DO NOTHING";
+                        dxs = "insert into region (uuid,name,externalid,id,changedate,creationdate,epidcode) values(?,?,?,?,now(),?,?) ON CONFLICT DO NOTHING";
                         re_g++;
                     } else if ("3".equals(rx.getString(5))) {
                         ds_c++;
-                        dxs = "insert into district (uuid,name,externalid,id,changedate,creationdate,region_id) values(?,?,?,?,now(),?,'" + stt + "') ON CONFLICT DO NOTHING";
+                        dxs = "insert into district (uuid,name,externalid,id,changedate,creationdate,region_id,epidcode) values(?,?,?,?,now(),?,'" + stt + "',?) ON CONFLICT DO NOTHING";
                     } else if ("4".equals(rx.getString(5))) {
                         com_m++;
-                        dxs = "insert into community (uuid,name,externalid,id,changedate,creationdate, district_id) values(?,?,?,?,now(),?,'" + stt + "') ON CONFLICT DO NOTHING";
+                        dxs = "insert into community (uuid,name,externalid,id,changedate,creationdate, district_id,epidcode) values(?,?,?,?,now(),?,'" + stt + "',?) ON CONFLICT DO NOTHING";
                     } else if ("5".equals(rx.getString(5))) {
                         fac_l++;
-                        dxs = "insert into facility (uuid,name,externalid,id,changedate,creationdate, community_id) values(?,?,?,?,now(),?,'" + stt + "') ON CONFLICT DO NOTHING";
+                        dxs = "insert into facility (uuid,name,externalid,id,changedate,creationdate, community_id,epidcode) values(?,?,?,?,now(),?,'" + stt + "',?) ON CONFLICT DO NOTHING";
                     } else if ("1".equals(rx.getString(5))) {
                         vk = 0;
                     }
@@ -966,6 +966,7 @@ public class UtilServer extends HttpServlet {
                         ps_pg.setString(3, rx.getString(2));
                         ps_pg.setInt(4, rx.getInt(3));
                         ps_pg.setDate(5, rx.getDate(4));
+                        ps_pg.setString(6, rx.getString(6));
 
                         //    System.out.println(ps_pg);
                         ret = ps_pg.executeUpdate();

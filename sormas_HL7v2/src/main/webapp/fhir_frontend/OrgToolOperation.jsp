@@ -286,7 +286,7 @@
 
 
 
-                                            <a onclick="start_pushX_X()" id="send_all_availx" class="btn btn-app hvr-icon-buzz-out">
+                                            <a onclick="start_pushX_X_x()" id="send_all_availx" class="btn btn-app hvr-icon-buzz-out">
                                                 <i class="fas fa-play hvr-icon"></i> Sync with NEW SORMAS
                                             </a>
 
@@ -645,6 +645,8 @@
                                                             };
                                                             xhr.send(null);
                                                             success: servlet_primer(stat - 1);
+                                                         //    setTimeout($('#progress_x').hide();, 2000)
+                                                            
                                                         }
 
                                                     }
@@ -658,8 +660,8 @@
                                                         document.getElementById("pbar").style.width = width + '%';
                                                         document.getElementById("chunker").innerHTML = 'Total chunks remaining = ' + width;
                                                         document.getElementById("chunker_").innerHTML = 'Total chunks remaining = ' + width;
-                                                        //document.getElementById("chunker_").innerHTML = maz;
-                                                        if (width < 3) {
+                                                        document.getElementById("chunker_").innerHTML = maz;
+                                                        if (width === 0) {
 
                                                             //Fhir need to start here.
                                                             $('#progress_').hide();
@@ -1805,7 +1807,7 @@
 
                     }
                     ;
-                    function start_pushX_X() {
+                    function start_pushX_X_x() {
                         document.getElementById("overlay").style.display = "block";
                         $('#text').html("Pushing all available matched data to sormas...");
                         var xhr = new XMLHttpRequest();
@@ -1818,7 +1820,7 @@
 
                                     document.getElementById("overlay").style.display = "none";
 
-                                    alertx(xhr.responseText);
+                                    //alertx(xhr.responseText);
 
                                 }
                             }

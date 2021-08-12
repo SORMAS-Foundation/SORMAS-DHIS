@@ -170,6 +170,8 @@ public class orgUnitConn extends HttpServlet {
 
             try {
                 //process each shunk and send the progress back to progress bar.
+                
+                System.out.println("URL in USE >>>>>>>>>>>>>>>>>> "+urll);
                 String ct_code = sessionx.getAttribute("country_code").toString();
                 int pg_ = starter(initzx, urll, ct_code);
                 
@@ -178,7 +180,7 @@ public class orgUnitConn extends HttpServlet {
                 ServletOutputStream sout = response.getOutputStream();
                 String content = "" + pg_;
                 sout.print(content);
-                // System.out.println("percentage been sent back to frontend"+content+"%");
+                 System.out.println("percentage been sent back to frontend"+content+"%");
             } catch (SQLException ex) {
                 Logger.getLogger(orgUnitConn.class.getName()).log(Level.SEVERE, null, ex);
             }

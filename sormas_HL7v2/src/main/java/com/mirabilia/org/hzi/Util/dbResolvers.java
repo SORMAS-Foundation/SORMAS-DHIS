@@ -92,7 +92,7 @@ public class dbResolvers {
                 pstmt.setString(6, levelx);
                 pstmt.setTimestamp(7, lastUpdatedx);
                 pstmt.setString(8, codd);
-                //   System.out.println("inserting records..." + pstmt);
+                   System.out.println("inserting records..." + pstmt);
                 pstmt.executeUpdate();
             }
             con.close();;

@@ -619,7 +619,7 @@
                                                         //debugger ristricting to ward leve
                                                         maxx = 6;
                                                         document.getElementById("overlay").style.display = "none";
-                                                        $('#progress_').show();
+                                                        //$('#progress_').show();
                                                         $('#progress_x').show();
                                                         servlet_primer(maxx);
                                                         console.log('running level>>> ' + maxx);
@@ -645,7 +645,7 @@
                                                             };
                                                             xhr.send(null);
                                                             success: servlet_primer(stat - 1);
-                                                         //    setTimeout($('#progress_x').hide();, 2000)
+                                                           //  setTimeout($('#progress_x').hide();, 2000)
                                                             
                                                         }
 
@@ -660,8 +660,8 @@
                                                         document.getElementById("pbar").style.width = width + '%';
                                                         document.getElementById("chunker").innerHTML = 'Total chunks remaining = ' + width;
                                                         document.getElementById("chunker_").innerHTML = 'Total chunks remaining = ' + width;
-                                                        document.getElementById("chunker_").innerHTML = maz;
-                                                        if (width === 0) {
+                                                        //document.getElementById("chunker_").innerHTML = maz;
+                                                        if (width < 3) {
 
                                                             //Fhir need to start here.
                                                             $('#progress_').hide();
@@ -1790,6 +1790,8 @@
 
 
                     function openxx() {
+                        $('#progress_x').hide();
+                        $('#progress_').hide();
                         var checked = $('#maintenance:checkbox:checked').length > 0;
 
                         if (checked == true) {

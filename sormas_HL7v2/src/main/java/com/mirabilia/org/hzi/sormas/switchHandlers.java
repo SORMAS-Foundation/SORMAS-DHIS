@@ -37,7 +37,7 @@ String uuid = "";
                 //create data source
                 if (what_Do.contains("create")) {
                    uuid = shortUUID(debug);
-                    ps = conn.prepareStatement("insert into `sormas_`.`_sources` SET `url`=?, `title`=?, `desc`=?, `status`=?,`uuid` = ?, `created`=now()");
+                    ps = conn.prepareStatement("insert into `_sources` SET `url`=?, `title`=?, `desc`=?, `status`=?,`uuid` = ?, `created`=now()");
                     
                     ps.setString(1, source_url); //url
                     ps.setString(2, uuid_title);//title
@@ -79,12 +79,12 @@ String uuid = "";
                 ps = null;
                 //update data source
                 if (what_Do.contains("update")) {
-                    ps = conn.prepareStatement("UPDATE `sormas_`.`_useradmin` SET `namex`=?, `passw`=?, `fullname`=?, `lastlogin`=?, `active`=?, `rolex`=? WHERE  `uid`=?");
+                    ps = conn.prepareStatement("UPDATE `_useradmin` SET `namex`=?, `passw`=?, `fullname`=?, `lastlogin`=?, `active`=?, `rolex`=? WHERE  `uid`=?");
                 }
                 //create data source
                 if (what_Do.contains("create")) {
                     uid = shortUUID(debug);
-                    ps = conn.prepareStatement("insert into `uid`=?, `sormas_`.`_useradmin` SET `namex`=?, `passw`=?, `fullname`=?, `lastlogin`=?, `active`=?, `rolex`=?");
+                    ps = conn.prepareStatement("insert into `uid`=?, `_useradmin` SET `namex`=?, `passw`=?, `fullname`=?, `lastlogin`=?, `active`=?, `rolex`=?");
                 }
                 ps.setString(1, uid); //namex
                 ps.setString(2, "");//passw

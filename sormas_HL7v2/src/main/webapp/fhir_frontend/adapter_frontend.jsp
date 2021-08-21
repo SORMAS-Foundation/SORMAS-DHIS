@@ -28,9 +28,22 @@ try {
 finally{
     
 }
+ String[] _url = ConffileCatcher.fileCatcher("passed");
+    session.setAttribute("fhir_url", _url[11].toString());
+
+    session.setAttribute("country", _url[12].toString());
+    session.setAttribute("country_code", _url[13].toString());
+
+    String totalOrg = sourceDTO.totalORGinDB();
+    String totalDest = sourceDTO.totalDestDB();
+    String tablx = getterSetters.getNoLastUpdated();
+    session.setAttribute("dhis_url", _url[10].toString());
 
 
 %>
+
+<jsp:include page="update_url.jsp"></jsp:include>
+
 <!DOCTYPE html>
 <html lang="en">
     <jsp:include page="template/head.jsp"></jsp:include>
@@ -53,12 +66,12 @@ finally{
                         <div class="container-fluid">
                             <div class="row mb-2">
                                 <div class="col-sm-6">
-                                    <h1 class="m-0 text-dark">Dashboard</h1>
+                                    <h1 class="m-0 text-dark">Dashboard | OrgTool Module</h1>
                                 </div><!-- /.col -->
                                 <div class="col-sm-6">
                                     <ol class="breadcrumb float-sm-right">
                                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li class="breadcrumb-item active">Dashboard</li>
+                                        <li class="breadcrumb-item active">Dashboard | OrgTool</li>
                                     </ol>
                                 </div><!-- /.col -->
                             </div><!-- /.row -->
@@ -74,28 +87,9 @@ finally{
                                 <div class="col-12 col-sm-6 col-md-3">
                                     <div class="info-box">
                                         <span class="info-box-icon bg-info elevation-1"><i class="fa fa-hospital"></i></span>
-                                        <%
-                                            String[] _url = ConffileCatcher.fileCatcher("passed");
-                                        //    System.out.println("values : "+_url[1].toString() + _url[13].toString());
-                                            
-                                            
-                                            session.setAttribute("dhis_url", _url[10].toString());
-                                            session.setAttribute("fhir_url", _url[11].toString());
-                                            
-                                            session.setAttribute("country", _url[12].toString());
-                                            session.setAttribute("country_code", _url[13].toString());
-                                            
-                                            //debugger
-                                          //  System.out.println("WEAREASE + "+_url[12].toString() + _url[13].toString());
-
-                                            String totalOrg = sourceDTO.totalORGinDB();
-                                            String totalDest = sourceDTO.totalDestDB();
-                                            String tablx = getterSetters.getNoLastUpdated();
-
-
-                                        %>
+                                       
                                     <div class="info-box-content" style="width:40%">
-                                        <span class="info-box-text">Total No of Org Unit from DHIS2</span>
+                                        <span class="info-box-text">Total imported from DHIS2</span>
                                         <span class="info-box-number">
                                             <%=totalOrg%> 
                                             <small>| Synced from Remote DHIS2</small>
@@ -113,7 +107,7 @@ finally{
                                     <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-sign-out-alt"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Total No of Org Unit from SORMAS</span>
+                                        <span class="info-box-text">Total imported from SORMAS</span>
                                         <span class="info-box-text"><b> <%=totalDest%> </b>  <small>| Synced from SORMAS</small></span>
 
                                     </div>
@@ -293,7 +287,7 @@ finally{
                                             <!-- /.progress-group -->
                                             <div class="progress-group">
                                                 Unclassified issues
-                                                <span class="float-right"><b>0</b>/11879</span>
+                                                <span class="float-right"><b>0</b>/<%=totalOrg%></span>
                                                 <div class="progress progress-sm">
                                                     <div class="progress-bar bg-dark" style="width: 1%"></div>
                                                 </div>
@@ -306,7 +300,7 @@ finally{
                                 </div>
                                 <!-- ./card-body -->
                                 <div class="card-footer">
-                                    <div class="row">
+                                    <div class="row" title="this section is under development, values are placeholder for now!!">
                                         <div class="col-sm-3 col-6">
                                             <div class="description-block border-right">
                                                 <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 89%</span>
@@ -519,12 +513,15 @@ finally{
                         if (xhr.readyState === xhr.DONE) {
                             if (xhr.status === 200) {
                                 maxx = xhr.responseText;
-                                console.log("SRMS getting value = " + xhr.responseText);
-                                document.getElementById("SRMS").innerHTML = "SRMS = " + xhr.responseText;
+                                //~~
+                                const myArr = maxx.split("~~");
+                                //console.log("SRMS getting value = " + xhr.responseText);
+                                document.getElementById("SRMS").innerHTML = "SRMS = " + myArr[0];
+                                document.getElementById("SRMS").title = myArr[1];
 
 
                             } else {
-                                console.log("Server error while contacting main methods to get total number of chunks");
+                                alert("ERROR MIR1242: Server error while contacting main methods to get total number of chunks");
                                 return;
                             }
                         }

@@ -41,7 +41,7 @@ public class ConffileCatcher {
             
             if(valx.equalsIgnoreCase("passed")){
         try {
-            File myObj = new File(System.getProperty("user.home") + File.separator + "somars.conf");
+            File myObj = new File(System.getProperty("user.home") + File.separator + "sormas.conf");
             if(myObj.exists()){
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {

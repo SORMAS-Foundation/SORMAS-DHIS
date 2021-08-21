@@ -28,8 +28,6 @@ public class orgUnitConn extends HttpServlet {
 
     private static String[] _url = ConffileCatcher.fileCatcher("passed");
 
-    private static String urll = _url[10].toString(); //should come from config file
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -60,6 +58,7 @@ public class orgUnitConn extends HttpServlet {
 
         if (initz == 1989) {
             JSONParser jsonParser = new JSONParser();
+            String urll = _url[10].toString();
 
             String base_url = urll + "/api/organisationUnits.json?fields=name&maxLevel=1";
 
@@ -110,6 +109,7 @@ public class orgUnitConn extends HttpServlet {
 
         if (initz == 5050) {
             JSONParser jsonParser = new JSONParser();
+            String urll = _url[10].toString();
 
             String base_url = urll + "/api/organisationUnits.json?fields=name&maxLevel=1";
 
@@ -169,6 +169,7 @@ public class orgUnitConn extends HttpServlet {
         if (initzx > 0) {
 
             try {
+                String urll = _url[10].toString();
                 //process each shunk and send the progress back to progress bar.
                 
                 System.out.println("URL in USE >>>>>>>>>>>>>>>>>> "+urll);

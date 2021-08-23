@@ -31,6 +31,7 @@ node {
         // Once again
         // another one
         // Next test 
+        // Test with multibranch pipeline
         dir('sormas_HL7v2') {
             withCredentials([ usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKERUSER', passwordVariable: 'DOCKERPASS' )]) {
                 def pom = readMavenPom file: 'pom.xml'

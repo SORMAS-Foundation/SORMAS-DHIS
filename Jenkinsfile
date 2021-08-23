@@ -26,13 +26,7 @@ node {
     }
     stage('Deploy') {
         echo 'Deploying....'
-        // Test auto deployment another time
-        // Test another time
-        // Once again
-        // another one
-        // Next test 
-        // Test with multibranch pipeline
-        // Next Test
+        // Test again
         dir('sormas_HL7v2') {
             withCredentials([ usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKERUSER', passwordVariable: 'DOCKERPASS' )]) {
                 def pom = readMavenPom file: 'pom.xml'

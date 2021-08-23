@@ -26,10 +26,6 @@ node {
     }
     stage('Deploy') {
         echo 'Deploying....'
-        // Test again
-        // Commit for Jenkins
-        // New Commit
-        // Next commit
         dir('sormas_HL7v2') {
             withCredentials([ usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKERUSER', passwordVariable: 'DOCKERPASS' )]) {
                 def pom = readMavenPom file: 'pom.xml'

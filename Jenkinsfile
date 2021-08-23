@@ -30,6 +30,7 @@ node {
         // Test another time
         // Once again
         // another one
+        // Next test 
         dir('sormas_HL7v2') {
             withCredentials([ usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKERUSER', passwordVariable: 'DOCKERPASS' )]) {
                 def pom = readMavenPom file: 'pom.xml'

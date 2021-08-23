@@ -26,6 +26,7 @@
 package com.mirabilia.org.hzi.sormas.cases;
 
 import com.mirabilia.org.hzi.Strings.sql;
+import com.mirabilia.org.hzi.sormas.aggregate.SendToDHISServer;
 import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import java.io.BufferedReader;

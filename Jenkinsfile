@@ -26,7 +26,7 @@ node {
     }
     stage('Deploy') {
         echo 'Deploying....'
-        // Test auto deployment
+        // Test auto deployment another time
         dir('sormas_HL7v2') {
             withCredentials([ usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKERUSER', passwordVariable: 'DOCKERPASS' )]) {
                 def pom = readMavenPom file: 'pom.xml'

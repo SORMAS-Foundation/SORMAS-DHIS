@@ -28,8 +28,6 @@ public class orgUnitConn extends HttpServlet {
 
     private static String[] _url = ConffileCatcher.fileCatcher("passed");
 
-    private static String urll = _url[10].toString(); //should come from config file
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -60,6 +58,7 @@ public class orgUnitConn extends HttpServlet {
 
         if (initz == 1989) {
             JSONParser jsonParser = new JSONParser();
+            String urll = _url[10].toString();
 
             String base_url = urll + "/api/organisationUnits.json?fields=name&maxLevel=1";
 
@@ -110,6 +109,7 @@ public class orgUnitConn extends HttpServlet {
 
         if (initz == 5050) {
             JSONParser jsonParser = new JSONParser();
+            String urll = _url[10].toString();
 
             String base_url = urll + "/api/organisationUnits.json?fields=name&maxLevel=1";
 
@@ -123,7 +123,11 @@ public class orgUnitConn extends HttpServlet {
                 ServletOutputStream sout = response.getOutputStream();
                 String content = "DHIS2 Not Responding";
                 sout.print(content);
+                  sessionx.setAttribute("err", "<div class=\"alert alert-danger\" role=\"alert\">  DHIS Instance Not available or mot responding</div>");
+             
                 return;
+            } else {
+             sessionx.setAttribute("err", "");
             }
 
             try {
@@ -165,7 +169,10 @@ public class orgUnitConn extends HttpServlet {
         if (initzx > 0) {
 
             try {
+                String urll = _url[10].toString();
                 //process each shunk and send the progress back to progress bar.
+                
+                System.out.println("URL in USE >>>>>>>>>>>>>>>>>> "+urll);
                 String ct_code = sessionx.getAttribute("country_code").toString();
                 int pg_ = starter(initzx, urll, ct_code);
                 
@@ -174,7 +181,7 @@ public class orgUnitConn extends HttpServlet {
                 ServletOutputStream sout = response.getOutputStream();
                 String content = "" + pg_;
                 sout.print(content);
-                // System.out.println("percentage been sent back to frontend"+content+"%");
+                 System.out.println("percentage been sent back to frontend"+content+"%");
             } catch (SQLException ex) {
                 Logger.getLogger(orgUnitConn.class.getName()).log(Level.SEVERE, null, ex);
             }

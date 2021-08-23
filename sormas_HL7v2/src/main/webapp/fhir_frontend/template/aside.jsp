@@ -14,10 +14,10 @@
                         <ul class="nav nav-pills nav-sidebar flex-column  nav-compact" data-widget="treeview" role="menu" data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
                                  with font-awesome or any other icon font library -->
-                            <li class="nav-item has-treeview menu-open" id="facl">
+                            <li class="nav-item has-treeview menu-close" id="facl">
                                 <a href="#" class="nav-link" onclick="cases_()">
                                     <p style="font-size:14px">
-                                        OrganizationTool Module
+                                        Organization Tool Module
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
@@ -43,10 +43,10 @@
                                     </li>
                                 </ul>
                             </li>   
-                            <li class="nav-item has-treeview menu-open" id="caxl">
+                            <li class="nav-item has-treeview menu-close" id="caxl">
                                 <a href="#" class="nav-link" onclick="cases()">
                                     <p style="font-size:14px">
-                                        Case Based Module
+                                        Admin Console
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
@@ -65,14 +65,21 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a href="datalog1.jsp" class="nav-link">
+                                            <i class="fas fa-exchange-alt nav-icon"></i>
+                                            <p style="font-size:12px">Aggregate Operation Logs</p>
+                                        </a>
+                                </li>
+                                 <li class="nav-item">
                                         <a href="datalog.jsp" class="nav-link">
                                             <i class="fas fa-exchange-alt nav-icon"></i>
-                                            <p style="font-size:12px">Operation Logs</p>
+                                            <p style="font-size:12px">Cases Operation Logs</p>
                                         </a>
                                 </li>
                                 </ul>
                             </li>
-
+                            
+                           
                             <li class="nav-header">Settings</li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
@@ -106,7 +113,9 @@
                                     </p>
                                 </a>
                             </li>
+                            
                     </nav>
+                     
                     <!-- /.sidebar-menu -->
                 </div>
                 <!-- /.sidebar -->

@@ -73,13 +73,23 @@ public class OperationLogJson extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PreparedStatement ps = null;
         ResultSet rx = null;
+        String sqq = "";
+     //   System.out.println(request.getParameter("tran"));
+        
+        
+        
         try {
+            if("2".equals(request.getParameter("tran"))){
+            sqq = "Select * from sync_tracker where case_specific_detail = 'Person Table' ORDER BY lastupdated desc LIMIT 100";
+            } else {
+            sqq = "Select * from sync_tracker where case_specific_detail != 'Person Table' ORDER BY lastupdated desc LIMIT 100";
+            }
 
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DbConnector.getConnection();
             String ret = "";
 
-            ps = conn.prepareStatement("Select * from sync_tracker limit 100");
+            ps = conn.prepareStatement(sqq);
             rx = ps.executeQuery();
             String e = "{\n"
                     + "  \"data\": [";
@@ -104,11 +114,7 @@ JSONObject json = (JSONObject) parser.parse(pp);
             System.out.println(json.toJSONString());
             
 
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(OperationLogJson.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(OperationLogJson.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
+        } catch (ClassNotFoundException | SQLException | ParseException ex) {
             Logger.getLogger(OperationLogJson.class.getName()).log(Level.SEVERE, null, ex);
         }
 

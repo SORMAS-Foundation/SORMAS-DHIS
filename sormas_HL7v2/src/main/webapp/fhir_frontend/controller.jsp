@@ -1,10 +1,8 @@
 <%@page import="com.mirabilia.org.hzi.test.tester_"%>
 <%@page import="java.io.InputStreamReader"%>
 <%@page import="java.io.BufferedReader"%>
-<%@page import="com.mirabilia.org.hzi.sormas.cases.AggregrateController"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="org.json.simple.parser.JSONParser"%>
-<%@page import="sun.misc.IOUtils"%>
 <%@page import="java.io.InputStream"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="com.mirabilia.org.hzi.Util.dhis.optionFiler"%>
@@ -280,7 +278,7 @@
                                                                 <a type="button" onclick="start_pushX_()" class="btn btn-block btn-outline-secondary btn-xs nope">Manually Sync Aggregate Data</a>
                                                             </td>
                                                             <td>
-                                                                <a type="button" href="" class="btn btn-block btn-outline-secondary btn-xs disabled">Manually Sync Case Based Data</a>
+                                                                <a type="button" onclick="start_pushX_m()" href="" class="btn btn-block btn-outline-secondary btn-xs nope">Manually Sync Case Based Data</a>
                                                             </td>
                                                             <td>
                                                                 <a type="button" href="" class="btn btn-block btn-outline-secondary btn-xs disabled">Edit Option/Configuration Files</a>
@@ -661,6 +659,32 @@
                         $('#text').html("Pushing all available matched data to sormas...");
                         var xhr = new XMLHttpRequest();
                         xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?aggregatToDHIS=true', true);
+                        xhr.responseType = 'text';
+                        xhr.onload = function () {
+
+                            if (xhr.readyState === xhr.DONE) {
+                                if (xhr.status === 200) {
+
+                                    document.getElementById("overlay").style.display = "none";
+
+                                    alert('response from server  : ' + xhr.responseText);
+
+                                }
+                            }
+                        };
+                        xhr.send(null);
+
+                    }
+                    ;
+                    
+                    
+                    function start_pushX_m() {
+
+
+                        document.getElementById("overlay").style.display = "block";
+                        $('#text').html("Syncing Persons record from SORMAS to DHIS2 Tracked Entity...");
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?personToDHIS=true', true);
                         xhr.responseType = 'text';
                         xhr.onload = function () {
 

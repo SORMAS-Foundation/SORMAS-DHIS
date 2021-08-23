@@ -76,6 +76,7 @@ public class sourceControllergettersetter extends HttpServlet {
 
 //update active or not
         if (request.getParameter("insert_checker") != null) {
+            System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
             String checkBox = (String) request.getParameter("insert_checker");
             String statusx = (String) request.getParameter("status");
 
@@ -91,6 +92,7 @@ public class sourceControllergettersetter extends HttpServlet {
         }
 
         if (request.getParameter("title") != null) {
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             String title = (String) request.getParameter("title");
             String url = (String) request.getParameter("url");
             String desc = (String) request.getParameter("desc");
@@ -224,10 +226,11 @@ public class sourceControllergettersetter extends HttpServlet {
                 }
 
                 int tt = sq1 + sq2 + sq3 + sq4;
+                String ttz = "~~Region: "+sq1 +", District: "+ sq2+", Community: " + sq3 +", Facility: "+ sq4;
 
                // System.out.println("SRMS : " + tt);
 
-                sout.print(tt);
+                sout.print(tt+ttz);
 
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(sourceControllergettersetter.class.getName()).log(Level.SEVERE, null, ex);

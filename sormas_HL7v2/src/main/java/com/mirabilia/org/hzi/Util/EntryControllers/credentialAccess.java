@@ -25,12 +25,11 @@
  */
 package com.mirabilia.org.hzi.Util.EntryControllers;
 
+import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -61,22 +60,26 @@ public class credentialAccess extends HttpServlet {
 
         HttpSession sessionx = request.getSession();
         
+        String[] paramx = ConffileCatcher.fileCatcher("passed");
+        String usrnm = paramx[14];
+        String passwd = paramx[15];
+        
         
 
         if (request.getParameter("usern") != null && request.getParameter("upass") != null) {
+            
+            
 
-            if (request.getParameter("usern").equals("Administrator")) {
-                 System.out.println("Get Method in use...");
-
-                if (request.getParameter("upass").equals("qwerty")) {
-                     System.out.println("Get Method in use...");
+            if (request.getParameter("usern").equals(usrnm)) {
+                if (request.getParameter("upass").equals(passwd)) {
 
                     Logger.getLogger(credentialAccess.class.getName()).log(Level.INFO, "User Logged in was successful: ADMINISTRATOR");
-                    sessionx.setAttribute("xloggedx", "true");
+                    sessionx.setAttribute("xloggedx", "truet_");
+                    sessionx.setAttribute("xloggedx_name", request.getParameter("usern"));
                     response.sendRedirect("fhir_frontend/adapter_frontend.jsp");
                     
                 } else {
-                    Logger.getLogger(credentialAccess.class.getName()).log(Level.INFO, "User Logged in was denailed: password/username not match");
+                    Logger.getLogger(credentialAccess.class.getName()).log(Level.INFO, "User Logged in was denialed: password/username not match");
                     response.sendRedirect("logout.jsp");
 
                 }

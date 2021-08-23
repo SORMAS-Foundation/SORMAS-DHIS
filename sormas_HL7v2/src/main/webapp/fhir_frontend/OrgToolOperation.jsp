@@ -1,3 +1,4 @@
+<%@page import="com.mirabilia.org.hzi.Util.UtilityAbstracts"%>
 <%@page import="com.mirabilia.org.hzi.Util.sourceDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -190,12 +191,14 @@
                     </section>
 
                     <div id="overlay" onclick="off()">
-                        <div id="text"><h3 style="padding-left:100px;">please wait... configuring SORMAS</h3>
+                        <div id="text"><h2 style="padding-left:100px;">please wait... we are populating/updating your adapter with admin data</h2>
                         </div></div>
 
 
                 <%
                     String sourcesX = sourceDTO.getSourcePaired();
+                    String mastt = UtilityAbstracts.getMasterSpource();
+                    String desss = UtilityAbstracts.getMdestinationSpource();
 
                 %>
 
@@ -278,12 +281,12 @@
 
 
                                             <a onclick="dd();" id="sync_x" class="btn btn-app hvr-icon-buzz-out">
-                                                <i class="fas fa-download hvr-icon"></i> Prime < Master
+                                                <i class="fas fa-download hvr-icon" title="Download Admin data from <%=mastt%>"></i> Master Data >> Adapter
                                             </a>
 
 
 
-                                            <a onclick="start_pushX_X()" id="send_all_availx" class="btn btn-app hvr-icon-buzz-out">
+                                            <a onclick="start_pushX_X_x()" id="send_all_availx" class="btn btn-app hvr-icon-buzz-out">
                                                 <i class="fas fa-play hvr-icon"></i> Sync with NEW SORMAS
                                             </a>
 
@@ -390,14 +393,14 @@
 
 
                                             <a class="btn btn-app hvr-icon-buzz-out" onclick="lc()">
-                                                <i class="fas fa-download hvr-icon"></i> Prime < Destination
+                                                <i class="fas fa-download hvr-icon" title="Download Admin data from <%=desss%>"></i> Destination Data >> Adapter
                                             </a>
 
 
 
 
                                             <a onclick="dd();" id="sync_" class="btn btn-app hvr-icon-buzz-out">
-                                                <i class="fas fa-download hvr-icon"></i> Prime < Master
+                                                <i class="fas fa-download hvr-icon" title="Download Admin data from <%=mastt%>"></i> Master Data >> Adapter
                                             </a>
 
                                             <a onclick="ana();" id="analysedb" class="btn btn-app hvr-icon-buzz-out">
@@ -408,9 +411,9 @@
                                                 <i class="fas fa-cogs hvr-icon"></i> Display Results
                                             </a>
 
-                                            <a onclick="fhir_()" id="analysefhir" class="btn btn-app hvr-icon-buzz-out">
+                                        <!--    <a onclick="fhir_()" id="analysefhir" class="btn btn-app hvr-icon-buzz-out">
                                                 <i class="fas fa-play hvr-icon"></i> Sync with FHIR
-                                            </a>
+                                            </a> -->
 
                                             <a onclick="start_pushX_()" id="send_all_avail" class="btn btn-app hvr-icon-buzz-out">
                                                 <i class="fas fa-play hvr-icon"></i> Sync with SORMAS
@@ -493,7 +496,7 @@
 
                                             <div class="row input-group">
 
-                                                <div onclick="dmd('')" class="col-xs-6 col-md-3 text-center clickables" data-togg="tooltip" title="Click here to view the Matched Data!" data-toggle="modal" data-target="#modal-xl" style="border-right: 1px solid #f4f4f4">
+                                                <div onclick="dmd('')" class="col-xs-6 col-md-4 text-center clickables" data-togg="tooltip" title="Click here to view the Matched Data!" data-toggle="modal" data-target="#modal-xl" style="border-right: 1px solid #f4f4f4">
                                                     <div style="display:inline;width:60px;height:60px;">
                                                         <input type="text" class="knob" data-readonly="true" value="20" id="dtt" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;">
                                                     </div>
@@ -501,19 +504,19 @@
                                                     <div class="knob-label" id="full" ></div>
                                                 </div>
 
-                                                <!-- ./col -->
+                                                <!-- ./col 
                                                 <div onclick="dmd('pat_mat')" class="col-xs-6 col-md-3 text-center clickables" style="border-right: 1px solid #f4f4f4" data-toggle="modal" data-target="#">
                                                     <div style="display:inline;width:60px;height:60px;"><input type="text" class="knob" data-readonly="true" id="ctt"  value="50" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;"></div>
 
                                                     <div class="knob-label" id="fullx" ></div>
                                                 </div>
-                                                <!-- ./col -->
-                                                <div class="col-xs-6 col-md-3 text-center clickables"  data-togg="tooltip" title="Click here to load Deduplicator Wizard!" onclick="dmd('dup_')" data-toggle="modal"  data-target="#dup_modal-xl">
+                                                ./col -->
+                                                <div class="col-xs-6 col-md-4 text-center clickables"  data-togg="tooltip" title="Click here to load Deduplicator Wizard!" onclick="dmd('dup_')" data-toggle="modal"  data-target="#dup_modal-xl">
                                                     <div style="display:inline;width:60px;height:60px;"><input type="text" id="btt"  class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;"></div>
 
                                                     <div class="knob-label" id="fullxxx"></div>
                                                 </div>
-                                                <div class="col-xs-6 col-md-3 text-center clickables" onclick="dmd('_mat')" data-toggle="modal"  data-target="#modal-warning"> 
+                                                <div class="col-xs-6 col-md-4 text-center clickables" onclick="dmd('_mat')" data-toggle="modal"  data-target="#modal-warning"> 
                                                     <div style="display:inline;width:60px;height:60px;"><input type="text" id="att" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgcolor="#39CCCC" readonly="readonly" style="width: 34px; height: 20px; position: absolute; vertical-align: middle; margin-top: 20px; margin-left: -47px; border: 0px; background: none; font: bold 12px Arial; text-align: center; color: rgb(57, 204, 204); padding: 0px; -webkit-appearance: none;"></div>
 
                                                     <div class="knob-label" id="fullxxxx"></div>
@@ -616,7 +619,7 @@
                                                         //debugger ristricting to ward leve
                                                         maxx = 6;
                                                         document.getElementById("overlay").style.display = "none";
-                                                        $('#progress_').show();
+                                                        //$('#progress_').show();
                                                         $('#progress_x').show();
                                                         servlet_primer(maxx);
                                                         console.log('running level>>> ' + maxx);
@@ -642,6 +645,8 @@
                                                             };
                                                             xhr.send(null);
                                                             success: servlet_primer(stat - 1);
+                                                           //  setTimeout($('#progress_x').hide();, 2000)
+                                                            
                                                         }
 
                                                     }
@@ -719,7 +724,7 @@
                                         const words = xhr.responseText.split(',');
                                         $('#fullxxxx').html("100% Not Matchable = " + words[0]);
                                         $('#fullxxx').html("Duplicates = " + words[1]);
-                                        $('#fullx').html("Partial Duplicates = " + words[2]);
+                                     //   $('#fullx').html("Partial Duplicates = " + words[2]);
                                         $('#full').html("Matched = " + words[3]);
                                         intPerser(xhr.responseText);
 
@@ -854,7 +859,6 @@
 
 
                 <%
-
                        }else{
                 %>
 
@@ -891,7 +895,6 @@
 
 
                 <%
-
                             }
                         }
 
@@ -1787,6 +1790,8 @@
 
 
                     function openxx() {
+                        $('#progress_x').hide();
+                        $('#progress_').hide();
                         var checked = $('#maintenance:checkbox:checked').length > 0;
 
                         if (checked == true) {
@@ -1804,7 +1809,7 @@
 
                     }
                     ;
-                    function start_pushX_X() {
+                    function start_pushX_X_x() {
                         document.getElementById("overlay").style.display = "block";
                         $('#text').html("Pushing all available matched data to sormas...");
                         var xhr = new XMLHttpRequest();
@@ -1817,7 +1822,7 @@
 
                                     document.getElementById("overlay").style.display = "none";
 
-                                    alertx(xhr.responseText);
+                                    //alertx(xhr.responseText);
 
                                 }
                             }

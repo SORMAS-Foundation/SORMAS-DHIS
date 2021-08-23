@@ -35,9 +35,13 @@ public class ConffileCatcher {
             String instance_code = "";
             String instance_Language = "";
             
+            String adapter_username = "";
+            String adapter_password = "";
+            
+            
             if(valx.equalsIgnoreCase("passed")){
         try {
-            File myObj = new File(System.getProperty("user.home") + File.separator + "somars.conf");
+            File myObj = new File(System.getProperty("user.home") + File.separator + "sormas.conf");
             if(myObj.exists()){
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
@@ -110,6 +114,16 @@ public class ConffileCatcher {
                    String val = data.replaceAll("fhir_url", "").replaceAll(" ", "").replaceAll("=", "");
                     fhir_url = val;
                 }
+                
+                if (data.contains("adapter_username =")) {
+                   String val = data.replaceAll("adapter_username", "").replaceAll(" ", "").replaceAll("=", "");
+                    adapter_username = val;
+                }
+                
+                if (data.contains("adapter_password =")) {
+                   String val = data.replaceAll("adapter_password", "").replaceAll(" ", "").replaceAll("=", "");
+                    adapter_password = val;
+                }
 
             }
 
@@ -127,7 +141,7 @@ public class ConffileCatcher {
                 System.out.println("UNAUTHORIZED ACCESS DETECTED");
             }
             
-        String[] arr = new String[14];
+        String[] arr = new String[16];
         arr[0] = val_host;
         arr[1] = val_port;
         arr[2] = val_name;
@@ -143,6 +157,9 @@ public class ConffileCatcher {
         arr[11] = fhir_url;
         arr[12] = instance_country;
         arr[13] = instance_code;
+        
+        arr[14] = adapter_username;
+        arr[15] = adapter_password;
         
         return arr;
 

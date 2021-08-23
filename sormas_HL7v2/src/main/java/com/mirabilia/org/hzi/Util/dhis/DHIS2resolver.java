@@ -51,13 +51,14 @@ public class DHIS2resolver {
         String authStringEnc = new String(authEncBytes);
         try {
             URL url = new URL(pg_url);
+           // System.out.println(pg_url+"ddddddddddddddddddddddddddddddddddddddddddddddddddddd");
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Authorization", "Basic " + authStringEnc);
             urlConnection.setDoOutput(true);
             urlConnection.setRequestMethod("GET");
             urlConnection.setUseCaches(true);
-            urlConnection.setConnectTimeout(2000);
-            urlConnection.setReadTimeout(2000);
+            urlConnection.setConnectTimeout(4000);
+            urlConnection.setReadTimeout(4000);
              urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.connect();
 

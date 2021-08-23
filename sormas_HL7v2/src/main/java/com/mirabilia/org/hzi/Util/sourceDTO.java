@@ -155,6 +155,9 @@ public class sourceDTO {
                 } finally {
 
                 }
+                
+                UtilityAbstracts.setMasterSpource(jsonString);
+                UtilityAbstracts.setMdestinationSpource(jsonStringx);
 
                 jsonString = "<strong>Master : </strong>" + jsonString + " | <strong> Destination : </strong>" + jsonStringx;
 

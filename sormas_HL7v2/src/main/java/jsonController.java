@@ -8,7 +8,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,7 +41,7 @@ public class jsonController {
             JSONArray jsonArray = (JSONArray) jsonObject.get("organisationUnits");
 
             //Insert a row into the MyPlayers table
-            pstmt = con.prepareStatement("INSERT INTO `sormas_`.`raw_` (`uuid`, `name`, `shortname`, `created`, `path_parent`, `level`, `updated_last`, `rec_created`) values (?, ?, ?, ?, ?, ? ,?, now())");
+            pstmt = con.prepareStatement("INSERT INTO `raw_` (`uuid`, `name`, `shortname`, `created`, `path_parent`, `level`, `updated_last`, `rec_created`) values (?, ?, ?, ?, ?, ? ,?, now())");
             for (Object object : jsonArray) {
                 JSONObject record = (JSONObject) object;
 

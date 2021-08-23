@@ -26,6 +26,7 @@ node {
     }
     stage('Deploy') {
         echo 'Deploying....'
+        // Test again with branch from variable
         dir('sormas_HL7v2') {
             withCredentials([ usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKERUSER', passwordVariable: 'DOCKERPASS' )]) {
                 def pom = readMavenPom file: 'pom.xml'

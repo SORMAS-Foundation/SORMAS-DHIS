@@ -53,7 +53,7 @@ public class localizerz extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>now in localizer");
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>now in localizer");
         try {
             String tkbck = "";
 
@@ -75,42 +75,41 @@ System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>now in localizer");
 
             //loop through sormas local and get infrastructure data by level into mysql local db for futher use by the adapter.
             try {
-                 if (request.getParameter("del_all") != null && "true".equals(request.getParameter("del_all"))) {
-                     
-                 Localizer_Deleter();
-                 
-                 if(1==1){
-                 
-                 System.out.println("yes!!!");
-                 }
-                 
-                 }
-                
+                if (request.getParameter("del_all") != null && "true".equals(request.getParameter("del_all"))) {
+
+                    Localizer_Deleter();
+
+                    if (1 == 1) {
+                        System.out.println("yes!!!");
+                    }
+
+                }
+
                 if (request.getParameter("rg") != null && "true".equals(request.getParameter("rg"))) {
-            //System.out.println("region? !"+request.getParameter("rg"));
-                    ps = conn.prepareStatement("SELECT changedate, uuid, externalid, name, id, creationdate FROM region;");
+                    //System.out.println("region? !"+request.getParameter("rg"));
+                    ps = conn.prepareStatement("SELECT changedate, uuid, externalid, name, id, creationdate, country_id FROM region;");
                     rx = ps.executeQuery();
                     while (rx.next()) {
                         String cf = "";
                         if (rx.getString(3) == null) {
-                            cf = "0";
+                            cf = rx.getString(3);
                         } else {
                             cf = rx.getString(3);
                         }
-                        getterSetters.Localizer(rx.getString(1), rx.getString(2), cf, "2", rx.getString(4), rx.getString(5), "", rx.getString(6) );
+                        getterSetters.Localizer(rx.getString(1), rx.getString(2), cf, "2", rx.getString(4), rx.getString(5), "", rx.getString(6));
 
                     }
                     tkbck = "finised pulling state data... successful";
                     System.out.println(tkbck);
                 }
                 if (request.getParameter("ds") != null && "true".equals(request.getParameter("ds"))) {
-            
-                    ps1 = conn.prepareStatement("SELECT changedate, uuid, externalid, name, id, region_id, creationdate FROM district;");
+
+                    ps1 = conn.prepareStatement("SELECT changedate, uuid, externalid, name, id, region_id, creationdate, region_id FROM district;");
                     rx1 = ps1.executeQuery();
                     while (rx1.next()) {
                         String cv = "";
                         if (rx1.getString(3) == null) {
-                            cv = "0";
+                            cv = rx1.getString(3);
                         } else {
                             cv = rx1.getString(3);
                         }
@@ -121,14 +120,14 @@ System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>now in localizer");
                 }
 
                 if (request.getParameter("co") != null && "true".equals(request.getParameter("co"))) {
-                    
-                    System.out.println("ward"+request.getParameter("co"));
+
+                    System.out.println("ward" + request.getParameter("co"));
                     ps2 = conn.prepareStatement("SELECT changedate, uuid, externalid, name, id, district_id, creationdate FROM community;");
                     rx2 = ps2.executeQuery();
                     while (rx2.next()) {
                         String cz = "";
                         if (rx2.getString(3) == null) {
-                            cz = "0";
+                            cz = rx2.getString(3);
                         } else {
                             cz = rx2.getString(3);
                         }
@@ -140,13 +139,13 @@ System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>now in localizer");
                 }
 
                 if (request.getParameter("fa") != null && "true".equals(request.getParameter("fa"))) {
-                    System.out.println("health facility !"+request.getParameter("fa"));
+                    System.out.println("health facility !" + request.getParameter("fa"));
                     ps3 = conn.prepareStatement("SELECT changedate, uuid, externalid, name, id, community_id, creationdate FROM facility;");
                     rx3 = ps3.executeQuery();
                     while (rx3.next()) {
                         String cq = "";
                         if (rx3.getString(3) == null) {
-                            cq = "0";
+                            cq = rx3.getString(3);
                         } else {
                             cq = rx3.getString(3);
                         }
@@ -163,16 +162,15 @@ System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>now in localizer");
                     response.setContentType("text/plain;charset=UTF-8");
                     response.setStatus(200);
                     ServletOutputStream sout = response.getOutputStream();
-                    
 
                     sout.print(tkbck);
                 } else {
-                response.setContentType("text/plain;charset=UTF-8");
+                    response.setContentType("text/plain;charset=UTF-8");
                     response.setStatus(200);
                     ServletOutputStream sout = response.getOutputStream();
 
                     sout.print("something is wrong! in localizer");
-                
+
                 }
 
             } catch (SQLException ex) {

@@ -403,17 +403,17 @@
                                                 <i class="fas fa-download hvr-icon" title="Download Admin data from <%=mastt%>"></i> Master Data >> Adapter
                                             </a>
 
-                                            <a onclick="ana();" id="analysedb" class="btn btn-app hvr-icon-buzz-out">
-                                                <i class="fas fa-sync hvr-icon"></i> Analyse and Match
+                                            <a onclick="intPerser_am()" id="analysedb" class="btn btn-app hvr-icon-buzz-out">
+                                                <i class="fas fa-cogs hvr-icon"></i> Analyse and Match
                                             </a>
 
                                             <a onclick="resx();" id="analyse"dsp class="btn btn-app hvr-icon-buzz-out">
-                                                <i class="fas fa-cogs hvr-icon"></i> Display Results
+                                                <i class="fas fa-check hvr-icon"></i> Display Results
                                             </a>
 
-                                        <!--    <a onclick="fhir_()" id="analysefhir" class="btn btn-app hvr-icon-buzz-out">
-                                                <i class="fas fa-play hvr-icon"></i> Sync with FHIR
-                                            </a> -->
+                                            <!--    <a onclick="fhir_()" id="analysefhir" class="btn btn-app hvr-icon-buzz-out">
+                                                    <i class="fas fa-play hvr-icon"></i> Sync with FHIR
+                                                </a> -->
 
                                             <a onclick="start_pushX_()" id="send_all_avail" class="btn btn-app hvr-icon-buzz-out">
                                                 <i class="fas fa-play hvr-icon"></i> Sync with SORMAS
@@ -530,6 +530,42 @@
                                     </div>
 
 
+                                    <div class="card card-success card-outline" id="body_wx_">
+                                        <div class="card-header">
+
+                                            <h3 class="card-title" data-togg="tooltip" title="NOTE: This is using local SORMAS Server as a baseline">
+                                                <i class="fas fa-sync"></i>
+                                                Analyse and Match Tool 
+                                            </h3><br>
+                                            <i class="pull-right"><b>NOTE:</b> Make sure that each level is resolved before accessing the next level</i>
+                                        </div>
+                                        <div class="card-body row">
+                                            <a class="btn btn-flat" onclick="bcknxx()">
+                                                <i class="fa fa-angle-double-left"></i> Close
+                                            </a>
+                                            
+                                            <a onclick="ana(1)" id="analysedb" class="btn btn-app hvr-icon-buzz-out">
+                                                <i class="fas fa-sync hvr-icon"></i> Resolve Level 1
+                                            </a>
+
+                                            <a onclick="ana(2)" id="analysefhir" class="btn btn-app hvr-icon-buzz-out">
+                                                <i class="fa fa-sync hvr-icon"></i> Resolve Level 2
+                                            </a>
+
+                                            <a onclick="ana(3)" id="send_all_avail" class="btn btn-app hvr-icon-buzz-out">
+                                                <i class="fas fa-sync hvr-icon"></i> Resolve Level 3
+                                            </a>
+                                            <a onclick="ana(4)" id="send_all_avail" class="btn btn-app hvr-icon-buzz-out">
+                                                <i class="fas fa-sync hvr-icon"></i> Resolve Level 4
+                                            </a>
+                                            <a onclick="ana(5)" id="send_all_avail" class="btn btn-app hvr-icon-buzz-out">
+                                                <i class="fas fa-sync hvr-icon"></i> Resolve Level 5
+                                            </a>
+                                        </div>  
+                                        <!-- /.card -->
+                                    </div>
+
+
                                 </section>  <!--section class="col-lg-5 connectedSortable"-->
 
                                 <input type="hidden" id="controllerx">
@@ -555,124 +591,123 @@
                     <script>
 
 
-                                                    var ctbb = '';
-                                                    $('[data-togg="tooltip"]').tooltip();
+                                                var ctbb = '';
+                                                $('[data-togg="tooltip"]').tooltip();
+                                                $('#body_wx').hide();
+                                                $('#body_wx_').hide();
+                                                $('#progress_').hide();
+                                                $('#progress_Fhir').hide();
+                                                $('#sync_').hide();
+                                                var max = 0;
+                                                var maz = 0;
+                                                var xhr = new XMLHttpRequest();
+                                                xhr.open('GET', '../orggetter?pg_counter=1989', true);
+                                                xhr.responseType = 'text';
+                                                var maxx = 0;
+                                                //populates the number of chunks from Source 1 (prehead)
+                                                starterx();
+                                                //get the total chunks
+                                                function starterx() {
+                                                xhr.onload = function () {
+                                                if (xhr.readyState === xhr.DONE) {
+                                                if (xhr.status === 200) {
+                                                maxx = xhr.responseText;
+                                                //   console.log("1 - total chunks to be process = " + maxx);
+                                                //   alertx();
+                                                //    $('#addit').append("<button type=\"button\" class=\"btn btn-block bg-gradient-success btn-xs col-lg-4\">Server now ready</button><br>");
 
-                                                    $('#body_wx').hide();
-
-                                                    $('#progress_').hide();
-                                                    $('#progress_Fhir').hide();
-                                                    $('#sync_').hide();
-                                                    var max = 0;
-                                                    var maz = 0;
-                                                    var xhr = new XMLHttpRequest();
-                                                    xhr.open('GET', '../orggetter?pg_counter=1989', true);
-                                                    xhr.responseType = 'text';
-                                                    var maxx = 0;
-                                                    //populates the number of chunks from Source 1 (prehead)
-                                                    starterx();
-                                                    //get the total chunks
-                                                    function starterx() {
-                                                        xhr.onload = function () {
-                                                            if (xhr.readyState === xhr.DONE) {
-                                                                if (xhr.status === 200) {
-                                                                    maxx = xhr.responseText;
-                                                                    //   console.log("1 - total chunks to be process = " + maxx);
-                                                                    //   alertx();
-                                                                    //    $('#addit').append("<button type=\"button\" class=\"btn btn-block bg-gradient-success btn-xs col-lg-4\">Server now ready</button><br>");
-
-                                                                    gren();
-                                                                    //   style="background-color: darkseagreen;min-height: 530px;"                            
-                                                                    $('#sync_').show();
-                                                                    var total = maxx * 100;
-                                                                    $('#totaler').append(total); //chunker
-                                                                    //   $('#chunker').append("chunks to process | "+ maxx);//chunker
-
+                                                gren();
+                                                //   style="background-color: darkseagreen;min-height: 530px;"                            
+                                                $('#sync_').show();
+                                                var total = maxx * 100;
+                                                $('#totaler').append(total); //chunker
+                                                //   $('#chunker').append("chunks to process | "+ maxx);//chunker
 
 
 
 
-                                                                } else {
-                                                                    //   console.log("Server error while contacting main methods to get total number of chunks");
-                                                                    alertx("DHIS2 Not Availalable");
-                                                                    return;
-                                                                }
-                                                            }
-                                                        };
-                                                        xhr.send("");
-                                                    }
-                                                    ;
-                                                    function gren() {
-                                                        // document.getElementById("contw").style.background = "#9eca9d";
-                                                        //  document.getElementById("contw").style.background-color = "darkseagreen";
-                                                        alertx("All Set");
-                                                    }
-                                                    ;
-                                                    //process the entire chunks one after the other
+
+                                                } else {
+                                                //   console.log("Server error while contacting main methods to get total number of chunks");
+                                                alertx("DHIS2 Not Availalable");
+                                                return;
+                                                }
+                                                }
+                                                };
+                                                xhr.send("");
+                                                }
+                                                ;
+                                                function gren() {
+                                                // document.getElementById("contw").style.background = "#9eca9d";
+                                                //  document.getElementById("contw").style.background-color = "darkseagreen";
+                                                alertx("All Set");
+                                                }
+                                                ;
+                                                //process the entire chunks one after the other
 
 
 
 
-                                                    //fires the main sync process.
-                                                    function starter() {
-                                                        maz = maxx;
-                                                        //debugger ristricting to ward leve
-                                                        maxx = 6;
-                                                        document.getElementById("overlay").style.display = "none";
-                                                        //$('#progress_').show();
-                                                        $('#progress_x').show();
-                                                        servlet_primer(maxx);
-                                                        console.log('running level>>> ' + maxx);
-                                                        //  myloader(0);
+                                                //fires the main sync process.
+                                                function starter() {
+                                                maz = maxx;
+                                                //debugger ristricting to ward leve
+                                                maxx = 6;
+                                                document.getElementById("overlay").style.display = "none";
+                                                //$('#progress_').show();
+                                                $('#progress_x').show();
+                                                servlet_primer(maxx);
+                                                console.log('running level>>> ' + maxx);
+                                                //  myloader(0);
 
-                                                    }
-                                                    ;
-                                                    function servlet_primer(stat) {
-                                                        // var stat = 233;
+                                                }
+                                                ;
+                                                function servlet_primer(stat) {
+                                                // var stat = 233;
 
-                                                        if (stat > 0) {
-                                                            var xhr = new XMLHttpRequest();
-                                                            xhr.open('GET', '../orggetter?pg_counterx=' + stat, true);
-                                                            xhr.responseType = 'text';
-                                                            xhr.onload = function () {
-                                                                if (xhr.readyState === xhr.DONE) {
-                                                                    if (xhr.status === 200) {
-                                                                        max = xhr.responseText;
-                                                                        myloader(max);
-                                                                        console.log("Number of chunk been processed currently = " + max);
-                                                                    }
-                                                                }
-                                                            };
-                                                            xhr.send(null);
-                                                            success: servlet_primer(stat - 1);
-                                                           //  setTimeout($('#progress_x').hide();, 2000)
-                                                            
-                                                        }
+                                                if (stat > 0) {
+                                                var xhr = new XMLHttpRequest();
+                                                xhr.open('GET', '../orggetter?pg_counterx=' + stat, true);
+                                                xhr.responseType = 'text';
+                                                xhr.onload = function () {
+                                                if (xhr.readyState === xhr.DONE) {
+                                                if (xhr.status === 200) {
+                                                max = xhr.responseText;
+                                                myloader(max);
+                                                console.log("Number of chunk been processed currently = " + max);
+                                                }
+                                                }
+                                                };
+                                                xhr.send(null);
+                                                success: servlet_primer(stat - 1);
+                                                //  setTimeout($('#progress_x').hide();, 2000)
 
-                                                    }
-                                                    ;
-                                                    function myloader(width) {
-                                                        // $('.progress-bar').css('width', width+'%');
-                                                        //     console.log(width + '%');
-                                                        //    $('#pbar').append(width);//???
-                                                        //
+                                                }
 
-                                                        document.getElementById("pbar").style.width = width + '%';
-                                                        document.getElementById("chunker").innerHTML = 'Total chunks remaining = ' + width;
-                                                        document.getElementById("chunker_").innerHTML = 'Total chunks remaining = ' + width;
-                                                        //document.getElementById("chunker_").innerHTML = maz;
-                                                        if (width < 3) {
+                                                }
+                                                ;
+                                                function myloader(width) {
+                                                // $('.progress-bar').css('width', width+'%');
+                                                //     console.log(width + '%');
+                                                //    $('#pbar').append(width);//???
+                                                //
 
-                                                            //Fhir need to start here.
-                                                            $('#progress_').hide();
-                                                            $('#progress_x').hide();
-                                                            $('#progress_Fhir').show();
-                                                            //Debugging with create only
-                                                            setTimeout(servlet_primer_fhir(1), 3000)
+                                                document.getElementById("pbar").style.width = width + '%';
+                                                document.getElementById("chunker").innerHTML = 'Total chunks remaining = ' + width;
+                                                document.getElementById("chunker_").innerHTML = 'Total chunks remaining = ' + width;
+                                                //document.getElementById("chunker_").innerHTML = maz;
+                                                if (width < 3) {
 
-                                                        }
-                                                    }
-                                                    ;
+                                                //Fhir need to start here.
+                                                $('#progress_').hide();
+                                                $('#progress_x').hide();
+                                                $('#progress_Fhir').show();
+                                                //Debugging with create only
+                                                setTimeout(servlet_primer_fhir(1), 3000)
+
+                                                }
+                                                }
+                                                ;
                     </script>
 
 
@@ -681,224 +716,198 @@
 
 
                         function dd() {
-                            document.getElementById("overlay").style.display = "block";
-                            setTimeout(function () {
-                                if (confirm("DANGER! \nThis action will Purge all MASTER Source Infrastructure Data already on the Adapter and reimport it afresh. \nDo you want to do that?")) {
+                        document.getElementById("overlay").style.display = "block";
+                        setTimeout(function () {
+                        if (confirm("DANGER! \nThis action will Purge all MASTER Source Infrastructure Data already on the Adapter and reimport it afresh. \nDo you want to do that?")) {
 
-                                    starter();
-
-                                } else {
-                                    document.getElementById("overlay").style.display = "none";
-
-                                }
-
-
-                            }, 1000);
+                        starter();
+                        } else {
+                        document.getElementById("overlay").style.display = "none";
                         }
 
-                        function ana() {
-                            document.getElementById("overlay").style.display = "block";
-                            setTimeout(function () {
-                                if (confirm("WARNING! \nLong Processing Action, you are about to run the match processor... This will take time. \nDo you want to do that?")) {
-                                    location.replace("../controllers_jsp/analytics_staging.jsp");
-                                } else {
-                                    document.getElementById("overlay").style.display = "none";
 
-                                }
+                        }, 1000);
+                        }
+
+                        function ana(e) {
+                        document.getElementById("overlay").style.display = "block";
+                        setTimeout(function () {
+                        if (confirm("WARNING! \nLong Processing Action, you are about to run the match processor... This will take time. \nDo you want to do that?")) {
+                        location.replace("../controllers_jsp/analytics_staging.jsp?levelX="+e);
+                        } else {
+                        document.getElementById("overlay").style.display = "none";
+                        }
 
 
-                            }, 1000);
+                        }, 1000);
                         }
 
                         function resx() {
 
-                            var xhr = new XMLHttpRequest();
-                            xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?count=10', true);
-                            xhr.responseType = 'text';
-                            xhr.onload = function () {
-                                if (xhr.readyState === xhr.DONE) {
-                                    if (xhr.status === 200) {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?count=10', true);
+                        xhr.responseType = 'text';
+                        xhr.onload = function () {
+                        if (xhr.readyState === xhr.DONE) {
+                        if (xhr.status === 200) {
 
-                                        //    console.log("Number of 100 percent machedprocessed currently = " + xhr.responseText);
+                        //    console.log("Number of 100 percent machedprocessed currently = " + xhr.responseText);
 
-                                        const words = xhr.responseText.split(',');
-                                        $('#fullxxxx').html("100% Not Matchable = " + words[0]);
-                                        $('#fullxxx').html("Duplicates = " + words[1]);
-                                     //   $('#fullx').html("Partial Duplicates = " + words[2]);
-                                        $('#full').html("Matched = " + words[3]);
-                                        intPerser(xhr.responseText);
+                        const words = xhr.responseText.split(',');
+                        $('#fullxxxx').html("100% Not Matchable = " + words[0]);
+                        $('#fullxxx').html("Duplicates = " + words[1]);
+                        //   $('#fullx').html("Partial Duplicates = " + words[2]);
+                        $('#full').html("Matched = " + words[3]);
+                        intPerser(xhr.responseText);
+                        } else {
+                        alert("There is a problem retreiving analytics from server, please rerun Analytics 'Analyse' button");
+                        return;
+                        }
+                        }
+                        };
+                        xhr.send(null);
+                        }
 
-                                    } else {
-                                        alert("There is a problem retreiving analytics from server, please rerun Analytics 'Analyse' button");
-                                        return;
-                                    }
-                                }
-                            };
-                            xhr.send(null);
 
+                        function intPerser_am() {
+
+                        $('#body_wx_').show();
                         }
 
                         function intPerser(e) {
-                            const words = e.split(',');
-                            var a = parseInt(words[0]);
-                            var b = parseInt(words[1]);
-                            var c = parseInt(words[2]);
-                            var d = parseInt(words[3]);
-
-                            var tt = a + b + c + d;
-
-                            $('#att').val(Math.floor((a / tt) * 100) + '%');
-                            $('#btt').val(Math.floor((b / tt) * 100) + '%');
-                            $('#ctt').val(Math.floor((c / tt) * 100) + '%');
-                            $('#dtt').val(Math.floor((d / tt) * 100) + '%');
-                            //   alert(Math.floor((c / tt) * 100));
-                            $('#body_wx').show();
-                            triggerKnob();
-
+                        const words = e.split(',');
+                        var a = parseInt(words[0]);
+                        var b = parseInt(words[1]);
+                        var c = parseInt(words[2]);
+                        var d = parseInt(words[3]);
+                        var tt = a + b + c + d;
+                        $('#att').val(Math.floor((a / tt) * 100) + '%');
+                        $('#btt').val(Math.floor((b / tt) * 100) + '%');
+                        $('#ctt').val(Math.floor((c / tt) * 100) + '%');
+                        $('#dtt').val(Math.floor((d / tt) * 100) + '%');
+                        //   alert(Math.floor((c / tt) * 100));
+                        $('#body_wx').show();
+                        triggerKnob();
                         }
 
 
 
 
                         function ds() {
-                            // window.location("./controllers/localizer.jsp");
+                        // window.location("./controllers/localizer.jsp");
                         }
 
                         function servlet_primer_fhir(stat) {
 
-                            if (stat > 0) {
-                                var xhr = new XMLHttpRequest();
-                                xhr.open('GET', '../controller?getAllListfromDBtoFHIR=' + stat, true);
-                                xhr.responseType = 'text';
-                                xhr.onload = function () {
-                                    if (xhr.readyState === xhr.DONE) {
-                                        if (xhr.status === 200) {
-                                            cleaner();
-                                        }
-                                    }
-                                };
-                                xhr.send(null);
-                                success: servlet_primer(stat - 1);
-                            }
+                        if (stat > 0) {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', '../controller?getAllListfromDBtoFHIR=' + stat, true);
+                        xhr.responseType = 'text';
+                        xhr.onload = function () {
+                        if (xhr.readyState === xhr.DONE) {
+                        if (xhr.status === 200) {
+                        cleaner();
+                        }
+                        }
+                        };
+                        xhr.send(null);
+                        success: servlet_primer(stat - 1);
+                        }
 
                         }
                         ;
                         function cleaner() {
-                            $('#progress_').hide();
-                            $('#progress_x').hide();
-                            $('#progress_Fhir').hide();
+                        $('#progress_').hide();
+                        $('#progress_x').hide();
+                        $('#progress_Fhir').hide();
                         }
                         ;
                         function alertxx() {
-                            const Toast = Swal.mixin({
-                                toast: true,
+                        const Toast = Swal.mixin({
+                        toast: true,
                                 position: 'top-end',
                                 showConfirmButton: false,
                                 timer: 3000
-                            });
-                            Toast.fire({
-                                type: 'success',
+                        });
+                        Toast.fire({
+                        type: 'success',
                                 title: 'Server now ready!.'
-                            });
+                        });
                         }
                         ;
-
                         function alertx(e) {
-                            const Toast = Swal.mixin({
-                                toast: true,
+                        const Toast = Swal.mixin({
+                        toast: true,
                                 position: 'top-end',
                                 showConfirmButton: false,
                                 timer: 3000
-                            });
-                            Toast.fire({
-                                type: 'success',
+                        });
+                        Toast.fire({
+                        type: 'success',
                                 title: e
-                            });
+                        });
                         }
                         ;
                         function alerterr(e) {
-                            const Toast = Swal.mixin({
-                                toast: true,
+                        const Toast = Swal.mixin({
+                        toast: true,
                                 position: 'top-end',
                                 showConfirmButton: false,
                                 timer: 3000
-                            });
-                            Toast.fire({
-                                type: 'error',
+                        });
+                        Toast.fire({
+                        type: 'error',
                                 title: e
-                            });
+                        });
                         }
                         ;
-
-
-
-
-
                     </script>
 
                 <%                if (request.getParameter("sayfini") != null) {
                         String sta = request.getParameter("sayfini");
-                     
+
                         if ("true".equals(sta)) {
                 %>
 
                 <script>
 
                     const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: true,
-                        timer: 6000
+                    toast: true,
+                            position: 'top-end',
+                            showConfirmButton: true,
+                            timer: 6000
                     });
                     Toast.fire({
-                        type: 'success',
-                        title: 'Server completed.'
+                    type: 'success',
+                            title: 'Server completed.'
                     });
                 </script>
 
 
 
                 <%
-                       }else{
+                } else {
                 %>
 
                 <script>
 
                     const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: true,
-                        timer: 6000
+                    toast: true,
+                            position: 'top-end',
+                            showConfirmButton: true,
+                            timer: 6000
                     });
                     Toast.fire({
-                        type: 'error',
-                        title: 'Server could not complete Operation!'
+                    type: 'error',
+                            title: 'Server could not complete Operation!'
                     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </script>
 
 
 
                 <%
-                            }
                         }
-
-                    
+                    }
 
 
                 %>
@@ -921,7 +930,6 @@
                 </style>
                 <script>
                     document.getElementById("overlay").style.display = "none";
-
                 </script>
 
                 <!--MODALS BASIN-->  
@@ -1196,10 +1204,10 @@
 
 
                 <!--MODALS BASIN-->  
-               
-                    
+
+
                 <div id="dup_now_closed" style="display: none">
-                    
+
                     <div class="" style="padding-left: 20px;padding-right: 10px;margin-top: 20px;margin-bottom: 20px;">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -1465,22 +1473,22 @@
                     <!-- /.modal-dialog -->
                 </div>
 
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
+
+
+
+
+
+
+
+
+
+
+
                 <!--MODALS BASIN UNMATCHABLES-->  
-               
-                    
+
+
                 <div id="dup_now_closed" style="display: none">
-                    
+
                     <div class="" style="padding-left: 20px;padding-right: 10px;margin-top: 20px;margin-bottom: 20px;">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -1746,13 +1754,13 @@
                     <!-- /.modal-dialog -->
                 </div>
 
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
+
+
+
+
+
+
+
 
                 <!-- Modal -->
                 <div class="modal fade" id="deduplicate" role="dialog">
@@ -1779,436 +1787,376 @@
 
                 <script>
                     function bcknxx() {
-                        $("#openxx1").hide();
-                        $("#cade").show();
-                        $("#openxx_").hide();
-                        $("#modal-xl_").hide();
-                        $("#dup_modal-xl").hide();
-
+                    $("#openxx1").hide();
+                    $("#cade").show();
+                    $("#openxx_").hide();
+                    $("#modal-xl_").hide();
+                    $("#dup_modal-xl").hide();
                     }
                     ;
-
-
                     function openxx() {
-                        $('#progress_x').hide();
-                        $('#progress_').hide();
-                        var checked = $('#maintenance:checkbox:checked').length > 0;
+                    $('#progress_x').hide();
+                    $('#progress_').hide();
+                    var checked = $('#maintenance:checkbox:checked').length > 0;
+                    if (checked == true) {
+                    // $('#overlay').show();
+                    $("#openxx_").show();
+                    $("#openxx1").hide();
+                    } else {
 
-                        if (checked == true) {
-                            // $('#overlay').show();
-                            $("#openxx_").show();
-                            $("#openxx1").hide();
-
-                        } else {
-
-                            $("#openxx1").show();
-                            // $("#cade").hide();
-                            $("#openxx_").hide();
-
-                        }
+                    $("#openxx1").show();
+                    // $("#cade").hide();
+                    $("#openxx_").hide();
+                    }
 
                     }
                     ;
                     function start_pushX_X_x() {
-                        document.getElementById("overlay").style.display = "block";
-                        $('#text').html("Pushing all available matched data to sormas...");
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?pushfreshavailable=true', true);
-                        xhr.responseType = 'text';
-                        xhr.onload = function () {
+                    document.getElementById("overlay").style.display = "block";
+                    $('#text').html("Pushing all available matched data to sormas...");
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?pushfreshavailable=true', true);
+                    xhr.responseType = 'text';
+                    xhr.onload = function () {
 
-                            if (xhr.readyState === xhr.DONE) {
-                                if (xhr.status === 200) {
+                    if (xhr.readyState === xhr.DONE) {
+                    if (xhr.status === 200) {
 
-                                    document.getElementById("overlay").style.display = "none";
+                    document.getElementById("overlay").style.display = "none";
+                    //alertx(xhr.responseText);
 
-                                    //alertx(xhr.responseText);
-
-                                }
-                            }
-                        };
-                        xhr.send(null);
-
+                    }
+                    }
+                    };
+                    xhr.send(null);
                     }
 
 
 
                     //buttons
                     function lc() {
-                        document.getElementById("overlay").style.display = "block";
-                        setTimeout(function () {
-                            if (confirm("DANGER! \nThis action will Purge all SORMAS Infrastructure Data already on the Adapter and reimport it afresh. \nDo you want to do that?")) {
-                                location.href = '../controllers_jsp/localized.jsp';
-                            } else {
-                                document.getElementById("overlay").style.display = "none";
+                    document.getElementById("overlay").style.display = "block";
+                    setTimeout(function () {
+                    if (confirm("DANGER! \nThis action will Purge all SORMAS Infrastructure Data already on the Adapter and reimport it afresh. \nDo you want to do that?")) {
+                    location.href = '../controllers_jsp/localized.jsp';
+                    } else {
+                    document.getElementById("overlay").style.display = "none";
+                    }
 
-                            }
-
-                        }, 1000);
+                    }, 1000);
                     }
                     ;
                     function fhir_() {
 
-                        alert("This action require all duplicates to be resuloved.");
-
-
+                    alert("This action require all duplicates to be resuloved.");
                     }
                     function start_pushX_() {
-                        document.getElementById("overlay").style.display = "block";
-                        $('#text').html("Pushing all available matched data to sormas...");
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?pushavailable=true', true);
-                        xhr.responseType = 'text';
-                        xhr.onload = function () {
+                    document.getElementById("overlay").style.display = "block";
+                    $('#text').html("Pushing all available matched data to sormas...");
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?pushavailable=true', true);
+                    xhr.responseType = 'text';
+                    xhr.onload = function () {
 
-                            if (xhr.readyState === xhr.DONE) {
-                                if (xhr.status === 200) {
+                    if (xhr.readyState === xhr.DONE) {
+                    if (xhr.status === 200) {
 
-                                    document.getElementById("overlay").style.display = "none";
-
-                                    alertx(xhr.responseText);
-
-                                }
-                            }
-                        };
-                        xhr.send(null);
-
+                    document.getElementById("overlay").style.display = "none";
+                    alertx(xhr.responseText);
+                    }
+                    }
+                    };
+                    xhr.send(null);
                     }
                     ;
-
-
-
-
                 </script>
 
                 <script>
                     function dmd(e) {
-                        //e = dup_
-                        $('#controllerx').val(e); //=dup_
-                        //var v = document.getElementById(e).value;
+                    //e = dup_
+                    $('#controllerx').val(e); //=dup_
+                    //var v = document.getElementById(e).value;
 
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + e + 'primer=' + e, true);
-                        xhr.responseType = 'text';
-                        xhr.onload = function () {
-                            if (xhr.readyState === xhr.DONE) {
-                                if (xhr.status === 200) {
-                                    //max = xhr.responseText;
-                                    const words = xhr.responseText.split(',');
-                                    const wordsx = xhr.responseText.split(',@@@');
-                                    //alert(xhr.responseText);
-                                    $('#' + e + 'dfe').css("width", words[0]);
-                                    $('#' + e + 'state_g').html(words[0]);
-                                    $('#' + e + '789').html('<a href="#">Total ' + e.replace('dup_', 'Duplicate') + ' at States Level on SORMAS </a> = ' + words[1] + ' | <a href="#">Total Matched</a> = ' + words[2])
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + e + 'primer=' + e, true);
+                    xhr.responseType = 'text';
+                    xhr.onload = function () {
+                    if (xhr.readyState === xhr.DONE) {
+                    if (xhr.status === 200) {
+                    //max = xhr.responseText;
+                    const words = xhr.responseText.split(',');
+                    const wordsx = xhr.responseText.split(',@@@');
+                    //alert(xhr.responseText);
+                    $('#' + e + 'dfe').css("width", words[0]);
+                    $('#' + e + 'state_g').html(words[0]);
+                    $('#' + e + '789').html('<a href="#">Total ' + e.replace('dup_', 'Duplicate') + ' at States Level on SORMAS </a> = ' + words[1] + ' | <a href="#">Total Matched</a> = ' + words[2])
 
-                                    $("#state_g_").addClass("locked_" + words[2]);
-                                    $('#' + e + 'state_x').html(wordsx);
+                            $("#state_g_").addClass("locked_" + words[2]);
+                    $('#' + e + 'state_x').html(wordsx);
+                    $("#cade").hide();
+                    $("#addit").hide();
+                    if (e === "dup_") {
 
-                                    $("#cade").hide();
-                                    $("#addit").hide();
-                                    if (e === "dup_") {
+                    $("#dup_now_closed").show();
+                    $("#modal-xl_").hide();
+                    } else {
 
-                                       $("#dup_now_closed").show();
-                                        $("#modal-xl_").hide();
-
-                                    } else {
-
-                                        $("#modal-xl_").show();
-                                       $("#dup_now_closed").hide();
-
-                                    }
+                    $("#modal-xl_").show();
+                    $("#dup_now_closed").hide();
+                    }
 
 
-                                    //   console.log("Number of chunk been processed currently = " + max);
-                                }
-                            }
-                        };
-                        xhr.send(null);
+                    //   console.log("Number of chunk been processed currently = " + max);
+                    }
+                    }
+                    };
+                    xhr.send(null);
                     }
 
                     function dmds(e) {
-                        const gh = e.split(',');
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=3', true);
-                        xhr.responseType = 'text';
-                        xhr.onload = function () {
-                            if (xhr.readyState === xhr.DONE) {
-                                if (xhr.status === 200) {
-                                    //max = xhr.responseText;
-                                    const words = xhr.responseText.split(',');
-                                    const wordsx = xhr.responseText.split(',@@@');
-                                    //   alert(words);
+                    const gh = e.split(',');
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=3', true);
+                    xhr.responseType = 'text';
+                    xhr.onload = function () {
+                    if (xhr.readyState === xhr.DONE) {
+                    if (xhr.status === 200) {
+                    //max = xhr.responseText;
+                    const words = xhr.responseText.split(',');
+                    const wordsx = xhr.responseText.split(',@@@');
+                    //   alert(words);
 
-                                    $('#' + gh[1] + 'dfe_lga').css("width", words[0]);
-                                    $('#' + gh[1] + 'lga_g').html(words[0]);
-                                    $('#' + gh[1] + '789_lga').html('<a href="#">Total LGAs for ' + gh[2] + ' on SORMAS </a> = ' + words[1] + ' | <a href="#"> Total LGAs from Source Server</a> = ' + words[2] + ' | <a href="#">Total ' + gh[1].replace('dup_', 'Duplicates ') + 'Matched</a> = ' + words[3])
-                                    $('#lga').html(wordsx);
-
-                                    $('#' + gh[1] + 'lga_g_').addClass("locked_" + words[2]);
-                                    $('#' + gh[1] + 'lga_x').html(wordsx);
-
-                                      // console.log(wordsx+"Number of chunk been processed currently = "  + gh[1]);
-                                }
-                            }
-                        };
-                        xhr.send(null);
+                    $('#' + gh[1] + 'dfe_lga').css("width", words[0]);
+                    $('#' + gh[1] + 'lga_g').html(words[0]);
+                    $('#' + gh[1] + '789_lga').html('<a href="#">Total LGAs for ' + gh[2] + ' on SORMAS </a> = ' + words[1] + ' | <a href="#"> Total LGAs from Source Server</a> = ' + words[2] + ' | <a href="#">Total ' + gh[1].replace('dup_', 'Duplicates ') + 'Matched</a> = ' + words[3])
+                            $('#lga').html(wordsx);
+                    $('#' + gh[1] + 'lga_g_').addClass("locked_" + words[2]);
+                    $('#' + gh[1] + 'lga_x').html(wordsx);
+                    // console.log(wordsx+"Number of chunk been processed currently = "  + gh[1]);
+                    }
+                    }
+                    };
+                    xhr.send(null);
                     }
 
                     function dmdm(e) {
-                        const gh = e.split(',');
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=4', true);
-                        //     console.log('../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=4');
-                        xhr.responseType = 'text';
-                        xhr.onload = function () {
-                            if (xhr.readyState === xhr.DONE) {
-                                if (xhr.status === 200) {
-                                    //max = xhr.responseText;
-                                    const words = xhr.responseText.split(',');
-                                    const wordsx = xhr.responseText.split(',@@@');
-                                    $('#' + gh[1] + 'dfe_ward').css("width", words[0]);
-                                    $('#' + gh[1] + 'ward_g').html(words[0]);
-                                    $('#' + gh[1] + '789_ward').html('<a href="#">Total Wards for ' + gh[2] + ' on SORMAS </a> = ' + words[1] + ' | <a href="#"> Total Wards from Source Server</a> = ' + words[2] + ' | <a href="#">Total ' + gh[1].replace('dup_', 'Duplicates ') + 'Matched</a> = ' + words[3])
-                                    $('#ward').html(wordsx);
-
-                                    $('#' + gh[1] + 'ward_g_').addClass("locked_" + words[2]);
-                                    $('#' + gh[1] + 'ward_x').html(wordsx);
-
-                                    //   console.log("Number of chunk been processed currently = " + max);
-                                }
-                            }
-                        };
-                        xhr.send(null);
+                    const gh = e.split(',');
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=4', true);
+                    //     console.log('../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=4');
+                    xhr.responseType = 'text';
+                    xhr.onload = function () {
+                    if (xhr.readyState === xhr.DONE) {
+                    if (xhr.status === 200) {
+                    //max = xhr.responseText;
+                    const words = xhr.responseText.split(',');
+                    const wordsx = xhr.responseText.split(',@@@');
+                    $('#' + gh[1] + 'dfe_ward').css("width", words[0]);
+                    $('#' + gh[1] + 'ward_g').html(words[0]);
+                    $('#' + gh[1] + '789_ward').html('<a href="#">Total Wards for ' + gh[2] + ' on SORMAS </a> = ' + words[1] + ' | <a href="#"> Total Wards from Source Server</a> = ' + words[2] + ' | <a href="#">Total ' + gh[1].replace('dup_', 'Duplicates ') + 'Matched</a> = ' + words[3])
+                            $('#ward').html(wordsx);
+                    $('#' + gh[1] + 'ward_g_').addClass("locked_" + words[2]);
+                    $('#' + gh[1] + 'ward_x').html(wordsx);
+                    //   console.log("Number of chunk been processed currently = " + max);
+                    }
+                    }
+                    };
+                    xhr.send(null);
                     }
 
 
 
                     function dmdmx(e) {
-                        const gh = e.split(',');
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=5', true);
-                             console.log('../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=5');
-                        xhr.responseType = 'text';
-                        xhr.onload = function () {
-                            if (xhr.readyState === xhr.DONE) {
-                                if (xhr.status === 200) {
-                                    //max = xhr.responseText;
-                                    const words = xhr.responseText.split(',');
-                                    const wordsx = xhr.responseText.split(',@@@');
-                                    $('#' + gh[1] + 'dfe_hfd').css("width", words[0]);
-                                    $('#' + gh[1] + 'hf_g').html(words[0]);
-                                    $('#' + gh[1] + '789_hf').html('<a href="#">Total Health Facility for ' + gh[2] + ' on SORMAS </a> = ' + words[1] + ' | <a href="#"> Total HFs from Source Server</a> = ' + words[2] + ' | <a href="#">Total ' + gh[1].replace('dup_', 'Duplicates ') + 'Matched</a> = ' + words[3])
-                                    $('#hf').html(wordsx);
-
-                                    $('#' + gh[1] + 'hf_g_').addClass("locked_" + words[2]);
-                                     $('#' + gh[1] + 'ward_x').html(wordsx);
-
-                                    //   console.log("Number of chunk been processed currently = " + max);
-                                }
-                            }
-                        };
-                        xhr.send(null);
+                    const gh = e.split(',');
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=5', true);
+                    console.log('../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?' + gh[1] + 'parentx=' + gh[0] + '&levelx=5');
+                    xhr.responseType = 'text';
+                    xhr.onload = function () {
+                    if (xhr.readyState === xhr.DONE) {
+                    if (xhr.status === 200) {
+                    //max = xhr.responseText;
+                    const words = xhr.responseText.split(',');
+                    const wordsx = xhr.responseText.split(',@@@');
+                    $('#' + gh[1] + 'dfe_hfd').css("width", words[0]);
+                    $('#' + gh[1] + 'hf_g').html(words[0]);
+                    $('#' + gh[1] + '789_hf').html('<a href="#">Total Health Facility for ' + gh[2] + ' on SORMAS </a> = ' + words[1] + ' | <a href="#"> Total HFs from Source Server</a> = ' + words[2] + ' | <a href="#">Total ' + gh[1].replace('dup_', 'Duplicates ') + 'Matched</a> = ' + words[3])
+                            $('#hf').html(wordsx);
+                    $('#' + gh[1] + 'hf_g_').addClass("locked_" + words[2]);
+                    $('#' + gh[1] + 'ward_x').html(wordsx);
+                    //   console.log("Number of chunk been processed currently = " + max);
+                    }
+                    }
+                    };
+                    xhr.send(null);
                     }
 
 
                     function load_lga(e) {
-                        var ex = $('#' + e + 'state_x option:selected').val();
-                        var ex_ = $('#' + e + 'state_x option:selected').text();
-                        console.log(ex);
-
-                        dmds(ex + ',' + e + ',' + ex_);
-                        $('#' + e + 'lgax').show();
-                        $('#' + e + 'statexx').removeClass("fas fa-bars bg-yellow").addClass("fas fa-check bg-green")
+                    var ex = $('#' + e + 'state_x option:selected').val();
+                    var ex_ = $('#' + e + 'state_x option:selected').text();
+                    console.log(ex);
+                    dmds(ex + ',' + e + ',' + ex_);
+                    $('#' + e + 'lgax').show();
+                    $('#' + e + 'statexx').removeClass("fas fa-bars bg-yellow").addClass("fas fa-check bg-green")
                     }
                     function load_ward(e) {
-                        var ex = $('#' + e + 'lga_x option:selected').val();
-                        var ex_ = $('#' + e + 'lga_x option:selected').text();
-                        console.log(e);
-
-                        dmdm(ex + ',' + e + ',' + ex_);
-                        $('#' + e + 'wardx').show();
-                        $('#' + e + 'lgaxx').removeClass("fas fa-bars bg-yellow").addClass("fas fa-check bg-green")
+                    var ex = $('#' + e + 'lga_x option:selected').val();
+                    var ex_ = $('#' + e + 'lga_x option:selected').text();
+                    console.log(e);
+                    dmdm(ex + ',' + e + ',' + ex_);
+                    $('#' + e + 'wardx').show();
+                    $('#' + e + 'lgaxx').removeClass("fas fa-bars bg-yellow").addClass("fas fa-check bg-green")
                     }
 
 
                     function load_hf(e) {
-                        var ex = $('#' + e + 'ward_x option:selected').val();
-                        var ex_ = $('#' + e + 'ward_x option:selected').text();
-                        console.log(e);
-
-                        dmdmx(ex + ',' + e + ',' + ex_);
-                        $('#' + e + 'hfx').show();
-                        $('#' + e + 'wardxx').removeClass("fas fa-bars bg-yellow").addClass("fas fa-check bg-green")
+                    var ex = $('#' + e + 'ward_x option:selected').val();
+                    var ex_ = $('#' + e + 'ward_x option:selected').text();
+                    console.log(e);
+                    dmdmx(ex + ',' + e + ',' + ex_);
+                    $('#' + e + 'hfx').show();
+                    $('#' + e + 'wardxx').removeClass("fas fa-bars bg-yellow").addClass("fas fa-check bg-green")
                     }
 
 
 
 
                     function statex(e) {
-                        var x = $('#controllerx').val();
-                        //  alert(e);
-                        // alert(x);
-                        var v = document.getElementById(e).value;
-                        console.log(v);
-                        //  alert(v);
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?parentx=' + v + '&methodx' + x, true);
-                        xhr.responseType = 'text';
-                        xhr.onload = function () {
-                            if (xhr.readyState === xhr.DONE) {
-                                if (xhr.status === 200) {
+                    var x = $('#controllerx').val();
+                    //  alert(e);
+                    // alert(x);
+                    var v = document.getElementById(e).value;
+                    console.log(v);
+                    //  alert(v);
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', '../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?parentx=' + v + '&methodx' + x, true);
+                    xhr.responseType = 'text';
+                    xhr.onload = function () {
+                    if (xhr.readyState === xhr.DONE) {
+                    if (xhr.status === 200) {
 
-                                    console.log("Number of chunk been processed currently = " + max);
-                                }
-                            }
-                        };
-                        xhr.send(null);
-
+                    console.log("Number of chunk been processed currently = " + max);
+                    }
+                    }
+                    };
+                    xhr.send(null);
                     }
 
                     function tableloader(e) {
-                        ctbb = e;
-
-                        var ex = $('#' + e + 'hf_x option:selected').val();
-                        var ex_ = $('#' + e + 'hf_x option:selected').text();
-
-
-                        $('#esef3456n').show();
-                        $('#dup_esef3456n').show();
-
-                        var pd = document.getElementById(e).value;
-
-
-                        if (e.includes('dup_')) {
-                            console.log("../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?jsonparentx=" + pd + "&jsonlevelx=" + e);
-                            var table = $('#dup_detailer').DataTable({
-                                "destroy": true,
-                                "paging": true,
-                                "processing": true,
-
-                                "ajax": {
-                                    "url": "../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?jsonparentx=" + pd + "&jsonlevelx=" + e,
+                    ctbb = e;
+                    var ex = $('#' + e + 'hf_x option:selected').val();
+                    var ex_ = $('#' + e + 'hf_x option:selected').text();
+                    $('#esef3456n').show();
+                    $('#dup_esef3456n').show();
+                    var pd = document.getElementById(e).value;
+                    if (e.includes('dup_')) {
+                    console.log("../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?jsonparentx=" + pd + "&jsonlevelx=" + e);
+                    var table = $('#dup_detailer').DataTable({
+                    "destroy": true,
+                            "paging": true,
+                            "processing": true,
+                            "ajax": {
+                            "url": "../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?jsonparentx=" + pd + "&jsonlevelx=" + e,
                                     "dataType": "json"
-                                }
-                            });
-                        } else {
-                            console.log("../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?jsonparentx=" + pd + "&jsonlevelx=" + e);
-                            var table = $('#detailer').DataTable({
-                                "destroy": true,
-                                "paging": true,
-                                "processing": true,
-
-                                "ajax": {
-                                    "url": "../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?jsonparentx=" + pd + "&jsonlevelx=" + e,
+                            }
+                    });
+                    } else {
+                    console.log("../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?jsonparentx=" + pd + "&jsonlevelx=" + e);
+                    var table = $('#detailer').DataTable({
+                    "destroy": true,
+                            "paging": true,
+                            "processing": true,
+                            "ajax": {
+                            "url": "../iopujlksrefdxcersdfxcedrtyuilkmnbvsdfghoiuytrdcvbnmkiuytrewsazsedfcd345678?jsonparentx=" + pd + "&jsonlevelx=" + e,
                                     "dataType": "json"
-                                }
-                            });
-                        }
-                        ;
-                        table.rows().every(function (rowIdx, tableLoop, rowLoop) {
-                            var cell = table.cell({row: rowIdx, column: 0}).node();
-                            $(cell).addClass('warningwwwwww');
-                        });
-
+                            }
+                    });
                     }
                     ;
-
-
-
-
+                    table.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                    var cell = table.cell({row: rowIdx, column: 0}).node();
+                    $(cell).addClass('warningwwwwww');
+                    });
+                    }
+                    ;
                     $(function () {
-                        $(".knob").knob();
+                    $(".knob").knob();
                     });
-
                     function triggerKnob() {
-                        $("input.knob").trigger('change');
+                    $("input.knob").trigger('change');
                     }
                     ;
-
                     $('#deduplicate').on('show.bs.modal', function (e) {
-                        //dmd('dup_')
+                    //dmd('dup_')
 
-                        var uri_ = $(e.relatedTarget).data('uri');
-
-                        const uri = uri_.split('@@');
-                        $('#acp_dup').prop("href", "../4a24cf8b-fbcb-4554-b676-2b54a239be62?accept=" + uri[1] + "&wht=" + uri[0]);
-                        $('#acp_cur').prop("href", "../4a24cf8b-fbcb-4554-b676-2b54a239be62?current=" + uri[2] + "&wht=" + uri[0]);
-                        $('#acp_res').prop("href", "../4a24cf8b-fbcb-4554-b676-2b54a239be62?reset=true&wht=" + uri[0]);
-                        //    $('#deduplicate').modal().show();
+                    var uri_ = $(e.relatedTarget).data('uri');
+                    const uri = uri_.split('@@');
+                    $('#acp_dup').prop("href", "../4a24cf8b-fbcb-4554-b676-2b54a239be62?accept=" + uri[1] + "&wht=" + uri[0]);
+                    $('#acp_cur').prop("href", "../4a24cf8b-fbcb-4554-b676-2b54a239be62?current=" + uri[2] + "&wht=" + uri[0]);
+                    $('#acp_res').prop("href", "../4a24cf8b-fbcb-4554-b676-2b54a239be62?reset=true&wht=" + uri[0]);
+                    //    $('#deduplicate').modal().show();
 
                     });
-
-
                     $('#acp_dup').click(function (event) {
-                        event.preventDefault();
-                        var href = $(this).attr('href');
-
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('GET', href, true);
-                        xhr.responseType = 'text';
-                        xhr.onload = function () {
-                            if (xhr.readyState === xhr.DONE) {
-                                if (xhr.status === 200) {
-                                    alertx(xhr.responseText)
-                                } else {
-                                    alerterr(xhr.responseText)
-                                }
-                                $('#deduplicate').modal().hide();
-                                ;
-
-                                tableloader(ctbb);
-
-                            }
-                        };
-                        xhr.send(null);
+                    event.preventDefault();
+                    var href = $(this).attr('href');
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', href, true);
+                    xhr.responseType = 'text';
+                    xhr.onload = function () {
+                    if (xhr.readyState === xhr.DONE) {
+                    if (xhr.status === 200) {
+                    alertx(xhr.responseText)
+                    } else {
+                    alerterr(xhr.responseText)
+                    }
+                    $('#deduplicate').modal().hide();
+                    ;
+                    tableloader(ctbb);
+                    }
+                    };
+                    xhr.send(null);
                     });
-
                     $('#acp_cur').click(function (event) {
-                        event.preventDefault();
-                        var href = $(this).attr('href');
-
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('GET', href, true);
-                        xhr.responseType = 'text';
-                        xhr.onload = function () {
-                            if (xhr.readyState === xhr.DONE) {
-                                if (xhr.status === 200) {
-                                    alertx(xhr.responseText)
-                                } else {
-                                    alerterr(xhr.responseText)
-                                }
-                                $('#deduplicate').modal().hide();
-                                ;
-
-                                tableloader(ctbb);
-
-                            }
-                        };
-                        xhr.send(null);
+                    event.preventDefault();
+                    var href = $(this).attr('href');
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', href, true);
+                    xhr.responseType = 'text';
+                    xhr.onload = function () {
+                    if (xhr.readyState === xhr.DONE) {
+                    if (xhr.status === 200) {
+                    alertx(xhr.responseText)
+                    } else {
+                    alerterr(xhr.responseText)
+                    }
+                    $('#deduplicate').modal().hide();
+                    ;
+                    tableloader(ctbb);
+                    }
+                    };
+                    xhr.send(null);
                     });
-
                     $('#acp_res').click(function (event) {
-                        event.preventDefault();
-                        var href = $(this).attr('href');
-
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('GET', href, true);
-                        xhr.responseType = 'text';
-                        xhr.onload = function () {
-                            if (xhr.readyState === xhr.DONE) {
-                                if (xhr.status === 200) {
-                                    alertx(xhr.responseText)
-                                } else {
-                                    alerterr(xhr.responseText)
-                                }
-                                $('#deduplicate').modal().hide();
-                                ;
-
-                                tableloader(ctbb);
-
-                            }
-                        };
-                        xhr.send(null);
+                    event.preventDefault();
+                    var href = $(this).attr('href');
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', href, true);
+                    xhr.responseType = 'text';
+                    xhr.onload = function () {
+                    if (xhr.readyState === xhr.DONE) {
+                    if (xhr.status === 200) {
+                    alertx(xhr.responseText)
+                    } else {
+                    alerterr(xhr.responseText)
+                    }
+                    $('#deduplicate').modal().hide();
+                    ;
+                    tableloader(ctbb);
+                    }
+                    };
+                    xhr.send(null);
                     });
 
                 </script>

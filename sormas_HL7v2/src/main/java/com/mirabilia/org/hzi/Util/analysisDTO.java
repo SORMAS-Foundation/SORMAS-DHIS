@@ -25,6 +25,7 @@
  */
 package com.mirabilia.org.hzi.Util;
 
+
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import static java.lang.System.out;
 import java.sql.Connection;
@@ -33,6 +34,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -54,7 +57,7 @@ public class analysisDTO {
         ResultSet rx;
 
         PreparedStatement xps;
-        ResultSet xrx;
+        ResultSet sorm_rs;
 
         Class.forName("com.mysql.jdbc.Driver");
         Connection conn = DbConnector.getConnection();
@@ -69,7 +72,9 @@ public class analysisDTO {
 
         //String pr = primer + "";
         String t_v = t_val + "";
-      //  String ds = (destin + 1) + "";
+        
+         cleanParentPath(t_val);
+        //  String ds = (destin + 1) + "";
 
         //TODO: Implement stripping mechanism from database and remove hard codes
         try {
@@ -86,80 +91,84 @@ public class analysisDTO {
                 ro = ro + 1;
                 //lets clean dhis data...
                 //check if org unit is valid from dhis
-                if (!cunty_code.contains("GH")) {
-                //    System.out.println("_______________ = "+cunty_code);
-                    if (rx.getString("name").contains(" ")) {
-                         String[] bb = rx.getString("name").split(" ");
-                        //verify if it has convetional first two prefix and strip them
-                         if (bb[0].length() == 2) {
-                           stack = rx.getString("name").replaceFirst(bb[0], "");
-                         }
-                    }
-                
-                /*
-                //lets remove the ward / LGA / HF Strings
-                switch (rx.getString("level")) {
-                    case "1":
-                        // code block
-                        stack = stack.replaceFirst("ng ", "");
-                        break;
-                    case "2":
-                        // code block
-                        stack = stack.replaceFirst(" State", "");
-                        break;
-                    case "3":
-                        // code block
-                        stack = stack.replaceFirst(" Local Government Area", "");
-                        break;
 
-                    default:
-                    // code block
-                }
-                 */
-                
+                //TO-DO: Get directive to strip first two prefix from FrontEND
+                if (cunty_code.contains("NG")) {
+                    //    System.out.println("_______________ = "+cunty_code);
+                    if (rx.getString("name").contains(" ")) {
+                        String[] bb = rx.getString("name").split(" ");
+                        //verify if it has convetional first two prefix and strip them
+
+                        if (bb[0].length() == 2) {
+                            stack = rx.getString("name").replaceFirst(bb[0], "");
+                        }
+                    }
+
+                    /* TO-DO: Get this from frontEND */
+                    //lets remove the ward / LGA / HF Strings
+                    switch (rx.getString("level")) {
+                        case "1":
+                            // code block
+                            stack = stack.replaceFirst("ng ", "");
+                            break;
+                        case "2":
+                            // code block
+                            stack = stack.replaceFirst(" State", "");
+                            break;
+                        case "3":
+                            // code block
+                            stack = stack.replaceFirst(" Local Government Area", "");
+                            break;
+
+                        default:
+                        // code block
+                    }
+
                 } else {
-                //    System.out.println("++++++++++++++");
+                    //    System.out.println("++++++++++++++");
                     stack = rx.getString("name");
                 }
-                
+
+                //start comparison
+                //TODO: Add what to remove while running comparisy algorithm from frontEnd
                 try {
                     stack = stack.toLowerCase().replaceAll(" ", "");
                     xps = conn.prepareStatement("SELECT UUID, namex, level FROM sormas_local where level = ?");
                     xps.setString(1, t_v);
-                    xrx = xps.executeQuery();
+                    sorm_rs = xps.executeQuery();
                     int dub = 0;
 
-                    while (xrx.next()) {
-                        if (xrx.getString("namex").length() > 2) {
-                            xstack = xrx.getString("namex").replaceAll(" ", "");
+                    while (sorm_rs.next()) {
+                        if (sorm_rs.getString("namex").length() > 2) {
+                            xstack = sorm_rs.getString("namex").replaceAll(" ", "");
 
                             //xstack = Compare(xstack);
-                        //    System.out.println(stack+"|"+xstack);
+                            //    System.out.println(stack+"|"+xstack);
                             if (stack.equals(xstack.toLowerCase())) {
-                                
-                                 System.out.println("found a match at EXACT : '" + xrx.getString("namex").toLowerCase() + "' matching dhis : '" + stack + "' with uuid :" + xrx.getString("UUID"));
+
+                                System.out.println("found a match at EXACT : '" + sorm_rs.getString("namex").toLowerCase() + "' matching dhis : '" + stack + "' with uuid :" + sorm_rs.getString("UUID"));
 
                                 found = 1;
                                 dub = dub + 1;
                                 dub_string = rx.getString("UUID") + ", " + dub_string;
-                                fieldList.add(xrx.getString("UUID"));
-                                ps_uuid = xrx.getString("UUID");
-                                
-                            }else if (stack.contains(xstack.toLowerCase())) {
-                                   System.out.println("found a match AT MAybe MATCH: '" + xrx.getString("namex").toLowerCase() + "' matching dhis : '" + stack + "' with uuid :" + xrx.getString("UUID"));
+                                fieldList.add(sorm_rs.getString("UUID"));
+                                ps_uuid = sorm_rs.getString("UUID");
+
+                            } else if (stack.contains(xstack.toLowerCase())) {
+                                System.out.println("found a match AT MAybe MATCH: '" + sorm_rs.getString("namex").toLowerCase() + "' matching dhis : '" + stack + "' with uuid :" + sorm_rs.getString("UUID"));
 
                                 found = 1;
                                 dub = dub + 1;
                                 dub_string = rx.getString("UUID") + ", " + dub_string;
-                                fieldList.add(xrx.getString("UUID"));
-                                ps_uuid = xrx.getString("UUID");
+                                fieldList.add(sorm_rs.getString("UUID"));
+                                ps_uuid = sorm_rs.getString("UUID");
 
                             }
 
                         }
                     }
 
-                    /**
+                    /*
                      * System.out.println("duble no : "+dub);
                      * System.out.println("found : "+found);
                      * System.out.println("stack : "+stack);
@@ -168,12 +177,12 @@ public class analysisDTO {
                      */
                     if (dub > 1) {
                         System.out.println("DUPLICATE: times = " + dub + " likely duplicates are : " + dub_string);
-                        Localizer("", dub_string, dub_string, "");
+                        Localizer("", dub_string, dub_string, "",rx.getString("path_parent"));
 
                     } else if (found > 1 || found == 1) {
                         //   System.out.println("Found a MATCH for : " + rx.getString("name")+ " at "+ ps_uuid);
                         //   System.out.println(rx.getString("uuid")+ "// "+rx.getString("updated_last")+"  //  "+ ps_uuid);
-                        Localizer(rx.getString("uuid"), "", rx.getString("updated_last"), ps_uuid);
+                        Localizer(rx.getString("uuid"), "", rx.getString("updated_last"), ps_uuid,rx.getString("path_parent"));
                     }
 //
                     //taking care of the garbage
@@ -203,7 +212,41 @@ public class analysisDTO {
             out.print("VendorError: " + ex.getErrorCode());
         }
     }
+private static void cleanParentPath(int get_level_x) throws ClassNotFoundException {
+    System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+    System.out.println(get_level_x);
+        PreparedStatement ps_xx;
+        PreparedStatement ps_x;
+        ResultSet rx_xx;
+        
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DbConnector.getConnection();
 
+        try {
+           
+            int get_level = get_level_x - 1;
+            ps_xx = conn.prepareStatement("SELECT path_parent, idx FROM raw_ where path_parent like '%/%' and level = ?");
+            ps_xx.setInt(1, get_level_x);
+            
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>"+ps_xx.toString());
+            rx_xx = ps_xx.executeQuery();
+
+            while (rx_xx.next()) {
+                String rdc = rx_xx.getString(1);
+                String[] ss = rdc.split("/");
+
+                ps_x = conn.prepareStatement("update raw_ set path_parent = ? where idx = ?");
+                ps_x.setString(1, ss[get_level]);
+                ps_x.setString(2, rx_xx.getString(2));
+
+                ps_x.executeUpdate();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(analysisDTO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
     public static void WARD_HF_fastSender(int primer, int destin, int t_val) throws ClassNotFoundException {
         //matching Ward/Community upward
         //this method do the major duplicationa analysis and also try to match each or unit with the entire DB to ascertain there are no deplicates and hf misplacement
@@ -304,12 +347,12 @@ public class analysisDTO {
                      */
                     if (dub > 1) {
                         System.out.println("DUPLICATE: times = " + dub + " likely duplicates are : " + dub_string);
-                        Localizer("", dub_string, dub_string, "");
+                        Localizer("", dub_string, dub_string, "",rx.getString("path_parent"));
 
                     } else if (found > 1 || found == 1) {
                         //   System.out.println("Found a MATCH for : " + rx.getString("name")+ " at "+ ps_uuid);
                         //   System.out.println(rx.getString("uuid")+ "// "+rx.getString("updated_last")+"  //  "+ ps_uuid);
-                        Localizer(rx.getString("uuid"), "", rx.getString("updated_last"), ps_uuid);
+                        Localizer(rx.getString("uuid"), "", rx.getString("updated_last"), ps_uuid,rx.getString("path_parent"));
                     }
 //
                     //taking care of the garbage
@@ -370,7 +413,7 @@ public class analysisDTO {
         }
         return how_many + 1;
     }
-    
+
     public static int Cutter_() throws ClassNotFoundException, SQLException {
 
         PreparedStatement ps = null;
@@ -386,15 +429,12 @@ public class analysisDTO {
             rx = ps.executeQuery();
             if (rx.next()) {
 
-                int all = Integer.parseInt(rx.getString(1));
+                int all = rx.getInt(1);
                 if (all > 499) {
                     how_many = all;
                 } else {
                     how_many = 1;
                 }
-                //   System.out.println(how_many);
-                //    System.out.println(rx.getString(1));
-
             }
 
         } finally {
@@ -453,7 +493,7 @@ public class analysisDTO {
         }
     }
 
-    public static void Localizer(String ch, String cm, String cc, String cdt) throws ClassNotFoundException, SQLException {
+    public static void Localizer(String ch, String cm, String cc, String cdt, String prtid) throws ClassNotFoundException, SQLException {
         // System.out.println(ch + "-" + cm + "-" + cc);
 
         PreparedStatement ps;
@@ -464,10 +504,12 @@ public class analysisDTO {
 
         try {
             if (cm.length() == 0) {
-                ps = conn.prepareStatement("update sormas_local set changedate = now(), externalid = ?, ext_cdate = ? where uuid = ?");
+                ps = conn.prepareStatement("update sormas_local set changedate = now(), externalid = ?, ext_cdate = ?, parent_id = ? where uuid = ?");
                 ps.setString(1, ch);
                 ps.setString(2, cc);
-                ps.setString(3, cdt);
+                ps.setString(3, prtid);
+                ps.setString(4, cdt);
+                ps.execute();
             } else {
 
                 StringBuilder sb = new StringBuilder();
@@ -488,11 +530,11 @@ public class analysisDTO {
                 //  System.out.println(sb.toString());
                 ps.setString(1, cm);
 
+                ps.execute();
+
             }
 
-            ps.execute();
             //   System.out.println(ps);
-
         } finally {
             conn.close();
         }

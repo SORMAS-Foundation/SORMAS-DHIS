@@ -66,7 +66,7 @@ public class personSender {
         // String http = httpx + "/api/dataValueSets";
         HttpURLConnection urlConnection = null;
         String name = "admin";
-        String password = "district";
+        String password = "Die^ch2Aequ5";
 
         String authString = name + ":" + password;
 

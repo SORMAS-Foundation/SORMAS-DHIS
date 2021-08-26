@@ -91,7 +91,7 @@ public class jsonController {
 
         HttpURLConnection urlConnection = null;
         String name = "admin";
-        String password = "district";
+        String password = "Die^ch2Aequ5";
         StringBuilder sb = new StringBuilder();
 
         String authString = name + ":" + password;

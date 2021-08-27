@@ -43,7 +43,7 @@ public class DHIS2resolver {
 
         HttpURLConnection urlConnection = null;
         String name = "admin";
-        String password = "Die^ch2Aequ5";
+        String password = "Test-123";
         StringBuilder sb = new StringBuilder();
 
         String authString = name + ":" + password;
@@ -138,7 +138,7 @@ public class DHIS2resolver {
 
         HttpURLConnection urlConnection = null;
         String name = "admin";
-        String password = "Die^ch2Aequ5";
+        String password = "Test-123";
         StringBuilder sb = new StringBuilder();
 
         String authString = name + ":" + password;

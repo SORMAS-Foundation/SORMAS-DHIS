@@ -68,7 +68,7 @@ public class SampleSender {
         // String http = httpx + "/api/dataValueSets";
         HttpURLConnection urlConnection = null;
         String name = "admin";
-        String password = "Die^ch2Aequ5";
+        String password = "Test-123";
 
         String authString = name + ":" + password;
 

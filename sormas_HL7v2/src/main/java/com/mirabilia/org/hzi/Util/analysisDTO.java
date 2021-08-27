@@ -101,6 +101,8 @@ public class analysisDTO {
 
                         if (bb[0].length() == 2) {
                             stack = rx.getString("name").replaceFirst(bb[0], "");
+                        }else{
+                        stack = rx.getString("name");
                         }
                     }
 
@@ -137,6 +139,7 @@ public class analysisDTO {
                     xps.setString(1, t_v);
                     sorm_rs = xps.executeQuery();
                     int dub = 0;
+                    System.out.println("checkpoint 1");
 
                     while (sorm_rs.next()) {
                         if (sorm_rs.getString("namex").length() > 2) {
@@ -144,6 +147,9 @@ public class analysisDTO {
 
                             //xstack = Compare(xstack);
                             //    System.out.println(stack+"|"+xstack);
+                            
+                            System.out.println("stack lagos= "+stack);
+                             System.out.println("stacxk lagosstate= "+xstack);
                             if (stack.equals(xstack.toLowerCase())) {
 
                                 System.out.println("found a match at EXACT : '" + sorm_rs.getString("namex").toLowerCase() + "' matching dhis : '" + stack + "' with uuid :" + sorm_rs.getString("UUID"));

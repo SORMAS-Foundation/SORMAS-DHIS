@@ -1,3 +1,4 @@
+<%@page import="com.mirabilia.org.hzi.Util.credentialsManagerUtil"%>
 <%@page import="com.mirabilia.org.hzi.Util.UtilityAbstracts"%>
 <%@page import="com.mirabilia.org.hzi.Util.sourceDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -1873,6 +1874,7 @@
 
                 <script>
                     function dmd(e) {
+                        alert(e);
                     //e = dup_
                     $('#controllerx').val(e); //=dup_
                     //var v = document.getElementById(e).value;

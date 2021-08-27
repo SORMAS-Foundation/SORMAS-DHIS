@@ -1,4 +1,5 @@
 
+import com.mirabilia.org.hzi.Util.credentialsManagerUtil;
 import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import java.io.BufferedReader;
@@ -90,8 +91,8 @@ public class jsonController {
         String http = httpx+"/api/organisationUnits.json?fields=lastUpdated,id,name,shortName,level,created,path&paging=true&maxLevel=1";
 
         HttpURLConnection urlConnection = null;
-        String name = "admin";
-        String password = "Test-123";
+        String name = credentialsManagerUtil.getDhis_User();
+        String password = credentialsManagerUtil.getDhis_pawd();
         StringBuilder sb = new StringBuilder();
 
         String authString = name + ":" + password;

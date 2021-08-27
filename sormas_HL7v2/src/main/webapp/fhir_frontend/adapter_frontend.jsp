@@ -1,3 +1,4 @@
+<%@page import="com.mirabilia.org.hzi.Util.credentialsManagerUtil"%>
 <%@page import="com.mirabilia.org.hzi.sormas.doa.DbConnector"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.ResultSet"%>
@@ -38,6 +39,9 @@ finally{
     String totalDest = sourceDTO.totalDestDB();
     String tablx = getterSetters.getNoLastUpdated();
     session.setAttribute("dhis_url", _url[10].toString());
+    
+credentialsManagerUtil.setDhis_User(_url[16].toString());
+credentialsManagerUtil.setDhis_pawd(_url[17].toString());
 
 
 %>

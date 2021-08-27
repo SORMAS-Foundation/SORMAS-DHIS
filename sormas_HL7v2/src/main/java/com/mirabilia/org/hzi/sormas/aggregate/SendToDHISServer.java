@@ -25,6 +25,7 @@
  */
 package com.mirabilia.org.hzi.sormas.aggregate;
 
+import com.mirabilia.org.hzi.Util.credentialsManagerUtil;
 import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import java.io.BufferedReader;
@@ -64,8 +65,8 @@ public class SendToDHISServer {
         String http = httpx + "/api/dataValueSets";
 
         HttpURLConnection urlConnection = null;
-        String name = "admin";
-        String password = "Test-123";
+        String name = credentialsManagerUtil.getDhis_User();
+        String password = credentialsManagerUtil.getDhis_pawd();
 
         String authString = name + ":" + password;
 

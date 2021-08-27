@@ -38,6 +38,9 @@ public class ConffileCatcher {
             String adapter_username = "";
             String adapter_password = "";
             
+            String dhis_username = "";
+            String dhis_password = "";
+            
             
             if(valx.equalsIgnoreCase("passed")){
         try {
@@ -124,6 +127,16 @@ public class ConffileCatcher {
                    String val = data.replaceAll("adapter_password", "").replaceAll(" ", "").replaceAll("=", "");
                     adapter_password = val;
                 }
+                
+                 if (data.contains("dhis_username =")) {
+                   String val = data.replaceAll("dhis_username", "").replaceAll(" ", "").replaceAll("=", "");
+                    dhis_username = val;
+                }
+                 
+                  if (data.contains("dhis_password =")) {
+                   String val = data.replaceAll("dhis_password", "").replaceAll(" ", "").replaceAll("=", "");
+                    dhis_password = val;
+                }
 
             }
 
@@ -141,7 +154,7 @@ public class ConffileCatcher {
                 System.out.println("UNAUTHORIZED ACCESS DETECTED");
             }
             
-        String[] arr = new String[16];
+        String[] arr = new String[18];
         arr[0] = val_host;
         arr[1] = val_port;
         arr[2] = val_name;
@@ -160,6 +173,9 @@ public class ConffileCatcher {
         
         arr[14] = adapter_username;
         arr[15] = adapter_password;
+        
+        arr[16] = dhis_username;
+        arr[17] = dhis_password;
         
         return arr;
 

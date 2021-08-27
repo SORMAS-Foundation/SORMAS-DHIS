@@ -25,6 +25,7 @@
  */
 package com.mirabilia.org.hzi.Util.dhis;
 
+import com.mirabilia.org.hzi.Util.credentialsManagerUtil;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -42,8 +43,9 @@ public class DHIS2resolver {
      public static String getDemAll(String pg_url) {
 
         HttpURLConnection urlConnection = null;
-        String name = "admin";
-        String password = "Test-123";
+        
+        String name = credentialsManagerUtil.getDhis_User();
+        String password = credentialsManagerUtil.getDhis_pawd();
         StringBuilder sb = new StringBuilder();
 
         String authString = name + ":" + password;
@@ -137,8 +139,8 @@ public class DHIS2resolver {
      public static String getDemAllLong(String pg_url) {
 
         HttpURLConnection urlConnection = null;
-        String name = "admin";
-        String password = "Test-123";
+        String name = credentialsManagerUtil.getDhis_User();
+        String password = credentialsManagerUtil.getDhis_pawd();
         StringBuilder sb = new StringBuilder();
 
         String authString = name + ":" + password;

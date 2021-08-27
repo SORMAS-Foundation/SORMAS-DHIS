@@ -25,7 +25,7 @@
                 <!-- Right navbar links -->
                 <ul class="navbar-nav ml-auto">
                      <li class="nav-item d-none d-sm-inline-block">
-                        <a href="#" class="nav-link disableClick">Adapter Version: 2.3.0</a>
+                        <a href="#" class="nav-link disableClick">Adapter Version: 2.3.1</a>
                     </li>
                     <!-- Messages Dropdown Menu -->
                     <li class="nav-item dropdown">

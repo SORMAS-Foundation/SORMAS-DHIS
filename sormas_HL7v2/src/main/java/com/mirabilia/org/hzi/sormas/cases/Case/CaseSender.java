@@ -25,6 +25,7 @@
  */
 package com.mirabilia.org.hzi.sormas.cases.Case;
 
+import com.mirabilia.org.hzi.Util.credentialsManagerUtil;
 import com.mirabilia.org.hzi.sormas.aggregate.SendToDHISServer;
 import com.mirabilia.org.hzi.sormas.cases.Sample.SampleUtilityClass;
 import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
@@ -66,8 +67,8 @@ public class CaseSender {
         //     System.out.println("URI in use: " + httpx);
         // String http = httpx + "/api/dataValueSets";
         HttpURLConnection urlConnection = null;
-        String name = "admin";
-        String password = "Test-123";
+        String name = credentialsManagerUtil.getDhis_User();
+        String password = credentialsManagerUtil.getDhis_pawd();
 
         String authString = name + ":" + password;
 

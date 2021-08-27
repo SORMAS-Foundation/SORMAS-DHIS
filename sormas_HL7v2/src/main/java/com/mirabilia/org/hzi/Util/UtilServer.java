@@ -346,8 +346,9 @@ public class UtilServer extends HttpServlet {
 
                 float seq = ((float) xv / xc);
                 String str = String.format("%2.02f", (seq * 100));
-                System.out.println("matched dup " + vc);
+                System.out.println(xx+"matched dup_____________________________________+++++++++++++++++++ " + vc);
                 mat = str + "%," + xx + "," + xc + "," + xv + ",@@@" + vc;
+                System.out.println(mat);
 
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);

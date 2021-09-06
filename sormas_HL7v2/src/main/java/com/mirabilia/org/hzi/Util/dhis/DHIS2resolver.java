@@ -66,7 +66,7 @@ public class DHIS2resolver {
 
             int HttpResult = urlConnection.getResponseCode();
             //debug  
-           // System.out.println("######cccccccccccc####Outreach Session HTTP Return Code = " + HttpResult);
+           System.out.println("######cccccccccccc####Outreach Session HTTP Return Code = " + HttpResult);
 
             if (HttpResult == 200) {
                 BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
@@ -267,6 +267,7 @@ public class DHIS2resolver {
                
             } else {
                 //response.setStatus(502, "DHIS2 Not there!");
+                System.out.println("finally : " + urlConnection.getResponseMessage());
                 System.out.println("####CCCCCCCCCCCCCC" + urlConnection.getInputStream().toString());
                 BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
                 String line = null;

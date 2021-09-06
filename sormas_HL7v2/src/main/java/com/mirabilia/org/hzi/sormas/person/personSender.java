@@ -23,14 +23,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.mirabilia.org.hzi.sormas.cases;
+package com.mirabilia.org.hzi.sormas.person;
 
-import com.mirabilia.org.hzi.Util.credentialsManagerUtil;
 import com.mirabilia.org.hzi.sormas.aggregate.SendToDHISServer;
 import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
-import com.mirabilia.org.hzi.sormas.person.personCasesToDHIS;
-import com.mirabilia.org.hzi.sormas.person.personCasesUtilityClass;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -68,8 +65,8 @@ public class personSender {
         //     System.out.println("URI in use: " + httpx);
         // String http = httpx + "/api/dataValueSets";
         HttpURLConnection urlConnection = null;
-        String name = credentialsManagerUtil.getDhis_User();
-        String password = credentialsManagerUtil.getDhis_pawd();
+        String name = "admin";
+        String password = "district";
 
         String authString = name + ":" + password;
 

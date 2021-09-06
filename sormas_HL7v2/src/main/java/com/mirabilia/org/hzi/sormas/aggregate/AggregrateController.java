@@ -29,13 +29,16 @@ import com.mirabilia.org.hzi.Strings.sql;
 import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
@@ -47,8 +50,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static junit.framework.Assert.assertEquals;
 import org.apache.commons.codec.binary.Base64;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -81,11 +84,11 @@ public class AggregrateController {
     private static String gender_others = "0";
     private static String gender_missing = "0";
     private static String not_confirmed_lab = "0";
-    
+
     private static String[] _url = ConffileCatcher.fileCatcher("passed");
 
     private static String httpx = _url[10].toString(); //should come from config file
-    
+
     public static void SormasAggregrator(String lev) throws ClassNotFoundException {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -158,7 +161,7 @@ public class AggregrateController {
 
             PreparedStatement pa_20 = null;
             ResultSet ra_20 = null;
-            
+
             PreparedStatement pa_20_a = null;
             ResultSet ra_20_a = null;
 
@@ -461,9 +464,7 @@ public class AggregrateController {
                             //System.out.println("E34323++++++++++++++++:" + ra_19.getString(1));
                         }
 
-
                         //System.out.println(ra.getString(5) + " " + ad[0] + " " + ra.getString(4) + " " + ad[1] + " " + ra.getString(1) + " " + dtf.format(now) + " " + ra.getString(4) + " " + ra.getString(3) + " " + imported + " " + incountry);
-
                         SendToDHISServer.SendCasesToDHIS(ra.getString(4), ad[0], ra.getString(3), ad[1], ra.getString(1), dtf.format(now), ra.getString(4) + " Aggregate", ra.getString(6), imported, incountry, death, recover, not_det_rec, age_1, age_2, age_3, age_4, age_5, age_6, age_7, Occupation_Health_Worker, Occupation_Lab_Staff, Occupation_unknow_missing, Male, female, not_confirmed_lab, gender_others, gender_missing, confirmed_lab, confirmed_missing);
 
                     }
@@ -478,13 +479,19 @@ public class AggregrateController {
 
     }
 
-   
-    public static String MetadaJsonSender(String paths_, String usn, String psw) throws ParseException {
+    public static String MetadaJsonSender(String datax, String usn, String psw) throws ParseException {
+
+      //  JSONParser parser = new JSONParser();
+
+      //  JSONObject json = (JSONObject) parser.parse(datax);
+
+        System.out.println("Debugger 876543.45789.242: " + datax);
 
         String ret = "opps... Something not right";
 
         StringBuilder sb = new StringBuilder();
         String http = httpx + "/api/metadata";
+        System.out.println("Debugger 4567.56789.76543: URL= " + http);
 
         HttpURLConnection urlConnection = null;
         String name = usn;
@@ -501,52 +508,71 @@ public class AggregrateController {
             urlConnection.setDoOutput(true);
             urlConnection.setRequestMethod("POST");
             urlConnection.setUseCaches(true);
-            urlConnection.setConnectTimeout(10000);
-            urlConnection.setReadTimeout(10000);
+            urlConnection.setConnectTimeout(200000);
+            urlConnection.setReadTimeout(200000);
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.connect();
 
-            //  System.out.println();
-            JSONParser parser = new JSONParser();
+            System.out.println("Debugger 23453.23432.21456t: username in user= " + usn + " Password= " + psw);
 
-            JSONObject json = (JSONObject) parser.parse(paths_);
-
-            System.out.println(json.toString());
             //  File file = new File(this.getClass().getClassLoader().getResource("someName.json").getFile());
             OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
-            out.write(json.toString());
+            out.write(datax);
             out.close();
 
             int HttpResult = urlConnection.getResponseCode();
-            System.err.println("done...");
-            System.out.println("response Code : " + HttpResult);
+            //  System.err.println("done...");
+            System.out.println("Debugger 456.34.421 response Code : " + HttpResult);
 
             if (HttpResult == 200) {
-                BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
-                String line = null;
-                while ((line = br.readLine()) != null) {
-                    sb.append(line + "\n");
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()))) {
+                    String line = null;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line + "\n");
+                    }
                 }
-                br.close();
 
                 System.err.println(sb.toString());
                 ret = sb.toString();
 
             } else {
+
                 System.out.println("finally : " + urlConnection.getResponseMessage());
+                ret = urlConnection.getResponseMessage();
                 System.out.println("finally Code : " + HttpResult);
                 if (HttpResult == 401) {
                     System.out.println("Username and Pass not working");
 
-                    ret = "Username and Pass not working";
+                    ret = "{\"Error\":\"Username or/and password is not correct\"}";
 
                     return ret;
                 }
+
+                if (HttpResult == 409) {
+                    InputStream _is;
+                    _is = urlConnection.getErrorStream();
+
+                    StringBuilder textBuilder = new StringBuilder();
+                    try (Reader reader = new BufferedReader(new InputStreamReader(_is, Charset.forName(StandardCharsets.UTF_8.name())))) {
+                        int c = 0;
+                        while ((c = reader.read()) != -1) {
+                            textBuilder.append((char) c);
+                        }
+                    }
+                    System.out.println(">>>>>>>>>>>>>>>>>" + textBuilder.toString());
+                    _is.close();
+
+                    //   System.err.println("Debugger 678.8765.gt7: " + sb.toString());
+                    //      ret = "{\"Status\":\"Debug 345678.67.2: Send but with error.\",\"Details\":\"" + sb.toString() + "\",}";
+                    return ret;
+                }
             }
+            urlConnection.disconnect();
         } catch (MalformedURLException localMalformedURLException) {
+            System.err.println("Debug 345678987.9876.33");
         } catch (IOException e) {
-            System.err.println("Pushers says..... DHIS2 not found or not working.");
-            return "Pushers says..... DHIS2 not found or not working.";
+            System.err.println("Debug 345678.67.2: Pushers says..... DHIS2 not found or not working. = " + e.getLocalizedMessage());
+            return "{\"Error\":\"Debug 345678.67.2: DHIS2 not found or not working.\",\"Details\":\"" + e.getLocalizedMessage() + "\",}";
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();

@@ -25,7 +25,6 @@
  */
 package com.mirabilia.org.hzi.sormas.cases.Case;
 
-import com.mirabilia.org.hzi.sormas.cases.*;
 import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 import java.io.IOException;
 import java.util.logging.Level;

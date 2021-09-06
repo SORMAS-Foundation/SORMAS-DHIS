@@ -464,9 +464,9 @@
 
 
                                         <div class="callout" style="display: none;" id="2_2_2_2_stepx">
-                                            <h5>Can I do ahead and install SORMAS Module on you DHIS2?</h5>
+                                            <h5>How do you want to install SORMAS Module on your DHIS2?</h5>
 
-                                            <p>You will meed to provide an administrator username and password of the DHIS2 server</p>
+
                                             <div class="col s6">
 
                                                 <div class="switch">
@@ -484,18 +484,19 @@
 
                                             <div class="row" id="instllx" style="display: none;">
                                                 <div class="col s4 m4 l4">
+                                                    <p>You will need to provide an administrator's username and password of the DHIS2 server</p>
 
                                                     <div class="form-group col s6 m6 l6">
-                                                        <label>Using default DHIS URL found in the system</label>
+                                                        <i>Using default DHIS URL found in the system</i>
 
                                                         <!--div class="input-group">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="far fa-link"></i></span>
                                                             </div>
                                                             <input type="url" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" required>
-                                                        </div-->
+                                                        </div--><br>
 
-                                                        <label>Administrator Username:</label>
+                                                        <label>DHIS2 Administrator Username:</label>
 
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
@@ -504,7 +505,7 @@
                                                             <input name="admin_uname" id="usn" type="text" class="form-control"  im-insert="false" required>
                                                         </div>
 
-                                                        <label>Administrator Password</label>
+                                                        <label>DHIS2 Administrator Password</label>
 
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
@@ -676,8 +677,8 @@
 
                     }
                     ;
-                    
-                    
+
+
                     function start_pushX_m() {
 
 
@@ -708,6 +709,26 @@
 
                 <%   //processing dhis_ control metadata from static file
                     String couty = session.getAttribute("country").toString();
+
+                    try {
+                        InputStream is = null;
+                        is = getServletContext().getResourceAsStream("/WEB-INF/metajson.json"); // this works!
+                        InputStreamReader isReaderd = new InputStreamReader(is);
+                        
+                        BufferedReader readerd = new BufferedReader(isReaderd);
+                        StringBuffer sbs = new StringBuffer();
+                        String str;
+                        while ((str = readerd.readLine()) != null) {
+                            sbs.append(str);
+                        }
+                        System.out.println(sbs + "___________________________________________");
+                        
+                        
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    System.out.println(getServletContext().getAttributeNames() + "___________________________________________");
                     if ("Nigeria".equalsIgnoreCase(couty)) {
                         InputStream intput = getServletContext().getResourceAsStream("dhis_processor");
                         //creating an InputStreamReader object
@@ -777,11 +798,13 @@
 
                             jsonViewer.showJSON(json, -1, -1);
                             var json = "";
+                            
+                             $('#RespondX').modal('show');
 
                         };
 
 
-                        $('#RespondX').modal('show');
+                       
 
                     });
 

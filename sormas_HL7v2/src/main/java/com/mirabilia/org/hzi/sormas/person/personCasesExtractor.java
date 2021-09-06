@@ -23,11 +23,10 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.mirabilia.org.hzi.sormas.cases;
+package com.mirabilia.org.hzi.sormas.person;
 
 import com.mirabilia.org.hzi.Strings.sql;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
-import com.mirabilia.org.hzi.sormas.person.personCasesUtilityClass;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -121,7 +120,7 @@ public class personCasesExtractor {
                 personCasesUtilityClass.setDeath_Place_Type(ra.getString("DeathPlaceType"));
                 personCasesUtilityClass.setEducation_Details(ra.getString("EducationDetails"));
                 personCasesUtilityClass.setEducation_Type(ra.getString("EducationType"));
-                personCasesUtilityClass.setExternalid(ra.getString("PERSONexternalid"));
+                personCasesUtilityClass.setExternalid(ra.getString("Externalid"));
                 personCasesUtilityClass.setExternaltoken(ra.getString("Externaltoken"));
                 personCasesUtilityClass.setFathersname(ra.getString("Fathersname"));
                 personCasesUtilityClass.setFirstname(ra.getString("Firstname"));
@@ -147,7 +146,7 @@ public class personCasesExtractor {
                 personCasesUtilityClass.setSex(ra.getString("Sex"));
                 personCasesUtilityClass.setSormas_System_Period(ra.getString("sys_Period"));
                 personCasesUtilityClass.setSRM_Uuid(ra.getString("Uuid"));
-                personCasesUtilityClass.setSymptomjournalstatus(ra.getString("Symptomjournalstatus"));
+                personCasesUtilityClass.setSymptomjournalstatus(ra.getString("Symptomjournalstatus"));//r.externalid
                 personCasesUtilityClass.setExternal_id(ra.getString("externalid_region"));
                 personCasesUtilityClass.setC_id(ra.getString("id_case"));
                 

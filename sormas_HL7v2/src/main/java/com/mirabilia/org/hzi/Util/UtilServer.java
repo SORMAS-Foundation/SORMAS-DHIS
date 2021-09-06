@@ -29,6 +29,7 @@ import com.mirabilia.org.hzi.Strings.sql;
 import com.mirabilia.org.hzi.sormas.aggregate.AggregrateController;
 import com.mirabilia.org.hzi.sormas.cases.personCasesExtractor;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
+import static com.mirabilia.org.hzi.updaters.Util.MetaFileGetter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -346,7 +347,7 @@ public class UtilServer extends HttpServlet {
 
                 float seq = ((float) xv / xc);
                 String str = String.format("%2.02f", (seq * 100));
-                System.out.println(xx+"matched dup_____________________________________+++++++++++++++++++ " + vc);
+                System.out.println(xx + "matched dup_____________________________________+++++++++++++++++++ " + vc);
                 mat = str + "%," + xx + "," + xc + "," + xv + ",@@@" + vc;
                 System.out.println(mat);
 
@@ -435,8 +436,8 @@ public class UtilServer extends HttpServlet {
             }
             mat = "Job done";
         }
-        
-         if (request.getParameter(
+
+        if (request.getParameter(
                 "personToDHIS") != null) {
 
             try {
@@ -668,13 +669,13 @@ public class UtilServer extends HttpServlet {
                 try {
                     String dxs = "";
                     if ("2".equals(rx.getString(2))) {
-                        dxs = "insert into region set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
+                        dxs = "insert into region set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=now()";
                     } else if ("3".equals(rx.getString(2))) {
-                        dxs = "insert into district set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
+                        dxs = "insert into district set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=now()";
                     } else if ("4".equals(rx.getString(2))) {
-                        dxs = "insert into community set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
+                        dxs = "insert into community set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=now()";
                     } else if ("5".equals(rx.getString(2))) {
-                        dxs = "insert into facility set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=?";
+                        dxs = "insert into facility set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=now()";
                     }
 
                     ps_pg = conn_pg.prepareStatement(dxs);
@@ -682,7 +683,7 @@ public class UtilServer extends HttpServlet {
                     ps_pg.setString(2, rx.getString(1));
                     ps_pg.setString(3, rx.getString(3));
                     ps_pg.setString(4, rx.getString(4));
-                    ps_pg.setString(5, rx.getString(5));
+                  //  ps_pg.setString(5, rx.getString(5));
 
                     // System.out.println(ps_pg);
                     ret = ps_pg.executeUpdate();
@@ -996,26 +997,27 @@ public class UtilServer extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession sess = request.getSession(false);
-        if (request.getParameter("PUSHRESULTS") != null && request.getParameter("usn") != null && request.getParameter("psn") != null) {
+      //  HttpSession sess = request.getSession(false);
+        if (request.getParameter("PUSHRESULTS") != null && request.getParameter("usn") != null && request.getParameter("ups") != null && "true".equals(request.getParameter("PUSHRESULTS"))) {
 
             try {
-                // System.out.println(filecont);
+                 System.out.println("Starting updates on DHIS2");
+                String bigData = MetaFileGetter();
 
-                mat = AggregrateController.MetadaJsonSender(sess.getAttribute("heavyjson").toString(), request.getParameter("usn"), request.getParameter("psn"));
+                mat = AggregrateController.MetadaJsonSender(bigData, request.getParameter("usn"), request.getParameter("ups"));
 
                 // mat = "Job done";
-                 System.out.println(mat);
+                System.out.println(mat+" : debugger 1.1.456789");
             } catch (ParseException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {
-          //  System.out.println("Error!");
+            //  System.out.println("Error!");
             mat = "{\"Error\":\"Username or/and password is not correct\"}";
             System.out.println(mat);
         }
-        
+
         response.setContentType(
                 "text/plain;charset=UTF-8");
         response.setStatus(
@@ -1024,7 +1026,7 @@ public class UtilServer extends HttpServlet {
 
         sout.print(mat);
         mat = "";
-     //   System.out.println("Done...");
+        //   System.out.println("Done...");
 
     }
 }

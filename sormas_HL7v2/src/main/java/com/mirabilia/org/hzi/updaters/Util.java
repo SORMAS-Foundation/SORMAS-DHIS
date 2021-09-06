@@ -25,10 +25,23 @@
  */
 package com.mirabilia.org.hzi.updaters;
 
+import com.google.gson.JsonSyntaxException;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -38,21 +51,63 @@ public class Util {
 
     public static void switcerh(String dx) throws ClassNotFoundException, SQLException {
         PreparedStatement ps = null;
-       
+
         Class.forName("com.mysql.jdbc.Driver");
         Connection conn = DbConnector.getConnection();
-         
-        
+
         try {
 
             ps = conn.prepareStatement("delete from _sources where url = ?;");
             ps.setString(1, dx.replaceAll("'", ""));
-         //   System.out.println("doneing _________________!"+ps);
+            //   System.out.println("doneing _________________!"+ps);
             ps.executeUpdate();
         } finally {
             conn.close();
             return;
         }
-      
+
     }
+
+    public static String MetaFileGetter() {
+
+        try {
+            URL link = new URL("http://172.105.77.79/downlos/dhisMetadata.json");
+            URLConnection uc1 = link.openConnection();
+            BufferedReader in1 = new BufferedReader(new InputStreamReader(uc1.getInputStream()));
+            StringBuilder miraFile = new StringBuilder();
+            miraFile.append(in1.readLine() + "\n");
+            String line = "0";
+
+            while ((line = in1.readLine()) != null) {
+                miraFile.append(line + "\n");
+            }
+
+            String result = miraFile.toString();
+            JSONParser parser = new JSONParser();
+
+            JSONObject obj = (JSONObject) parser.parse(result);
+
+            /* JSONArray jarr = (JSONArray) obj.get("data");
+            
+            System.out.println(((JSONObject) jarr.get(0)).get("city"));
+            System.out.println(((JSONObject) jarr.get(0)).get("country"));
+            System.out.println(((JSONObject) jarr.get(0)).get("min_today"));
+            System.out.println(((JSONObject) jarr.get(0)).get("max_today"));
+            System.out.println(((JSONObject) jarr.get(0)).get("desc_today"));
+            System.out.println(((JSONObject) jarr.get(0)).get("date"));
+             */
+            //System.out.println(obj);
+            return obj.toString();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException | ParseException ex) {
+            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+     public static void main(String[] args) {
+         System.out.println(MetaFileGetter());
+    }
+
 }

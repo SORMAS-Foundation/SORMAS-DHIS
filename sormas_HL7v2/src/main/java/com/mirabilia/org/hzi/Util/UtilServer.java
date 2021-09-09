@@ -406,8 +406,15 @@ public class UtilServer extends HttpServlet {
             }
         }
 
+//setup new sormas logic
         if (request.getParameter("pushfreshavailable") != null) {
+
             try {
+                UpgradeSORMASTable();
+               UpgradeSORMASTable1();
+                UpgradeSORMASTable2();
+              UpgradeSORMASTable3();
+
                 sess.setAttribute("fav", "plus-square");
                 sess.setAttribute("no", "1");
                 sess.setAttribute("notf", "Pending Job Progress");
@@ -683,7 +690,7 @@ public class UtilServer extends HttpServlet {
                     ps_pg.setString(2, rx.getString(1));
                     ps_pg.setString(3, rx.getString(3));
                     ps_pg.setString(4, rx.getString(4));
-                  //  ps_pg.setString(5, rx.getString(5));
+                    //  ps_pg.setString(5, rx.getString(5));
 
                     // System.out.println(ps_pg);
                     ret = ps_pg.executeUpdate();
@@ -889,7 +896,7 @@ public class UtilServer extends HttpServlet {
             ps = conn.prepareStatement(sql.sync_primer_all_fresh);
             ps.setString(1, i + "");
             rx = ps.executeQuery();
-            System.out.println("deugging fresh pusher >>>>>>>>>>>>>>>>>>>>>>>.." + ps);
+            System.out.println("deugging 987654.234567 >>>>>>>>>>>>>>>>>>>>>>>.." + ps);
 
             while (rx.next()) {
                 String abx = rx.getString(1);
@@ -904,7 +911,7 @@ public class UtilServer extends HttpServlet {
 
                 //  System.out.println(ps_g);
                 if (s_x.next()) {
-                    System.out.println(ab[ddx_] + "   ____   " + rx.getString(1) + " >>>>>>>>>  " + s_x.getString(1) + "");
+                    //  System.out.println(ab[ddx_] + "   ____   " + rx.getString(1) + " >>>>>>>>>  " + s_x.getString(1) + "");
 
                     sendDataX_a(s_x.getString(1), ab[ddx_], i + "");
 
@@ -918,6 +925,57 @@ public class UtilServer extends HttpServlet {
 
         }
 
+    }
+
+    public static void UpgradeSORMASTable() throws ClassNotFoundException {
+        PreparedStatement ps = null;
+        Connection conn = DbConnector.getPgConnection();
+        try {
+            ps = conn.prepareStatement(sql.batch_updateSORMASTable_1);
+            ps.executeUpdate();
+            conn.close();
+        } catch (SQLException e) {
+                System.err.println("An exception was thrown "+e.getLocalizedMessage());
+            }
+        
+    }
+
+    public static void UpgradeSORMASTable1() throws ClassNotFoundException {
+        PreparedStatement ps = null;
+        Connection conn = DbConnector.getPgConnection();
+        try {
+            ps = conn.prepareStatement(sql.batch_updateSORMASTable_2);
+            ps.executeUpdate();
+             conn.close();
+       } catch (SQLException e) {
+                System.err.println("An exception was thrown");
+            }
+        
+    }
+
+    public static void UpgradeSORMASTable2() throws ClassNotFoundException {
+        PreparedStatement ps = null;
+        Connection conn = DbConnector.getPgConnection();
+        try {
+            ps = conn.prepareStatement(sql.batch_updateSORMASTable_3);
+            ps.executeUpdate();
+            conn.close();
+       } catch (SQLException e) {
+                System.err.println("An exception was thrown");
+            }
+         
+    }
+
+    public static void UpgradeSORMASTable3() throws ClassNotFoundException {
+        PreparedStatement ps = null;
+        Connection conn = DbConnector.getPgConnection();
+        try {
+            ps = conn.prepareStatement(sql.batch_updateSORMASTable_4);
+            ps.executeUpdate();
+            conn.close();
+       } catch (SQLException e) {
+                System.err.println("An exception was thrown");
+            }
     }
 
     public static void sendDataX_a(String stt, String prnt, String numz) throws ClassNotFoundException, SQLException {
@@ -970,7 +1028,7 @@ public class UtilServer extends HttpServlet {
                         ps_pg.setDate(5, rx.getDate(4));
                         ps_pg.setString(6, rx.getString(6));
 
-                        //    System.out.println(ps_pg);
+                        System.out.println("debugger 4567.234.13: " + ps_pg);
                         ret = ps_pg.executeUpdate();
                     }
                 } finally {
@@ -997,19 +1055,21 @@ public class UtilServer extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      //  HttpSession sess = request.getSession(false);
+        //  HttpSession sess = request.getSession(false);
         if (request.getParameter("PUSHRESULTS") != null && request.getParameter("usn") != null && request.getParameter("ups") != null && "true".equals(request.getParameter("PUSHRESULTS"))) {
 
             try {
-                 System.out.println("Starting updates on DHIS2");
+                System.out.println("Starting updates on DHIS2");
                 String bigData = MetaFileGetter();
 
                 mat = AggregrateController.MetadaJsonSender(bigData, request.getParameter("usn"), request.getParameter("ups"));
 
                 // mat = "Job done";
-                System.out.println(mat+" : debugger 1.1.456789");
+                System.out.println(mat + " : debugger 1.1.456789");
+
             } catch (ParseException ex) {
-                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UtilServer.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {

@@ -243,7 +243,7 @@
                                                             Perform maintenance
                                                             <input type="checkbox" <%//rx.getString(2)%> name="server" id="maintenance">
                                                             <span class="lever"></span>
-                                                            Setup on New SORMAS Server
+                                                            Setup New SORMAS Server
                                                         </label>
                                                     </div>
 

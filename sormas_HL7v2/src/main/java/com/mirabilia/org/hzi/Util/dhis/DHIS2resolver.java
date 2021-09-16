@@ -53,7 +53,7 @@ public class DHIS2resolver {
         String authStringEnc = new String(authEncBytes);
         try {
             URL url = new URL(pg_url);
-           // System.out.println(pg_url+"ddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+           // ////System.out.println(pg_url+"ddddddddddddddddddddddddddddddddddddddddddddddddddddd");
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Authorization", "Basic " + authStringEnc);
             urlConnection.setDoOutput(true);
@@ -66,7 +66,7 @@ public class DHIS2resolver {
 
             int HttpResult = urlConnection.getResponseCode();
             //debug  
-           System.out.println("######cccccccccccc####Outreach Session HTTP Return Code = " + HttpResult);
+           ////System.out.println("######cccccccccccc####Outreach Session HTTP Return Code = " + HttpResult);
 
             if (HttpResult == 200) {
                 BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
@@ -76,7 +76,7 @@ public class DHIS2resolver {
                 }
                 br.close();
 
-                //debug  System.out.println("#########AAA###" + sb.toString());
+                //debug  ////System.out.println("#########AAA###" + sb.toString());
                 if (sb.toString().indexOf("success") >= 1) {
                     //      response.setStatus(200);
                     System.err.println("FIXED: Success!");
@@ -94,7 +94,7 @@ public class DHIS2resolver {
                 }
             } else {
                 //response.setStatus(502, "DHIS2 Not there!");
-                System.out.println("####CCCCCCCCCCCCCC" + urlConnection.getInputStream().toString());
+                ////System.out.println("####CCCCCCCCCCCCCC" + urlConnection.getInputStream().toString());
                 BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
                 String line = null;
                 while ((line = br.readLine()) != null) {
@@ -102,8 +102,8 @@ public class DHIS2resolver {
                 }
                 br.close();
 
-                System.out.println("#####XXX##" + sb.toString());
-                System.out.println("OUT ERROR:>>>>" + urlConnection.getResponseMessage());
+                ////System.out.println("#####XXX##" + sb.toString());
+                ////System.out.println("OUT ERROR:>>>>" + urlConnection.getResponseMessage());
                 return sb.toString();
             }
 
@@ -119,7 +119,7 @@ public class DHIS2resolver {
                 String string = "2020-02-22 22:13:50.948";
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
                 java.sql.Timestamp datetime = new Timestamp(formatter.parse(string).getTime());
-                //   System.out.println("DatedTime: " + datetime.toString());
+                //   ////System.out.println("DatedTime: " + datetime.toString());
 
                 System.err.println("FIXED: Warning!");
             } catch (ParseException ex) {
@@ -129,7 +129,7 @@ public class DHIS2resolver {
         }
         **/
         }
-      //  System.out.println(sb.toString());
+      //  ////System.out.println(sb.toString());
         return sb.toString();
     }
      
@@ -160,7 +160,7 @@ public class DHIS2resolver {
 
             int HttpResult = urlConnection.getResponseCode();
             //debug  
-           // System.out.println("######cccccccccccc####Outreach Session HTTP Return Code = " + HttpResult);
+           // ////System.out.println("######cccccccccccc####Outreach Session HTTP Return Code = " + HttpResult);
 
             if (HttpResult == 200) {
                 BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
@@ -170,7 +170,7 @@ public class DHIS2resolver {
                 }
                 br.close();
 
-                //debug  System.out.println("#########AAA###" + sb.toString());
+                //debug  ////System.out.println("#########AAA###" + sb.toString());
                 if (sb.toString().indexOf("success") >= 1) {
                     //      response.setStatus(200);
                     System.err.println("FIXED: Success!");
@@ -188,7 +188,7 @@ public class DHIS2resolver {
                 }
             } else {
                 //response.setStatus(502, "DHIS2 Not there!");
-                System.out.println("####CCCCCCCCCCCCCC" + urlConnection.getInputStream().toString());
+                ////System.out.println("####CCCCCCCCCCCCCC" + urlConnection.getInputStream().toString());
                 BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
                 String line = null;
                 while ((line = br.readLine()) != null) {
@@ -196,8 +196,8 @@ public class DHIS2resolver {
                 }
                 br.close();
 
-                System.out.println("#####XXX##" + sb.toString());
-                System.out.println("OUT ERROR:>>>>" + urlConnection.getResponseMessage());
+                ////System.out.println("#####XXX##" + sb.toString());
+                ////System.out.println("OUT ERROR:>>>>" + urlConnection.getResponseMessage());
                 return sb.toString();
             }
 
@@ -213,7 +213,7 @@ public class DHIS2resolver {
                 String string = "2020-02-22 22:13:50.948";
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
                 java.sql.Timestamp datetime = new Timestamp(formatter.parse(string).getTime());
-                //   System.out.println("DatedTime: " + datetime.toString());
+                //   ////System.out.println("DatedTime: " + datetime.toString());
 
                 System.err.println("FIXED: Warning!");
             } catch (ParseException ex) {
@@ -223,7 +223,7 @@ public class DHIS2resolver {
         }
         **/
         }
-      //  System.out.println(sb.toString());
+      //  ////System.out.println(sb.toString());
         return sb.toString();
     }
      
@@ -254,7 +254,7 @@ public class DHIS2resolver {
             urlConnection.connect();
 
             int HttpResult = urlConnection.getResponseCode();
-            //debug  System.out.println("######cccccccccccc####Outreach Session HTTP Return Code = " + HttpResult);
+            //debug  ////System.out.println("######cccccccccccc####Outreach Session HTTP Return Code = " + HttpResult);
 
             if (HttpResult == 200) {
                 BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
@@ -267,8 +267,8 @@ public class DHIS2resolver {
                
             } else {
                 //response.setStatus(502, "DHIS2 Not there!");
-                System.out.println("finally : " + urlConnection.getResponseMessage());
-                System.out.println("####CCCCCCCCCCCCCC" + urlConnection.getInputStream().toString());
+                ////System.out.println("finally : " + urlConnection.getResponseMessage());
+                ////System.out.println("####CCCCCCCCCCCCCC" + urlConnection.getInputStream().toString());
                 BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
                 String line = null;
                 while ((line = br.readLine()) != null) {
@@ -276,8 +276,8 @@ public class DHIS2resolver {
                 }
                 br.close();
 
-                System.out.println("#####XXX##" + sb.toString());
-                System.out.println("OUT ERROR:>>>>" + urlConnection.getResponseMessage());
+                ////System.out.println("#####XXX##" + sb.toString());
+                ////System.out.println("OUT ERROR:>>>>" + urlConnection.getResponseMessage());
                 return sb.toString();
             }
 

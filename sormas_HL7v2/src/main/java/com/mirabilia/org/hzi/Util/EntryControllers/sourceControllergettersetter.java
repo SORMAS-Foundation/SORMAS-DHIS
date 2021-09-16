@@ -145,7 +145,7 @@ public class sourceControllergettersetter extends HttpServlet {
 
             try {
 
-                System.out.println("I am here o");
+              //  System.out.println("I am here o");
                 //This method syncs orgunits into fhir server.
                 //send 1 to create and 2 to update.
                 getAllOrgFromDB(2);

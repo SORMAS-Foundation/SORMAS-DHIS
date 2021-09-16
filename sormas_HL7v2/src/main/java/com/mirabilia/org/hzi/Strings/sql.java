@@ -41,6 +41,12 @@ public class sql {
 
     public static String sync_primer_all_fresh = "select path_parent from raw_ where level = ? order by idx asc";
 
+    public static String batch_updateSORMASTable_1 = "ALTER TABLE region ADD CONSTRAINT unique_region_adapter UNIQUE (externalid)";
+    public static String batch_updateSORMASTable_2 = "ALTER TABLE district ADD CONSTRAINT unique_district_adapter UNIQUE (externalid)";
+    public static String batch_updateSORMASTable_3 = "ALTER TABLE community ADD CONSTRAINT unique_community_adapter UNIQUE (externalid)";
+    public static String batch_updateSORMASTable_4 = "ALTER TABLE facility ADD CONSTRAINT unique_faciliti_adapter UNIQUE (externalid)";
+    
+
     public static String sync_primer_all_fresh_ = "select idx from raw_ where uuid = ? order by idx asc";
     public static String sync_all_fresh = "select name, uuid, idx, rec_created, level  from raw_ where level = ? and path_parent like '%?%'";
 

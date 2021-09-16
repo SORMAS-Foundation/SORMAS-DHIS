@@ -150,7 +150,7 @@ public class getterSetters {
 
         String str = "";
         try {
-            ps = conn.prepareStatement("TRUNCATE `raw_`");
+            ps = conn.prepareStatement("delete from `raw_`");
             ps.execute();
         } finally {
             conn.close();

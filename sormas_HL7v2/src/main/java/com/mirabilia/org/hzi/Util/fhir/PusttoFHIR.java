@@ -155,7 +155,7 @@ public class PusttoFHIR implements Serializable {
         tag_arrary.add(tag_json);
         json.put("physicalType", tag_arrary);
 
-        System.out.println(json.toString());
+        //System.out.println(json.toString());
         URL url;
         try {
             if ("x".equals(fhiruuid)) {
@@ -185,15 +185,15 @@ public class PusttoFHIR implements Serializable {
             out.close();
 
             int HttpResult = urlConnection.getResponseCode();
-            System.out.println("FHIR Response = " + HttpResult);
+            //System.out.println("FHIR Response = " + HttpResult);
             if (HttpResult == 201) {
 
                 String Location = urlConnection.getHeaderField("Location");
 
                 if (Location == null) {
-                    System.out.println("Key 'Server' is not found!");
+                    //System.out.println("Key 'Server' is not found!");
                 } else {
-                   // System.out.println("Server - " + Location.split("/")[3]);
+                   // //System.out.println("Server - " + Location.split("/")[3]);
                     sb = Location.split("/")[3];//note that [5] should be implmented to track changes / history uuid of the id
                 }
 
@@ -201,7 +201,7 @@ public class PusttoFHIR implements Serializable {
                 //  String line = null;
                 /**
                  * while ((line = br.readLine()) != null) { sb.append(line +
-                 * "\n"); } br.close(); System.out.println("FHIR RAW = " + sb);
+                 * "\n"); } br.close(); //System.out.println("FHIR RAW = " + sb);
                  *
                  *
                  */
@@ -211,9 +211,9 @@ public class PusttoFHIR implements Serializable {
             String Location = urlConnection.getHeaderField("Location");
 
                 if (Location == null) {
-                    System.out.println("Key 'Location History' is not found!");
+                    //System.out.println("Key 'Location History' is not found!");
                 } else {
-                   // System.out.println("Server - " + Location.split("/")[3]);
+                   // //System.out.println("Server - " + Location.split("/")[3]);
                     sb = Location.split("/")[5]+"#######";//note that [5] should be implmented to track changes / history uuid of the id
                 }
             

@@ -6,7 +6,7 @@
     </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <jsp-file>/dumxmy.jsp</jsp-file>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>

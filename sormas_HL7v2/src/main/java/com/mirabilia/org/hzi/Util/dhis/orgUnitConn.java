@@ -79,7 +79,7 @@ public class orgUnitConn extends HttpServlet {
                 jsonObjectx = (JSONObject) jsonParser.parse(json_all);
                 Object pager_values = jsonObjectx.get("pager");
 
-                System.out.println(pager_values);
+                //System.out.println(pager_values);
 
                 JSONObject jsonObjectxx = (JSONObject) pager_values;
 
@@ -140,7 +140,7 @@ public class orgUnitConn extends HttpServlet {
                 Object org_values = jsonObjectx.get("organisationUnits");
                 String nn = org_values.toString();
                 String cnty_set = sessionx.getAttribute("country").toString();
-                System.out.println(cnty_set);
+                //System.out.println(cnty_set);
 
                 if (!nn.contains(cnty_set)) {
                     sessionx.setAttribute("err", "<div class=\"alert alert-danger\" role=\"alert\">  DHIS Instance Country is different from the one set in control file or not set properly? please fix this problem!</div>");
@@ -172,7 +172,7 @@ public class orgUnitConn extends HttpServlet {
                 String urll = _url[10].toString();
                 //process each shunk and send the progress back to progress bar.
                 
-                System.out.println("URL in USE >>>>>>>>>>>>>>>>>> "+urll);
+                //System.out.println("URL in USE >>>>>>>>>>>>>>>>>> "+urll);
                 String ct_code = sessionx.getAttribute("country_code").toString();
                 int pg_ = starter(initzx, urll, ct_code);
                 
@@ -181,7 +181,7 @@ public class orgUnitConn extends HttpServlet {
                 ServletOutputStream sout = response.getOutputStream();
                 String content = "" + pg_;
                 sout.print(content);
-                 System.out.println("percentage been sent back to frontend"+content+"%");
+                 //System.out.println("percentage been sent back to frontend"+content+"%");
             } catch (SQLException ex) {
                 Logger.getLogger(orgUnitConn.class.getName()).log(Level.SEVERE, null, ex);
             }

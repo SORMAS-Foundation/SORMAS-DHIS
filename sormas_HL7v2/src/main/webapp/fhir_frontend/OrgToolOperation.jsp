@@ -236,7 +236,6 @@
                                             <p>Please answer "Setup" if this is the first time the adapter is been installed or the adapter service has just been reinstalled. If not, click next to perform maintenance</p>
                                             <div class="row">
                                                 <div class="col s4">
-                                                    New Server?
 
                                                     <div class="switch">
                                                         <label >
@@ -630,7 +629,7 @@
 
                                                 } else {
                                                 //   console.log("Server error while contacting main methods to get total number of chunks");
-                                                alertx("DHIS2 Not Availalable");
+                                                alertx("DHIS2 Not Availalable or Adapter timed-out, please re-login");
                                                 return;
                                                 }
                                                 }
@@ -755,7 +754,7 @@
                         //    console.log("Number of 100 percent machedprocessed currently = " + xhr.responseText);
 
                         const words = xhr.responseText.split(',');
-                        $('#fullxxxx').html("100% Not Matchable = " + words[0]);
+                        $('#fullxxxx').html("Not Matchable = " + words[0]);
                         $('#fullxxx').html("Duplicates = " + words[1]);
                         //   $('#fullx').html("Partial Duplicates = " + words[2]);
                         $('#full').html("Matched = " + words[3]);
@@ -841,7 +840,7 @@
                         toast: true,
                                 position: 'top-end',
                                 showConfirmButton: false,
-                                timer: 3000
+                                timer: 6000
                         });
                         Toast.fire({
                         type: 'success',

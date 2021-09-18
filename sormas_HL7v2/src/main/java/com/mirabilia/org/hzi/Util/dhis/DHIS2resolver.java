@@ -49,11 +49,15 @@ public class DHIS2resolver {
         StringBuilder sb = new StringBuilder();
 
         String authString = name + ":" + password;
+        if(name.isEmpty()){
+        return "";
+        }
+       //  System.out.println("ddddddddddddddddddddddddddddddddddddddddddddd" +authString);
         byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
         String authStringEnc = new String(authEncBytes);
         try {
             URL url = new URL(pg_url);
-           // ////System.out.println(pg_url+"ddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+         //  System.out.println(pg_url+"ddddddddddddddddddddddddddddddddddddddddddddddddddddd");
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Authorization", "Basic " + authStringEnc);
             urlConnection.setDoOutput(true);
@@ -92,18 +96,19 @@ public class DHIS2resolver {
                     System.err.println("Noticable Error:\n" + sb.toString());
                     return sb.toString();
                 }
+                System.out.println("Debugger QWERTYUH.456Y.VFR567Y: " + sb.toString());
             } else {
                 //response.setStatus(502, "DHIS2 Not there!");
                 ////System.out.println("####CCCCCCCCCCCCCC" + urlConnection.getInputStream().toString());
-                BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
+                BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getErrorStream(), "utf-8"));
                 String line = null;
                 while ((line = br.readLine()) != null) {
                     sb.append(line + "\n");
                 }
                 br.close();
 
-                ////System.out.println("#####XXX##" + sb.toString());
-                ////System.out.println("OUT ERROR:>>>>" + urlConnection.getResponseMessage());
+                System.out.println("Debugger DFGH.456Y.VFR567Y: " + sb.toString());
+                System.out.println("OUT ERROR: 567uyt.876.gy: " + urlConnection.getResponseMessage());
                 return sb.toString();
             }
 

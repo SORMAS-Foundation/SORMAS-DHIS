@@ -71,9 +71,10 @@ public class sourceDTO {
             String strr = str + "@@";
             jsonString = "[" + strr.replace(",@@", "]");
 
-            System.out.println(jsonString);
+          //  System.out.println(jsonString);
         } catch (SQLException ex) {
             Logger.getLogger(sourceDTO.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("4567.7654.vtyuhgt6:"+ex.getMessage());
         }
         return jsonString;
     }

@@ -305,7 +305,7 @@
 
                         <%
                             String sourcesX = sourceDTO.getSourcePaired();
-                            System.out.println(sourcesX);
+                          //  System.out.println(sourcesX);
 
                         %>
 

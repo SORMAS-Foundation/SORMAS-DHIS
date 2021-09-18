@@ -82,9 +82,7 @@ public class UtilServer extends HttpServlet {
 
                 mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.externalid IS NULL AND d.duplicate_with IS null or d.duplicate_with = '';") + "," + mat; //Unmachables
 
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -205,9 +203,7 @@ public class UtilServer extends HttpServlet {
                 //  System.out.println(xc+"vc_____xm"+xm+"______"+sub+"_______"+vc);
                 mat = str + "%," + xx + "," + xc + "," + xm + ",@@@" + vc;
 
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

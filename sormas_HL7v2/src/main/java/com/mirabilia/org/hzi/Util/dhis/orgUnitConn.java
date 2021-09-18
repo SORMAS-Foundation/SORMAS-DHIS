@@ -72,6 +72,7 @@ public class orgUnitConn extends HttpServlet {
                 ServletOutputStream sout = response.getOutputStream();
                 String content = "DHIS2 Not Responding";
                 sout.print(content);
+                sessionx.setAttribute("err", "<div class=\"alert alert-danger\" role=\"alert\">  DHIS Instance Not available/not responding OR adapter timed-out, relogin</div>");
                 return;
             }
 
@@ -123,7 +124,7 @@ public class orgUnitConn extends HttpServlet {
                 ServletOutputStream sout = response.getOutputStream();
                 String content = "DHIS2 Not Responding";
                 sout.print(content);
-                  sessionx.setAttribute("err", "<div class=\"alert alert-danger\" role=\"alert\">  DHIS Instance Not available or not responding</div>");
+                  sessionx.setAttribute("err", "<div class=\"alert alert-danger\" role=\"alert\">  DHIS Instance Not available / not responding OR adapter timed-out, relogin</div>");
              
                 return;
             } else {

@@ -47,7 +47,7 @@ public class credentialAccess extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println(request.getParameter("upass")+ " Method in use..."+ request.getParameter("usern"));
+       // System.out.println(request.getParameter("upass")+ " Method in use..."+ request.getParameter("usern"));
 
         response.sendRedirect(request.getContextPath());
 
@@ -56,7 +56,7 @@ public class credentialAccess extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println(request.getParameter("upass")+ " Method in use..."+ request.getParameter("usern"));
+       // System.out.println(request.getParameter("upass")+ " Method in use..."+ request.getParameter("usern"));
 
         HttpSession sessionx = request.getSession();
         

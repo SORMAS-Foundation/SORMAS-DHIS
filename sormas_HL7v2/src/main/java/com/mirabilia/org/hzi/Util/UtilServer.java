@@ -660,7 +660,7 @@ public class UtilServer extends HttpServlet {
         ResultSet rx_pg = null;
         Connection conn_pg = DbConnector.getPgConnection();
         int ret = 0;
-        System.out.println("============"+sqq);
+     //   System.out.println("============"+sqq);
 
         try {
 
@@ -702,7 +702,7 @@ public class UtilServer extends HttpServlet {
                     */
                     
                     
-                    System.out.println("--------------------"+dxs);
+             //       System.out.println("--------------------"+dxs);
                     ps_pg = conn_pg.prepareStatement(dxs);
                     ps_pg.setString(1, rx.getString(1));
                     ps_pg.setString(2, rx.getString(3));

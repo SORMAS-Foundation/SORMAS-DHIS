@@ -483,7 +483,7 @@
 
 
                                             <div class="row" id="instllx" style="display: none;">
-                                                <div class="col s4 m4 l4">
+                                                <div class="col s4 m4 l4" style="pointer-events: none" title="This section is under developement: milestone 2.3.3">
                                                     <p>You will need to provide an administrator's username and password of the DHIS2 server</p>
 
                                                     <div class="form-group col s6 m6 l6">

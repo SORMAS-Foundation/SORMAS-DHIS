@@ -9,7 +9,7 @@
  *   list of conditions and the following disclaimer.
  * * Redistributions in binary form must reproduce the above copyright notice,
  *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
+ *   and/or other materials provided with the distribution. 
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -64,6 +64,7 @@ public class UtilServer extends HttpServlet {
     private static int ds_c = 0;
     private static int com_m = 0;
     private static int fac_l = 0;
+    private static int country_l = 0;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -407,16 +408,16 @@ public class UtilServer extends HttpServlet {
 
             try {
                 UpgradeSORMASTable();
-               UpgradeSORMASTable1();
+                UpgradeSORMASTable1();
                 UpgradeSORMASTable2();
-              UpgradeSORMASTable3();
+                UpgradeSORMASTable3();
 
                 sess.setAttribute("fav", "plus-square");
                 sess.setAttribute("no", "1");
                 sess.setAttribute("notf", "Pending Job Progress");
                 int n = 6;
                 // System.out.print("Even Numbers from 1 to " + n + " are: ");
-                for (int i = 2; i < n; i++) {
+                for (int i = 1; i < n; i++) {
                     sendDataX_(i);
                     sess.setAttribute("jobber", "Region Progress: " + re_g);
                     sess.setAttribute("jobber1", "District Progress: " + ds_c);
@@ -659,6 +660,7 @@ public class UtilServer extends HttpServlet {
         ResultSet rx_pg = null;
         Connection conn_pg = DbConnector.getPgConnection();
         int ret = 0;
+        System.out.println("============"+sqq);
 
         try {
 
@@ -666,35 +668,52 @@ public class UtilServer extends HttpServlet {
             rx = ps.executeQuery();
 
             while (rx.next()) {
-                UUID uuid = UUID.randomUUID();
-                String randomUUIDString = uuid.toString().toUpperCase();
+             //   UUID uuid = UUID.randomUUID();
+             //   String randomUUIDString = uuid.toString().toUpperCase();
 
                 try {
                     String dxs = "";
                     if ("2".equals(rx.getString(2))) {
-                        dxs = "insert into region set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=now()";
+                        dxs = "update region set externalid = ? where uuid = ?";
                     } else if ("3".equals(rx.getString(2))) {
-                        dxs = "insert into district set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=now()";
+                        dxs = "update district set externalid = ? where uuid = ?";
                     } else if ("4".equals(rx.getString(2))) {
-                        dxs = "insert into community set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=now()";
+                        dxs = "update community set externalid = ? where uuid = ?";
                     } else if ("5".equals(rx.getString(2))) {
-                        dxs = "insert into facility set uuid = ?, name = ?, externalid = ?, id = ?, changedate = now(), creationdate=now()";
+                        dxs = "update facility set externalid = ? where uuid = ?";
                     }
-
+                     /*
+                    String dxs = "";
+                    if ("2".equals(rx.getString(2))) {
+                        dxs = "insert into region (uuid,externalid,id,changedate,creationdate,name) values(?,?,?,now(),now(),?) ON CONFLICT ON CONSTRAINT region_uuid_key DO UPDATE SET externalid = EXCLUDED.externalid";
+                    } else if ("3".equals(rx.getString(2))) {
+                        dxs = "insert into district (uuid,externalid,id,changedate,creationdate,name) values(?,?,?,now(),now(),?) ON CONFLICT ON CONSTRAINT district_uuid_key DO UPDATE SET externalid = EXCLUDED.externalid";
+                    } else if ("4".equals(rx.getString(2))) {
+                        dxs = "insert into community (uuid,externalid,id,changedate,creationdate,name) values(?,?,?,now(),now(),?) ON CONFLICT ON CONSTRAINT community_uuid_key DO UPDATE SET externalid = EXCLUDED.externalid";
+                    } else if ("5".equals(rx.getString(2))) {
+                        dxs = "insert into facility (uuid,externalid,id,changedate,creationdate,name) values(?,?,?,now(),now(),?) ON CONFLICT ON CONSTRAINT facility_uuid_key DO UPDATE SET externalid = EXCLUDED.externalid";
+                    }
                     ps_pg = conn_pg.prepareStatement(dxs);
-                    ps_pg.setString(1, randomUUIDString);
-                    ps_pg.setString(2, rx.getString(1));
-                    ps_pg.setString(3, rx.getString(3));
-                    ps_pg.setString(4, rx.getString(4));
+                    ps_pg.setString(1, rx.getString(1));
+                    ps_pg.setString(2, rx.getString(3));
+                    ps_pg.setInt(3, rx.getInt(4));
+                    ps_pg.setString(4, rx.getString(5));
                     //  ps_pg.setString(5, rx.getString(5));
+                    */
+                    
+                    
+                    System.out.println("--------------------"+dxs);
+                    ps_pg = conn_pg.prepareStatement(dxs);
+                    ps_pg.setString(1, rx.getString(1));
+                    ps_pg.setString(2, rx.getString(3));
 
-                    // System.out.println(ps_pg);
+                     System.out.println("Debugger 4567x.23456e.65432t: "+ps_pg);
                     ret = ps_pg.executeUpdate();
 
                 } finally {
                     if (ret > 0) {
                         //    System.out.println("afected rows =" + ret + " setting " + rx.getString(1) + " with externalID " + rx.getString(3) + " status to synced");
-                        update_oneParm(sql.sync_send_all_matched_My, rx.getString(4));
+                        update_oneParm(sql.sync_send_all_matched_My, rx.getString(1));
                     }
                     ret = 0;
                 }
@@ -887,41 +906,103 @@ public class UtilServer extends HttpServlet {
         ResultSet s_x = null;
 
         Connection conn = DbConnector.getConnection();
+        Connection connx = DbConnector.getPgConnection();
+        
+        clean_ParentPath();
 
-        try {
-            ps = conn.prepareStatement(sql.sync_primer_all_fresh);
-            ps.setString(1, i + "");
-            rx = ps.executeQuery();
-            System.out.println("deugging 987654.234567 >>>>>>>>>>>>>>>>>>>>>>>.." + ps);
+        if (i != 1) {
 
-            while (rx.next()) {
-                String abx = rx.getString(1);
-                String[] ab = abx.split("/");
-                int ddx = ab.length;
-                int ddx_ = ddx - 2;
-                //    System.out.println(rx.getString(1));
+            try {
+                ps = conn.prepareStatement(sql.sync_primer_all_fresh);
+                ps.setString(1, i + ""); //state
+                rx = ps.executeQuery();
+               // System.out.println("deugging 987654.234567 >>>>>>>>>>>>>>>>>>>>>>>.." + ps);
 
-                ps_g = conn.prepareStatement(sql.sync_primer_all_fresh_);
-                ps_g.setString(1, ab[ddx_]);
-                s_x = ps_g.executeQuery();
+                while (rx.next()) {
+                    String abx = rx.getString(1);//lF9JYZn7kfV/GwPcX4nwChj
+                    
+                    //    System.out.println(rx.getString(1));
+                    switch (i) {
 
-                //  System.out.println(ps_g);
-                if (s_x.next()) {
-                    //  System.out.println(ab[ddx_] + "   ____   " + rx.getString(1) + " >>>>>>>>>  " + s_x.getString(1) + "");
+                        case 2:
+                            ps_g = connx.prepareStatement(sql.getting_REGION_from_sormas_);
+                            break;
+                        case 3:
+                            ps_g = connx.prepareStatement(sql.getting_DISTRICT_from_sormas_);
+                            break;
+                        case 4:
+                            ps_g = connx.prepareStatement(sql.getting_COMMUNITY_from_sormas_);
+                            break;
+                        case 5:
+                            ps_g = connx.prepareStatement(sql.getting_FACILITY_from_sormas_);
+                            break;
+                    }
+                    ps_g.setString(1, abx);
+                    s_x = ps_g.executeQuery();
 
-                    sendDataX_a(s_x.getString(1), ab[ddx_], i + "");
+                    System.out.println(ps_g);
+                    if (s_x.next()) {
+                        //  System.out.println(ab[ddx_] + "   ____   " + rx.getString(1) + " >>>>>>>>>  " + s_x.getString(1) + "");
 
-                } else {
-                    // return;
+                        sendDataX_a(s_x.getString(1), abx, i + "");
+
+                    } else {
+                        // return;
+                    }
+
                 }
 
+            } finally {
+                connx.close();
+                conn.close();
             }
 
-        } finally {
+        } else {
 
+            try {
+
+                sendDataX_a("", "", i + "");
+
+            } finally {
+
+            }
         }
 
     }
+
+    private static void clean_ParentPath() {
+        try {
+            PreparedStatement ps = null;
+            PreparedStatement psz = null;
+            ResultSet rxf = null;
+            
+            Connection conn = DbConnector.getConnection();
+            
+            ps = conn.prepareStatement(sql.sync_primer_all_fresh_CLEANER);
+            rxf = ps.executeQuery();
+         //   System.out.println("deugging 9876eee54.234d3d567 >>>>>>>>>>>>>>>>>>>>>>>.." + ps);
+            
+            while (rxf.next()) {
+                String abx = rxf.getString(1);
+                String[] ab = abx.split("/");
+                int ddx = ab.length;
+                int ddx_ = ddx - 2;
+                
+                psz = conn.prepareStatement("update raw_ set path_parent = ? where idx = ?");
+                psz.setString(1, ab[ddx_]);
+                psz.setString(2, rxf.getString(2));
+                System.out.println("deugging 987WWWWWWWWWW6eee54.234d3d567 >>>>>>>>>>>>>>>>>>>>>>>.." + psz);
+                psz.executeUpdate();
+                
+                
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 
     public static void UpgradeSORMASTable() throws ClassNotFoundException {
         PreparedStatement ps = null;
@@ -931,9 +1012,9 @@ public class UtilServer extends HttpServlet {
             ps.executeUpdate();
             conn.close();
         } catch (SQLException e) {
-                System.err.println("An exception was thrown "+e.getLocalizedMessage());
-            }
-        
+            System.err.println("An exception was thrown " + e.getLocalizedMessage());
+        }
+
     }
 
     public static void UpgradeSORMASTable1() throws ClassNotFoundException {
@@ -942,11 +1023,11 @@ public class UtilServer extends HttpServlet {
         try {
             ps = conn.prepareStatement(sql.batch_updateSORMASTable_2);
             ps.executeUpdate();
-             conn.close();
-       } catch (SQLException e) {
-                System.err.println("An exception was thrown");
-            }
-        
+            conn.close();
+        } catch (SQLException e) {
+            System.err.println("An exception was thrown");
+        }
+
     }
 
     public static void UpgradeSORMASTable2() throws ClassNotFoundException {
@@ -956,10 +1037,10 @@ public class UtilServer extends HttpServlet {
             ps = conn.prepareStatement(sql.batch_updateSORMASTable_3);
             ps.executeUpdate();
             conn.close();
-       } catch (SQLException e) {
-                System.err.println("An exception was thrown");
-            }
-         
+        } catch (SQLException e) {
+            System.err.println("An exception was thrown");
+        }
+
     }
 
     public static void UpgradeSORMASTable3() throws ClassNotFoundException {
@@ -969,9 +1050,9 @@ public class UtilServer extends HttpServlet {
             ps = conn.prepareStatement(sql.batch_updateSORMASTable_4);
             ps.executeUpdate();
             conn.close();
-       } catch (SQLException e) {
-                System.err.println("An exception was thrown");
-            }
+        } catch (SQLException e) {
+            System.err.println("An exception was thrown");
+        }
     }
 
     public static void sendDataX_a(String stt, String prnt, String numz) throws ClassNotFoundException, SQLException {
@@ -1001,18 +1082,20 @@ public class UtilServer extends HttpServlet {
                     int vk = 1;
 
                     if ("2".equals(rx.getString(5))) {
-                        dxs = "insert into region (uuid,name,externalid,id,changedate,creationdate,epidcode) values(?,?,?,?,now(),?,?) ON CONFLICT DO NOTHING";
+                        dxs = "insert into region (uuid,name,externalid,id,changedate,creationdate,country_id,epidcode) values(?,?,?,?,now(),?,'" + stt + "',?) ON CONFLICT ON CONSTRAINT unique_region_adapter DO UPDATE SET epidcode = EXCLUDED.epidcode";
                         re_g++;
                     } else if ("3".equals(rx.getString(5))) {
                         ds_c++;
-                        dxs = "insert into district (uuid,name,externalid,id,changedate,creationdate,region_id,epidcode) values(?,?,?,?,now(),?,'" + stt + "',?) ON CONFLICT DO NOTHING";
+                        dxs = "insert into district (uuid,name,externalid,id,changedate,creationdate,region_id,epidcode) values(?,?,?,?,now(),?,'" + stt + "',?) ON CONFLICT ON CONSTRAINT unique_district_adapter DO UPDATE SET epidcode = EXCLUDED.epidcode";
                     } else if ("4".equals(rx.getString(5))) {
                         com_m++;
-                        dxs = "insert into community (uuid,name,externalid,id,changedate,creationdate, district_id,epidcode) values(?,?,?,?,now(),?,'" + stt + "',?) ON CONFLICT DO NOTHING";
+                        dxs = "insert into community (uuid,name,externalid,id,changedate,creationdate, district_id,epidcode) values(?,?,?,?,now(),?,'" + stt + "',?) ON CONFLICT ON CONSTRAINT unique_community_adapter DO UPDATE SET epidcode = EXCLUDED.epidcode";
                     } else if ("5".equals(rx.getString(5))) {
                         fac_l++;
-                        dxs = "insert into facility (uuid,name,externalid,id,changedate,creationdate, community_id,epidcode) values(?,?,?,?,now(),?,'" + stt + "',?) ON CONFLICT DO NOTHING";
+                        dxs = "insert into facility (uuid,name,externalid,id,changedate,creationdate, community_id,epidcode) values(?,?,?,?,now(),?,'" + stt + "',?) ON CONFLICT ON CONSTRAINT unique_facility_adapter DO UPDATE SET epidcode = EXCLUDED.epidcode";
                     } else if ("1".equals(rx.getString(5))) {
+                        country_l++;
+                        dxs = "insert into country (uuid,defaultname,externalid,id,changedate,creationdate,isocode) values(?,?,?,?,now(),?,?) ON CONFLICT DO NOTHING";
                         vk = 0;
                     }
                     if (vk == 1) {
@@ -1026,6 +1109,18 @@ public class UtilServer extends HttpServlet {
 
                         System.out.println("debugger 4567.234.13: " + ps_pg);
                         ret = ps_pg.executeUpdate();
+                    } else {
+                        ps_pg = conn_pg.prepareStatement(dxs);
+                        ps_pg.setString(1, randomUUIDString);
+                        ps_pg.setString(2, rx.getString(1));
+                        ps_pg.setString(3, rx.getString(2));
+                        ps_pg.setInt(4, rx.getInt(3));
+                        ps_pg.setDate(5, rx.getDate(4));
+                        ps_pg.setString(6, rx.getString(6));
+
+                        System.out.println("debugger 4567.234.139999: " + ps_pg);
+                        ret = ps_pg.executeUpdate();
+
                     }
                 } finally {
                     if (ret > 0) {

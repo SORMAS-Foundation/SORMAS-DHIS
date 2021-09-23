@@ -21,8 +21,5 @@
     <welcome-file-list>
         <welcome-file>dumxmy.jsp</welcome-file>
     </welcome-file-list>
-    <error-page>
-        <exception-type>org.apache.jasper.JasperException</exception-type>
-        <location>/</location>
-    </error-page>
+   
 </web-app>

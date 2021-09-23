@@ -37,9 +37,12 @@ public class sql {
 
     public static String sync_count_all_synced = "SELECT count(*) FROM sormas_local d WHERE synced = 1;";
 
-    public static String sync_primer_all_matched = "SELECT uuid, level, externalid, idx FROM sormas_local d WHERE (d.duplicate_with is null or d.duplicate_with = '') and (d.externalid != '' or d.externalid is not null);";
+    //public static String sync_primer_all_matched = "SELECT uuid, level, externalid, uid, namex FROM sormas_local d WHERE (d.duplicate_with is null or d.duplicate_with = '') and (d.externalid != '' or d.externalid is not null);";
+    public static String sync_primer_all_matched = "SELECT externalid, level, uuid FROM sormas_local d WHERE (d.duplicate_with is null or d.duplicate_with = '') and (d.externalid != '' or d.externalid is not null);";
 
-    public static String sync_primer_all_fresh = "select path_parent from raw_ where level = ? order by idx asc";
+    public static String sync_primer_all_fresh = "select path_parent from raw_ where level = ? group by path_parent order by idx asc";
+    
+    public static String sync_primer_all_fresh_CLEANER = "select path_parent, idx from raw_ where level != 1 and path_parent like \"%/%\" order by idx asc";
 
     public static String batch_updateSORMASTable_1 = "ALTER TABLE region ADD CONSTRAINT unique_region_adapter UNIQUE (externalid)";
     public static String batch_updateSORMASTable_2 = "ALTER TABLE district ADD CONSTRAINT unique_district_adapter UNIQUE (externalid)";
@@ -47,7 +50,11 @@ public class sql {
     public static String batch_updateSORMASTable_4 = "ALTER TABLE facility ADD CONSTRAINT unique_faciliti_adapter UNIQUE (externalid)";
     
 
-    public static String sync_primer_all_fresh_ = "select idx from raw_ where uuid = ? order by idx asc";
+    public static String getting_REGION_from_sormas_ = "select id from country where externalid = ?";
+    public static String getting_DISTRICT_from_sormas_ = "select id from region where externalid = ?";
+    public static String getting_COMMUNITY_from_sormas_ = "select id from district where externalid = ?";
+    public static String getting_FACILITY_from_sormas_ = "select id from community where externalid = ?";
+    
     public static String sync_all_fresh = "select name, uuid, idx, rec_created, level  from raw_ where level = ? and path_parent like '%?%'";
 
     public static String sync_primer_all_new_matched = "SELECT name, level, externalid, idx, rec_created FROM sormas_local d WHERE (d.duplicate_with is null or d.duplicate_with = '') and (d.externalid != '' or d.externalid is not null);";
@@ -265,7 +272,7 @@ public class sql {
             + "where c.region_id = ?\n"
             + "group by c.caseclassification, c.healthfacility_id, c.classificationdate::date";
 
-    public static String sync_send_all_matched_My = "update raw_ set synced = 1 where idx = ?;";
+    public static String sync_send_all_matched_My = "update raw_ set synced = 1 where uuid = ?;";
 
     //public static String dup_count_matched_no = "SELECT count(*) FROM raw_ r inner JOIN sormas_local d ON (r.UUID = d.externalid) WHERE r.`level` = 2";
     // public static String dup_count_all_from_source_no= "SELECT count(*) FROM raw_ r WHERE r.`level` = 2;";

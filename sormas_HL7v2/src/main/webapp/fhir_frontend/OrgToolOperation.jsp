@@ -233,7 +233,7 @@
                                         <div class="callout" id="step_">
                                             <h5>Maintenance</h5>
 
-                                            <p>Please answer "Setup" if this is the first time the adapter is been installed or the adapter service has just been reinstalled. If not, click next to perform maintenance</p>
+                                            <p>Please answer "Setup" if this is the first time the adapter is been installed or the adapter service has just been reinstalled or you want to sync any new admin data to SORMAS system. If not, click next to perform maintenance</p>
                                             <div class="row">
                                                 <div class="col s4">
 
@@ -241,8 +241,8 @@
                                                         <label >
                                                             Perform maintenance
                                                             <input type="checkbox" <%//rx.getString(2)%> name="server" id="maintenance">
-                                                            <span class="lever"></span>
-                                                            Setup New SORMAS Server
+                                                            <span class="lever" ></span>
+                                                            <span title="Setup new sormas or sync new admin data with SORMAS server">Setup SORMAS Server</span>
                                                         </label>
                                                     </div>
 

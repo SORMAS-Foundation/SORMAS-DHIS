@@ -43,7 +43,7 @@ public class dhisOrgRetrival {
 
             String json_all = "{'pager':'5'}";
 
-            System.out.println("COUNTER XXXXX<<<<<<<<<<<<<<XXXXXXXXXXX = " + pg_counterd);
+            System.out.println("COUNTER executing at level: " + pg_counterd);
 
             try {
 

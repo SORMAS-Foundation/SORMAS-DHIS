@@ -40,7 +40,7 @@ public class sql {
     //public static String sync_primer_all_matched = "SELECT uuid, level, externalid, uid, namex FROM sormas_local d WHERE (d.duplicate_with is null or d.duplicate_with = '') and (d.externalid != '' or d.externalid is not null);";
     public static String sync_primer_all_matched = "SELECT externalid, level, uuid FROM sormas_local d WHERE (d.duplicate_with is null or d.duplicate_with = '') and (d.externalid != '' or d.externalid is not null);";
 
-    public static String sync_primer_all_fresh = "select path_parent from raw_ where level = ? group by path_parent order by idx asc";
+    public static String sync_primer_all_fresh = "select path_parent, idx from raw_ where level = ? group by path_parent order by idx asc";
     
     public static String sync_primer_all_fresh_CLEANER = "select path_parent, idx from raw_ where level != 1 and path_parent like \"%/%\" order by idx asc";
 

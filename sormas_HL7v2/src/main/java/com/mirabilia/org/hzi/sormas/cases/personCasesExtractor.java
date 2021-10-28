@@ -42,8 +42,9 @@ import java.util.logging.Logger;
  */
 public class personCasesExtractor {
 
-    public static void SormasCasePull(String lev) throws ClassNotFoundException {
+    public static String SormasCasePull(String lev) throws ClassNotFoundException {
         SimpleDateFormat frnmt = new SimpleDateFormat("yyyy-MM-dd");
+        String err_ = "";
 
         try {
 
@@ -66,7 +67,9 @@ public class personCasesExtractor {
             }
 
             ra = pa.executeQuery();
+            boolean noBreak = true;
             while (ra.next()) {
+                noBreak = false;
 
                 personCasesUtilityClass.setAddress(ra.getString("address_id"));
                 personCasesUtilityClass.setAddtionaldetails(ra.getString("additionaldetails"));
@@ -155,10 +158,16 @@ public class personCasesExtractor {
                 
 
             }
+            
+            if(noBreak){
+                err_ = "No record found on SORMAS System";
+                System.out.println("DEBUGGER 45WERF345DFG: No record found on SORMAS System");
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(personCasesExtractor.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return err_;
 
     }
 }

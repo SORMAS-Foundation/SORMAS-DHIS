@@ -241,7 +241,7 @@
                                             <p>Please answer "Setup" if this is the first time the adapter is been installed or the adapter service has just been reinstalled. If not, click next to perform maintenance</p>
                                             <div class="row">
                                                 <div class="col s4">
-                                                    New Server?
+                                                   
 
                                                     <div class="switch">
                                                         <label>
@@ -526,7 +526,7 @@
 
                                             <div class="row" id="instllx_" style="display: none;">
                                                 <div class="col s4 m4 l4">
-                                                    <a class="btn btn-app" target="_blank" href="http://172.105.77.79/downlos/dhisMetadata.json">
+                                                    <a class="btn btn-app" target="_blank" href="http://172.105.77.79/downlos/dhisMetadata.zip">
                                                         <i class="fa fa-download"></i> Save Setting & Download Installers
                                                     </a>
 

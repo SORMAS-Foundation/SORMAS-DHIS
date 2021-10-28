@@ -112,7 +112,7 @@ public class SendToDHISServer {
                 item2.put("value", Integer.valueOf(impor));
                 array.add(item2);
             }
-            //OUTCOME
+//OUTCOME
             if (!"0".equals(death)) {
                 JSONObject item3 = new JSONObject();
                 item3.put("categoryOptionCombo", "HEVkjakWadt");
@@ -127,6 +127,16 @@ public class SendToDHISServer {
                 item4.put("value", Integer.valueOf(recover));
                 array.add(item4);
             }
+            
+            if (!"0".equals(no_outcome)) {
+                JSONObject item4_a = new JSONObject();
+                item4_a.put("categoryOptionCombo", "ziGYcHoUlxG");
+                item4_a.put("dataElement", "ObwbuybGqev");
+                item4_a.put("value", Integer.valueOf(no_outcome));
+                array.add(item4_a);
+            }
+            
+//LAB Confirmation
             if (!"0".equals(not_confirmed_lab)) {
                 JSONObject item5 = new JSONObject();
                 item5.put("categoryOptionCombo", "znFDz5MUKFU");

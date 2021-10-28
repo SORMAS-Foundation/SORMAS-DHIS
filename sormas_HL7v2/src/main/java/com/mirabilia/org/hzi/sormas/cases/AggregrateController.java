@@ -463,6 +463,7 @@ public class AggregrateController {
                             confirmed_lab = ra_19.getString(1);
                             //System.out.println("E34323++++++++++++++++:" + ra_19.getString(1));
                         }
+                     
 
 
                         //System.out.println(ra.getString(5) + " " + ad[0] + " " + ra.getString(4) + " " + ad[1] + " " + ra.getString(1) + " " + dtf.format(now) + " " + ra.getString(4) + " " + ra.getString(3) + " " + imported + " " + incountry);

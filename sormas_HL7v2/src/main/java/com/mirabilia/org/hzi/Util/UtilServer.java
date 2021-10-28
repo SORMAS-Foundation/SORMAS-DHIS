@@ -443,13 +443,15 @@ public class UtilServer extends HttpServlet {
 
         if (request.getParameter(
                 "personToDHIS") != null) {
+            String err_ = "";
+            //System.out.println("DEBUG: SD56789987DFG");
 
             try {
-                personCasesExtractor.SormasCasePull("2");
+               err_ = personCasesExtractor.SormasCasePull("2");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
             }
-            mat = "Job done";
+            mat = "Job done: "+err_.toUpperCase();
         }
 
         response.setContentType(
@@ -910,7 +912,7 @@ public class UtilServer extends HttpServlet {
         
         clean_ParentPath();
 
-        if (i != 1) {
+        if (i == 2) {
 
             try {
                 ps = conn.prepareStatement(sql.sync_primer_all_fresh);
@@ -931,18 +933,64 @@ public class UtilServer extends HttpServlet {
                             ps_g = connx.prepareStatement(sql.getting_DISTRICT_from_sormas_);
                             break;
                         case 4:
-                            ps_g = connx.prepareStatement(sql.getting_COMMUNITY_from_sormas_);
+                          //  ps_g = connx.prepareStatement(sql.getting_COMMUNITY_from_sormas_);
                             break;
                         case 5:
-                            ps_g = connx.prepareStatement(sql.getting_FACILITY_from_sormas_);
+                          //  ps_g = connx.prepareStatement(sql.getting_FACILITY_from_sormas_);
                             break;
                     }
+                    
                     ps_g.setString(1, abx);
+                    //retrieving each orgunit data by their parent 
+                    System.out.println("DEBUGGER DFTR345ER90: "+ps_g);
                     s_x = ps_g.executeQuery();
-
-                    System.out.println(ps_g);
+                    
+                    
                     if (s_x.next()) {
-                        //  System.out.println(ab[ddx_] + "   ____   " + rx.getString(1) + " >>>>>>>>>  " + s_x.getString(1) + "");
+                          System.out.println(abx + "   ____   " + rx.getString(1) + " >>>>>>>>>  " + s_x.getString(1) + "");
+
+                        sendDataX_a(s_x.getString(1), abx, i + "");
+
+                    } else {
+                        // return;
+                    }
+
+                }
+
+            } finally {
+                connx.close();
+                conn.close();
+            }
+
+        }else if (i == 3) {
+
+            try {
+                ps = conn.prepareStatement(sql.sync_primer_all_fresh);
+                ps.setString(1, i + ""); //state
+                rx = ps.executeQuery();
+               // System.out.println("deugging 987654.234567 >>>>>>>>>>>>>>>>>>>>>>>.." + ps);
+
+                while (rx.next()) {
+                    String abx = rx.getString(1);//lF9JYZn7kfV/GwPcX4nwChj
+                    
+                    //    System.out.println(rx.getString(1));
+                    switch (i) {
+
+                       
+                        case 3:
+                            ps_g = connx.prepareStatement(sql.getting_DISTRICT_from_sormas_);
+                            break;
+                       
+                    }
+                    
+                    ps_g.setString(1, abx);
+                    //retrieving each orgunit data by their parent 
+                    System.out.println("DEBUGGER DFTR345ER90: "+ps_g);
+                    s_x = ps_g.executeQuery();
+                    
+                    
+                    if (s_x.next()) {
+                          System.out.println(abx + "   ____   " + rx.getString(1) + " >>>>>>>>>  " + s_x.getString(1) + "");
 
                         sendDataX_a(s_x.getString(1), abx, i + "");
 
@@ -960,8 +1008,8 @@ public class UtilServer extends HttpServlet {
         } else {
 
             try {
-
-                sendDataX_a("", "", i + "");
+                System.out.println("-------------------------------------------------------------------------------------------");
+            //    sendDataX_a("", "", i + "");
 
             } finally {
 

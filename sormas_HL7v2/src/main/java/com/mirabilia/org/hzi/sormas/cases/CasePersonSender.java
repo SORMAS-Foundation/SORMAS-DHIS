@@ -56,7 +56,7 @@ import org.json.simple.JSONObject;
  *
  * @author Mathew Official
  */
-public class personSender {
+public class CasePersonSender {
 
     private static String[] _url = ConffileCatcher.fileCatcher("passed");
 
@@ -486,7 +486,7 @@ public class personSender {
 
             json.put("enrollments", arr_1);
 
-            //System.out.println(json.toString());
+           // System.out.println("DEBUGGER BNJHG456789D: "+json.toString());
         } finally {
 
             String pg_url = httpx + "/api/29/trackedEntityInstances";
@@ -531,7 +531,7 @@ public class personSender {
 
                 String json_all = json.toString();
                 jsn = json_all;
-                //  System.err.println(json_all);
+                System.err.println("DEBUGGER POLI0989DF: "+json_all);
 
                 OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
                 out.write(json_all);
@@ -561,7 +561,7 @@ public class personSender {
                         SendToDHISServer.update_PSQL_oneParm_X("update person set externalid = ? where uuid = ?", ch, personCasesUtilityClass.getSRM_Uuid());
 
                         String wx = sb.toString();
-                        System.err.println("Response: Successful! " + wx);
+                        System.err.println("Successful ER2343DG4! " + wx);
                         SendToDHISServer.update_oneParm_X("insert into sync_tracker set json_response = ?, datasource= '" + personCasesUtilityClass.getSRM_Uuid() + "', dataperiod = '" + personCasesUtilityClass.getCreationdate() + "', case_specific_detail = 'Person Table', status = 'ok', created = now()", sb.toString());
                         return;
                     }
@@ -590,18 +590,20 @@ public class personSender {
                     }
                     br.close();
                     System.err.println("STATUS: ERROR!" + sb.toString());
+                    
 
                     System.out.println(urlConnection.getResponseMessage());
+                    
+                 //   SendToDHISServer.update_oneParm_X("insert into sync_tracker set json_response = ?, datasource= '" + personCasesUtilityClass.getSRM_Uuid() + "', dataperiod = '" + personCasesUtilityClass.getCreationdate() + "', case_specific_detail = 'Person Table',  status = 'ERROR_Conflicts_General', created = now()", sb.toString());
+                        
 
                     return;
 
                 }
 
             } catch (IOException ex) {
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(personSender.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(personSender.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(CasePersonSender.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
 
             }

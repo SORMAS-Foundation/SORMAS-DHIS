@@ -40,24 +40,25 @@ import org.apache.commons.codec.binary.Base64;
  * @author Mathew Official
  */
 public class DHIS2resolver {
-     public static String getDemAll(String pg_url) {
+
+    public static String getDemAll(String pg_url) {
 
         HttpURLConnection urlConnection = null;
-        
+
         String name = credentialsManagerUtil.getDhis_User();
         String password = credentialsManagerUtil.getDhis_pawd();
         StringBuilder sb = new StringBuilder();
 
         String authString = name + ":" + password;
-        if(name.isEmpty()){
-        return "";
+        if (name.isEmpty()) {
+            return "";
         }
-       //  System.out.println("ddddddddddddddddddddddddddddddddddddddddddddd" +authString);
+        //  System.out.println("ddddddddddddddddddddddddddddddddddddddddddddd" +authString);
         byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
         String authStringEnc = new String(authEncBytes);
         try {
             URL url = new URL(pg_url);
-         //  System.out.println(pg_url+"ddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+            //  System.out.println(pg_url+"ddddddddddddddddddddddddddddddddddddddddddddddddddddd");
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Authorization", "Basic " + authStringEnc);
             urlConnection.setDoOutput(true);
@@ -65,12 +66,12 @@ public class DHIS2resolver {
             urlConnection.setUseCaches(true);
             urlConnection.setConnectTimeout(4000);
             urlConnection.setReadTimeout(4000);
-             urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.connect();
 
             int HttpResult = urlConnection.getResponseCode();
             //debug  
-           ////System.out.println("######cccccccccccc####Outreach Session HTTP Return Code = " + HttpResult);
+            ////System.out.println("######cccccccccccc####Outreach Session HTTP Return Code = " + HttpResult);
 
             if (HttpResult == 200) {
                 BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
@@ -112,36 +113,33 @@ public class DHIS2resolver {
                 return sb.toString();
             }
 
-        } 
-         catch (IOException ex) {
-             Logger.getLogger(DHIS2resolver.class.getName()).log(Level.SEVERE, null, ex);
-            
-         }        finally {
-            
+        } catch (IOException ex) {
+            Logger.getLogger(DHIS2resolver.class.getName()).log(Level.SEVERE, null, ex);
+
+        } finally {
+
             /**
-             * if (1==2){
-            try {
-                String string = "2020-02-22 22:13:50.948";
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-                java.sql.Timestamp datetime = new Timestamp(formatter.parse(string).getTime());
-                //   ////System.out.println("DatedTime: " + datetime.toString());
-
-                System.err.println("FIXED: Warning!");
-            } catch (ParseException ex) {
-        Logger.getLogger(resolver.class.getName()).log(Level.SEVERE, null, ex);
-    }
-
+             * if (1==2){ try { String string = "2020-02-22 22:13:50.948";
+             * SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd
+             * HH:mm:ss.SSS"); java.sql.Timestamp datetime = new
+             * Timestamp(formatter.parse(string).getTime()); //
+             * ////System.out.println("DatedTime: " + datetime.toString());
+             *
+             * System.err.println("FIXED: Warning!"); } catch (ParseException
+             * ex) {
+             * Logger.getLogger(resolver.class.getName()).log(Level.SEVERE,
+             * null, ex); }
+             *
+             * }
+             *
+             */
         }
-        **/
-        }
-      //  ////System.out.println(sb.toString());
+        //  ////System.out.println(sb.toString());
         return sb.toString();
     }
-     
-     
-     //This method enable downloading of a long connection...
-     
-     public static String getDemAllLong(String pg_url) {
+
+    //This method enable downloading of a long connection...
+    public static String getDemAllLong(String pg_url) {
 
         HttpURLConnection urlConnection = null;
         String name = credentialsManagerUtil.getDhis_User();
@@ -149,6 +147,7 @@ public class DHIS2resolver {
         StringBuilder sb = new StringBuilder();
 
         String authString = name + ":" + password;
+        System.out.println("CONFIDENTIAL DATA: USER currently in use = "+authString);
         byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
         String authStringEnc = new String(authEncBytes);
         try {
@@ -160,12 +159,12 @@ public class DHIS2resolver {
             urlConnection.setUseCaches(true);
             urlConnection.setConnectTimeout(100000);
             urlConnection.setReadTimeout(100000);
-             urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.connect();
 
             int HttpResult = urlConnection.getResponseCode();
             //debug  
-           // ////System.out.println("######cccccccccccc####Outreach Session HTTP Return Code = " + HttpResult);
+            System.out.println("######cccccccccccc####Outreach Session HTTP Return Code = " + HttpResult);
 
             if (HttpResult == 200) {
                 BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
@@ -193,63 +192,65 @@ public class DHIS2resolver {
                 }
             } else {
                 //response.setStatus(502, "DHIS2 Not there!");
-                ////System.out.println("####CCCCCCCCCCCCCC" + urlConnection.getInputStream().toString());
-                BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
+                System.out.println("ERROR 56789 in DHIS2 Resolver");
+                
+                BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getErrorStream(), "utf-8"));
                 String line = null;
                 while ((line = br.readLine()) != null) {
                     sb.append(line + "\n");
                 }
                 br.close();
+                System.err.println("STATUS: ERROR 34RE3" + sb.toString());
+
+                System.out.println(urlConnection.getResponseMessage());
 
                 ////System.out.println("#####XXX##" + sb.toString());
                 ////System.out.println("OUT ERROR:>>>>" + urlConnection.getResponseMessage());
                 return sb.toString();
             }
 
-        } 
-         catch (IOException ex) {
-             Logger.getLogger(DHIS2resolver.class.getName()).log(Level.SEVERE, null, ex);
-            
-         }        finally {
-            
+        } catch (IOException ex) {
+            Logger.getLogger(DHIS2resolver.class.getName()).log(Level.SEVERE, null, ex);
+
+        } finally {
+
             /**
-             * if (1==2){
-            try {
-                String string = "2020-02-22 22:13:50.948";
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-                java.sql.Timestamp datetime = new Timestamp(formatter.parse(string).getTime());
-                //   ////System.out.println("DatedTime: " + datetime.toString());
-
-                System.err.println("FIXED: Warning!");
-            } catch (ParseException ex) {
-        Logger.getLogger(resolver.class.getName()).log(Level.SEVERE, null, ex);
-    }
-
+             * if (1==2){ try { String string = "2020-02-22 22:13:50.948";
+             * SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd
+             * HH:mm:ss.SSS"); java.sql.Timestamp datetime = new
+             * Timestamp(formatter.parse(string).getTime()); //
+             * ////System.out.println("DatedTime: " + datetime.toString());
+             *
+             * System.err.println("FIXED: Warning!"); } catch (ParseException
+             * ex) {
+             * Logger.getLogger(resolver.class.getName()).log(Level.SEVERE,
+             * null, ex); }
+             *
+             * }
+             *
+             */
         }
-        **/
-        }
-      //  ////System.out.println(sb.toString());
+        //  ////System.out.println(sb.toString());
         return sb.toString();
     }
-     
-     
-      public static String getDemAllfromFHIR(String pg_url) {
+
+    public static String getDemAllfromFHIR(String pg_url) {
 
         HttpURLConnection urlConnection = null;
         StringBuilder sb = new StringBuilder();
         /**
-        String name = "field";
-        String password = "Passcode1!x";
-        
-
-        String authString = name + ":" + password;
-        byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
-        String authStringEnc = new String(authEncBytes);
-        **/
+         * String name = "field"; String password = "Passcode1!x";
+         *
+         *
+         * String authString = name + ":" + password; byte[] authEncBytes =
+         * Base64.encodeBase64(authString.getBytes()); String authStringEnc =
+         * new String(authEncBytes);
+        *
+         */
         try {
             URL url = new URL(pg_url);
             urlConnection = (HttpURLConnection) url.openConnection();
-          //  urlConnection.setRequestProperty("Authorization", "Basic " + authStringEnc);
+            //  urlConnection.setRequestProperty("Authorization", "Basic " + authStringEnc);
             urlConnection.setDoOutput(true);
             urlConnection.setRequestMethod("GET");
             urlConnection.setUseCaches(true);
@@ -269,30 +270,27 @@ public class DHIS2resolver {
                 }
                 br.close();
 
-               
             } else {
-                //response.setStatus(502, "DHIS2 Not there!");
-                ////System.out.println("finally : " + urlConnection.getResponseMessage());
-                ////System.out.println("####CCCCCCCCCCCCCC" + urlConnection.getInputStream().toString());
-                BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
+                BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getErrorStream(), "utf-8"));
                 String line = null;
                 while ((line = br.readLine()) != null) {
                     sb.append(line + "\n");
                 }
                 br.close();
+                System.err.println("STATUS: ERROR 34RE3" + sb.toString());
+
 
                 ////System.out.println("#####XXX##" + sb.toString());
                 ////System.out.println("OUT ERROR:>>>>" + urlConnection.getResponseMessage());
                 return sb.toString();
             }
 
-        } 
-         catch (IOException ex) {
-             Logger.getLogger(DHIS2resolver.class.getName()).log(Level.SEVERE, null, ex);
-         }        finally {
-          
+        } catch (IOException ex) {
+            Logger.getLogger(DHIS2resolver.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+
         }
         return sb.toString();
     }
-    
+
 }

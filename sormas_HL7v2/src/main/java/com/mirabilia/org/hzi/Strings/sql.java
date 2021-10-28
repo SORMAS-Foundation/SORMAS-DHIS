@@ -101,7 +101,7 @@ public class sql {
     public static String getSORMAS_NOT_RECOVERED_AND_NOT_DEATH = "select count(*), c.disease, (select externalid from region where id = c.region_id), c.reportdate::date\n"
             + "from cases c\n"
             + "left join region r on (c.region_id = r.id)\n"
-            + "where c.outcome != 'RECOVERED' AND c.outcome = 'DECEASED' and c.region_id = ? and c.reportdate::date = ?\n"
+            + "where c.outcome != 'RECOVERED' AND c.outcome != 'DECEASED' and c.region_id = ? and c.reportdate::date = ?\n"
             + "group by c.disease, c.region_id, c.reportdate::date";
     //Age <=5
     public static String Age_LESS_5 = "select count(*), c.disease, (select externalid from region where id = c.region_id), c.reportdate::date\n"
@@ -150,67 +150,72 @@ public class sql {
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
             + "where p.occupationtype = 'healthworker' and c.region_id = ? and c.reportdate::date = ?\n"
-            + "group by c.disease, c.person_id, c.reportdate::date, p.occupationtype";
+            + "group by c.disease, c.reportdate::date, p.occupationtype";
 
     //occupation lab staff
     public static String Occupation_Lab_Staff = "select count(*), c.disease, c.reportdate::date, p.occupationtype\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
             + "where p.occupationtype is = 'laboratory staff' and c.region_id = ? and c.reportdate::date = ?\n"
-            + "group by c.disease, c.person_id, c.reportdate::date, p.occupationtype";
+            + "group by c.disease, c.reportdate::date, p.occupationtype";
 
     //occupation others 
     public static String Occupation_others = "select count(*), c.disease, c.reportdate::date, p.occupationtype\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
             + "where p.occupationtype != 'laboratory staff'  and p.occupationtype != 'healthworker'  and c.region_id = ? and c.reportdate::date = ?\n"
-            + "group by c.disease, c.person_id, c.reportdate::date, p.occupationtype";
+            + "group by c.disease, c.reportdate::date, p.occupationtype";
 
     //occupation missing unknown
     public static String Occupation_unknow_missing = "select count(*), c.disease, c.reportdate::date, p.occupationtype\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
             + "where (p.occupationtype is null and c.region_id = ? and c.reportdate::date = ?)\n"
-            + "group by c.disease, c.person_id, c.reportdate::date, p.occupationtype";
+            + "group by c.disease, c.reportdate::date, p.occupationtype";
 
     //Gender Male
     public static String Male = "select count(*), c.disease, c.reportdate::date, p.sex\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
             + "where p.sex='MALE' and c.region_id = ? and c.reportdate::date = ?\n"
-            + "group by c.disease, c.person_id, c.reportdate::date, p.sex";
+            + "group by c.disease, c.reportdate::date, p.sex";
 
     //Gender Female
     public static String female = "select count(*), c.disease, c.reportdate::date, p.sex\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
             + "where p.sex='FEMALE' and c.region_id = ? and c.reportdate::date = ?\n"
-            + "group by c.disease, c.person_id, c.reportdate::date, p.sex";
+            + "group by c.disease, c.reportdate::date, p.sex";
 
     //Gender Others
     public static String gender_others = "select count(*), c.disease, c.reportdate::date, p.sex\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
             + "where p.sex != 'FEMALE' and p.sex != 'MALE' and p.sex is not null and c.region_id = ? and c.reportdate::date = ?\n"
-            + "group by c.disease, c.person_id, c.reportdate::date, p.sex";
+            + "group by c.disease, c.reportdate::date, p.sex";
 
     //Gender Unknown
     public static String gender_missing = "select count(*), c.disease, c.reportdate::date, p.sex\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
             + "where  p.sex is null and c.region_id = ? and c.reportdate::date = ?\n"
-            + "group by c.disease, c.person_id, c.reportdate::date, p.sex";
+            + "group by c.disease, c.reportdate::date, p.sex";
 
     //Confirmed not by laboratory  
     public static String confirmed_lab = "select count(*), c.disease, c.reportdate::date, c.laboratorydiagnosticconfirmation\n"
             + "from cases c\n"
             + "where c.laboratorydiagnosticconfirmation='YES' and c.region_id = ? and c.reportdate::date = ?\n"
-            + "group by c.disease, c.person_id, c.reportdate::date, c.laboratorydiagnosticconfirmation";
-
+            + "group by c.disease, c.reportdate::date, c.laboratorydiagnosticconfirmation";
+    
     public static String not_confirmed_lab = "select count(*), c.disease, c.reportdate::date, c.laboratorydiagnosticconfirmation\n"
             + "from cases c\n"
-            + "where c.laboratorydiagnosticconfirmation !='NO' and c.region_id = ? and c.reportdate::date = ?\n"
-            + "group by c.disease, c.person_id, c.reportdate::date, c.laboratorydiagnosticconfirmation";
+            + "where c.laboratorydiagnosticconfirmation!='YES' and c.region_id = ? and c.reportdate::date = ?\n"
+            + "group by c.disease, c.reportdate::date, c.laboratorydiagnosticconfirmation";
+
+    public static String not_confirmed_labm = "select count(*), c.disease, c.reportdate::date, c.laboratorydiagnosticconfirmation\n"
+            + "from cases c\n"
+            + "where c.laboratorydiagnosticconfirmation !='`YES' and c.region_id = ? and c.reportdate::date = ?\n"
+            + "group by c.disease, c.reportdate::date, c.laboratorydiagnosticconfirmation";
 
     public static String getSROMAS_community_PG = "select count(*), c.disease, (select name from community where id = c.community_id), (select externalid from community where id = c.community_id), c.creationdate::date\n"
             + "from cases c\n"

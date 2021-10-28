@@ -27,7 +27,9 @@ package com.mirabilia.org.hzi.Util;
 
 import com.mirabilia.org.hzi.Strings.sql;
 import com.mirabilia.org.hzi.sormas.aggregate.AggregrateController;
-import com.mirabilia.org.hzi.sormas.cases.personCasesExtractor;
+import com.mirabilia.org.hzi.sormas.cases.Case.CasesExtractor;
+import com.mirabilia.org.hzi.sormas.cases.Case.CasesToDHIS;
+import com.mirabilia.org.hzi.sormas.cases.personRecords.personCasesExtractor;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import static com.mirabilia.org.hzi.updaters.Util.MetaFileGetter;
 import java.io.IOException;
@@ -447,11 +449,23 @@ public class UtilServer extends HttpServlet {
             //System.out.println("DEBUG: SD56789987DFG");
 
             try {
-               err_ = personCasesExtractor.SormasCasePull("2");
+                //pushing person's record
+                err_ = personCasesExtractor.SormasCasePull("2");
+
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+
+                try {
+//pushing cases and attache it to person's record
+                    CasesExtractor.SormasCasePull("2");
+
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(CasesToDHIS.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
-            mat = "Job done: "+err_.toUpperCase();
+            mat = "Job done: " + err_.toUpperCase();
         }
 
         response.setContentType(
@@ -662,7 +676,7 @@ public class UtilServer extends HttpServlet {
         ResultSet rx_pg = null;
         Connection conn_pg = DbConnector.getPgConnection();
         int ret = 0;
-     //   System.out.println("============"+sqq);
+        //   System.out.println("============"+sqq);
 
         try {
 
@@ -670,8 +684,8 @@ public class UtilServer extends HttpServlet {
             rx = ps.executeQuery();
 
             while (rx.next()) {
-             //   UUID uuid = UUID.randomUUID();
-             //   String randomUUIDString = uuid.toString().toUpperCase();
+                //   UUID uuid = UUID.randomUUID();
+                //   String randomUUIDString = uuid.toString().toUpperCase();
 
                 try {
                     String dxs = "";
@@ -684,7 +698,7 @@ public class UtilServer extends HttpServlet {
                     } else if ("5".equals(rx.getString(2))) {
                         dxs = "update facility set externalid = ? where uuid = ?";
                     }
-                     /*
+                    /*
                     String dxs = "";
                     if ("2".equals(rx.getString(2))) {
                         dxs = "insert into region (uuid,externalid,id,changedate,creationdate,name) values(?,?,?,now(),now(),?) ON CONFLICT ON CONSTRAINT region_uuid_key DO UPDATE SET externalid = EXCLUDED.externalid";
@@ -701,15 +715,14 @@ public class UtilServer extends HttpServlet {
                     ps_pg.setInt(3, rx.getInt(4));
                     ps_pg.setString(4, rx.getString(5));
                     //  ps_pg.setString(5, rx.getString(5));
-                    */
-                    
-                    
-             //       System.out.println("--------------------"+dxs);
+                     */
+
+                    //       System.out.println("--------------------"+dxs);
                     ps_pg = conn_pg.prepareStatement(dxs);
                     ps_pg.setString(1, rx.getString(1));
                     ps_pg.setString(2, rx.getString(3));
 
-                     System.out.println("Debugger 4567x.23456e.65432t: "+ps_pg);
+                    System.out.println("Debugger 4567x.23456e.65432t: " + ps_pg);
                     ret = ps_pg.executeUpdate();
 
                 } finally {
@@ -909,20 +922,20 @@ public class UtilServer extends HttpServlet {
 
         Connection conn = DbConnector.getConnection();
         Connection connx = DbConnector.getPgConnection();
-        
+
         clean_ParentPath();
 
-        if (i == 2) {
+        if (i == 3) {
 
             try {
                 ps = conn.prepareStatement(sql.sync_primer_all_fresh);
                 ps.setString(1, i + ""); //state
                 rx = ps.executeQuery();
-               // System.out.println("deugging 987654.234567 >>>>>>>>>>>>>>>>>>>>>>>.." + ps);
+                // System.out.println("deugging 987654.234567 >>>>>>>>>>>>>>>>>>>>>>>.." + ps);
 
                 while (rx.next()) {
                     String abx = rx.getString(1);//lF9JYZn7kfV/GwPcX4nwChj
-                    
+
                     //    System.out.println(rx.getString(1));
                     switch (i) {
 
@@ -933,21 +946,20 @@ public class UtilServer extends HttpServlet {
                             ps_g = connx.prepareStatement(sql.getting_DISTRICT_from_sormas_);
                             break;
                         case 4:
-                          //  ps_g = connx.prepareStatement(sql.getting_COMMUNITY_from_sormas_);
+                            //  ps_g = connx.prepareStatement(sql.getting_COMMUNITY_from_sormas_);
                             break;
                         case 5:
-                          //  ps_g = connx.prepareStatement(sql.getting_FACILITY_from_sormas_);
+                            //  ps_g = connx.prepareStatement(sql.getting_FACILITY_from_sormas_);
                             break;
                     }
-                    
+
                     ps_g.setString(1, abx);
                     //retrieving each orgunit data by their parent 
-                    System.out.println("DEBUGGER DFTR345ER90: "+ps_g);
+                    System.out.println("DEBUGGER DFTR345ER90: " + ps_g);
                     s_x = ps_g.executeQuery();
-                    
-                    
+
                     if (s_x.next()) {
-                          System.out.println(abx + "   ____   " + rx.getString(1) + " >>>>>>>>>  " + s_x.getString(1) + "");
+                        System.out.println(abx + "   ____   " + rx.getString(1) + " >>>>>>>>>  " + s_x.getString(1) + "");
 
                         sendDataX_a(s_x.getString(1), abx, i + "");
 
@@ -962,54 +974,12 @@ public class UtilServer extends HttpServlet {
                 conn.close();
             }
 
-        }else if (i == 3) {
-
-            try {
-                ps = conn.prepareStatement(sql.sync_primer_all_fresh);
-                ps.setString(1, i + ""); //state
-                rx = ps.executeQuery();
-               // System.out.println("deugging 987654.234567 >>>>>>>>>>>>>>>>>>>>>>>.." + ps);
-
-                while (rx.next()) {
-                    String abx = rx.getString(1);//lF9JYZn7kfV/GwPcX4nwChj
-                    
-                    //    System.out.println(rx.getString(1));
-                    switch (i) {
-
-                       
-                        case 3:
-                            ps_g = connx.prepareStatement(sql.getting_DISTRICT_from_sormas_);
-                            break;
-                       
-                    }
-                    
-                    ps_g.setString(1, abx);
-                    //retrieving each orgunit data by their parent 
-                    System.out.println("DEBUGGER DFTR345ER90: "+ps_g);
-                    s_x = ps_g.executeQuery();
-                    
-                    
-                    if (s_x.next()) {
-                          System.out.println(abx + "   ____   " + rx.getString(1) + " >>>>>>>>>  " + s_x.getString(1) + "");
-
-                        sendDataX_a(s_x.getString(1), abx, i + "");
-
-                    } else {
-                        // return;
-                    }
-
-                }
-
-            } finally {
-                connx.close();
-                conn.close();
-            }
-
-        } else {
+        }
+        else {
 
             try {
                 System.out.println("-------------------------------------------------------------------------------------------");
-            //    sendDataX_a("", "", i + "");
+                    sendDataX_a("", "", i + "");
 
             } finally {
 
@@ -1023,34 +993,31 @@ public class UtilServer extends HttpServlet {
             PreparedStatement ps = null;
             PreparedStatement psz = null;
             ResultSet rxf = null;
-            
+
             Connection conn = DbConnector.getConnection();
-            
+
             ps = conn.prepareStatement(sql.sync_primer_all_fresh_CLEANER);
             rxf = ps.executeQuery();
-         //   System.out.println("deugging 9876eee54.234d3d567 >>>>>>>>>>>>>>>>>>>>>>>.." + ps);
-            
+            //   System.out.println("deugging 9876eee54.234d3d567 >>>>>>>>>>>>>>>>>>>>>>>.." + ps);
+
             while (rxf.next()) {
                 String abx = rxf.getString(1);
                 String[] ab = abx.split("/");
                 int ddx = ab.length;
                 int ddx_ = ddx - 2;
-                
+
                 psz = conn.prepareStatement("update raw_ set path_parent = ? where idx = ?");
                 psz.setString(1, ab[ddx_]);
                 psz.setString(2, rxf.getString(2));
                 System.out.println("deugging 987WWWWWWWWWW6eee54.234d3d567 >>>>>>>>>>>>>>>>>>>>>>>.." + psz);
                 psz.executeUpdate();
-                
-                
+
             }
-            
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 
     public static void UpgradeSORMASTable() throws ClassNotFoundException {
         PreparedStatement ps = null;

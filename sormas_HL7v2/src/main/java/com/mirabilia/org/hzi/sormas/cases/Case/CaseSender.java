@@ -212,8 +212,8 @@ public class CaseSender {
 
                 String json_all = json.toString();
                 jsn = json_all;
-                  System.err.println(json_all);
-
+                  System.err.println("DEBBUGGER 2345WEFTG2345: "+json_all);
+                 
                 OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
                 out.write(json_all);
                 out.close();
@@ -270,7 +270,7 @@ public class CaseSender {
                         sb.append(line + "\n");
                     }
                     br.close();
-                    System.err.println("STATUS: ERROR!" + sb.toString());
+                    System.err.println("STATUS: UCVB32:" + sb.toString());
 
                     System.out.println(urlConnection.getResponseMessage());
 

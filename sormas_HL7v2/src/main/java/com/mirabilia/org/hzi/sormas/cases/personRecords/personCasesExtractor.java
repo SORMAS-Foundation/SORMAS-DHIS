@@ -23,10 +23,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.mirabilia.org.hzi.sormas.person;
+package com.mirabilia.org.hzi.sormas.cases.personRecords;
 
 import com.mirabilia.org.hzi.Strings.sql;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
+import com.mirabilia.org.hzi.sormas.cases.CasesData.personCasesUtilityClass;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,8 +42,9 @@ import java.util.logging.Logger;
  */
 public class personCasesExtractor {
 
-    public static void SormasCasePull(String lev) throws ClassNotFoundException {
+    public static String SormasCasePull(String lev) throws ClassNotFoundException {
         SimpleDateFormat frnmt = new SimpleDateFormat("yyyy-MM-dd");
+        String err_ = "";
 
         try {
 
@@ -65,7 +67,9 @@ public class personCasesExtractor {
             }
 
             ra = pa.executeQuery();
+            boolean noBreak = true;
             while (ra.next()) {
+                noBreak = false;
 
                 personCasesUtilityClass.setAddress(ra.getString("address_id"));
                 personCasesUtilityClass.setAddtionaldetails(ra.getString("additionaldetails"));
@@ -120,7 +124,7 @@ public class personCasesExtractor {
                 personCasesUtilityClass.setDeath_Place_Type(ra.getString("DeathPlaceType"));
                 personCasesUtilityClass.setEducation_Details(ra.getString("EducationDetails"));
                 personCasesUtilityClass.setEducation_Type(ra.getString("EducationType"));
-                personCasesUtilityClass.setExternalid(ra.getString("Externalid"));
+                personCasesUtilityClass.setExternalid(ra.getString("PERSONexternalid"));
                 personCasesUtilityClass.setExternaltoken(ra.getString("Externaltoken"));
                 personCasesUtilityClass.setFathersname(ra.getString("Fathersname"));
                 personCasesUtilityClass.setFirstname(ra.getString("Firstname"));
@@ -146,7 +150,7 @@ public class personCasesExtractor {
                 personCasesUtilityClass.setSex(ra.getString("Sex"));
                 personCasesUtilityClass.setSormas_System_Period(ra.getString("sys_Period"));
                 personCasesUtilityClass.setSRM_Uuid(ra.getString("Uuid"));
-                personCasesUtilityClass.setSymptomjournalstatus(ra.getString("Symptomjournalstatus"));//r.externalid
+                personCasesUtilityClass.setSymptomjournalstatus(ra.getString("Symptomjournalstatus"));
                 personCasesUtilityClass.setExternal_id(ra.getString("externalid_region"));
                 personCasesUtilityClass.setC_id(ra.getString("id_case"));
                 
@@ -154,10 +158,16 @@ public class personCasesExtractor {
                 
 
             }
+            
+            if(noBreak){
+                err_ = "No record found on SORMAS System";
+                System.out.println("DEBUGGER 45WERF345DFG: No record found on SORMAS System");
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(personCasesExtractor.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return err_;
 
     }
 }

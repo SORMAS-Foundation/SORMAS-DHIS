@@ -295,9 +295,9 @@ public class SampleSender {
 
             } catch (IOException ex) {
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CaseSender.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SampleSender.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
-                Logger.getLogger(CaseSender.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SampleSender.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
 
             }

@@ -23,7 +23,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.mirabilia.org.hzi.sormas.cases;
+package com.mirabilia.org.hzi.sormas.cases.personRecords;
 
 import com.mirabilia.org.hzi.Strings.sql;
 import com.mirabilia.org.hzi.sormas.aggregate.SendToDHISServer;

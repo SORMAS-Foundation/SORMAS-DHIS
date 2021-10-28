@@ -26,7 +26,6 @@
 package com.mirabilia.org.hzi.sormas.cases.Sample;
 
 import com.mirabilia.org.hzi.sormas.cases.Case.*;
-import com.mirabilia.org.hzi.sormas.cases.*;
 import com.mirabilia.org.hzi.Strings.sql;
 import com.mirabilia.org.hzi.sormas.aggregate.SendToDHISServer;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;

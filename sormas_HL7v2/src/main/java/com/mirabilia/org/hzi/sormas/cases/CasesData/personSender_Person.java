@@ -23,14 +23,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.mirabilia.org.hzi.sormas.cases;
+package com.mirabilia.org.hzi.sormas.cases.CasesData;
 
-import com.mirabilia.org.hzi.Util.credentialsManagerUtil;
 import com.mirabilia.org.hzi.sormas.aggregate.SendToDHISServer;
 import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
-import com.mirabilia.org.hzi.sormas.person.personCasesToDHIS;
-import com.mirabilia.org.hzi.sormas.person.personCasesUtilityClass;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -56,7 +53,7 @@ import org.json.simple.JSONObject;
  *
  * @author Mathew Official
  */
-public class CasePersonSender {
+public class personSender_Person {
 
     private static String[] _url = ConffileCatcher.fileCatcher("passed");
 
@@ -68,8 +65,8 @@ public class CasePersonSender {
         //     System.out.println("URI in use: " + httpx);
         // String http = httpx + "/api/dataValueSets";
         HttpURLConnection urlConnection = null;
-        String name = credentialsManagerUtil.getDhis_User();
-        String password = credentialsManagerUtil.getDhis_pawd();
+        String name = "admin";
+        String password = "district";
 
         String authString = name + ":" + password;
 
@@ -486,7 +483,7 @@ public class CasePersonSender {
 
             json.put("enrollments", arr_1);
 
-           // System.out.println("DEBUGGER BNJHG456789D: "+json.toString());
+            //System.out.println(json.toString());
         } finally {
 
             String pg_url = httpx + "/api/29/trackedEntityInstances";
@@ -531,7 +528,7 @@ public class CasePersonSender {
 
                 String json_all = json.toString();
                 jsn = json_all;
-                System.err.println("DEBUGGER POLI0989DF: "+json_all);
+                //  System.err.println(json_all);
 
                 OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
                 out.write(json_all);
@@ -561,7 +558,7 @@ public class CasePersonSender {
                         SendToDHISServer.update_PSQL_oneParm_X("update person set externalid = ? where uuid = ?", ch, personCasesUtilityClass.getSRM_Uuid());
 
                         String wx = sb.toString();
-                        System.err.println("Successful ER2343DG4! " + wx);
+                        System.err.println("Response: Successful! " + wx);
                         SendToDHISServer.update_oneParm_X("insert into sync_tracker set json_response = ?, datasource= '" + personCasesUtilityClass.getSRM_Uuid() + "', dataperiod = '" + personCasesUtilityClass.getCreationdate() + "', case_specific_detail = 'Person Table', status = 'ok', created = now()", sb.toString());
                         return;
                     }
@@ -590,20 +587,18 @@ public class CasePersonSender {
                     }
                     br.close();
                     System.err.println("STATUS: ERROR!" + sb.toString());
-                    
 
                     System.out.println(urlConnection.getResponseMessage());
-                    
-                 //   SendToDHISServer.update_oneParm_X("insert into sync_tracker set json_response = ?, datasource= '" + personCasesUtilityClass.getSRM_Uuid() + "', dataperiod = '" + personCasesUtilityClass.getCreationdate() + "', case_specific_detail = 'Person Table',  status = 'ERROR_Conflicts_General', created = now()", sb.toString());
-                        
 
                     return;
 
                 }
 
             } catch (IOException ex) {
-            } catch (ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(CasePersonSender.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(personSender_Person.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(personSender_Person.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
 
             }

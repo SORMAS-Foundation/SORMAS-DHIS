@@ -23,9 +23,8 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.mirabilia.org.hzi.sormas.person;
+package com.mirabilia.org.hzi.sormas.cases.CasesData;
 
-import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,18 +41,19 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "extractor_Validatorx", urlPatterns = {"/seRtyTreSDfrEwertrfDrTyuiOlmNbvcdfGhyUiOLKMNbVCxDfgHJkIuytRd"})
 public class personCasesToDHIS extends HttpServlet {
 
-   
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         try {
 
-            personCasesExtractor.SormasCasePull("2");
+            personCasesExtractor_.SormasCasePull("2");
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(personCasesToDHIS.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+          //  CaseSender.jsonDHISSender();
+
         }
 
     }

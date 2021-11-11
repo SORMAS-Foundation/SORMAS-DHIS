@@ -160,7 +160,7 @@ public class personCasesExtractor {
             }
             
             if(noBreak){
-                err_ = "No record found on SORMAS System";
+                err_ = "No new record found on SORMAS System";
                 System.out.println("DEBUGGER 45WERF345DFG: No record found on SORMAS System");
             }
 

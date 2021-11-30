@@ -353,6 +353,7 @@ public class sql {
             + "where  s.pathogentestresult = 'POSITIVE' and s.changedate::date = '2020-06-15' and c.id not in (select id from cases where pointofentry_id is not null and creationdate::date = '2020-06-15') group by region_id";
 
     //CASE_BASE_NEW
+    //concat(d.housenumber,', ',d.street,', ',d.city,'.')
     public static String getPersons_Record_to_TrackEntity = "select p.id, p.approximateage, p.burialconductor, p.burialdate, p.changedate, p.creationdate,	\n"
             + "p.deathdate, p.firstname, p.lastname, p.occupationdetails, p.occupationtype, p.presentcondition,\n"
             + "p.sex, p.uuid, concat(d.street, ' ', d.housenumber, ', ',d.postalcode, ' ', d.city), p.birthdate_dd, p.birthdate_mm, p.birthdate_yyyy, p.nickname, p.mothersmaidenname,\n"

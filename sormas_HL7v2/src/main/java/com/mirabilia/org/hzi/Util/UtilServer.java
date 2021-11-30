@@ -925,7 +925,7 @@ public class UtilServer extends HttpServlet {
 
         clean_ParentPath();
 
-        if (i == 3) {
+        if (i != 1) {
 
             try {
                 ps = conn.prepareStatement(sql.sync_primer_all_fresh);

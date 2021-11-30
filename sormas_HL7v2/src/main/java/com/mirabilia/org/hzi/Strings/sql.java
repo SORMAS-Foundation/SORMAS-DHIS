@@ -41,20 +41,19 @@ public class sql {
     public static String sync_primer_all_matched = "SELECT externalid, level, uuid FROM sormas_local d WHERE (d.duplicate_with is null or d.duplicate_with = '') and (d.externalid != '' or d.externalid is not null);";
 
     public static String sync_primer_all_fresh = "select path_parent, idx from raw_ where level = ? group by path_parent order by idx asc";
-    
+
     public static String sync_primer_all_fresh_CLEANER = "select path_parent, idx from raw_ where level != 1 and path_parent like \"%/%\" order by idx asc";
 
     public static String batch_updateSORMASTable_1 = "ALTER TABLE region ADD CONSTRAINT unique_region_adapter UNIQUE (externalid)";
     public static String batch_updateSORMASTable_2 = "ALTER TABLE district ADD CONSTRAINT unique_district_adapter UNIQUE (externalid)";
     public static String batch_updateSORMASTable_3 = "ALTER TABLE community ADD CONSTRAINT unique_community_adapter UNIQUE (externalid)";
     public static String batch_updateSORMASTable_4 = "ALTER TABLE facility ADD CONSTRAINT unique_faciliti_adapter UNIQUE (externalid)";
-    
 
     public static String getting_REGION_from_sormas_ = "select id from country where externalid = ?";
     public static String getting_DISTRICT_from_sormas_ = "select id from region where externalid = ?";
     public static String getting_COMMUNITY_from_sormas_ = "select id from district where externalid = ?";
     public static String getting_FACILITY_from_sormas_ = "select id from community where externalid = ?";
-    
+
     public static String sync_all_fresh = "select name, uuid, idx, rec_created, level  from raw_ where level = ? and path_parent like '%?%'";
 
     public static String sync_primer_all_new_matched = "SELECT name, level, externalid, idx, rec_created FROM sormas_local d WHERE (d.duplicate_with is null or d.duplicate_with = '') and (d.externalid != '' or d.externalid is not null);";
@@ -206,7 +205,7 @@ public class sql {
             + "from cases c\n"
             + "where c.laboratorydiagnosticconfirmation='YES' and c.region_id = ? and c.reportdate::date = ?\n"
             + "group by c.disease, c.reportdate::date, c.laboratorydiagnosticconfirmation";
-    
+
     public static String not_confirmed_lab = "select count(*), c.disease, c.reportdate::date, c.laboratorydiagnosticconfirmation\n"
             + "from cases c\n"
             + "where c.laboratorydiagnosticconfirmation!='YES' and c.region_id = ? and c.reportdate::date = ?\n"
@@ -354,20 +353,21 @@ public class sql {
             + "where  s.pathogentestresult = 'POSITIVE' and s.changedate::date = '2020-06-15' and c.id not in (select id from cases where pointofentry_id is not null and creationdate::date = '2020-06-15') group by region_id";
 
     //CASE_BASE_NEW
-    public static String getPersons_Record_to_TrackEntity = "select p.id, p.approximateage, p.burialconductor, p.burialdate, p.changedate, p.creationdate,\n"
-            + "	p.deathdate, p.firstname, p.lastname, p.occupationdetails, p.occupationtype, p.presentcondition, \n"
-            + "	p.sex, p.uuid, p.address_id, p.birthdate_dd, p.birthdate_mm, p.birthdate_yyyy, p.nickname, p.mothersmaidenname,\n"
-            + "	p.deathplacetype, p.deathplacedescription, p.sys_period, p.causeofdeath, p.causeofdeathdetails, p.causeofdeathdisease, p.educationtype,\n"
-            + "	p.educationdetails, p.approximateagereferencedate, p.approximateagetype, p.mothersname, p.fathersname, p.placeofbirthregion_id,\n"
-            + "	p.placeofbirthdistrict_id, p.placeofbirthcommunity_id, p.placeofbirthfacility_id, p.placeofbirthfacilitydetails, p.gestationageatbirth,\n"
-            + "	p.birthweight, p.passportnumber, p.nationalhealthid, p.placeofbirthfacilitytype, p.changedateofembeddedlists, \n"
-            + "	p.symptomjournalstatus, p.hascovidapp, p.covidcodedelivered, p.externalid as PERSONexternalid, p.armedforcesrelationtype,\n"
-            + "	p.namesofguardians, p.additionaldetails, p.BurialPlaceDescription, p.salutation,"
-            + " p.othersalutation, p.birthname, p.birthcountry_id, p.citizenship_id, p.externaltoken, r.externalid as externalid_region, c.id as id_case\n"
-            + "	from person p\n"
-            + "	left join cases c on p.id = c.person_id\n"
-            + "	left join region r on c.responsibleregion_id = r.id\n"
-            + "      where p.externalid is null or p.changedate = now()";
+    public static String getPersons_Record_to_TrackEntity = "select p.id, p.approximateage, p.burialconductor, p.burialdate, p.changedate, p.creationdate,	\n"
+            + "p.deathdate, p.firstname, p.lastname, p.occupationdetails, p.occupationtype, p.presentcondition,\n"
+            + "p.sex, p.uuid, concat(d.street, ' ', d.housenumber, ', ',d.postalcode, ' ', d.city), p.birthdate_dd, p.birthdate_mm, p.birthdate_yyyy, p.nickname, p.mothersmaidenname,\n"
+            + "p.deathplacetype, p.deathplacedescription, p.sys_period, p.causeofdeath, p.causeofdeathdetails, p.causeofdeathdisease, p.educationtype,\n"
+            + "p.educationdetails, p.approximateagereferencedate, p.approximateagetype, p.mothersname, p.fathersname, p.placeofbirthregion_id,\n"
+            + "p.placeofbirthdistrict_id, p.placeofbirthcommunity_id, p.placeofbirthfacility_id, p.placeofbirthfacilitydetails, p.gestationageatbirth,\n"
+            + "p.birthweight, p.passportnumber, p.nationalhealthid, p.placeofbirthfacilitytype, p.changedateofembeddedlists, \n"
+            + "p.symptomjournalstatus, p.hascovidapp, p.covidcodedelivered, p.externalid as PERSONexternalid, p.armedforcesrelationtype,\n"
+            + "p.namesofguardians, p.additionaldetails, p.BurialPlaceDescription, p.salutation,\n"
+            + "p.othersalutation, p.birthname, p.birthcountry_id, p.citizenship_id, p.externaltoken, r.externalid as externalid_region, c.id as id_case\n"
+            + "from person p\n"
+            + "left join cases c on p.id = c.person_id\n"
+            + "inner join public.location d on d.id = p.address_id\n"
+            + "left join region r on r.id = c.responsibleregion_id\n"
+            + "where p.externalid is null or p.changedate = now()";
 
     public static String getCases = "select c.id, c.person_id, r.externalid as reg_externalid, c.creationdate, c.disease, c.caseclassification,\n"
             + "c.outcome, c.caseage, c.caseorigin,c.uuid, c.reportlon, c.reportlat, c.externalid,\n"

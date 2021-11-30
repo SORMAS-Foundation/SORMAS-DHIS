@@ -363,11 +363,11 @@ public class sql {
             + "	p.birthweight, p.passportnumber, p.nationalhealthid, p.placeofbirthfacilitytype, p.changedateofembeddedlists, \n"
             + "	p.symptomjournalstatus, p.hascovidapp, p.covidcodedelivered, p.externalid as PERSONexternalid, p.armedforcesrelationtype,\n"
             + "	p.namesofguardians, p.additionaldetails, p.BurialPlaceDescription, p.salutation,"
-            + "      p.othersalutation, p.birthname, p.birthcountry_id, p.citizenship_id, p.externaltoken, r.externalid as externalid_region, c.id as id_case\n"
+            + " p.othersalutation, p.birthname, p.birthcountry_id, p.citizenship_id, p.externaltoken, r.externalid as externalid_region, c.id as id_case\n"
             + "	from person p\n"
             + "	left join cases c on p.id = c.person_id\n"
-            + "	left join region r on c.region_id = r.id\n"
-            + "      where p.externalid is not null or p.changedate = now()";
+            + "	left join region r on c.responsibleregion_id = r.id\n"
+            + "      where p.externalid is null or p.changedate = now()";
 
     public static String getCases = "select c.id, c.person_id, r.externalid as reg_externalid, c.creationdate, c.disease, c.caseclassification,\n"
             + "c.outcome, c.caseage, c.caseorigin,c.uuid, c.reportlon, c.reportlat, c.externalid,\n"

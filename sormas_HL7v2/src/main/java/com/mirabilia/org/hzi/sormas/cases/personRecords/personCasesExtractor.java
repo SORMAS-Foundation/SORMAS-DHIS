@@ -71,7 +71,7 @@ public class personCasesExtractor {
             while (ra.next()) {
                 noBreak = false;
 
-                personCasesUtilityClass.setAddress(ra.getString("address_id"));
+                personCasesUtilityClass.setAddress(ra.getString("address_idx"));
                 personCasesUtilityClass.setAddtionaldetails(ra.getString("additionaldetails"));
                 personCasesUtilityClass.setApproximateage(ra.getString("Approximateage"));
 

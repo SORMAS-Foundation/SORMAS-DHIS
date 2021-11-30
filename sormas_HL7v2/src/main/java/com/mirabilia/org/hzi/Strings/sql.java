@@ -356,7 +356,7 @@ public class sql {
     //concat(d.housenumber,', ',d.street,', ',d.city,'.')
     public static String getPersons_Record_to_TrackEntity = "select p.id, p.approximateage, p.burialconductor, p.burialdate, p.changedate, p.creationdate,	\n"
             + "p.deathdate, p.firstname, p.lastname, p.occupationdetails, p.occupationtype, p.presentcondition,\n"
-            + "p.sex, p.uuid, concat(d.street, ' ', d.housenumber, ', ',d.postalcode, ' ', d.city), p.birthdate_dd, p.birthdate_mm, p.birthdate_yyyy, p.nickname, p.mothersmaidenname,\n"
+            + "p.sex, p.uuid, concat(d.street, ' ', d.housenumber, ', ',d.postalcode, ' ', d.city) as address_idx, p.birthdate_dd, p.birthdate_mm, p.birthdate_yyyy, p.nickname, p.mothersmaidenname,\n"
             + "p.deathplacetype, p.deathplacedescription, p.sys_period, p.causeofdeath, p.causeofdeathdetails, p.causeofdeathdisease, p.educationtype,\n"
             + "p.educationdetails, p.approximateagereferencedate, p.approximateagetype, p.mothersname, p.fathersname, p.placeofbirthregion_id,\n"
             + "p.placeofbirthdistrict_id, p.placeofbirthcommunity_id, p.placeofbirthfacility_id, p.placeofbirthfacilitydetails, p.gestationageatbirth,\n"

@@ -209,13 +209,13 @@ public class AggregrateController {
                 pa = cox.prepareStatement(sql.getSROMAS_region_Aggregate_AllCases);
             }
             if ("3".equals(lev)) {
-                pa = cox.prepareStatement(sql.getSROMAS_district_Aggregate_AllCases);
+          //      pa = cox.prepareStatement(sql.getSROMAS_district_Aggregate_AllCases);
             }
             if ("4".equals(lev)) {
-                pa = cox.prepareStatement(sql.getSROMAS_community_PG);
+            //    pa = cox.prepareStatement(sql.getSROMAS_community_PG);
             }
             if ("5".equals(lev)) {
-                pa = cox.prepareStatement(sql.getSROMAS_hf_PG);
+             //   pa = cox.prepareStatement(sql.getSROMAS_hf_PG);
             }
 
             ra = pa.executeQuery();

@@ -64,10 +64,10 @@ public class sql {
             + "where c.id = ?"
             + "group by c.disease, c.district_id, c.creationdate::date";
 //no of cases by disease
-    public static String getSROMAS_region_Aggregate_AllCases = "select count(*), c.disease, (select externalid from region where id = c.region_id), c.reportdate::date, c.region_id, r.name\n"
+    public static String getSROMAS_region_Aggregate_AllCases = "select count(*), c.disease, (select externalid from region where id = c.responsibleregion_id), c.reportdate::date, c.responsibleregion_id, r.name\n"
             + "from cases c\n"
-            + "left join region r on (c.region_id = r.id)\n"
-            + "group by c.disease, c.region_id, c.reportdate::date, r.name";
+            + "left join region r on (c.responsibleregion_id = r.id)\n"
+            + "group by c.disease, c.responsibleregion_id, c.reportdate::date, r.name";
 
 //no of cases in country
     public static String getSORMAS_INCOUNTRY = "select count(*), c.disease\n"

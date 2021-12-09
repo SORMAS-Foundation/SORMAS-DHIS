@@ -94,6 +94,8 @@ public class AggregrateController {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
 
+        Boolean debug = true;
+
         try {
             Connection cox = DbConnector.getPgConnection();
             PreparedStatement pa = null;
@@ -205,22 +207,27 @@ public class AggregrateController {
             ResultSet ra_33 = null;
 
             if ("2".equals(lev)) {
-                ////System.out.println("1111111111111111");
+                if (debug) {
+                    System.out.println("Debugger: 2DEASR34 = " + sql.getSROMAS_region_Aggregate_AllCases);
+                };
                 pa = cox.prepareStatement(sql.getSROMAS_region_Aggregate_AllCases);
             }
             if ("3".equals(lev)) {
-          //      pa = cox.prepareStatement(sql.getSROMAS_district_Aggregate_AllCases);
+                //      pa = cox.prepareStatement(sql.getSROMAS_district_Aggregate_AllCases);
             }
             if ("4".equals(lev)) {
-            //    pa = cox.prepareStatement(sql.getSROMAS_community_PG);
+                //    pa = cox.prepareStatement(sql.getSROMAS_community_PG);
             }
             if ("5".equals(lev)) {
-             //   pa = cox.prepareStatement(sql.getSROMAS_hf_PG);
+                //   pa = cox.prepareStatement(sql.getSROMAS_hf_PG);
             }
 
             ra = pa.executeQuery();
             while (ra.next()) {
-                //////System.out.println("I am in DHIS2 pusher AggregrateController");
+                if (debug) {
+                    System.out.println("I am in DHIS2 pusher AggregrateController");
+                };
+
                 String splitt = SendToDHISServer.update_oneParm("select concat(s.parm2,\",\", s.parm3) from transition_parameters s where s.parm1 = ?", ra.getString(2));
 
                 if (!splitt.isEmpty()) {
@@ -228,43 +235,11 @@ public class AggregrateController {
                         String region_id = ra.getString(5);
                         Date datee = ra.getDate(4);
                         String[] ad = splitt.split(",");
-                        /*                     String all_cast = "0";
-                        String incountry = "0";
-                        String imported = "0";
-                        String death = "0";
-                        String recover = "0";
-                        String not_det_rec = "0";
-                        //Age
-                        String age_1 = "0";
-                        String age_2 = "0";
-                        String age_3 = "0";
-                        String age_4 = "0";
-                        String age_5 = "0";
-                        String age_6 = "0";
-                        String age_7 = "0";
-                        String Occupation_Health_Worker = "0";
-                        String Occupation_Lab_Staff = "0";
-                        String Occupation_unknow_missing = "0";
-                        String Occupation_others = "0";
-                        String Male = "0";
-                        String female = "0";
-                        String not_confirmed_lab = "0";
-                        String gender_others = "0";
-                        String gender_missing = "0";
-                        
-                        String SROMAS_community_PG = "0";
-                        String SROMAS_hf_PG = "0";
-                        String SROMAS_district_PG_outc = "0";
-                        String SROMAS_region_PG_outc = "0";
-                        String SROMAS_community_PG_outc = "0";
-                        String SROMAS_hf_PG_outc = "0";
-                        String SROMAS_district_PG_class = "0";
-                        String SROMAS_region_PG_class = "0";
-                        String SROMAS_community_PG_class = "0";
-                        String SROMAS_hf_PG_class = "0";
-                         */
-                        ////System.out.println("E3432221_:" + ra.getString(5));
 
+                        if (debug) {
+                            System.out.println("E3432221_:" + ra.getString(5));
+                        };
+                   
                         // String incountry = "";
                         pa_1 = cox.prepareStatement(sql.getSORMAS_INCOUNTRY);
                         pa_1.setInt(1, Integer.parseInt(region_id));
@@ -272,9 +247,11 @@ public class AggregrateController {
                         ra_1 = pa_1.executeQuery();
                         if (ra_1.next()) {
                             incountry = ra_1.getString(1);
-                            ////System.out.println("E3432221:" + ra_1.getString(1));
+                            if (debug) {
+                                System.out.println("E3432221:" + ra_1.getString(1));
+                            };
                         } else {
-                        incountry = "0";
+                            incountry = "0";
                         }
                         pa_2 = cox.prepareStatement(sql.getSORMAS_IMPORTED);
                         pa_2.setInt(1, Integer.parseInt(region_id));
@@ -282,9 +259,11 @@ public class AggregrateController {
                         ra_2 = pa_2.executeQuery();
                         if (ra_2.next()) {
                             imported = ra_2.getString(1);
-                            ////System.out.println("E3432222:" + ra_2.getString(1));
+                            if (debug) {
+                                System.out.println("E3432222:" + ra_2.getString(1));
+                            };
                         } else {
-                        imported = "0";
+                            imported = "0";
                         }
 
                         pa_3 = cox.prepareStatement(sql.getSORMAS_DEATH);
@@ -293,9 +272,11 @@ public class AggregrateController {
                         ra_3 = pa_3.executeQuery();
                         if (ra_3.next()) {
                             death = ra_3.getString(1);
-                            ////System.out.println("E34333:" + ra_3.getString(1));
-                        }else {
-                        death = "0";
+                            if (debug) {
+                                System.out.println("E34333:" + ra_3.getString(1));
+                            };
+                        } else {
+                            death = "0";
                         }
 
                         pa_4 = cox.prepareStatement(sql.getSORMAS_RECOVERED);
@@ -304,9 +285,11 @@ public class AggregrateController {
                         ra_4 = pa_4.executeQuery();
                         if (ra_4.next()) {
                             recover = ra_4.getString(1);
-                            ////System.out.println("E34324:" + ra_4.getString(1));
-                        }else {
-                        recover = "0";
+                            if (debug) {
+                                System.out.println("E34324:" + ra_4.getString(1));
+                            };
+                        } else {
+                            recover = "0";
                         }
 
                         pa_5 = cox.prepareStatement(sql.getSORMAS_NOT_RECOVERED_AND_NOT_DEATH);
@@ -315,9 +298,11 @@ public class AggregrateController {
                         ra_5 = pa_5.executeQuery();
                         if (ra_5.next()) {
                             not_det_rec = ra_5.getString(1);
-                            ////System.out.println("E34325:" + ra_5.getString(1));
-                        }else {
-                        not_det_rec = "0";
+                            if (debug) {
+                                System.out.println("E34325:" + ra_5.getString(1));
+                            };
+                        } else {
+                            not_det_rec = "0";
                         }
 
                         //AGE Disaggregation
@@ -327,9 +312,11 @@ public class AggregrateController {
                         ra_6 = pa_6.executeQuery();
                         if (ra_6.next()) {
                             age_1 = ra_6.getString(1);
-                            ////System.out.println("E34326:" + ra_6.getString(1));
-                        }else {
-                        age_1 = "0";
+                            if (debug) {
+                                System.out.println("E34326:" + ra_6.getString(1));
+                            };
+                        } else {
+                            age_1 = "0";
                         }
 
                         pa_7 = cox.prepareStatement(sql.Age_LESS5_GREATER_14);
@@ -338,9 +325,11 @@ public class AggregrateController {
                         ra_7 = pa_7.executeQuery();
                         if (ra_7.next()) {
                             age_2 = ra_7.getString(1);
-                            ////System.out.println("E34327:" + ra_7.getString(1));
-                        }else {
-                        age_2 = "0";
+                            if (debug) {
+                                System.out.println("E34327:" + ra_7.getString(1));
+                            };
+                        } else {
+                            age_2 = "0";
                         }
 
                         pa_8 = cox.prepareStatement(sql.Age_greater_14_and_less_40);
@@ -349,9 +338,11 @@ public class AggregrateController {
                         ra_8 = pa_8.executeQuery();
                         if (ra_8.next()) {
                             age_3 = ra_8.getString(1);
-                            ////System.out.println("E34328:" + ra_8.getString(1));
-                        }else {
-                        age_3 = "0";
+                            if (debug) {
+                                System.out.println("E34328:" + ra_8.getString(1));
+                            };
+                        } else {
+                            age_3 = "0";
                         }
 
                         pa_9 = cox.prepareStatement(sql.Age__grat40_less65);
@@ -360,9 +351,11 @@ public class AggregrateController {
                         ra_9 = pa_9.executeQuery();
                         if (ra_9.next()) {
                             age_4 = ra_9.getString(1);
-                            ////System.out.println("E34325:" + ra_9.getString(1));
-                        }else {
-                        age_4 = "0";
+                            if (debug) {
+                                System.out.println("E34325:" + ra_9.getString(1));
+                            };
+                        } else {
+                            age_4 = "0";
                         }
 
                         pa_10 = cox.prepareStatement(sql.Age_grater65_less80yr);
@@ -371,9 +364,11 @@ public class AggregrateController {
                         ra_10 = pa_10.executeQuery();
                         if (ra_10.next()) {
                             age_5 = ra_10.getString(1);
-                            ////System.out.println("E3432_10:" + ra_10.getString(1));
-                        }else {
-                        age_5 = "0";
+                            if (debug) {
+                                System.out.println("E3432_10:" + ra_10.getString(1));
+                            };
+                        } else {
+                            age_5 = "0";
                         }
 
                         pa_11 = cox.prepareStatement(sql.Age_above_80);
@@ -382,9 +377,11 @@ public class AggregrateController {
                         ra_11 = pa_11.executeQuery();
                         if (ra_11.next()) {
                             age_6 = ra_11.getString(1);
-                            ////System.out.println("E34325:" + ra_11.getString(1));
-                        }else {
-                        age_6 = "0";
+                            if (debug) {
+                                System.out.println("E34325:" + ra_11.getString(1));
+                            };
+                        } else {
+                            age_6 = "0";
                         }
 
                         pa_12 = cox.prepareStatement(sql.Age_Missing_Unknown);
@@ -393,9 +390,11 @@ public class AggregrateController {
                         ra_12 = pa_12.executeQuery();
                         if (ra_12.next()) {
                             age_7 = ra_12.getString(1);
-                            ////System.out.println("E34325:" + ra_12.getString(1));
-                        }else {
-                        age_7 = "0";
+                            if (debug) {
+                                System.out.println("E34325:" + ra_12.getString(1));
+                            };
+                        } else {
+                            age_7 = "0";
                         }
 
                         pa_13 = cox.prepareStatement(sql.Occupation_Health_Worker);
@@ -404,9 +403,11 @@ public class AggregrateController {
                         ra_13 = pa_13.executeQuery();
                         if (ra_13.next()) {
                             Occupation_Health_Worker = ra_13.getString(1);
-                            ////System.out.println("E34323++++++++++++++++:" + ra_13.getString(1));
-                        }else {
-                        Occupation_Health_Worker = "0";
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:" + ra_13.getString(1));
+                            };
+                        } else {
+                            Occupation_Health_Worker = "0";
                         }
 
                         pa_14 = cox.prepareStatement(sql.Occupation_Lab_Staff);
@@ -415,9 +416,11 @@ public class AggregrateController {
                         ra_14 = pa_13.executeQuery();
                         if (ra_14.next()) {
                             Occupation_Lab_Staff = ra_14.getString(1);
-                            ////System.out.println("E34323++++++++++++++++:" + ra_14.getString(1));
-                        }else {
-                        Occupation_Lab_Staff = "0";
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:" + ra_14.getString(1));
+                            };
+                        } else {
+                            Occupation_Lab_Staff = "0";
                         }
 
                         pa_15 = cox.prepareStatement(sql.Occupation_unknow_missing);
@@ -426,9 +429,11 @@ public class AggregrateController {
                         ra_15 = pa_15.executeQuery();
                         if (ra_15.next()) {
                             Occupation_unknow_missing = ra_15.getString(1);
-                            ////System.out.println("E34323++++++++++++++++:" + ra_15.getString(1));
-                        }else {
-                        Occupation_unknow_missing = "0";
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:" + ra_15.getString(1));
+                            };
+                        } else {
+                            Occupation_unknow_missing = "0";
                         }
 
                         pa_20 = cox.prepareStatement(sql.Occupation_others);
@@ -437,9 +442,11 @@ public class AggregrateController {
                         ra_20 = pa_20.executeQuery();
                         if (ra_20.next()) {
                             Occupation_unknow_missing = ra_20.getString(1);
-                            ////System.out.println("E34323++++++++++++++++:" + ra_20.getString(1));
-                        }else {
-                        Occupation_unknow_missing = "0";
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:" + ra_20.getString(1));
+                            };
+                        } else {
+                            Occupation_unknow_missing = "0";
                         }
 
                         pa_16 = cox.prepareStatement(sql.Male);
@@ -448,9 +455,11 @@ public class AggregrateController {
                         ra_16 = pa_16.executeQuery();
                         if (ra_16.next()) {
                             Male = ra_16.getString(1);
-                            ////System.out.println("E34323++++++++++++++++:" + ra_16.getString(1));
-                        }else {
-                        Male = "0";
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:" + ra_16.getString(1));
+                            };
+                        } else {
+                            Male = "0";
                         }
 
                         pa_17 = cox.prepareStatement(sql.female);
@@ -459,20 +468,24 @@ public class AggregrateController {
                         ra_17 = pa_17.executeQuery();
                         if (ra_17.next()) {
                             female = ra_17.getString(1);
-                            ////System.out.println("E34323++++++++++++++++:" + ra_17.getString(1));
-                        }else {
-                        female = "0";
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:" + ra_17.getString(1));
+                            };
+                        } else {
+                            female = "0";
                         }
-                        
+
                         pa_19 = cox.prepareStatement(sql.gender_others);
                         pa_19.setInt(1, Integer.parseInt(region_id));
                         pa_19.setDate(2, datee);
                         ra_19 = pa_19.executeQuery();
                         if (ra_19.next()) {
                             gender_others = ra_19.getString(1);
-                            ////System.out.println("E34323++++++++++++++++:" + ra_19.getString(1));
-                        }else {
-                        gender_others = "0";
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:" + ra_19.getString(1));
+                            };
+                        } else {
+                            gender_others = "0";
                         }
 
                         pa_20_a = cox.prepareStatement(sql.gender_missing);
@@ -481,9 +494,11 @@ public class AggregrateController {
                         ra_20_a = pa_20_a.executeQuery();
                         if (ra_20_a.next()) {
                             gender_missing = ra_20_a.getString(1);
-                            ////System.out.println("E34323++++++++++++++++:" + ra_20.getString(1));
-                        }else {
-                        gender_missing = "0";
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:" + ra_20.getString(1));
+                            };
+                        } else {
+                            gender_missing = "0";
                         }
 
                         pa_18 = cox.prepareStatement(sql.not_confirmed_lab);
@@ -492,9 +507,11 @@ public class AggregrateController {
                         ra_18 = pa_18.executeQuery();
                         if (ra_18.next()) {
                             not_confirmed_lab = ra_18.getString(1);
-                            ////System.out.println("E34323++++++++++++++++:" + ra_18.getString(1));
-                        }else {
-                        not_confirmed_lab = "0";
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:" + ra_18.getString(1));
+                            };
+                        } else {
+                            not_confirmed_lab = "0";
                         }
 
                         /* Iyanu to fix confirmed_lab*/
@@ -504,34 +521,35 @@ public class AggregrateController {
                         ra_19 = pa_19.executeQuery();
                         if (ra_19.next()) {
                             confirmed_lab = ra_19.getString(1);
-                            ////System.out.println("E34323++++++++++++++++:" + ra_19.getString(1));
-                        }else {
-                        confirmed_lab = "0";
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:" + ra_19.getString(1));
+                            };
+                        } else {
+                            confirmed_lab = "0";
                         }
 
-                        ////System.out.println(ra.getString(5) + " " + ad[0] + " " + ra.getString(4) + " " + ad[1] + " " + ra.getString(1) + " " + dtf.format(now) + " " + ra.getString(4) + " " + ra.getString(3) + " " + imported + " " + incountry);
-                        SendToDHISServer.SendCasesToDHIS(ra.getString(4), ad[0], ra.getString(3), ad[1], ra.getString(1), dtf.format(now), ra.getString(4) + " Aggregate", ra.getString(6), imported, incountry, death, recover, not_det_rec, age_1, age_2, age_3, age_4, age_5, age_6, age_7, Occupation_Health_Worker, Occupation_Lab_Staff, Occupation_unknow_missing, Male, female, not_confirmed_lab, gender_others, gender_missing, confirmed_lab, confirmed_missing);
+                        if (debug) {
+                            System.out.println(ra.getString(5) + " " + ad[0] + " " + ra.getString(4) + " " + ad[1] + " " + ra.getString(1) + " " + dtf.format(now) + " " + ra.getString(4) + " " + ra.getString(3) + " " + imported + " " + incountry);
+                            SendToDHISServer.SendCasesToDHIS(ra.getString(4), ad[0], ra.getString(3), ad[1], ra.getString(1), dtf.format(now), ra.getString(4) + " Aggregate", ra.getString(6), imported, incountry, death, recover, not_det_rec, age_1, age_2, age_3, age_4, age_5, age_6, age_7, Occupation_Health_Worker, Occupation_Lab_Staff, Occupation_unknow_missing, Male, female, not_confirmed_lab, gender_others, gender_missing, confirmed_lab, confirmed_missing);
 
+                        }
                     }
-                } else {
-
                 }
-            }
 
-        } catch (SQLException ex) {
+            }
+        }catch (SQLException ex) {
             Logger.getLogger(AggregrateController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }
+        }
+
+    
 
     public static String MetadaJsonSender(String datax, String usn, String psw) throws ParseException {
 
-      //  JSONParser parser = new JSONParser();
-
-      //  JSONObject json = (JSONObject) parser.parse(datax);
-
+        //  JSONParser parser = new JSONParser();
+        //  JSONObject json = (JSONObject) parser.parse(datax);
         //System.out.println("Debugger 876543.45789.242: " + datax);
-
         String ret = "opps... Something not right";
 
         StringBuilder sb = new StringBuilder();
@@ -559,7 +577,6 @@ public class AggregrateController {
             urlConnection.connect();
 
             //System.out.println("Debugger 23453.23432.21456t: username in user= " + usn + " Password= " + psw);
-
             //  File file = new File(this.getClass().getClassLoader().getResource("someName.json").getFile());
             OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
             out.write(datax);

@@ -470,7 +470,12 @@ public class personSender_Person {
             json.put("attributes", array);
 
             json.put("orgUnit", personCasesUtilityClass.getExternal_id());
+            
+            if(personCasesUtilityClass.getExternalid() != null){
+            json.put("trackedEntity", personCasesUtilityClass.getExternalid());
+            }else{
             json.put("trackedEntityType", "XBrd5VNB5j2");
+            }
 
             //enrollment data
             JSONArray arr_1 = new JSONArray();
@@ -478,9 +483,7 @@ public class personSender_Person {
             js_1.put("orgUnit", personCasesUtilityClass.getExternal_id());
             js_1.put("program", "m0lmvyTblN0");
             
-            if(personCasesUtilityClass.getExternalid() != null){
-            js_1.put("trackedEntityInstance", personCasesUtilityClass.getExternalid());
-            }
+            
             js_1.put("enrollmentDate", personCasesUtilityClass.getCreationdate());
             //  js_1.put("incidentDate", "");
             arr_1.add(js_1);

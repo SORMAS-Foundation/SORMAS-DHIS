@@ -974,12 +974,11 @@ public class UtilServer extends HttpServlet {
                 conn.close();
             }
 
-        }
-        else {
+        } else {
 
             try {
                 System.out.println("-------------------------------------------------------------------------------------------");
-                    sendDataX_a("", "", i + "");
+                sendDataX_a("", "", i + "");
 
             } finally {
 
@@ -1120,6 +1119,7 @@ public class UtilServer extends HttpServlet {
                         ps_pg.setString(3, rx.getString(2));
                         ps_pg.setInt(4, rx.getInt(3));
                         ps_pg.setDate(5, rx.getDate(4));
+
                         ps_pg.setString(6, rx.getString(6));
 
                         System.out.println("debugger 4567.234.13: " + ps_pg);
@@ -1131,7 +1131,15 @@ public class UtilServer extends HttpServlet {
                         ps_pg.setString(3, rx.getString(2));
                         ps_pg.setInt(4, rx.getInt(3));
                         ps_pg.setDate(5, rx.getDate(4));
-                        ps_pg.setString(6, rx.getString(6));
+
+                        if (rx.getString(6) != null) {
+                            ps_pg.setString(6, rx.getString(6));
+                            System.out.println("debugger 11111111111111111111111111111111111111111111GGGGGGGGGG= "+rx.getString(6));
+                        } else {
+                           
+                             ps_pg.setString(6, "DE");
+                            System.out.println("debugger 456GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG = "+rx.getString(6));
+                        }
 
                         System.out.println("debugger 4567.234.139999: " + ps_pg);
                         ret = ps_pg.executeUpdate();

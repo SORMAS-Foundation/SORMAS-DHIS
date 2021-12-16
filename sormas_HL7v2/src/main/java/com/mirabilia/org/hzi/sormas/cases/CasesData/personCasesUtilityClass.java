@@ -88,6 +88,7 @@ public class personCasesUtilityClass {
     private static String Symptomjournalstatus = "0";
     private static String external_id = "0";
     private static String c_id = "0";
+    private static String externalid = null;
 
     public static String getAddress() {
         return Address;

@@ -122,7 +122,7 @@ public class personCasesExtractor_ {
                 personCasesUtilityClass.setEducation_Type(ra.getString("EducationType"));
                 personCasesUtilityClass.setExternalid(ra.getString("PERSONexternalid"));
                 personCasesUtilityClass.setExternaltoken(ra.getString("Externaltoken"));
-                personCasesUtilityClass.setFathersname(ra.getString("Fathersname"));
+                personCasesUtilityClass.setFathersname(ra.getString("lastname"));
                 personCasesUtilityClass.setFirstname(ra.getString("Firstname"));
                 personCasesUtilityClass.setGestationageatbirth(ra.getString("Gestationageatbirth"));
                 personCasesUtilityClass.setHascovidapp(ra.getString("Hascovidapp"));
@@ -148,6 +148,7 @@ public class personCasesExtractor_ {
                 personCasesUtilityClass.setSRM_Uuid(ra.getString("Uuid"));
                 personCasesUtilityClass.setSymptomjournalstatus(ra.getString("Symptomjournalstatus"));//r.externalid
                 personCasesUtilityClass.setExternal_id(ra.getString("externalid_region"));
+                personCasesUtilityClass.setExternalid(ra.getString("externalid"));
                 personCasesUtilityClass.setC_id(ra.getString("id_case"));
                 
                 personSender_Person.jsonDHISSender();

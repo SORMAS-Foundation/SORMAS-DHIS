@@ -477,6 +477,10 @@ public class personSender_Person {
             JSONObject js_1 = new JSONObject();
             js_1.put("orgUnit", personCasesUtilityClass.getExternal_id());
             js_1.put("program", "m0lmvyTblN0");
+            
+            if(personCasesUtilityClass.getExternalid() != null){
+            js_1.put("trackedEntityInstance", personCasesUtilityClass.getExternalid());
+            }
             js_1.put("enrollmentDate", personCasesUtilityClass.getCreationdate());
             //  js_1.put("incidentDate", "");
             arr_1.add(js_1);

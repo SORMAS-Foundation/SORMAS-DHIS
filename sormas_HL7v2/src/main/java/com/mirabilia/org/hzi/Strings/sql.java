@@ -367,7 +367,8 @@ public class sql {
             + "from person p\n"
             + "left join cases c on p.id = c.person_id\n"
             + "inner join public.location d on d.id = p.address_id\n"
-            + "left join region r on r.id = c.responsibleregion_id";
+            + "left join region r on r.id = c.responsibleregion_id\n"
+            +"where c.responsibleregion_id is not null";
            // + "where p.externalid is null or p.changedate = now()";
 
     public static String getCases = "select c.id, c.person_id, r.externalid as reg_externalid, c.creationdate, c.disease, c.caseclassification,\n"

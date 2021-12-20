@@ -96,7 +96,7 @@ credentialsManagerUtil.setDhis_pawd(_url[17].toString());
                                         <span class="info-box-text">Total imported from DHIS2</span>
                                         <span class="info-box-number">
                                             <%=totalOrg%> 
-                                            <small>| Synced from Remote DHIS2</small>
+                                            <small>| Synced from DHIS2</small>
                                         </span>
                                     </div>
                                     <!-- /.info-box-content -->

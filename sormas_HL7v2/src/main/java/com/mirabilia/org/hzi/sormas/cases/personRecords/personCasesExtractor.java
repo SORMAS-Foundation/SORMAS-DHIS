@@ -83,17 +83,18 @@ public class personCasesExtractor {
 
                 if (null != ra.getString("Birthdate_dd")) {
                     String dx = ra.getString("Birthdate_dd");
-                    personCasesUtilityClass.setBirthdate(dx.substring(0, dx.indexOf(" ")));
+                   // personCasesUtilityClass.setBirthdate(dx.substring(0, dx.indexOf(" ")));
+                    personCasesUtilityClass.setBirthdate(dx);
                 }
                 
                 if (null != ra.getString("Birthdate_mm")) {
                     String dx = ra.getString("Birthdate_mm");
-                    personCasesUtilityClass.setBirthdate_Month(dx.substring(0, dx.indexOf(" ")));
+                    personCasesUtilityClass.setBirthdate_Month(dx);
                 }
                 
                 if (null != ra.getString("Birthdate_yyyy")) {
                     String dx = ra.getString("Birthdate_yyyy");
-                    personCasesUtilityClass.setBirthdate_Year(dx.substring(0, dx.indexOf(" ")));
+                    personCasesUtilityClass.setBirthdate_Year(dx);
                 }
                 personCasesUtilityClass.setBirthname(ra.getString("Birthname"));
                 personCasesUtilityClass.setBirthweight(ra.getString("Birthweight"));

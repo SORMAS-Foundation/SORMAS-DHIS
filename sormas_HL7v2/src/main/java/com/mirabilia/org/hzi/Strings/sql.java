@@ -363,7 +363,7 @@ public class sql {
             + "p.birthweight, p.passportnumber, p.nationalhealthid, p.placeofbirthfacilitytype, p.changedateofembeddedlists, \n"
             + "p.symptomjournalstatus, p.hascovidapp, p.covidcodedelivered, p.externalid as PERSONexternalid, p.armedforcesrelationtype,\n"
             + "p.namesofguardians, p.additionaldetails, p.BurialPlaceDescription, p.salutation,\n"
-            + "p.othersalutation, p.birthname, p.birthcountry_id, p.citizenship_id, p.externaltoken, r.externalid as externalid_region, c.id as id_case, p.externalid as externalid\n"
+            + "p.othersalutation, p.birthname, p.birthcountry_id, p.citizenship_id, p.externaltoken, r.externalid as externalid_region, c.id as id_case\n"
             + "from person p\n"
             + "left join cases c on p.id = c.person_id\n"
             + "inner join public.location d on d.id = p.address_id\n"

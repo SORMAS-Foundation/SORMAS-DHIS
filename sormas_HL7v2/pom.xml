@@ -4,7 +4,7 @@
 
     <groupId>org.hzi.com.mirabilia</groupId>
     <artifactId>sormas_HL7v2_3</artifactId>
-    <version>2.3.1.1</version>
+    <version>2.3.1.2</version>
     <packaging>war</packaging>
 
     <name>sormas_HL7v2_3-SNAPSHOT</name>

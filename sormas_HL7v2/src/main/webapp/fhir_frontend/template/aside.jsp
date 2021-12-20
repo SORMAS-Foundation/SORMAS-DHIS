@@ -106,10 +106,10 @@
                                 </a>
                             </li-->
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="fas fa-chart-line"></i>
+                                <a href="about_page.jsp" class="nav-link">
+                                    <i class="fas fa-info-circle"></i>
                                     <p>
-                                        Analytics
+                                        About Adapter
                                     </p>
                                 </a>
                             </li>

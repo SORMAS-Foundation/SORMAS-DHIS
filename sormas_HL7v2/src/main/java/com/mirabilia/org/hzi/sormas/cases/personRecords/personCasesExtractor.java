@@ -126,7 +126,7 @@ public class personCasesExtractor {
                 personCasesUtilityClass.setEducation_Type(ra.getString("EducationType"));
                 personCasesUtilityClass.setExternalid(ra.getString("PERSONexternalid"));
                 personCasesUtilityClass.setExternaltoken(ra.getString("Externaltoken"));
-                personCasesUtilityClass.setFathersname(ra.getString("Fathersname"));
+                personCasesUtilityClass.setFathersname(ra.getString("lastname"));
                 personCasesUtilityClass.setFirstname(ra.getString("Firstname"));
                 personCasesUtilityClass.setGestationageatbirth(ra.getString("Gestationageatbirth"));
                 personCasesUtilityClass.setHascovidapp(ra.getString("Hascovidapp"));

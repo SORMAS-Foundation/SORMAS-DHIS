@@ -33,8 +33,9 @@
     <style>
         .disableClick{
             color: currentColor;
-  cursor: not-allowed;
+            cursor: not-allowed;
         }
+
     </style>
 
 </head>

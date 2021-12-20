@@ -83,6 +83,10 @@ public class personSender {
         String jsn = "";
 
         String ch = "";
+        Boolean tracked = false;
+        String method = "POST";
+        String top = "";
+        String buttom = "";
 
         try {
             if (!"0".equals(personCasesUtilityClass.getAddress())) {
@@ -473,8 +477,21 @@ public class personSender {
             json.put("attributes", array);
 
             json.put("orgUnit", personCasesUtilityClass.getExternal_id());
-            json.put("trackedEntityType", "XBrd5VNB5j2");
+            // json.put("trackedEntityType", "XBrd5VNB5j2");
 
+            //  System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> = "+personCasesUtilityClass.getExternalid());
+            ///api/trackedEntityInstances/<tracked-entity-instance-id>
+            if (personCasesUtilityClass.getExternalid() != null) {
+                tracked = true;
+                json.put("trackedEntityInstance", personCasesUtilityClass.getExternalid());
+                json.put("ignoreEmptyCollection", true);
+                json.put("trackedEntityType", "XBrd5VNB5j2");
+                top = "{\"trackedEntityInstances\": [";
+                buttom = "]}";
+            } else {
+                json.put("trackedEntityType", "XBrd5VNB5j2");
+            }
+//if(tracked){}else{
             //enrollment data
             JSONArray arr_1 = new JSONArray();
             JSONObject js_1 = new JSONObject();
@@ -485,11 +502,12 @@ public class personSender {
             arr_1.add(js_1);
 
             json.put("enrollments", arr_1);
+//}
 
-           // System.out.println("DEBUGGER BNJHG456789D: "+json.toString());
         } finally {
 
             String pg_url = httpx + "/api/29/trackedEntityInstances";
+            //method = "POST";
 
             try {
 
@@ -515,9 +533,13 @@ public class personSender {
                     sc.init(null, trustAllCerts, new java.security.SecureRandom());
                     HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
                 } catch (Exception e) {
+                    System.err.println(e.getMessage());
+
+                    System.err.println(e.getStackTrace());
                 }
 
                 // Now you can access an https URL without having the certificate in the truststore
+                //  System.out.println(pg_url+ "  ===   DEBUGGER ASDFASVE: " + method + "   ------ "+authString);
                 URL url = new URL(pg_url);
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestProperty("Authorization", "Basic " + authStringEnc);
@@ -529,9 +551,10 @@ public class personSender {
                 urlConnection.setRequestProperty("Content-Type", "application/json");
                 urlConnection.connect();
 
-                String json_all = json.toString();
+                String maker = top + json.toString() + buttom;
+                String json_all = maker;
                 jsn = json_all;
-                System.err.println("DEBUGGER POLI0989DF: "+json_all);
+                System.err.println("DEBUGGER POLI0989DF: " + json_all);
 
                 OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
                 out.write(json_all);
@@ -540,6 +563,7 @@ public class personSender {
                 int HttpResult = urlConnection.getResponseCode();
 
                 if (HttpResult == 200) {
+                    // System.err.println("STATUS: YESSS");
                     BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
                     String line = null;
                     while ((line = br.readLine()) != null) {
@@ -583,6 +607,7 @@ public class personSender {
                     }
 
                 } else {
+                    //    System.err.println("STATUS: NON");
                     BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getErrorStream(), "utf-8"));
                     String line = null;
                     while ((line = br.readLine()) != null) {
@@ -590,13 +615,10 @@ public class personSender {
                     }
                     br.close();
                     System.err.println("STATUS: ERROR!" + sb.toString());
-                    
 
                     System.out.println(urlConnection.getResponseMessage());
-                    
-                 //   SendToDHISServer.update_oneParm_X("insert into sync_tracker set json_response = ?, datasource= '" + personCasesUtilityClass.getSRM_Uuid() + "', dataperiod = '" + personCasesUtilityClass.getCreationdate() + "', case_specific_detail = 'Person Table',  status = 'ERROR_Conflicts_General', created = now()", sb.toString());
-                        
 
+                    //   SendToDHISServer.update_oneParm_X("insert into sync_tracker set json_response = ?, datasource= '" + personCasesUtilityClass.getSRM_Uuid() + "', dataperiod = '" + personCasesUtilityClass.getCreationdate() + "', case_specific_detail = 'Person Table',  status = 'ERROR_Conflicts_General', created = now()", sb.toString());
                     return;
 
                 }

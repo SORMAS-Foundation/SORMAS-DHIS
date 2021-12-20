@@ -471,6 +471,8 @@ public class personSender_Person {
 
             json.put("orgUnit", personCasesUtilityClass.getExternal_id());
             
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> = "+personCasesUtilityClass.getExternalid());
+            
             if(personCasesUtilityClass.getExternalid() != null){
             json.put("trackedEntity", personCasesUtilityClass.getExternalid());
             }else{

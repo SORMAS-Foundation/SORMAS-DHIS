@@ -265,8 +265,12 @@ credentialsManagerUtil.setDhis_pawd(_url[17].toString());
 
 
                                             <%
-                                                String dxe = getterSetters.getNoGeoPoints();
-                                                String dxex = getterSetters.getNoSynced();
+                                                String dxe = "0";
+                                                String dxex = "0";
+                                                if(getterSetters.getNoGeoPoints() != null){
+                                                dxe = getterSetters.getNoGeoPoints();
+                                               dxex = getterSetters.getNoSynced();
+                                                }
 
 
                                             %>

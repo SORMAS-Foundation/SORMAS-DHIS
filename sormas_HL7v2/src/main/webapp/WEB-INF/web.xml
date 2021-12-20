@@ -6,20 +6,19 @@
     </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
-        <jsp-file>/dumxmy.jsp</jsp-file>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/details/*</url-pattern>
+        <url-pattern>/1/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    <welcome-file-list>
-        <welcome-file>dumxmy.jsp</welcome-file>
+     <welcome-file-list>
+        <welcome-file>1/dumxmy.jsp</welcome-file>
     </welcome-file-list>
-   
 </web-app>

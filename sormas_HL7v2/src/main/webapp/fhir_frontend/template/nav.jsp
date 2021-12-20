@@ -24,9 +24,9 @@
 
                 <!-- Right navbar links -->
                 <ul class="navbar-nav ml-auto">
-                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="#" class="nav-link disableClick">Adapter Version: 2.3.2</a>
-                    </li>
+                     <!--li class="nav-item d-none d-sm-inline-block">
+                        <a href="#" class="nav-link disableClick">Adapter Version: 2.3.3 | Compactible SORMAS Version: 1.66.3 </a>
+                    </li-->
                     <!-- Messages Dropdown Menu -->
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">

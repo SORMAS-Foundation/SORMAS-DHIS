@@ -28,8 +28,8 @@ package com.mirabilia.org.hzi.Util;
 import com.mirabilia.org.hzi.Strings.sql;
 import com.mirabilia.org.hzi.sormas.aggregate.AggregrateController;
 import com.mirabilia.org.hzi.sormas.cases.Case.CasesExtractor;
-import com.mirabilia.org.hzi.sormas.cases.Case.CasesToDHIS;
-import com.mirabilia.org.hzi.sormas.cases.personRecords.personCasesExtractor;
+import com.mirabilia.org.hzi.sormas.cases.CasesData.personCasesExtractor;
+import com.mirabilia.org.hzi.sormas.cases.Sample.SampleExtractor;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import static com.mirabilia.org.hzi.updaters.Util.MetaFileGetter;
 import java.io.IOException;
@@ -443,28 +443,31 @@ public class UtilServer extends HttpServlet {
             mat = "Job done";
         }
 
-        if (request.getParameter(
-                "personToDHIS") != null) {
+        if (request.getParameter("personToDHIS") != null) {
             String err_ = "";
-            //System.out.println("DEBUG: SD56789987DFG");
-
             try {
                 //pushing person's record
                 err_ = personCasesExtractor.SormasCasePull("2");
-
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-
+                
                 try {
-//pushing cases and attache it to person's record
+                //pushing cases and attache it to person's record
                     CasesExtractor.SormasCasePull("2");
 
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(CasesToDHIS.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CasesExtractor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                 try {
+                //pushing Samples and attache it to person's record
+                    SampleExtractor.SormasSamplePull("2");
+
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(SampleExtractor.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-            }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
+            } 
             mat = "Job done: " + err_.toUpperCase();
         }
 
@@ -1039,7 +1042,7 @@ public class UtilServer extends HttpServlet {
             ps.executeUpdate();
             conn.close();
         } catch (SQLException e) {
-            System.err.println("An exception was thrown");
+            System.err.println("An exception was thrown"+e.getMessage());
         }
 
     }
@@ -1052,7 +1055,7 @@ public class UtilServer extends HttpServlet {
             ps.executeUpdate();
             conn.close();
         } catch (SQLException e) {
-            System.err.println("An exception was thrown");
+            System.err.println("An exception was thrown"+e.getMessage());
         }
 
     }
@@ -1065,7 +1068,22 @@ public class UtilServer extends HttpServlet {
             ps.executeUpdate();
             conn.close();
         } catch (SQLException e) {
-            System.err.println("An exception was thrown");
+            System.err.println("An exception was thrown"+e.getMessage());
+        } finally{
+        UpgradeSORMASTable4();
+        }
+    }
+    
+    public static void UpgradeSORMASTable4() throws ClassNotFoundException {
+        
+        PreparedStatement ps = null;
+        Connection conn = DbConnector.getPgConnection();
+        try {
+            ps = conn.prepareStatement(sql.batch_updateSORMASTable_5);
+            ps.executeUpdate();
+            conn.close();
+        } catch (SQLException e) {
+            System.err.println("An excssssssssssssseption was thrown" +e.getMessage());
         }
     }
 

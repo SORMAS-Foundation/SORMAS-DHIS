@@ -27,6 +27,7 @@ package com.mirabilia.org.hzi.sormas.cases.Sample;
 
 import com.mirabilia.org.hzi.sormas.cases.Case.*;
 import com.mirabilia.org.hzi.Strings.sql;
+import com.mirabilia.org.hzi.Util.UtilServer;
 import com.mirabilia.org.hzi.sormas.aggregate.SendToDHISServer;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import java.sql.Connection;
@@ -43,27 +44,33 @@ import java.util.logging.Logger;
  */
 public class SampleExtractor {
 
-    public static void SormasCasePull(String lev) throws ClassNotFoundException {
+    public static void SormasSamplePull(String lev) throws ClassNotFoundException {
         SimpleDateFormat frnmt = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
+            
+            UtilServer.UpgradeSORMASTable4();
 
             Connection cox = DbConnector.getPgConnection();
             PreparedStatement pa = null;
             ResultSet ra = null;
 
             if ("2".equals(lev)) {
-                System.out.println("1111111111111111");
+                
                 pa = cox.prepareStatement(sql.getSamples);
             }
-            if ("3".equals(lev)) {
+            else if ("3".equals(lev)) {
                 //   pa = cox.prepareStatement(sql.getSROMAS_district_Aggregate_AllCases);
             }
-            if ("4".equals(lev)) {
+            else if  ("4".equals(lev)) {
                 //  pa = cox.prepareStatement(sql.getSROMAS_community_PG);
             }
-            if ("5".equals(lev)) {
+            else if ("5".equals(lev)) {
                 //   pa = cox.prepareStatement(sql.getSROMAS_hf_PG);
+            } else {
+            
+            return;
+            
             }
 
             ra = pa.executeQuery();
@@ -80,24 +87,23 @@ public class SampleExtractor {
                 SampleUtilityClass.setLabdetails(ra.getString("labdetails"));
                 SampleUtilityClass.setAssociatedcase_id(ra.getString("associatedcase_id"));
                 
-                SampleUtilityClass.setSample_id(ra.getString("id")); //reg_externalid
-                SampleUtilityClass.setSampleUuid(ra.getString("associatedcase_id"));
+                SampleUtilityClass.setSample_id(ra.getString("id"));
+                SampleUtilityClass.setSampleUuid(ra.getString("uuid"));
+                
+                
+                SampleUtilityClass.setCaseUuid(ra.getString("associatedcase_uuid"));
                 
                 SampleUtilityClass.setSampleRegionID(ra.getString("reg_externalid"));
+                SampleUtilityClass.setSampleExternal_Id(ra.getString("externalid"));
                 String ddd = ra.getString("creationdate");
-             //   System.out.println("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd = "+ddd);
                 SampleUtilityClass.setCreationdate(ddd.substring( 0, ddd.indexOf(" ")));
-                //impliment coordinates
                 
+                
+                //TODO: impliment coordinates
                 SampleUtilityClass.setSampleCaseLat(ra.getString("reportlat"));
                 SampleUtilityClass.setSampleCaseLong(ra.getString("reportlon"));
-                //implement UUID
                 
-                String rett = SendToDHISServer.get_trackEntity("select externalid from person where id = ?", ra.getString("pid"));
-                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!TRACKEDINSTANT ID = "+rett);
-          //      String rettx = SendToDHISServer.get_trackEntity("select external_id from person where id = ?", ra.getString("Id"));
-            //    System.out.println("222222");
-                SampleUtilityClass.setTrackedentity_id(rett);
+                SampleUtilityClass.setTrackedentity_id(ra.getString("person_external_id"));
                 
                 SampleSender.jsonDHISSender();
 

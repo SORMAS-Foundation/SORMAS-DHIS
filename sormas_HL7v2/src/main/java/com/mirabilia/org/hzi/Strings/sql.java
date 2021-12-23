@@ -49,6 +49,16 @@ public class sql {
     public static String batch_updateSORMASTable_3 = "ALTER TABLE community ADD CONSTRAINT unique_community_adapter UNIQUE (externalid)";
     public static String batch_updateSORMASTable_4 = "ALTER TABLE facility ADD CONSTRAINT unique_faciliti_adapter UNIQUE (externalid)";
 
+    public static String batch_updateSORMASTable_5 = "DO $$ \n"
+            + "    BEGIN\n"
+            + "        BEGIN\n"
+            + "            ALTER TABLE samples ADD COLUMN externalid TEXT;\n"
+            + "        EXCEPTION\n"
+            + "            WHEN duplicate_column THEN RAISE NOTICE 'column external_ID already exists in.';\n"
+            + "        END;\n"
+            + "    END;\n"
+            + "$$";
+
     public static String getting_REGION_from_sormas_ = "select id from country where externalid = ?";
     public static String getting_DISTRICT_from_sormas_ = "select id from region where externalid = ?";
     public static String getting_COMMUNITY_from_sormas_ = "select id from district where externalid = ?";
@@ -106,63 +116,63 @@ public class sql {
     public static String Age_LESS_5 = "select count(*), c.disease, (select externalid from region where id = c.responsibleregion_id), c.reportdate::date\n"
             + "from cases c\n"
             + "where c.caseage <= 5 and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
-            + "group by c.disease, c.responsibleregion_id, c.reportdate::date, c.quarantine";
+            + "group by c.disease, c.responsibleregion_id, c.reportdate::date";
 
     //Age >=5 <= 14yr
     public static String Age_LESS5_GREATER_14 = "select count(*), c.disease, (select externalid from region where id = c.responsibleregion_id), c.reportdate::date\n"
             + "from cases c\n"
             + "where c.caseage between 5 and 14 and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
-            + "group by c.disease, c.responsibleregion_id, c.reportdate::date, c.quarantine";
+            + "group by c.disease, c.responsibleregion_id, c.reportdate::date";
 
     //>14 <= 40yr
     public static String Age_greater_14_and_less_40 = "select count(*), c.disease, (select externalid from region where id = c.responsibleregion_id), c.reportdate::date, c.caseage\n"
             + "from cases c\n"
             + "where c.caseage between 14 and 40 and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
-            + "group by c.disease, c.responsibleregion_id, c.reportdate::date, c.quarantine, c.caseage";
+            + "group by c.disease, c.responsibleregion_id, c.reportdate::date, c.caseage";
 
     //>40 <=65yr
     public static String Age__grat40_less65 = "select count(*), c.disease, (select externalid from region where id = c.responsibleregion_id), c.reportdate::date, c.caseage\n"
             + "from cases c\n"
             + "where c.caseage > 40 and  c.caseage <= 65 and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
-            + "group by c.disease, c.responsibleregion_id, c.reportdate::date, c.quarantine, c.caseage";
+            + "group by c.disease, c.responsibleregion_id, c.reportdate::date, c.caseage";
 
     //>65 <=80yr
     public static String Age_grater65_less80yr = "select count(*), c.disease, (select externalid from region where id = c.responsibleregion_id), c.reportdate::date, c.caseage\n"
             + "from cases c\n"
             + "where c.caseage > 65 and  c.caseage <= 80 and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
-            + "group by c.disease, c.responsibleregion_id, c.reportdate::date, c.quarantine, c.caseage";
+            + "group by c.disease, c.responsibleregion_id, c.reportdate::date, c.caseage";
 
     //>80yr
     public static String Age_above_80 = "select count(*), c.disease, (select externalid from region where id = c.responsibleregion_id), c.reportdate::date,c.caseage\n"
             + "from cases c\n"
             + "where c.caseage > 80 and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
-            + "group by c.disease, c.responsibleregion_id, c.reportdate::date, c.quarantine, c.caseage";
+            + "group by c.disease, c.responsibleregion_id, c.reportdate::date, c.caseage";
 
     //Missing/Unknown
     public static String Age_Missing_Unknown = "select count(*), c.disease, (select externalid from region where id = c.responsibleregion_id), c.reportdate::date,c.caseage\n"
             + "from cases c\n"
             + "where c.caseage is null and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
-            + "group by c.disease, c.responsibleregion_id, c.reportdate::date, c.quarantine, c.caseage";
+            + "group by c.disease, c.responsibleregion_id, c.reportdate::date, c.caseage";
 
     //occupation health worker
     public static String Occupation_Health_Worker = "select count(*), c.disease, c.reportdate::date, p.occupationtype\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
-            + "where p.occupationtype = 'healthworker' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "where p.occupationtype = 'HEALTHCARE_WORKER' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
             + "group by c.disease, c.reportdate::date, p.occupationtype";
 
     //occupation lab staff
     public static String Occupation_Lab_Staff = "select count(*), c.disease, c.reportdate::date, p.occupationtype\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
-            + "where p.occupationtype is = 'laboratory staff' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "where p.occupationtype is = 'LABORATORY_STAFF' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
             + "group by c.disease, c.reportdate::date, p.occupationtype";
 
     //occupation others 
     public static String Occupation_others = "select count(*), c.disease, c.reportdate::date, p.occupationtype\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
-            + "where p.occupationtype != 'laboratory staff'  and p.occupationtype != 'healthworker'  and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "where p.occupationtype = 'OTHER' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
             + "group by c.disease, c.reportdate::date, p.occupationtype";
 
     //occupation missing unknown
@@ -208,7 +218,7 @@ public class sql {
 
     public static String not_confirmed_lab = "select count(*), c.disease, c.reportdate::date, c.laboratorydiagnosticconfirmation\n"
             + "from cases c\n"
-            + "where c.laboratorydiagnosticconfirmation!='YES' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "where c.laboratorydiagnosticconfirmation !='YES' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
             + "group by c.disease, c.reportdate::date, c.laboratorydiagnosticconfirmation";
 
     public static String not_confirmed_labm = "select count(*), c.disease, c.reportdate::date, c.laboratorydiagnosticconfirmation\n"
@@ -368,26 +378,57 @@ public class sql {
             + "left join cases c on p.id = c.person_id\n"
             + "inner join public.location d on d.id = p.address_id\n"
             + "left join region r on r.id = c.responsibleregion_id\n"
-            +"where c.responsibleregion_id is not null";
-           // + "where p.externalid is null or p.changedate = now()";
+            + "where c.responsibleregion_id is not null";
+    // + "where p.externalid is null or p.changedate = now()";
 
-    public static String getCases = "select c.id, c.person_id, r.externalid as reg_externalid, c.creationdate, c.disease, c.caseclassification,\n"
-            + "c.outcome, c.caseage, c.caseorigin,c.uuid, c.reportlon, c.reportlat, c.externalid,\n"
+    public static String getCases = "select c.id as id, p.externalid as person_external_id, r.externalid as reg_externalid, c.creationdate, c.disease, c.caseclassification,\n"
+            + "c.outcome, c.caseage, c.caseorigin,c.uuid, c.reportlon, c.reportlat, c.externalid as cases_external_id,\n"
             + "c.outcome, c.caseage, c.caseorigin\n"
             + "from cases c\n"
             + "LEFT join person p on (c.person_id = p.id)\n"
-            + "	LEFT join region r on c.responsibleregion_id = r.id\n"
-            + "where c.externalid is null and p.externalid is not null";
+            + "LEFT join region r on c.responsibleregion_id = r.id\n"
+            + "where p.externalid is not null";
 
-    public static String getSamples = "select p.id as pid, r.externalid as reg_externalid, s.creationdate , s.samplematerial, s.lab_id, s.pathogentestingrequested, \n"
-            + "s.pathogentestresult, s.fieldsampleid, s.samplingreason, s.reportlon, s.reportlat, s.labdetails, \n"
-            + "s.associatedcase_id, s.uuid, s.id\n"
-            + "from samples s \n"
+    public static String getSamples = "select p.id as pid, r.externalid as reg_externalid, s.creationdate , s.samplematerial, s.lab_id, s.pathogentestingrequested,\n"
+            + "s.pathogentestresult, s.fieldsampleid, s.samplingreason, s.reportlon, s.reportlat, s.labdetails,\n"
+            + "s.associatedcase_id, s.uuid, c.uuid as associatedcase_uuid, s.id, s.externalid, p.externalid as person_external_id\n"
+            + "from samples s\n"
             + "LEFT join cases c on (s.associatedcase_id = c.id)\n"
             + "LEFT join person p on (c.person_id = p.id)\n"
-            + "	LEFT join region r on c.responsibleregion_id = r.id\n"
-            //     + "where s.changedate = ?\n"
-            + "      where samplingreason is null and p.externalid is not null limit 2";
+            + "LEFT join region r on c.responsibleregion_id = r.id\n"
+            + "where p.externalid is not null";
+
+    //Case Classification
+    public static String suspected = "select count(*), c.disease, c.reportdate::date\n"
+            + "from cases c\n"
+            + "left join person p on (c.person_id = p.id)\n"
+            + "where c.caseclassification = 'SUSPECT' AND c.disease = 'CORONAVIRUS' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "group by c.disease, c.reportdate::date, C.caseclassification";
+    
+      public static String probable = "select count(*), c.disease, c.reportdate::date\n"
+            + "from cases c\n"
+            + "left join person p on (c.person_id = p.id)\n"
+            + "where c.caseclassification = 'PROBABLE' AND c.disease = 'CORONAVIRUS' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "group by c.disease, c.reportdate::date, C.caseclassification";
+      
+       public static String no_case = "select count(*), c.disease, c.reportdate::date\n"
+            + "from cases c\n"
+            + "left join person p on (c.person_id = p.id)\n"
+            + "where c.caseclassification = 'NO_CASE' AND c.disease = 'CORONAVIRUS' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "group by c.disease, c.reportdate::date, C.caseclassification";
+    
+    
+    public static String Not_Classfied = "select count(*), c.disease, c.reportdate::date\n"
+            + "from cases c\n"
+            + "left join person p on (c.person_id = p.id)\n"
+            + "where c.caseclassification = 'NOT_CLASSIFIED' AND c.disease = 'CORONAVIRUS' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "group by c.disease, c.reportdate::date, C.caseclassification";
+    
+    public static String Confimed = "select count(*), c.disease, c.reportdate::date\n"
+            + "from cases c\n"
+            + "left join person p on (c.person_id = p.id)\n"
+            + "where c.caseclassification ~ 'CONFIR' AND c.disease = 'CORONAVIRUS' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "group by c.disease, c.reportdate::date, C.caseclassification";
 
     // public static String Get_all_Isolated_today = "";
     // public static String Get_all_Isolated_today = "";

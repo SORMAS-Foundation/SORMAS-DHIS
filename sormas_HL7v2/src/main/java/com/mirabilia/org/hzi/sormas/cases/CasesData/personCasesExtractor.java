@@ -27,6 +27,7 @@ package com.mirabilia.org.hzi.sormas.cases.CasesData;
 
 import com.mirabilia.org.hzi.Strings.sql;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
+import com.mirabilia.org.hzi.sormas.cases.CasesData.personCasesUtilityClass;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,10 +40,11 @@ import java.util.logging.Logger;
  *
  * @author Mathew Official
  */
-public class personCasesExtractor_ {
+public class personCasesExtractor {
 
-    public static void SormasCasePull(String lev) throws ClassNotFoundException {
-        SimpleDateFormat frnmt = new SimpleDateFormat("yyyy-MM-dd");
+    public static String SormasCasePull(String lev) throws ClassNotFoundException {
+        //SimpleDateFormat frnmt = new SimpleDateFormat("yyyy-MM-dd");
+        String err_ = "";
 
         try {
 
@@ -65,7 +67,9 @@ public class personCasesExtractor_ {
             }
 
             ra = pa.executeQuery();
+            boolean noBreak = true;
             while (ra.next()) {
+                noBreak = false;
 
                 personCasesUtilityClass.setAddress(ra.getString("address_idx"));
                 personCasesUtilityClass.setAddtionaldetails(ra.getString("additionaldetails"));
@@ -79,17 +83,18 @@ public class personCasesExtractor_ {
 
                 if (null != ra.getString("Birthdate_dd")) {
                     String dx = ra.getString("Birthdate_dd");
-                    personCasesUtilityClass.setBirthdate(dx.substring(0, dx.indexOf(" ")));
+                   // personCasesUtilityClass.setBirthdate(dx.substring(0, dx.indexOf(" ")));
+                    personCasesUtilityClass.setBirthdate(dx);
                 }
                 
                 if (null != ra.getString("Birthdate_mm")) {
                     String dx = ra.getString("Birthdate_mm");
-                    personCasesUtilityClass.setBirthdate_Month(dx.substring(0, dx.indexOf(" ")));
+                    personCasesUtilityClass.setBirthdate_Month(dx);
                 }
                 
                 if (null != ra.getString("Birthdate_yyyy")) {
                     String dx = ra.getString("Birthdate_yyyy");
-                    personCasesUtilityClass.setBirthdate_Year(dx.substring(0, dx.indexOf(" ")));
+                    personCasesUtilityClass.setBirthdate_Year(dx);
                 }
                 personCasesUtilityClass.setBirthname(ra.getString("Birthname"));
                 personCasesUtilityClass.setBirthweight(ra.getString("Birthweight"));
@@ -120,11 +125,6 @@ public class personCasesExtractor_ {
                 personCasesUtilityClass.setDeath_Place_Type(ra.getString("DeathPlaceType"));
                 personCasesUtilityClass.setEducation_Details(ra.getString("EducationDetails"));
                 personCasesUtilityClass.setEducation_Type(ra.getString("EducationType"));
-                
-                  System.out.println(">>>>>________________________________________>>>>>>> = "+ra.getString("PERSONexternalid"));
-           
-                  
-                  
                 personCasesUtilityClass.setExternalid(ra.getString("PERSONexternalid"));
                 personCasesUtilityClass.setExternaltoken(ra.getString("Externaltoken"));
                 personCasesUtilityClass.setFathersname(ra.getString("lastname"));
@@ -151,18 +151,24 @@ public class personCasesExtractor_ {
                 personCasesUtilityClass.setSex(ra.getString("Sex"));
                 personCasesUtilityClass.setSormas_System_Period(ra.getString("sys_Period"));
                 personCasesUtilityClass.setSRM_Uuid(ra.getString("Uuid"));
-                personCasesUtilityClass.setSymptomjournalstatus(ra.getString("Symptomjournalstatus"));//r.externalid
+                personCasesUtilityClass.setSymptomjournalstatus(ra.getString("Symptomjournalstatus"));
                 personCasesUtilityClass.setExternal_id(ra.getString("externalid_region"));
                 personCasesUtilityClass.setC_id(ra.getString("id_case"));
                 
-                personSender_Person.jsonDHISSender();
+                personSender.jsonDHISSender();
                 
 
             }
+            
+            if(noBreak){
+                err_ = "No new record found on SORMAS System";
+                System.out.println("DEBUGGER 45WERF345DFG: No record found on SORMAS System");
+            }
 
         } catch (SQLException ex) {
-            Logger.getLogger(personCasesExtractor_.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(personCasesExtractor.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return err_;
 
     }
 }

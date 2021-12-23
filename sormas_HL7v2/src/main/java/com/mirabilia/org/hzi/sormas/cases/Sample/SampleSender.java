@@ -26,7 +26,6 @@
 package com.mirabilia.org.hzi.sormas.cases.Sample;
 
 import com.mirabilia.org.hzi.Util.credentialsManagerUtil;
-import com.mirabilia.org.hzi.sormas.cases.Case.*;
 import com.mirabilia.org.hzi.sormas.aggregate.SendToDHISServer;
 import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
@@ -60,13 +59,12 @@ public class SampleSender {
     private static String[] _url = ConffileCatcher.fileCatcher("passed");
 
     private static String httpx = _url[10].toString();
+    private static String methodx = "POST";
 
     public static void jsonDHISSender() {
-        System.out.println("llllllllllllllllllllllllllllllllllllllllllllllllllllll");
+        System.out.println("DEBUGGER: VT6789UIK = Now in SAMPLE LOGIC");
         StringBuilder sb = new StringBuilder();
 
-        //     System.out.println("URI in use: " + httpx);
-        // String http = httpx + "/api/dataValueSets";
         HttpURLConnection urlConnection = null;
         String name = credentialsManagerUtil.getDhis_User();
         String password = credentialsManagerUtil.getDhis_pawd();
@@ -83,11 +81,9 @@ public class SampleSender {
 
         String jsn = "";
 
-        
-        
-        
-        
         String ch = "";
+
+        String sample_exists = "";
 
         try {
             if (!"0".equals(SampleUtilityClass.getSample_id())) {
@@ -131,14 +127,14 @@ public class SampleSender {
                 item6.put("value", SampleUtilityClass.getLabdetails());
                 array.add(item6);
             }
-            
-            if (!"0".equals(SampleUtilityClass.getAssociatedcase_id())) {
-                JSONObject item6 = new JSONObject();
-                item6.put("dataElement", "JIUpcDytaBI");
-                item6.put("value", SampleUtilityClass.getAssociatedcase_id());
-                array.add(item6);
+
+            if (!"0".equals(SampleUtilityClass.getCaseUuid())) {
+                JSONObject item7 = new JSONObject();
+                item7.put("dataElement", "JIUpcDytaBI");
+                item7.put("value", SampleUtilityClass.getCaseUuid());
+                array.add(item7);
             }
-            
+
             if (!"0".equals(SampleUtilityClass.getSampleUuid())) {
                 JSONObject item6 = new JSONObject();
                 item6.put("dataElement", "rYWumVJDsmN");
@@ -146,9 +142,10 @@ public class SampleSender {
                 array.add(item6);
             }
             json.put("dataValues", array);
-            
-            
+
             /*
+            
+            LON and LAT
             
             if (!"0".equals(SampleUtilityClass.getSampleCaseLat())) {
                 JSONObject item6x = new JSONObject();
@@ -167,9 +164,7 @@ public class SampleSender {
             json.put("geometry", arrayx);
 
             
-            */
-            
-            
+             */
             //enrollment data
             json.put("program", "m0lmvyTblN0");
             json.put("orgUnit", SampleUtilityClass.getSampleRegionID());
@@ -178,13 +173,25 @@ public class SampleSender {
             json.put("completedDate", SampleUtilityClass.getCreationdate());
             json.put("programStage", "dDv9tXSitXC");
             json.put("trackedEntityInstance", SampleUtilityClass.getTrackedentity_id());
-            
-            System.out.println("3333333333333dddddddddddddddddddddddddddddddddppp"+json.toString());
 
+            if (SampleUtilityClass.getSampleExternal_Id() != null) {
+                if (!SampleUtilityClass.getSampleExternal_Id().equalsIgnoreCase("")) {
+
+                    sample_exists = "/" + SampleUtilityClass.getSampleExternal_Id();
+                    methodx = "PUT";
+                    System.out.println("SAMPLE UPDATING LOGIC In ACTION.... using = " + sample_exists);
+                } else {
+                    methodx = "POST";
+                }
+            }else {
+                    methodx = "POST";
+                }
 
         } finally {
 
-            String pg_url = httpx + "/api/29/events";
+            System.out.println("DEBUGGER- VCGFDTRE4KJIU87 sample" + json.toString());
+
+            String pg_url = httpx + "/api/29/events" + sample_exists;
 
             try {
 
@@ -217,7 +224,7 @@ public class SampleSender {
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestProperty("Authorization", "Basic " + authStringEnc);
                 urlConnection.setDoOutput(true);
-                urlConnection.setRequestMethod("POST");
+                urlConnection.setRequestMethod(methodx);
                 urlConnection.setUseCaches(true);
                 urlConnection.setConnectTimeout(10000);
                 urlConnection.setReadTimeout(10000);
@@ -226,8 +233,8 @@ public class SampleSender {
 
                 String json_all = json.toString();
                 jsn = json_all;
-                
-               System.err.println("pppppppppppppppppppppppppppppppppppppp"+jsn);
+                System.err.println("DEBBUGGER++++++++++-------------------------------------------");
+                System.err.println("DEBBUGGER 234FDRT5Y67345: " + json_all);
 
                 OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
                 out.write(json_all);
@@ -249,16 +256,19 @@ public class SampleSender {
                         String dx = dd.substring(dd.indexOf("reference"));
                         String cl = dx.replaceAll("\"", "").replaceAll(",", "");
                         String dw = cl.substring(cl.indexOf(":"));
-                        String du = dw.substring(0, dw.indexOf("href"));
-                        //  System.out.println(dw.replaceAll(":", ""));
-                        System.out.println(du.replaceAll(":", ""));
+                        String du = "";
+                        if (!methodx.equalsIgnoreCase("PUT")) {
+                            du = dw.substring(0, dw.indexOf("href"));
+                            //  System.out.println(dw.replaceAll(":", ""));
+                            System.out.println(du.replaceAll(":", ""));
+                            ch = du.replaceAll(":", "");
+                            SendToDHISServer.update_PSQL_oneParm_XINT("update samples set externalid = ? where id = ?", ch, SampleUtilityClass.getSample_id());
 
-                        ch = du.replaceAll(":", "");
-                        SendToDHISServer.update_PSQL_oneParm_XINT("update samples set samplingreason = ? where id = ?", ch, SampleUtilityClass.getSample_id());
+                        }
 
                         String wx = sb.toString();
                         System.err.println("Response: Successful! " + wx);
-                        SendToDHISServer.update_oneParm_X("insert into sync_tracker set json_response = ?, datasource= '" + SampleUtilityClass.getSampleUuid()+ "', dataperiod = '" + SampleUtilityClass.getCreationdate() + "', case_specific_detail = 'Person Table', status = 'ok', created = now()", sb.toString());
+                        SendToDHISServer.update_oneParm_X("insert into sync_tracker set json_response = ?, datasource= '" + SampleUtilityClass.getSampleUuid() + "', dataperiod = '" + SampleUtilityClass.getCreationdate() + "', case_specific_detail = 'Person Table', status = 'ok', created = now()", sb.toString());
                         return;
                     }
 

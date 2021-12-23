@@ -84,10 +84,22 @@ public class AggregrateController {
     private static String gender_others = "0";
     private static String gender_missing = "0";
     private static String not_confirmed_lab = "0";
+    
+    //classification of a class
+    private static String Confirm = "0";
+    private static String Probab = "0";
+    private static String suspect = "0";
+    private static String notclass = "0";
+    private static String not_a_case = "0";
 
     private static String[] _url = ConffileCatcher.fileCatcher("passed");
 
     private static String httpx = _url[10].toString(); //should come from config file
+    private static String Confimed;
+    private static String Susptected;
+    private static String Propable;
+    private static String Not_Case;
+    private static String Not_Classfied;
 
     public static void SormasAggregrator(String lev) throws ClassNotFoundException {
 
@@ -205,6 +217,22 @@ public class AggregrateController {
 
             PreparedStatement pa_33 = null;
             ResultSet ra_33 = null;
+            
+            
+            PreparedStatement pa_34 = null;
+            ResultSet ra_34 = null;
+
+            PreparedStatement pa_35 = null;
+            ResultSet ra_35 = null;
+
+            PreparedStatement pa_36 = null;
+            ResultSet ra_36 = null;
+
+            PreparedStatement pa_37 = null;
+            ResultSet ra_37 = null;
+
+            PreparedStatement pa_38 = null;
+            ResultSet ra_38 = null;
 
             if ("2".equals(lev)) {
                 if (debug) {
@@ -514,7 +542,7 @@ public class AggregrateController {
                             not_confirmed_lab = "0";
                         }
 
-                        /* Iyanu to fix confirmed_lab*/
+                        
                         pa_19 = cox.prepareStatement(sql.confirmed_lab);
                         pa_19.setInt(1, Integer.parseInt(region_id));
                         pa_19.setDate(2, datee);
@@ -527,10 +555,81 @@ public class AggregrateController {
                         } else {
                             confirmed_lab = "0";
                         }
+                        
+                        //Case Classfiication
+                        
+                         pa_34 = cox.prepareStatement(sql.Confimed);
+                        pa_34.setInt(1, Integer.parseInt(region_id));
+                        pa_34.setDate(2, datee);
+                        ra_34 = pa_34.executeQuery();
+                        if (ra_34.next()) {
+                            Confimed = ra_34.getString(1);
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:" + ra_34.getString(1));
+                            };
+                        } else {
+                            Confimed = "0";
+                        }
+                        
+                         pa_35 = cox.prepareStatement(sql.suspected);
+                        pa_35.setInt(1, Integer.parseInt(region_id));
+                        pa_35.setDate(2, datee);
+                        ra_35 = pa_35.executeQuery();
+                        if (ra_35.next()) {
+                            Susptected = ra_35.getString(1);
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:" + ra_35.getString(1));
+                            };
+                        } else {
+                            Susptected = "0";
+                        }
+                        
+                         pa_36 = cox.prepareStatement(sql.probable);
+                        pa_36.setInt(1, Integer.parseInt(region_id));
+                        pa_36.setDate(2, datee);
+                        ra_36 = pa_36.executeQuery();
+                        if (ra_36.next()) {
+                            Propable = ra_36.getString(1);
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:" + ra_36.getString(1));
+                            };
+                        } else {
+                            Propable = "0";
+                        }
+                        
+                          pa_37 = cox.prepareStatement(sql.no_case);
+                        pa_37.setInt(1, Integer.parseInt(region_id));
+                        pa_37.setDate(2, datee);
+                        ra_37 = pa_37.executeQuery();
+                        if (ra_37.next()) {
+                            Not_Case = ra_37.getString(1);
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:" + ra_37.getString(1));
+                            };
+                        } else {
+                            Not_Case = "0";
+                        }
+                        
+                         pa_38 = cox.prepareStatement(sql.Not_Classfied);
+                        pa_38.setInt(1, Integer.parseInt(region_id));
+                        pa_38.setDate(2, datee);
+                        ra_38 = pa_38.executeQuery();
+                        if (ra_38.next()) {
+                            Not_Classfied = ra_38.getString(1);
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:" + ra_38.getString(1));
+                            };
+                        } else {
+                            Not_Classfied = "0";
+                        }
+                        
+                        
+                   
+                        
 
                         if (debug) {
                             System.out.println(ra.getString(5) + " " + ad[0] + " " + ra.getString(4) + " " + ad[1] + " " + ra.getString(1) + " " + dtf.format(now) + " " + ra.getString(4) + " " + ra.getString(3) + " " + imported + " " + incountry);
-                            SendToDHISServer.SendCasesToDHIS(ra.getString(4), ad[0], ra.getString(3), ad[1], ra.getString(1), dtf.format(now), ra.getString(4) + " Aggregate", ra.getString(6), imported, incountry, death, recover, not_det_rec, age_1, age_2, age_3, age_4, age_5, age_6, age_7, Occupation_Health_Worker, Occupation_Lab_Staff, Occupation_unknow_missing, Male, female, not_confirmed_lab, gender_others, gender_missing, confirmed_lab, confirmed_missing);
+                            SendToDHISServer.SendCasesToDHIS(ra.getString(4), ad[0], ra.getString(3), ad[1], ra.getString(1), dtf.format(now), ra.getString(4) + " Aggregate", ra.getString(6), imported, incountry, death, recover, not_det_rec, age_1, age_2, age_3, age_4, age_5, age_6, age_7, Occupation_Health_Worker, Occupation_Lab_Staff, Occupation_unknow_missing, Male, female, not_confirmed_lab, gender_others, gender_missing, confirmed_lab, confirmed_missing, Not_Classfied, Not_Case, Propable, Susptected, Confimed);
 
                         }
                     }

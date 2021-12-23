@@ -23,13 +23,12 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.mirabilia.org.hzi.sormas.cases.personRecords;
+package com.mirabilia.org.hzi.sormas.cases.CasesData;
 
 import com.mirabilia.org.hzi.Util.credentialsManagerUtil;
 import com.mirabilia.org.hzi.sormas.aggregate.SendToDHISServer;
 import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
-import com.mirabilia.org.hzi.sormas.cases.CasesData.personCasesToDHIS;
 import com.mirabilia.org.hzi.sormas.cases.CasesData.personCasesUtilityClass;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -482,12 +481,14 @@ public class personSender {
             //  System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> = "+personCasesUtilityClass.getExternalid());
             ///api/trackedEntityInstances/<tracked-entity-instance-id>
             if (personCasesUtilityClass.getExternalid() != null) {
+                 if(!personCasesUtilityClass.getExternalid().equalsIgnoreCase("")){
                 tracked = true;
                 json.put("trackedEntityInstance", personCasesUtilityClass.getExternalid());
-                json.put("ignoreEmptyCollection", true);
+               // json.put("ignoreEmptyCollection", true);
                 json.put("trackedEntityType", "XBrd5VNB5j2");
                 top = "{\"trackedEntityInstances\": [";
                 buttom = "]}";
+            }
             } else {
                 json.put("trackedEntityType", "XBrd5VNB5j2");
             }
@@ -682,8 +683,8 @@ public class personSender {
             System.out.print("VendorError: " + ex.getErrorCode());
 
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(personCasesToDHIS.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            Logger.getLogger(personSender.class.getName()).log(Level.SEVERE, null, ex);
+        } 
 
     }
 }

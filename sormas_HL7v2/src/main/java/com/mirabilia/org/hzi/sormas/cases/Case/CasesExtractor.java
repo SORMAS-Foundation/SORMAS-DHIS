@@ -43,7 +43,7 @@ import java.util.logging.Logger;
 public class CasesExtractor {
 
     public static void SormasCasePull(String lev) throws ClassNotFoundException {
-        SimpleDateFormat frnmt = new SimpleDateFormat("yyyy-MM-dd");
+       // SimpleDateFormat frnmt = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
 
@@ -52,7 +52,6 @@ public class CasesExtractor {
             ResultSet ra = null;
 
             if ("2".equals(lev)) {
-                //System.out.println("1111111111111111");
                 pa = cox.prepareStatement(sql.getCases);
             }
             if ("3".equals(lev)) {
@@ -67,7 +66,6 @@ public class CasesExtractor {
 
             ra = pa.executeQuery();
             while (ra.next()) {
-
                 CasesUtilityClass.setC_id(ra.getString("Id"));
                 CasesUtilityClass.setCaseage(ra.getString("caseage"));
                 CasesUtilityClass.setCaseclassification(ra.getString("caseclassification"));
@@ -77,14 +75,13 @@ public class CasesExtractor {
                 CasesUtilityClass.setCaseLat(ra.getString("reportlon"));
                 CasesUtilityClass.setCaseLong(ra.getString("reportlat"));
                 CasesUtilityClass.setCaseuuid(ra.getString("uuid"));
-                CasesUtilityClass.setExternal_id(ra.getString("externalid"));
+                CasesUtilityClass.setExternal_id(ra.getString("cases_external_id"));
                 CasesUtilityClass.setRedgion_id(ra.getString("reg_externalid"));
                 String ddd = ra.getString("creationdate");
                 CasesUtilityClass.setCreationdate(ddd.substring(0, ddd.indexOf(" ")));
 
-                String rett = SendToDHISServer.get_trackEntity("select externalid from person where id = ?", ra.getString("person_id"));
-                CasesUtilityClass.setTrackedentity_id(rett);
-
+              // String rett = SendToDHISServer.get_trackEntity("select externalid from person where id = ?", ra.getString("person_id"));
+                CasesUtilityClass.setTrackedentity_id(ra.getString("person_external_id"));
                 CaseSender.jsonDHISSender();
 
             }

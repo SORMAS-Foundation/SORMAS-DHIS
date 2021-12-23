@@ -27,7 +27,7 @@ package com.mirabilia.org.hzi.sormas.cases.Case;
 
 import com.mirabilia.org.hzi.Util.credentialsManagerUtil;
 import com.mirabilia.org.hzi.sormas.aggregate.SendToDHISServer;
-import com.mirabilia.org.hzi.sormas.cases.Sample.SampleUtilityClass;
+import com.mirabilia.org.hzi.sormas.cases.CasesData.personCasesUtilityClass;
 import com.mirabilia.org.hzi.sormas.doa.ConffileCatcher;
 import com.mirabilia.org.hzi.sormas.doa.DbConnector;
 import java.io.BufferedReader;
@@ -60,8 +60,10 @@ public class CaseSender {
     private static String[] _url = ConffileCatcher.fileCatcher("passed");
 
     private static String httpx = _url[10].toString();
+    private static String methodx = "POST";
 
     public static void jsonDHISSender() {
+
         StringBuilder sb = new StringBuilder();
 
         //     System.out.println("URI in use: " + httpx);
@@ -84,7 +86,10 @@ public class CaseSender {
 
         String ch = "";
 
+        String case_exist = "";
+
         try {
+
             if (!"0".equals(CasesUtilityClass.getC_id())) {
                 JSONObject item1 = new JSONObject();
                 item1.put("dataElement", "eyoiseFH2aB");
@@ -126,7 +131,13 @@ public class CaseSender {
                 item6.put("value", CasesUtilityClass.getOutcome());
                 array.add(item6);
             }
-
+            
+            if (!"0".equals(CasesUtilityClass.getCreationdate())) {
+                JSONObject item7 = new JSONObject();
+                item7.put("dataElement", "J9ri8Ue6RI9");
+                item7.put("value", CasesUtilityClass.getCreationdate());
+                array.add(item7);
+            }
 
             json.put("dataValues", array);
             /*
@@ -146,31 +157,35 @@ public class CaseSender {
             
             json.put("geometry", arrayx);
 
-            */
-            
-            
-            
+             */
+
             //enrollment data
             json.put("program", "m0lmvyTblN0");
-            json.put("orgUnit", CasesUtilityClass.getExternal_id());
-            json.put("eventDate", CasesUtilityClass.getCreationdate());
-            json.put("status", "m0lmvyTblN0");
-            json.put("completedDate", "m0lmvyTblN0");
-            json.put("program", "m0lmvyTblN0");
-            
-            
-            
-            json.put("program", "m0lmvyTblN0");
-            json.put("orgUnit",  CasesUtilityClass.getRedgion_id());
+            json.put("orgUnit", CasesUtilityClass.getRedgion_id());
             json.put("eventDate", CasesUtilityClass.getCreationdate());
             json.put("status", "COMPLETED");
             json.put("completedDate", CasesUtilityClass.getCreationdate());
             json.put("programStage", "cSlBpW1TXVQ");
             json.put("trackedEntityInstance", CasesUtilityClass.getTrackedentity_id());
 
+            if (CasesUtilityClass.getExternal_id() != null) {
+                if (!CasesUtilityClass.getExternal_id().equalsIgnoreCase("")) {
+
+                    case_exist = "/" + CasesUtilityClass.getExternal_id();
+                    methodx = "PUT";
+                    System.out.println("CASES UPDATING LOGIC In ACTION.... using = " + case_exist);
+                } else {
+                    methodx = "POST";
+                }
+            }else {
+                    methodx = "POST";
+                }
+
         } finally {
 
-            String pg_url = httpx + "/api/29/events";
+            System.out.println("DEBUGGER- 4567JHGFDERT67 CASES" + json.toString());
+
+            String pg_url = httpx + "/api/29/events" + case_exist;
 
             try {
 
@@ -203,7 +218,7 @@ public class CaseSender {
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestProperty("Authorization", "Basic " + authStringEnc);
                 urlConnection.setDoOutput(true);
-                urlConnection.setRequestMethod("POST");
+                urlConnection.setRequestMethod(methodx);
                 urlConnection.setUseCaches(true);
                 urlConnection.setConnectTimeout(10000);
                 urlConnection.setReadTimeout(10000);
@@ -212,8 +227,9 @@ public class CaseSender {
 
                 String json_all = json.toString();
                 jsn = json_all;
-                  System.err.println("DEBBUGGER 2345WEFTG2345: "+json_all);
-                 
+                System.err.println("DEBBUGGER++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=");
+                System.err.println("DEBBUGGER 2345WEFTG2345: " + json_all);
+
                 OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
                 out.write(json_all);
                 out.close();
@@ -234,12 +250,15 @@ public class CaseSender {
                         String dx = dd.substring(dd.indexOf("reference"));
                         String cl = dx.replaceAll("\"", "").replaceAll(",", "");
                         String dw = cl.substring(cl.indexOf(":"));
-                        String du = dw.substring(0, dw.indexOf("href"));
-                        //  System.out.println(dw.replaceAll(":", ""));
-                        System.out.println(du.replaceAll(":", ""));
+                        String du = "";
+                        if (!methodx.equalsIgnoreCase("PUT")) {
+                            du = dw.substring(0, dw.indexOf("href"));
+                            //  System.out.println(dw.replaceAll(":", ""));
+                            System.out.println(du.replaceAll(":", ""));
+                            ch = du.replaceAll(":", "");
+                            SendToDHISServer.update_PSQL_oneParm_XINT("update cases set externalid = ? where id = ?", ch, CasesUtilityClass.getC_id());
 
-                        ch = du.replaceAll(":", "");
-                        SendToDHISServer.update_PSQL_oneParm_XINT("update cases set externalid = ? where id = ?", ch, CasesUtilityClass.getC_id());
+                        }
 
                         String wx = sb.toString();
                         System.err.println("Response: Successful! " + wx);

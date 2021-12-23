@@ -25,6 +25,7 @@
  */
 package com.mirabilia.org.hzi.sormas.cases.Sample;
 
+import com.mirabilia.org.hzi.Util.UtilServer;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,7 +50,9 @@ public class SampleCasesToDHIS extends HttpServlet {
 
         try {
 
-            SampleExtractor.SormasCasePull("2");
+            SampleExtractor.SormasSamplePull("2");
+            
+            
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SampleCasesToDHIS.class.getName()).log(Level.SEVERE, null, ex);

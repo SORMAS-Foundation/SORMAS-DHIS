@@ -51,10 +51,29 @@ public class SampleUtilityClass {
     private static String associatedcase_id="0";
     
     private static String SampleUuid = "0";
+    
+    private static String CaseUuid = "0";
+
+    public static String getCaseUuid() {
+        return CaseUuid;
+    }
+
+    public static void setCaseUuid(String CaseUuid) {
+        SampleUtilityClass.CaseUuid = CaseUuid;
+    }
 
     private static String creationdate = "0";
     
     private static String sampleRegionID = "0";
+     private static String sampleExternal_Id = "0";
+
+    public static String getSampleExternal_Id() {
+        return sampleExternal_Id;
+    }
+
+    public static void setSampleExternal_Id(String sampleExternal_Id) {
+        SampleUtilityClass.sampleExternal_Id = sampleExternal_Id;
+    }
     
     
     
@@ -186,7 +205,6 @@ public class SampleUtilityClass {
         SampleUtilityClass.sampleRegionID = sampleRegionID;
     }
 
-    
     
     
     

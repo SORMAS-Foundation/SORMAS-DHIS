@@ -404,30 +404,65 @@ public class sql {
             + "left join person p on (c.person_id = p.id)\n"
             + "where c.caseclassification = 'SUSPECT' AND c.disease = 'CORONAVIRUS' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
             + "group by c.disease, c.reportdate::date, C.caseclassification";
-    
-      public static String probable = "select count(*), c.disease, c.reportdate::date\n"
+
+    public static String probable = "select count(*), c.disease, c.reportdate::date\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
             + "where c.caseclassification = 'PROBABLE' AND c.disease = 'CORONAVIRUS' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
             + "group by c.disease, c.reportdate::date, C.caseclassification";
-      
-       public static String no_case = "select count(*), c.disease, c.reportdate::date\n"
+
+    public static String no_case = "select count(*), c.disease, c.reportdate::date\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
             + "where c.caseclassification = 'NO_CASE' AND c.disease = 'CORONAVIRUS' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
             + "group by c.disease, c.reportdate::date, C.caseclassification";
-    
-    
+
     public static String Not_Classfied = "select count(*), c.disease, c.reportdate::date\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
             + "where c.caseclassification = 'NOT_CLASSIFIED' AND c.disease = 'CORONAVIRUS' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
             + "group by c.disease, c.reportdate::date, C.caseclassification";
     
+    public static String Not_Classfied_MISSING = "select count(*), c.disease, c.reportdate::date\n"
+            + "from cases c\n"
+            + "left join person p on (c.person_id = p.id)\n"
+            + "where (c.caseclassification = '' OR c.caseclassification is null) AND c.disease = 'CORONAVIRUS' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "group by c.disease, c.reportdate::date, C.caseclassification";
+
     public static String Confimed = "select count(*), c.disease, c.reportdate::date\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
             + "where c.caseclassification ~ 'CONFIR' AND c.disease = 'CORONAVIRUS' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "group by c.disease, c.reportdate::date, C.caseclassification";
+
+    public static String Quarantine_Institution = "select count(*), c.disease, c.reportdate::date\n"
+            + "from cases c\n"
+            + "left join person p on (c.person_id = p.id)\n"
+            + "where c.quarantine = 'INSTITUTIONELL' AND c.disease = 'CORONAVIRUS' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "group by c.disease, c.reportdate::date, C.caseclassification";
+    
+    public static String Quarantine_Home = "select count(*), c.disease, c.reportdate::date\n"
+            + "from cases c\n"
+            + "left join person p on (c.person_id = p.id)\n"
+            + "where c.quarantine = 'HOME' AND c.disease = 'CORONAVIRUS' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "group by c.disease, c.reportdate::date, C.caseclassification";
+    
+    public static String Quarantine_NO_Q = "select count(*), c.disease, c.reportdate::date\n"
+            + "from cases c\n"
+            + "left join person p on (c.person_id = p.id)\n"
+            + "where c.quarantine = 'NONE' AND c.disease = 'CORONAVIRUS' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "group by c.disease, c.reportdate::date, C.caseclassification";
+    
+    public static String Quarantine_other = "select count(*), c.disease, c.reportdate::date\n"
+            + "from cases c\n"
+            + "left join person p on (c.person_id = p.id)\n"
+            + "where c.quarantine = 'OTHER' AND c.disease = 'CORONAVIRUS' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "group by c.disease, c.reportdate::date, C.caseclassification";
+    
+    public static String Quarantine_Missing = "select count(*), c.disease, c.reportdate::date\n"
+            + "from cases c\n"
+            + "left join person p on (c.person_id = p.id)\n"
+            + "where c.quarantine = '' AND c.quarantine = null AND c.disease = 'CORONAVIRUS' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
             + "group by c.disease, c.reportdate::date, C.caseclassification";
 
     // public static String Get_all_Isolated_today = "";

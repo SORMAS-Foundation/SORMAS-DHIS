@@ -131,7 +131,7 @@ public class CaseSender {
                 item6.put("value", CasesUtilityClass.getOutcome());
                 array.add(item6);
             }
-            
+
             if (!"0".equals(CasesUtilityClass.getCreationdate())) {
                 JSONObject item7 = new JSONObject();
                 item7.put("dataElement", "J9ri8Ue6RI9");
@@ -177,9 +177,9 @@ public class CaseSender {
                 } else {
                     methodx = "POST";
                 }
-            }else {
-                    methodx = "POST";
-                }
+            } else {
+                methodx = "POST";
+            }
 
         } finally {
 
@@ -235,7 +235,7 @@ public class CaseSender {
                 out.close();
 
                 int HttpResult = urlConnection.getResponseCode();
-
+                System.out.println("DEBBUGGER HTTPSTATUS_5678IK: " + HttpResult);
                 if (HttpResult == 200) {
                     BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
                     String line = null;
@@ -254,8 +254,9 @@ public class CaseSender {
                         if (!methodx.equalsIgnoreCase("PUT")) {
                             du = dw.substring(0, dw.indexOf("href"));
                             //  System.out.println(dw.replaceAll(":", ""));
-                            System.out.println(du.replaceAll(":", ""));
+                            System.out.println("DEBBUGGER 23455678i2345: " + dd);
                             ch = du.replaceAll(":", "");
+                            System.out.println("DEBUGGER BNJUY879UHJJHG: SQL parameters for sample updater = " + ch + " --- " + CasesUtilityClass.getC_id());
                             SendToDHISServer.update_PSQL_oneParm_XINT("update cases set externalid = ? where id = ?", ch, CasesUtilityClass.getC_id());
 
                         }

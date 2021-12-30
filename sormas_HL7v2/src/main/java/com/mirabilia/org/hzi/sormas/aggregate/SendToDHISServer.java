@@ -57,7 +57,7 @@ public class SendToDHISServer {
 
     public static void SendCasesToDHIS(String cPer, String dSet, String OrgUnit, String dEle, String val, String tDay, String disC, String org_name, String incount, String impor, String death, String recover, String no_outcome,
             String age_1, String age_2, String age_3, String age_4, String age_5, String age_6, String age_7, String Health_Worker, String Occupation_Lab_Staff, String Occupation_unknow_missing,
-            String Male, String female, String not_confirmed_lab, String gender_others, String gender_missing, String confirmed_lab, String comfrimed_missing, String Not_Classfied, String Not_Case, String Propable, String Susptected, String Confimed) {
+            String Male, String female, String not_confirmed_lab, String gender_others, String gender_missing, String confirmed_lab, String comfrimed_missing, String Not_Classfied, String Not_Case, String Propable, String Susptected, String Confimed, String Quarantine_other, String Quarantine_Missing, String Quarantine_Home, String quaratine_none, String quaratine_inst, String Not_Classfied_Missing) {
 
         StringBuilder sb = new StringBuilder();
         System.out.println("URI in use: " + httpx);
@@ -93,221 +93,253 @@ public class SendToDHISServer {
 
             JSONArray array = new JSONArray();
             //if (!"0".equals(val)) {
-                JSONObject item = new JSONObject();
-                item.put("dataElement", "y914IkI1mcw");
-                item.put("value", Integer.parseInt(val));
-                array.add(item);
-           // }
+            JSONObject item = new JSONObject();
+            item.put("dataElement", "y914IkI1mcw");
+            item.put("value", Integer.parseInt(val));
+            array.add(item);
+            // }
             //if (!"0".equals(incount)) {
-                JSONObject item1 = new JSONObject();
-                item1.put("categoryOptionCombo", "yr9KCcp24dI");
-                item1.put("dataElement", "LwLDycsBaSC");
-                item1.put("value", Integer.valueOf(incount));
-                array.add(item1);
-          //  }
+            JSONObject item1 = new JSONObject();
+            item1.put("categoryOptionCombo", "yr9KCcp24dI");
+            item1.put("dataElement", "LwLDycsBaSC");
+            item1.put("value", Integer.valueOf(incount));
+            array.add(item1);
+            //  }
             //if (!"0".equals(impor)) {
-                JSONObject item2 = new JSONObject();
-                item2.put("categoryOptionCombo", "CqhKacjKIyG");
-                item2.put("dataElement", "LwLDycsBaSC");
-                item2.put("value", Integer.valueOf(impor));
-                array.add(item2);
-           // }
+            JSONObject item2 = new JSONObject();
+            item2.put("categoryOptionCombo", "CqhKacjKIyG");
+            item2.put("dataElement", "LwLDycsBaSC");
+            item2.put("value", Integer.valueOf(impor));
+            array.add(item2);
+            // }
 //OUTCOME
             //if (!"0".equals(death)) {
-                JSONObject item3 = new JSONObject();
-                item3.put("categoryOptionCombo", "HEVkjakWadt");
-                item3.put("dataElement", "ObwbuybGqev");
-                item3.put("value", Integer.valueOf(death));
-                array.add(item3);
+            JSONObject item3 = new JSONObject();
+            item3.put("categoryOptionCombo", "HEVkjakWadt");
+            item3.put("dataElement", "ObwbuybGqev");
+            item3.put("value", Integer.valueOf(death));
+            array.add(item3);
             //}
             //if (!"0".equals(recover)) {
-                JSONObject item4 = new JSONObject();
-                item4.put("categoryOptionCombo", "SNwVO65yKLD");
-                item4.put("dataElement", "ObwbuybGqev");
-                item4.put("value", Integer.valueOf(recover));
-                array.add(item4);
+            JSONObject item4 = new JSONObject();
+            item4.put("categoryOptionCombo", "SNwVO65yKLD");
+            item4.put("dataElement", "ObwbuybGqev");
+            item4.put("value", Integer.valueOf(recover));
+            array.add(item4);
             //}
-            
+
             //if (!"0".equals(no_outcome)) {
-                JSONObject item4_a = new JSONObject();
-                item4_a.put("categoryOptionCombo", "ziGYcHoUlxG");
-                item4_a.put("dataElement", "ObwbuybGqev");
-                item4_a.put("value", Integer.valueOf(no_outcome));
-                array.add(item4_a);
-           // }
-            
+            JSONObject item4_a = new JSONObject();
+            item4_a.put("categoryOptionCombo", "ziGYcHoUlxG");
+            item4_a.put("dataElement", "ObwbuybGqev");
+            item4_a.put("value", Integer.valueOf(no_outcome));
+            array.add(item4_a);
+            // }
+
 //LAB Confirmation
             //if (!"0".equals(not_confirmed_lab)) {
-                JSONObject item5 = new JSONObject();
-                item5.put("categoryOptionCombo", "znFDz5MUKFU");
-                item5.put("dataElement", "M2lh3zVT85m");
-                
-                System.out.println("============================="+Integer.valueOf(not_confirmed_lab));
-                item5.put("value", Integer.valueOf(not_confirmed_lab));
-                array.add(item5);
-          //  }
+            JSONObject item5 = new JSONObject();
+            item5.put("categoryOptionCombo", "znFDz5MUKFU");
+            item5.put("dataElement", "M2lh3zVT85m");
+
+            System.out.println("=============================" + Integer.valueOf(not_confirmed_lab));
+            item5.put("value", Integer.valueOf(not_confirmed_lab));
+            array.add(item5);
+            //  }
             //if (!"0".equals(confirmed_lab)) {
-                JSONObject item5_a = new JSONObject();
-                item5_a.put("categoryOptionCombo", "zYy56QC7AMh");
-                item5_a.put("dataElement", "M2lh3zVT85m");
-                System.out.println("----------------------------------------"+Integer.valueOf(confirmed_lab));
-                item5_a.put("value", Integer.valueOf(confirmed_lab));
-                array.add(item5_a);
-           // }
+            JSONObject item5_a = new JSONObject();
+            item5_a.put("categoryOptionCombo", "zYy56QC7AMh");
+            item5_a.put("dataElement", "M2lh3zVT85m");
+            System.out.println("----------------------------------------" + Integer.valueOf(confirmed_lab));
+            item5_a.put("value", Integer.valueOf(confirmed_lab));
+            array.add(item5_a);
+            // }
 //GENDER
             //if (!"0".equals(gender_others)) {
-                JSONObject item6 = new JSONObject();
-                item6.put("categoryOptionCombo", "WuSqzHEx8zh");
-                item6.put("dataElement", "p5lUq0nikYc");
-                item6.put("value", Integer.valueOf(gender_others));
-                array.add(item6);
+            JSONObject item6 = new JSONObject();
+            item6.put("categoryOptionCombo", "WuSqzHEx8zh");
+            item6.put("dataElement", "p5lUq0nikYc");
+            item6.put("value", Integer.valueOf(gender_others));
+            array.add(item6);
             //}
             //if (!"0".equals(Male)) {
-                JSONObject item7 = new JSONObject();
-                item7.put("categoryOptionCombo", "XqVYgyPkDDD");
-                item7.put("dataElement", "p5lUq0nikYc");
-                item7.put("value", Integer.valueOf(Male));
-                array.add(item7);
-           // }
+            JSONObject item7 = new JSONObject();
+            item7.put("categoryOptionCombo", "XqVYgyPkDDD");
+            item7.put("dataElement", "p5lUq0nikYc");
+            item7.put("value", Integer.valueOf(Male));
+            array.add(item7);
+            // }
             //if (!"0".equals(female)) {
-                JSONObject item8 = new JSONObject();
-                item8.put("categoryOptionCombo", "hzuy9TV8MEW");
-                item8.put("dataElement", "p5lUq0nikYc");
-                item8.put("value", Integer.valueOf(female));
-                array.add(item8);
+            JSONObject item8 = new JSONObject();
+            item8.put("categoryOptionCombo", "hzuy9TV8MEW");
+            item8.put("dataElement", "p5lUq0nikYc");
+            item8.put("value", Integer.valueOf(female));
+            array.add(item8);
             //}
             //if (!"0".equals(gender_missing)) {
-                JSONObject item9 = new JSONObject();
-                item9.put("categoryOptionCombo", "X6mISFBGX0t");
-                item9.put("dataElement", "p5lUq0nikYc");
-                item9.put("value", Integer.valueOf(gender_missing));
-                array.add(item9);
-           // }
+            JSONObject item9 = new JSONObject();
+            item9.put("categoryOptionCombo", "X6mISFBGX0t");
+            item9.put("dataElement", "p5lUq0nikYc");
+            item9.put("value", Integer.valueOf(gender_missing));
+            array.add(item9);
+            // }
             //if (!"0".equals(Occupation_Lab_Staff)) {
-                JSONObject item10 = new JSONObject();
-                item10.put("categoryOptionCombo", "ADVU5rDCqdL");
-                item10.put("dataElement", "XUAtpFmcDTN");
-                item10.put("value", Integer.valueOf(Occupation_Lab_Staff));
-                array.add(item10);
-                
-                JSONObject item10_a = new JSONObject();
-                item10_a.put("categoryOptionCombo", "nZbakguAkPK");
-                item10_a.put("dataElement", "XUAtpFmcDTN");
-                item10_a.put("value", Integer.valueOf(Health_Worker));
-                array.add(item10_a);
-                
-                
-           // }
+            JSONObject item10 = new JSONObject();
+            item10.put("categoryOptionCombo", "ADVU5rDCqdL");
+            item10.put("dataElement", "XUAtpFmcDTN");
+            item10.put("value", Integer.valueOf(Occupation_Lab_Staff));
+            array.add(item10);
+
+            JSONObject item10_a = new JSONObject();
+            item10_a.put("categoryOptionCombo", "nZbakguAkPK");
+            item10_a.put("dataElement", "XUAtpFmcDTN");
+            item10_a.put("value", Integer.valueOf(Health_Worker));
+            array.add(item10_a);
+
+            // }
             //if (!"0".equals(Occupation_unknow_missing)) {
-                JSONObject item11 = new JSONObject();
-                item11.put("categoryOptionCombo", "Tfjs297bieK");
-                item11.put("dataElement", "XUAtpFmcDTN");
-                item11.put("value", Integer.valueOf(Occupation_unknow_missing));
-                array.add(item11);
-           // }
+            JSONObject item11 = new JSONObject();
+            item11.put("categoryOptionCombo", "Tfjs297bieK");
+            item11.put("dataElement", "XUAtpFmcDTN");
+            item11.put("value", Integer.valueOf(Occupation_unknow_missing));
+            array.add(item11);
+            // }
             //AGE
             //if (!"0".equals(age_1)) {
-                JSONObject item12 = new JSONObject();
-                item12.put("categoryOptionCombo", "fBXLtsRhjmL");
-                item12.put("dataElement", "WZNgywrtQsl");
-                item12.put("value", Integer.valueOf(age_1));
-                array.add(item12);
+            JSONObject item12 = new JSONObject();
+            item12.put("categoryOptionCombo", "fBXLtsRhjmL");
+            item12.put("dataElement", "WZNgywrtQsl");
+            item12.put("value", Integer.valueOf(age_1));
+            array.add(item12);
             //}
             //if (!"0".equals(age_2)) {
-                JSONObject item13 = new JSONObject();
-                item13.put("categoryOptionCombo", "v7YmpmfRfTj");
-                item13.put("dataElement", "WZNgywrtQsl");
-                item13.put("value", Integer.valueOf(age_2));
-                array.add(item13);
-           // }
+            JSONObject item13 = new JSONObject();
+            item13.put("categoryOptionCombo", "v7YmpmfRfTj");
+            item13.put("dataElement", "WZNgywrtQsl");
+            item13.put("value", Integer.valueOf(age_2));
+            array.add(item13);
+            // }
             //if (!"0".equals(age_3)) {
-                JSONObject item14 = new JSONObject();
-                item14.put("categoryOptionCombo", "aZR8OrZdxy1");
-                item14.put("dataElement", "WZNgywrtQsl");
-                item14.put("value", Integer.valueOf(age_3));
-                array.add(item14);
-          //  }
+            JSONObject item14 = new JSONObject();
+            item14.put("categoryOptionCombo", "aZR8OrZdxy1");
+            item14.put("dataElement", "WZNgywrtQsl");
+            item14.put("value", Integer.valueOf(age_3));
+            array.add(item14);
+            //  }
             //if (!"0".equals(age_4)) {
-                JSONObject item15 = new JSONObject();
-                item15.put("categoryOptionCombo", "qK08trg18Wr");
-                item15.put("dataElement", "WZNgywrtQsl");
-                item15.put("value", Integer.valueOf(age_4));
-                array.add(item15);
-           // }
+            JSONObject item15 = new JSONObject();
+            item15.put("categoryOptionCombo", "qK08trg18Wr");
+            item15.put("dataElement", "WZNgywrtQsl");
+            item15.put("value", Integer.valueOf(age_4));
+            array.add(item15);
+            // }
             //if (!"0".equals(age_5)) {
-                JSONObject item16 = new JSONObject();
-                item16.put("categoryOptionCombo", "gI6hobBK0Fv");
-                item16.put("dataElement", "WZNgywrtQsl");
-                item16.put("value", Integer.valueOf(age_5));
-                array.add(item16);
-           // }
+            JSONObject item16 = new JSONObject();
+            item16.put("categoryOptionCombo", "gI6hobBK0Fv");
+            item16.put("dataElement", "WZNgywrtQsl");
+            item16.put("value", Integer.valueOf(age_5));
+            array.add(item16);
+            // }
             //if (!"0".equals(age_6)) {
-                JSONObject item17 = new JSONObject();
-                item17.put("categoryOptionCombo", "NZzOXySPLdW");
-                item17.put("dataElement", "WZNgywrtQsl");
-                item17.put("value", Integer.valueOf(age_6
-                ));
-                array.add(item17);
-           // }
+            JSONObject item17 = new JSONObject();
+            item17.put("categoryOptionCombo", "NZzOXySPLdW");
+            item17.put("dataElement", "WZNgywrtQsl");
+            item17.put("value", Integer.valueOf(age_6
+            ));
+            array.add(item17);
+            // }
             //if (!"0".equals(age_7)) {
-                JSONObject item18 = new JSONObject();
-                item18.put("categoryOptionCombo", "FY8ksWTLuFp");
-                item18.put("dataElement", "WZNgywrtQsl");
-                item18.put("value", Integer.valueOf(age_7
-                ));
-                array.add(item18);
-                
-                //classficiation patch
-                //Not_Classfied, Not_Case, Propable, Susptected, Confimed
-                
-                
-                 JSONObject item19 = new JSONObject();
-                item19.put("categoryOptionCombo", "maWulTsI11M");
-                item19.put("dataElement", "OeYjA8YfEmG");
-                item19.put("value", Integer.valueOf(Not_Classfied
-                ));
-                array.add(item19);
-                
-                 JSONObject item20 = new JSONObject();
-                item20.put("categoryOptionCombo", "tjk0rPZG3US");
-                item20.put("dataElement", "OeYjA8YfEmG");
-                item20.put("value", Integer.valueOf(Not_Case
-                ));
-                array.add(item20);
-                
-                 JSONObject item21 = new JSONObject();
-                item21.put("categoryOptionCombo", "gAYDDAR5hoH");
-                item21.put("dataElement", "OeYjA8YfEmG");
-                item21.put("value", Integer.valueOf(Propable
-                ));
-                array.add(item21);
-                
-                 JSONObject item22 = new JSONObject();
-                item22.put("categoryOptionCombo", "tiufJKy6JK8");
-                item22.put("dataElement", "OeYjA8YfEmG");
-                item22.put("value", Integer.valueOf(Susptected
-                ));
-                array.add(item22);
-                
-                 JSONObject item23 = new JSONObject();
-                item23.put("categoryOptionCombo", "AewFMtFllZ9");
-                item23.put("dataElement", "OeYjA8YfEmG");
-                item23.put("value", Integer.valueOf(Confimed
-                ));
-                array.add(item23);
-                
-                
-           // }
-            /*  JSONObject item2 = new JSONObject();
-            item1.put("categoryOptionCombo", "CqhKacjKIyG");
-             item1.put("dataElement", "LwLDycsBaSC");
-            item1.put("value", Integer.valueOf(impor));
-            array.add(item2);*/
+            JSONObject item18 = new JSONObject();
+            item18.put("categoryOptionCombo", "FY8ksWTLuFp");
+            item18.put("dataElement", "WZNgywrtQsl");
+            item18.put("value", Integer.valueOf(age_7
+            ));
+            array.add(item18);
+
+            //classficiation patch
+            //Not_Classfied, Not_Case, Propable, Susptected, Confimed
+            JSONObject item19 = new JSONObject();
+            item19.put("categoryOptionCombo", "maWulTsI11M");
+            item19.put("dataElement", "OeYjA8YfEmG");
+            item19.put("value", Integer.valueOf(Not_Classfied
+            ));
+            array.add(item19);
+
+            JSONObject item20 = new JSONObject();
+            item20.put("categoryOptionCombo", "tjk0rPZG3US");
+            item20.put("dataElement", "OeYjA8YfEmG");
+            item20.put("value", Integer.valueOf(Not_Case
+            ));
+            array.add(item20);
+
+            JSONObject item21 = new JSONObject();
+            item21.put("categoryOptionCombo", "gAYDDAR5hoH");
+            item21.put("dataElement", "OeYjA8YfEmG");
+            item21.put("value", Integer.valueOf(Propable
+            ));
+            array.add(item21);
+
+            JSONObject item22 = new JSONObject();
+            item22.put("categoryOptionCombo", "tiufJKy6JK8");
+            item22.put("dataElement", "OeYjA8YfEmG");
+            item22.put("value", Integer.valueOf(Susptected
+            ));
+            array.add(item22);
+
+            
+            //QUARANTINE ==Quarantine_other, Quarantine_Missing, Quarantine_Home, quaratine_none, quaratine_inst
+            JSONObject item23 = new JSONObject();
+            item23.put("categoryOptionCombo", "YWdSGPXe02C");
+            item23.put("dataElement", "uIwbb7XCePT");
+            item23.put("value", Integer.valueOf(Quarantine_Home
+            ));
+            array.add(item23);
+            
+            JSONObject item24 = new JSONObject();
+            item24.put("categoryOptionCombo", "c4pjKQIJJeH");
+            item24.put("dataElement", "uIwbb7XCePT");
+            item24.put("value", Integer.valueOf(quaratine_inst
+            ));
+            array.add(item24);
+            
+            JSONObject item26 = new JSONObject();
+            item26.put("categoryOptionCombo", "HPaCa6VRiAU");
+            item26.put("dataElement", "uIwbb7XCePT");
+            item26.put("value", Integer.valueOf(quaratine_none
+            ));
+            array.add(item26);
+            
+            JSONObject item27 = new JSONObject();
+            item27.put("categoryOptionCombo", "PHEg8zuplZZ");
+            item27.put("dataElement", "uIwbb7XCePT");
+            item27.put("value", Integer.valueOf(Quarantine_other
+            ));
+            array.add(item27);
+            
+            JSONObject item28 = new JSONObject();
+            item28.put("categoryOptionCombo", "RJDECCMQd0V");
+            item28.put("dataElement", "uIwbb7XCePT");
+            item28.put("value", Integer.valueOf(Quarantine_Missing
+            ));
+            array.add(item28);//Not_Classfied_Missing
+           
+            
+            /*
+            JSONObject item29 = new JSONObject();
+            item29.put("categoryOptionCombo", "AewFMtFllZ9");
+            item29.put("dataElement", "OeYjA8YfEmG");
+            item29.put("value", Integer.valueOf(Confimed
+            ));
+            array.add(item29);
+            
+            */
+
             json.put("dataValues", array);
 
-            System.out.println("E8765: " + json.toString());
+            System.out.println("E8765&&&&&7777: " + json.toString());
 
             if (1 == 2) {
+                System.out.println("E8765&&&&&7777: " + json.toString());
                 return;
             }
 
@@ -437,7 +469,7 @@ public class SendToDHISServer {
             Logger.getLogger(SendToDHISServer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public static void update_PSQL_oneParm_XINT(String sqq, String sqq_, String sqll__) throws ClassNotFoundException {
 
         Connection cox = DbConnector.getPgConnection();
@@ -462,7 +494,6 @@ public class SendToDHISServer {
         ResultSet rx = null;
         String rett = "0";
 
-        
         Connection conn = DbConnector.getPgConnection();
 
         try {
@@ -475,7 +506,7 @@ public class SendToDHISServer {
             while (rx.next()) {
                 rett = rx.getString(1);
             }
-            
+
         } finally {
             conn.close();
         }

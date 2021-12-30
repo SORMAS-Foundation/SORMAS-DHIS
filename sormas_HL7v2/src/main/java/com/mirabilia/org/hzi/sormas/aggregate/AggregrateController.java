@@ -84,7 +84,7 @@ public class AggregrateController {
     private static String gender_others = "0";
     private static String gender_missing = "0";
     private static String not_confirmed_lab = "0";
-    
+
     //classification of a class
     private static String Confirm = "0";
     private static String Probab = "0";
@@ -100,6 +100,13 @@ public class AggregrateController {
     private static String Propable;
     private static String Not_Case;
     private static String Not_Classfied;
+    private static String Not_Classfied_Missing;
+
+    private static String quaratine_none;
+    private static String quaratine_inst;
+    private static String Quarantine_Home;
+    private static String Quarantine_Missing;
+    private static String Quarantine_other;
 
     public static void SormasAggregrator(String lev) throws ClassNotFoundException {
 
@@ -217,8 +224,7 @@ public class AggregrateController {
 
             PreparedStatement pa_33 = null;
             ResultSet ra_33 = null;
-            
-            
+
             PreparedStatement pa_34 = null;
             ResultSet ra_34 = null;
 
@@ -230,13 +236,31 @@ public class AggregrateController {
 
             PreparedStatement pa_37 = null;
             ResultSet ra_37 = null;
-
+            
             PreparedStatement pa_38 = null;
             ResultSet ra_38 = null;
+            
+             PreparedStatement pa_38_a = null;
+            ResultSet ra_38_a = null;
+
+            PreparedStatement pa_39 = null;
+            ResultSet ra_39 = null;
+
+            PreparedStatement pa_40 = null;
+            ResultSet ra_40 = null;
+
+            PreparedStatement pa_41 = null;
+            ResultSet ra_41 = null;
+
+            PreparedStatement pa_42 = null;
+            ResultSet ra_42 = null;
+
+            PreparedStatement pa_43 = null;
+            ResultSet ra_43 = null;
 
             if ("2".equals(lev)) {
                 if (debug) {
-                    System.out.println("Debugger: 2DEASR34 = " + sql.getSROMAS_region_Aggregate_AllCases);
+                 //   System.out.println("Debugger: 2DEASR34 = " + sql.getSROMAS_region_Aggregate_AllCases);
                 };
                 pa = cox.prepareStatement(sql.getSROMAS_region_Aggregate_AllCases);
             }
@@ -267,7 +291,7 @@ public class AggregrateController {
                         if (debug) {
                             System.out.println("E3432221_:" + ra.getString(5));
                         };
-                   
+
                         // String incountry = "";
                         pa_1 = cox.prepareStatement(sql.getSORMAS_INCOUNTRY);
                         pa_1.setInt(1, Integer.parseInt(region_id));
@@ -542,7 +566,6 @@ public class AggregrateController {
                             not_confirmed_lab = "0";
                         }
 
-                        
                         pa_19 = cox.prepareStatement(sql.confirmed_lab);
                         pa_19.setInt(1, Integer.parseInt(region_id));
                         pa_19.setDate(2, datee);
@@ -555,10 +578,9 @@ public class AggregrateController {
                         } else {
                             confirmed_lab = "0";
                         }
-                        
+
                         //Case Classfiication
-                        
-                         pa_34 = cox.prepareStatement(sql.Confimed);
+                        pa_34 = cox.prepareStatement(sql.Confimed);
                         pa_34.setInt(1, Integer.parseInt(region_id));
                         pa_34.setDate(2, datee);
                         ra_34 = pa_34.executeQuery();
@@ -570,8 +592,8 @@ public class AggregrateController {
                         } else {
                             Confimed = "0";
                         }
-                        
-                         pa_35 = cox.prepareStatement(sql.suspected);
+
+                        pa_35 = cox.prepareStatement(sql.suspected);
                         pa_35.setInt(1, Integer.parseInt(region_id));
                         pa_35.setDate(2, datee);
                         ra_35 = pa_35.executeQuery();
@@ -583,8 +605,8 @@ public class AggregrateController {
                         } else {
                             Susptected = "0";
                         }
-                        
-                         pa_36 = cox.prepareStatement(sql.probable);
+
+                        pa_36 = cox.prepareStatement(sql.probable);
                         pa_36.setInt(1, Integer.parseInt(region_id));
                         pa_36.setDate(2, datee);
                         ra_36 = pa_36.executeQuery();
@@ -596,53 +618,126 @@ public class AggregrateController {
                         } else {
                             Propable = "0";
                         }
-                        
-                          pa_37 = cox.prepareStatement(sql.no_case);
+
+                        pa_37 = cox.prepareStatement(sql.no_case);
                         pa_37.setInt(1, Integer.parseInt(region_id));
                         pa_37.setDate(2, datee);
                         ra_37 = pa_37.executeQuery();
                         if (ra_37.next()) {
                             Not_Case = ra_37.getString(1);
                             if (debug) {
-                                System.out.println("E34323++++++++++++++++:" + ra_37.getString(1));
+                                System.out.println("E34323++++++++++++++====" + region_id + " ==" + ra_37.getString(1));
                             };
                         } else {
                             Not_Case = "0";
-                        }
-                        
-                         pa_38 = cox.prepareStatement(sql.Not_Classfied);
+                        }//Not_Classfied_MISSING
+
+                        pa_38 = cox.prepareStatement(sql.Not_Classfied);
                         pa_38.setInt(1, Integer.parseInt(region_id));
                         pa_38.setDate(2, datee);
                         ra_38 = pa_38.executeQuery();
                         if (ra_38.next()) {
                             Not_Classfied = ra_38.getString(1);
                             if (debug) {
-                                System.out.println("E34323++++++++++++++++:" + ra_38.getString(1));
+                                System.out.println("E34323++++++++++++++++:Not_Classfied" + ra_38.getString(1));
                             };
                         } else {
                             Not_Classfied = "0";
                         }
                         
-                        
-                   
-                        
+                         pa_38_a = cox.prepareStatement(sql.Not_Classfied_MISSING);
+                        pa_38_a.setInt(1, Integer.parseInt(region_id));
+                        pa_38_a.setDate(2, datee);
+                        ra_38_a = pa_38_a.executeQuery();
+                        if (ra_38_a.next()) {
+                            Not_Classfied_Missing = ra_38_a.getString(1);
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:Not_Classfied_Missing" + ra_38_a.getString(1));
+                            };
+                        } else {
+                            Not_Classfied_Missing = "0";
+                        }
+
+                        //QUARANTINE
+                        pa_39 = cox.prepareStatement(sql.Quarantine_Institution);
+                        pa_39.setInt(1, Integer.parseInt(region_id));
+                        pa_39.setDate(2, datee);
+                        ra_39 = pa_39.executeQuery();
+                        if (ra_39.next()) {
+                            quaratine_inst = ra_39.getString(1);
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:" + ra_39.getString(1));
+                            };
+                        } else {
+                            quaratine_inst = "0";
+                        }
+
+                        pa_40 = cox.prepareStatement(sql.Quarantine_NO_Q);
+                        pa_40.setInt(1, Integer.parseInt(region_id));
+                        pa_40.setDate(2, datee);
+                        ra_40 = pa_40.executeQuery();
+                        if (ra_40.next()) {
+                            quaratine_none = ra_40.getString(1);
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:" + ra_40.getString(1));
+                            };
+                        } else {
+                            quaratine_none = "0";
+                        }
+
+                        pa_41 = cox.prepareStatement(sql.Quarantine_Home);
+                        pa_41.setInt(1, Integer.parseInt(region_id));
+                        pa_41.setDate(2, datee);
+                        ra_41 = pa_41.executeQuery();
+                        if (ra_41.next()) {
+                            Quarantine_Home = ra_41.getString(1);
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:Quarantine_Home" + ra_41.getString(1));
+                            };
+                        } else {
+                            Quarantine_Home = "0";
+                        }
+
+                        pa_42 = cox.prepareStatement(sql.Quarantine_Missing);
+                        pa_42.setInt(1, Integer.parseInt(region_id));
+                        pa_42.setDate(2, datee);
+                        ra_42 = pa_42.executeQuery();
+                        if (ra_42.next()) {
+                            Quarantine_Missing = ra_42.getString(1);
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++:Quarantine_Missing" + ra_42.getString(1));
+                            };
+                        } else {
+                            Quarantine_Missing = "0";
+                        }
+
+                        pa_43 = cox.prepareStatement(sql.Quarantine_other);
+                        pa_43.setInt(1, Integer.parseInt(region_id));
+                        pa_43.setDate(2, datee);
+                        ra_43 = pa_43.executeQuery();
+                        if (ra_43.next()) {
+                            Quarantine_other = ra_43.getString(1);
+                            if (debug) {
+                                System.out.println("E34323++++++++++++++++Quarantine_other:" + ra_43.getString(1));
+                            };
+                        } else {
+                            Quarantine_other = "0";
+                        }
 
                         if (debug) {
-                            System.out.println(ra.getString(5) + " " + ad[0] + " " + ra.getString(4) + " " + ad[1] + " " + ra.getString(1) + " " + dtf.format(now) + " " + ra.getString(4) + " " + ra.getString(3) + " " + imported + " " + incountry);
-                            SendToDHISServer.SendCasesToDHIS(ra.getString(4), ad[0], ra.getString(3), ad[1], ra.getString(1), dtf.format(now), ra.getString(4) + " Aggregate", ra.getString(6), imported, incountry, death, recover, not_det_rec, age_1, age_2, age_3, age_4, age_5, age_6, age_7, Occupation_Health_Worker, Occupation_Lab_Staff, Occupation_unknow_missing, Male, female, not_confirmed_lab, gender_others, gender_missing, confirmed_lab, confirmed_missing, Not_Classfied, Not_Case, Propable, Susptected, Confimed);
+                            System.out.println(ra.getString(5) + " " + ad[0] + " " + ra.getString(4) + " " + ad[1] + " " + ra.getString(1) + " " + dtf.format(now) + " " + ra.getString(4) + " " + ra.getString(3) + " " + imported + " " + incountry+" "+Quarantine_other+" "+ Quarantine_Missing+" "+ Quarantine_Home+" "+ quaratine_none+" "+ quaratine_inst+" "+Not_Classfied_Missing);
+                            SendToDHISServer.SendCasesToDHIS(ra.getString(4), ad[0], ra.getString(3), ad[1], ra.getString(1), dtf.format(now), ra.getString(4) + " Aggregate", ra.getString(6), imported, incountry, death, recover, not_det_rec, age_1, age_2, age_3, age_4, age_5, age_6, age_7, Occupation_Health_Worker, Occupation_Lab_Staff, Occupation_unknow_missing, Male, female, not_confirmed_lab, gender_others, gender_missing, confirmed_lab, confirmed_missing, Not_Classfied, Not_Case, Propable, Susptected, Confimed,Quarantine_other, Quarantine_Missing, Quarantine_Home, quaratine_none, quaratine_inst,Not_Classfied_Missing);
 
                         }
                     }
                 }
 
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(AggregrateController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        }
-
-    
+    }
 
     public static String MetadaJsonSender(String datax, String usn, String psw) throws ParseException {
 

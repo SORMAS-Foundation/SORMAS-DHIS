@@ -52,7 +52,7 @@
           <h3>SORMAS - DHIS2 Adapter</h3>
 
           <p>
-           Adapter Version: 2.4.3<br/>
+           Adapter Version: 2.4.4<br/>
            SORMAS Version: <a href="../../index.html">1.66.1</a>
           </p>
 

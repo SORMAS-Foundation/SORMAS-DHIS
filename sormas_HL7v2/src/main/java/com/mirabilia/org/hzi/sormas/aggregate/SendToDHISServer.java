@@ -286,7 +286,6 @@ public class SendToDHISServer {
             ));
             array.add(item22);
 
-            
             //QUARANTINE ==Quarantine_other, Quarantine_Missing, Quarantine_Home, quaratine_none, quaratine_inst
             JSONObject item23 = new JSONObject();
             item23.put("categoryOptionCombo", "YWdSGPXe02C");
@@ -294,45 +293,41 @@ public class SendToDHISServer {
             item23.put("value", Integer.valueOf(Quarantine_Home
             ));
             array.add(item23);
-            
+
             JSONObject item24 = new JSONObject();
             item24.put("categoryOptionCombo", "c4pjKQIJJeH");
             item24.put("dataElement", "uIwbb7XCePT");
             item24.put("value", Integer.valueOf(quaratine_inst
             ));
             array.add(item24);
-            
+
             JSONObject item26 = new JSONObject();
             item26.put("categoryOptionCombo", "HPaCa6VRiAU");
             item26.put("dataElement", "uIwbb7XCePT");
             item26.put("value", Integer.valueOf(quaratine_none
             ));
             array.add(item26);
-            
+
             JSONObject item27 = new JSONObject();
             item27.put("categoryOptionCombo", "PHEg8zuplZZ");
             item27.put("dataElement", "uIwbb7XCePT");
             item27.put("value", Integer.valueOf(Quarantine_other
             ));
             array.add(item27);
-            
+
             JSONObject item28 = new JSONObject();
             item28.put("categoryOptionCombo", "RJDECCMQd0V");
             item28.put("dataElement", "uIwbb7XCePT");
             item28.put("value", Integer.valueOf(Quarantine_Missing
             ));
             array.add(item28);//Not_Classfied_Missing
-           
-            
-            /*
+
             JSONObject item29 = new JSONObject();
             item29.put("categoryOptionCombo", "AewFMtFllZ9");
             item29.put("dataElement", "OeYjA8YfEmG");
             item29.put("value", Integer.valueOf(Confimed
             ));
             array.add(item29);
-            
-            */
 
             json.put("dataValues", array);
 

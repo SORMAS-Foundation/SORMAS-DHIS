@@ -165,21 +165,21 @@ public class sql {
     public static String Occupation_Lab_Staff = "select count(*), c.disease, c.reportdate::date, p.occupationtype\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
-            + "where p.occupationtype is = 'LABORATORY_STAFF' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "where p.occupationtype = 'LABORATORY_STAFF' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
             + "group by c.disease, c.reportdate::date, p.occupationtype";
 
     //occupation others 
     public static String Occupation_others = "select count(*), c.disease, c.reportdate::date, p.occupationtype\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
-            + "where p.occupationtype = 'OTHER' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "where (p.occupationtype != 'HEALTHCARE_WORKER' OR p.occupationtype != 'LABORATORY_STAFF' OR p.occupationtype is not null) and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
             + "group by c.disease, c.reportdate::date, p.occupationtype";
 
     //occupation missing unknown
     public static String Occupation_unknow_missing = "select count(*), c.disease, c.reportdate::date, p.occupationtype\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
-            + "where (p.occupationtype is null and c.responsibleregion_id = ? and c.reportdate::date = ?)\n"
+            + "where p.occupationtype is null and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
             + "group by c.disease, c.reportdate::date, p.occupationtype";
 
     //Gender Male
@@ -213,12 +213,12 @@ public class sql {
     //Confirmed not by laboratory  
     public static String confirmed_lab = "select count(*), c.disease, c.reportdate::date, c.laboratorydiagnosticconfirmation\n"
             + "from cases c\n"
-            + "where c.laboratorydiagnosticconfirmation='YES' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "where c.laboratorydiagnosticconfirmation='YES' and c.caseclassification ~ 'CONFIR' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
             + "group by c.disease, c.reportdate::date, c.laboratorydiagnosticconfirmation";
 
     public static String not_confirmed_lab = "select count(*), c.disease, c.reportdate::date, c.laboratorydiagnosticconfirmation\n"
             + "from cases c\n"
-            + "where c.laboratorydiagnosticconfirmation !='YES' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "where (c.laboratorydiagnosticconfirmation !='YES' OR c.laboratorydiagnosticconfirmation ='' OR c.laboratorydiagnosticconfirmation is null) and c.caseclassification ~ 'CONFIR' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
             + "group by c.disease, c.reportdate::date, c.laboratorydiagnosticconfirmation";
 
     public static String not_confirmed_labm = "select count(*), c.disease, c.reportdate::date, c.laboratorydiagnosticconfirmation\n"
@@ -462,7 +462,7 @@ public class sql {
     public static String Quarantine_Missing = "select count(*), c.disease, c.reportdate::date\n"
             + "from cases c\n"
             + "left join person p on (c.person_id = p.id)\n"
-            + "where c.quarantine = '' AND c.quarantine = null AND c.disease = 'CORONAVIRUS' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
+            + "where (c.quarantine = '' OR c.quarantine is null) AND c.disease = 'CORONAVIRUS' and c.responsibleregion_id = ? and c.reportdate::date = ?\n"
             + "group by c.disease, c.reportdate::date, C.caseclassification";
 
     // public static String Get_all_Isolated_today = "";

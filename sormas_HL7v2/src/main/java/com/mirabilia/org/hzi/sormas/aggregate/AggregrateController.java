@@ -630,7 +630,7 @@ public class AggregrateController {
                             };
                         } else {
                             Not_Case = "0";
-                        }//Not_Classfied_MISSING
+                        }
 
                         pa_38 = cox.prepareStatement(sql.Not_Classfied);
                         pa_38.setInt(1, Integer.parseInt(region_id));

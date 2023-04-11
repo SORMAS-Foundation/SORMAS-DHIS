@@ -262,7 +262,7 @@ public class SampleSender {
                             //  System.out.println(dw.replaceAll(":", ""));
                             System.out.println(du.replaceAll(":", ""));
                             ch = du.replaceAll(":", "");
-                            SendToDHISServer.update_PSQL_oneParm_XINT("update samples set externalid = ? where id = ?", ch, SampleUtilityClass.getSample_id());
+                            SendToDHISServer.update_PSQL_oneParm_XINT("update samples set adapterid = ? where id = ?", ch, SampleUtilityClass.getSample_id());
 
                         }
 

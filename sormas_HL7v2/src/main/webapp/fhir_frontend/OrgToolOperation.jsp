@@ -1,3 +1,7 @@
+ <%           
+    if(session.getAttribute("xloggedx") != null || session.getAttribute("xloggedx") == "truet_" ){
+%>
+
 <%@page import="com.mirabilia.org.hzi.Util.credentialsManagerUtil"%>
 <%@page import="com.mirabilia.org.hzi.Util.UtilityAbstracts"%>
 <%@page import="com.mirabilia.org.hzi.Util.sourceDTO"%>
@@ -197,6 +201,7 @@
 
 
                 <%
+           
                     String sourcesX = sourceDTO.getSourcePaired();
                     String mastt = UtilityAbstracts.getMasterSpource();
                     String desss = UtilityAbstracts.getMdestinationSpource();
@@ -2165,3 +2170,12 @@
             </div>
     </body>
 </html>
+
+
+
+<%
+    } else {
+    response.sendRedirect(request.getContextPath());
+    }
+
+%>

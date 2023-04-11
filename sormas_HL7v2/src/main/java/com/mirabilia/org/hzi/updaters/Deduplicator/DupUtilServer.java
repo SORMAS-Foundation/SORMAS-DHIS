@@ -61,7 +61,7 @@ public class DupUtilServer extends HttpServlet {
 
         if (request.getParameter("accept") != null) {
             try {
-                String dx = "update sormas_local set externalid = '" + request.getParameter("accept") + "', duplicate_with = null, resolved_by = 'logged_in_user' where uuid = '" + request.getParameter("wht") + "';";
+                String dx = "update sormas_local set adapterid = '" + request.getParameter("accept") + "', duplicate_with = null, resolved_by = 'logged_in_user' where uuid = '" + request.getParameter("wht") + "';";
                 //    System.out.println("jkjhgfdswedrftghjuytrewdfghjjhgtfd++++++++++++++ " + dx);
                 DTOx(dx);
                 //        response.sendRedirect("./fhir_frontend/OrgToolOperation.jsp");
@@ -83,7 +83,7 @@ public class DupUtilServer extends HttpServlet {
 
         if (request.getParameter("current") != null) {
             try {
-                String dx = "update sormas_local set externalid = '" + request.getParameter("current") + "', duplicate_with = null, resolved_by = 'logged_in_user' where uuid = '" + request.getParameter("wht") + "';";
+                String dx = "update sormas_local set adapterid = '" + request.getParameter("current") + "', duplicate_with = null, resolved_by = 'logged_in_user' where uuid = '" + request.getParameter("wht") + "';";
                 //  System.out.println("jkjhgfdswedrftghjuytrewdfghjjhgtfd++++++++++++++ " + dx);
                 DTOx(dx);
                 //     response.sendRedirect("./fhir_frontend/OrgToolOperation.jsp");
@@ -103,7 +103,7 @@ public class DupUtilServer extends HttpServlet {
 
         if (request.getParameter("reset") != null) {
             try {
-                String dx = "update sormas_local set externalid = null, duplicate_with = null, resolved_by = 'logged_in_user' where uuid = '" + request.getParameter("wht") + "';";
+                String dx = "update sormas_local set adapterid = null, duplicate_with = null, resolved_by = 'logged_in_user' where uuid = '" + request.getParameter("wht") + "';";
                 // System.out.println("jkjhgfdswedrftghjuytrewdfghjjhgtfd++++++++++++++ " + dx);
                 DTOx(dx);
                 //  response.sendRedirect("./fhir_frontend/OrgToolOperation.jsp");

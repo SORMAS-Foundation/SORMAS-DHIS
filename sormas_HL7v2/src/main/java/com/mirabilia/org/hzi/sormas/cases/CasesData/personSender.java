@@ -583,7 +583,7 @@ public class personSender {
                         System.out.println(du.replaceAll(":", ""));
 
                         ch = du.replaceAll(":", "");
-                        SendToDHISServer.update_PSQL_oneParm_X("update person set externalid = ? where uuid = ?", ch, personCasesUtilityClass.getSRM_Uuid());
+                        SendToDHISServer.update_PSQL_oneParm_X("update person set adapterid = ? where uuid = ?", ch, personCasesUtilityClass.getSRM_Uuid());
 
                         String wx = sb.toString();
                         System.err.println("Successful ER2343DG4! " + wx);

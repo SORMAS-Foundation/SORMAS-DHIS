@@ -6,6 +6,11 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%
+    if(session.getAttribute("xloggedx") == null || session.getAttribute("xloggedx") != "truet_" ){
+    response.sendRedirect(request.getContextPath());
+    }
+%>
+<%
 
     String[] _url = ConffileCatcher.fileCatcher("passed");
     PreparedStatement ps;

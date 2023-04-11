@@ -464,7 +464,7 @@ private static void cleanParentPath(int get_level_x) throws ClassNotFoundExcepti
 
         try {
 
-            ps = conn.prepareStatement("SELECT duplicate_with, idx FROM sormas_local where duplicate_with is not null and externalid is null;");
+            ps = conn.prepareStatement("SELECT duplicate_with, idx FROM sormas_local where duplicate_with is not null and adapterid is null;");
             rx = ps.executeQuery();
             while (rx.next()) {
 
@@ -479,12 +479,12 @@ private static void cleanParentPath(int get_level_x) throws ClassNotFoundExcepti
                 if (words[0].equals(words[dx - 1])) {
                 } else {
 
-                    ps_x = conn.prepareStatement("select idx from sormas_local where externalid = ?");
+                    ps_x = conn.prepareStatement("select idx from sormas_local where adapterid = ?");
                     ps_x.setString(1, words[0]);
                     rx_x = ps_x.executeQuery();
                     if (rx_x.next()) {
                     } else {
-                        ps_ = conn.prepareStatement("update sormas_local set externalid = ?, duplicate_with = '' where idx = ? and externalid is null");
+                        ps_ = conn.prepareStatement("update sormas_local set adapterid = ?, duplicate_with = '' where idx = ? and adapterid is null");
                         ps_.setString(1, words[0]);
                         ps_.setString(2, rx.getString(2));
                         System.out.println(ps_.toString());
@@ -510,7 +510,7 @@ private static void cleanParentPath(int get_level_x) throws ClassNotFoundExcepti
 
         try {
             if (cm.length() == 0) {
-                ps = conn.prepareStatement("update sormas_local set changedate = now(), externalid = ?, ext_cdate = ?, parent_id = ? where uuid = ?");
+                ps = conn.prepareStatement("update sormas_local set changedate = now(), adapterid = ?, ext_cdate = ?, parent_id = ? where uuid = ?");
                 ps.setString(1, ch);
                 ps.setString(2, cc);
                 ps.setString(3, prtid);

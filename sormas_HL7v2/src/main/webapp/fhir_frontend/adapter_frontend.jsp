@@ -1,3 +1,6 @@
+<%           
+    if(session.getAttribute("xloggedx") != null || session.getAttribute("xloggedx") == "truet_" ){
+%>
 <%@page import="com.mirabilia.org.hzi.Util.credentialsManagerUtil"%>
 <%@page import="com.mirabilia.org.hzi.sormas.doa.DbConnector"%>
 <%@page import="java.sql.Connection"%>
@@ -9,9 +12,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    if(session.getAttribute("xloggedx") == null || session.getAttribute("xloggedx") != "truet_" ){
-    response.sendRedirect(request.getContextPath());
-    }
+   
         PreparedStatement ps;
         ResultSet rx;
         Class.forName("com.mysql.jdbc.Driver");
@@ -466,7 +467,6 @@ credentialsManagerUtil.setDhis_pawd(_url[17].toString());
 
 
 
-
         <jsp:include page="template/scripts_footer.jsp"></jsp:include>
 
 
@@ -591,3 +591,11 @@ credentialsManagerUtil.setDhis_pawd(_url[17].toString());
 
     </body>
 </html>
+
+
+<%
+    } else {
+    response.sendRedirect(request.getContextPath());
+    }
+
+%>

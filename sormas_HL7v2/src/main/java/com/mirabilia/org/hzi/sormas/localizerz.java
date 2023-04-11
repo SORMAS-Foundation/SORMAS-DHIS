@@ -87,7 +87,7 @@ public class localizerz extends HttpServlet {
 
                 if (request.getParameter("rg") != null && "true".equals(request.getParameter("rg"))) {
                     //System.out.println("region? !"+request.getParameter("rg"));
-                    ps = conn.prepareStatement("SELECT changedate, uuid, externalid, name, id, creationdate, country_id FROM region;");
+                    ps = conn.prepareStatement("SELECT changedate, uuid, adapterid, name, id, creationdate, country_id FROM region;");
                     rx = ps.executeQuery();
                     while (rx.next()) {
                         String cf = "";
@@ -104,7 +104,7 @@ public class localizerz extends HttpServlet {
                 }
                 if (request.getParameter("ds") != null && "true".equals(request.getParameter("ds"))) {
 
-                    ps1 = conn.prepareStatement("SELECT changedate, uuid, externalid, name, id, region_id, creationdate, region_id FROM district;");
+                    ps1 = conn.prepareStatement("SELECT changedate, uuid, adapterid, name, id, region_id, creationdate, region_id FROM district;");
                     rx1 = ps1.executeQuery();
                     while (rx1.next()) {
                         String cv = "";
@@ -122,7 +122,7 @@ public class localizerz extends HttpServlet {
                 if (request.getParameter("co") != null && "true".equals(request.getParameter("co"))) {
 
                     System.out.println("ward" + request.getParameter("co"));
-                    ps2 = conn.prepareStatement("SELECT changedate, uuid, externalid, name, id, district_id, creationdate FROM community;");
+                    ps2 = conn.prepareStatement("SELECT changedate, uuid, adapterid, name, id, district_id, creationdate FROM community;");
                     rx2 = ps2.executeQuery();
                     while (rx2.next()) {
                         String cz = "";
@@ -140,7 +140,7 @@ public class localizerz extends HttpServlet {
 
                 if (request.getParameter("fa") != null && "true".equals(request.getParameter("fa"))) {
                     System.out.println("health facility !" + request.getParameter("fa"));
-                    ps3 = conn.prepareStatement("SELECT changedate, uuid, externalid, name, id, community_id, creationdate FROM facility;");
+                    ps3 = conn.prepareStatement("SELECT changedate, uuid, adapterid, name, id, community_id, creationdate FROM facility;");
                     rx3 = ps3.executeQuery();
                     while (rx3.next()) {
                         String cq = "";

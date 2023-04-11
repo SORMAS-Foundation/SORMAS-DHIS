@@ -93,8 +93,8 @@ public class SampleExtractor {
                 
                 SampleUtilityClass.setCaseUuid(ra.getString("associatedcase_uuid"));
                 
-                SampleUtilityClass.setSampleRegionID(ra.getString("reg_externalid"));
-                SampleUtilityClass.setSampleExternal_Id(ra.getString("externalid"));
+                SampleUtilityClass.setSampleRegionID(ra.getString("reg_adapterid"));
+                SampleUtilityClass.setSampleExternal_Id(ra.getString("adapterid"));
                 String ddd = ra.getString("creationdate");
                 SampleUtilityClass.setCreationdate(ddd.substring( 0, ddd.indexOf(" ")));
                 

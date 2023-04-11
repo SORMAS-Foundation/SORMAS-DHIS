@@ -77,13 +77,13 @@ public class UtilServer extends HttpServlet {
         if (request.getParameter("count") != null) {
             try {
 
-                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.externalid != 'null' AND d.duplicate_with IS NULL or d.duplicate_with = '';"); //counts all MATCHED
+                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.adapterid != 'null' AND d.duplicate_with IS NULL or d.duplicate_with = '';"); //counts all MATCHED
 
-                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.externalid != 'null' AND d.duplicate_with IS not NULL and d.duplicate_with != '';") + "," + mat; //counting all possible duplicate
+                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.adapterid != 'null' AND d.duplicate_with IS not NULL and d.duplicate_with != '';") + "," + mat; //counting all possible duplicate
 
-                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.externalid IS NULL AND d.duplicate_with != '';") + "," + mat; //counting real Duplicates
+                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.adapterid IS NULL AND d.duplicate_with != '';") + "," + mat; //counting real Duplicates
 
-                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.externalid IS NULL AND d.duplicate_with IS null or d.duplicate_with = '';") + "," + mat; //Unmachables
+                mat = counterX("SELECT COUNT(*) FROM sormas_local d WHERE d.adapterid IS NULL AND d.duplicate_with IS null or d.duplicate_with = '';") + "," + mat; //Unmachables
 
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(UtilServer.class.getName()).log(Level.SEVERE, null, ex);
@@ -693,24 +693,24 @@ public class UtilServer extends HttpServlet {
                 try {
                     String dxs = "";
                     if ("2".equals(rx.getString(2))) {
-                        dxs = "update region set externalid = ? where uuid = ?";
+                        dxs = "update region set adapterid = ? where uuid = ?";
                     } else if ("3".equals(rx.getString(2))) {
-                        dxs = "update district set externalid = ? where uuid = ?";
+                        dxs = "update district set adapterid = ? where uuid = ?";
                     } else if ("4".equals(rx.getString(2))) {
-                        dxs = "update community set externalid = ? where uuid = ?";
+                        dxs = "update community set adapterid = ? where uuid = ?";
                     } else if ("5".equals(rx.getString(2))) {
-                        dxs = "update facility set externalid = ? where uuid = ?";
+                        dxs = "update facility set adapterid = ? where uuid = ?";
                     }
                     /*
                     String dxs = "";
                     if ("2".equals(rx.getString(2))) {
-                        dxs = "insert into region (uuid,externalid,id,changedate,creationdate,name) values(?,?,?,now(),now(),?) ON CONFLICT ON CONSTRAINT region_uuid_key DO UPDATE SET externalid = EXCLUDED.externalid";
+                        dxs = "insert into region (uuid,adapterid,id,changedate,creationdate,name) values(?,?,?,now(),now(),?) ON CONFLICT ON CONSTRAINT region_uuid_key DO UPDATE SET adapterid = EXCLUDED.adapterid";
                     } else if ("3".equals(rx.getString(2))) {
-                        dxs = "insert into district (uuid,externalid,id,changedate,creationdate,name) values(?,?,?,now(),now(),?) ON CONFLICT ON CONSTRAINT district_uuid_key DO UPDATE SET externalid = EXCLUDED.externalid";
+                        dxs = "insert into district (uuid,adapterid,id,changedate,creationdate,name) values(?,?,?,now(),now(),?) ON CONFLICT ON CONSTRAINT district_uuid_key DO UPDATE SET adapterid = EXCLUDED.adapterid";
                     } else if ("4".equals(rx.getString(2))) {
-                        dxs = "insert into community (uuid,externalid,id,changedate,creationdate,name) values(?,?,?,now(),now(),?) ON CONFLICT ON CONSTRAINT community_uuid_key DO UPDATE SET externalid = EXCLUDED.externalid";
+                        dxs = "insert into community (uuid,adapterid,id,changedate,creationdate,name) values(?,?,?,now(),now(),?) ON CONFLICT ON CONSTRAINT community_uuid_key DO UPDATE SET adapterid = EXCLUDED.adapterid";
                     } else if ("5".equals(rx.getString(2))) {
-                        dxs = "insert into facility (uuid,externalid,id,changedate,creationdate,name) values(?,?,?,now(),now(),?) ON CONFLICT ON CONSTRAINT facility_uuid_key DO UPDATE SET externalid = EXCLUDED.externalid";
+                        dxs = "insert into facility (uuid,adapterid,id,changedate,creationdate,name) values(?,?,?,now(),now(),?) ON CONFLICT ON CONSTRAINT facility_uuid_key DO UPDATE SET adapterid = EXCLUDED.adapterid";
                     }
                     ps_pg = conn_pg.prepareStatement(dxs);
                     ps_pg.setString(1, rx.getString(1));
@@ -877,7 +877,7 @@ public class UtilServer extends HttpServlet {
                 rx_ = ps_.executeQuery();
                 while (rx_.next()) {
 
-                    ps_x = conn.prepareStatement("select r.name, r.uuid from raw_ r where r.uuid = '" + rx.getString("externalid") + "'");
+                    ps_x = conn.prepareStatement("select r.name, r.uuid from raw_ r where r.uuid = '" + rx.getString("adapterid") + "'");
                     //      System.out.println(ps_x.toString());
                     rx_x = ps_x.executeQuery();
                     // System.out.println("__________________________________________________");
@@ -1114,20 +1114,20 @@ public class UtilServer extends HttpServlet {
                     int vk = 1;
 
                     if ("2".equals(rx.getString(5))) {
-                        dxs = "insert into region (uuid,name,externalid,id,changedate,creationdate,country_id,epidcode) values(?,?,?,?,now(),?,'" + stt + "',?) ON CONFLICT ON CONSTRAINT unique_region_adapter DO UPDATE SET epidcode = EXCLUDED.epidcode";
+                        dxs = "insert into region (uuid,name,adapterid,id,changedate,creationdate,country_id,epidcode) values(?,?,?,?,now(),?,'" + stt + "',?) ON CONFLICT ON CONSTRAINT unique_region_adapter DO UPDATE SET epidcode = EXCLUDED.epidcode";
                         re_g++;
                     } else if ("3".equals(rx.getString(5))) {
                         ds_c++;
-                        dxs = "insert into district (uuid,name,externalid,id,changedate,creationdate,region_id,epidcode) values(?,?,?,?,now(),?,'" + stt + "',?) ON CONFLICT ON CONSTRAINT unique_district_adapter DO UPDATE SET epidcode = EXCLUDED.epidcode";
+                        dxs = "insert into district (uuid,name,adapterid,id,changedate,creationdate,region_id,epidcode) values(?,?,?,?,now(),?,'" + stt + "',?) ON CONFLICT ON CONSTRAINT unique_district_adapter DO UPDATE SET epidcode = EXCLUDED.epidcode";
                     } else if ("4".equals(rx.getString(5))) {
                         com_m++;
-                        dxs = "insert into community (uuid,name,externalid,id,changedate,creationdate, district_id,epidcode) values(?,?,?,?,now(),?,'" + stt + "',?) ON CONFLICT ON CONSTRAINT unique_community_adapter DO UPDATE SET epidcode = EXCLUDED.epidcode";
+                        dxs = "insert into community (uuid,name,adapterid,id,changedate,creationdate, district_id,epidcode) values(?,?,?,?,now(),?,'" + stt + "',?) ON CONFLICT ON CONSTRAINT unique_community_adapter DO UPDATE SET epidcode = EXCLUDED.epidcode";
                     } else if ("5".equals(rx.getString(5))) {
                         fac_l++;
-                        dxs = "insert into facility (uuid,name,externalid,id,changedate,creationdate, community_id,epidcode) values(?,?,?,?,now(),?,'" + stt + "',?) ON CONFLICT ON CONSTRAINT unique_facility_adapter DO UPDATE SET epidcode = EXCLUDED.epidcode";
+                        dxs = "insert into facility (uuid,name,adapterid,id,changedate,creationdate, community_id,epidcode) values(?,?,?,?,now(),?,'" + stt + "',?) ON CONFLICT ON CONSTRAINT unique_facility_adapter DO UPDATE SET epidcode = EXCLUDED.epidcode";
                     } else if ("1".equals(rx.getString(5))) {
                         country_l++;
-                        dxs = "insert into country (uuid,defaultname,externalid,id,changedate,creationdate,isocode) values(?,?,?,?,now(),?,?) ON CONFLICT DO NOTHING";
+                        dxs = "insert into country (uuid,defaultname,adapterid,id,changedate,creationdate,isocode) values(?,?,?,?,now(),?,?) ON CONFLICT DO NOTHING";
                         vk = 0;
                     }
                     if (vk == 1) {

@@ -257,7 +257,7 @@ public class CaseSender {
                             System.out.println("DEBBUGGER 23455678i2345: " + dd);
                             ch = du.replaceAll(":", "");
                             System.out.println("DEBUGGER BNJUY879UHJJHG: SQL parameters for sample updater = " + ch + " --- " + CasesUtilityClass.getC_id());
-                            SendToDHISServer.update_PSQL_oneParm_XINT("update cases set externalid = ? where id = ?", ch, CasesUtilityClass.getC_id());
+                            SendToDHISServer.update_PSQL_oneParm_XINT("update cases set adapterid = ? where id = ?", ch, CasesUtilityClass.getC_id());
 
                         }
 

@@ -76,11 +76,11 @@ public class CasesExtractor {
                 CasesUtilityClass.setCaseLong(ra.getString("reportlat"));
                 CasesUtilityClass.setCaseuuid(ra.getString("uuid"));
                 CasesUtilityClass.setExternal_id(ra.getString("cases_external_id"));
-                CasesUtilityClass.setRedgion_id(ra.getString("reg_externalid"));
+                CasesUtilityClass.setRedgion_id(ra.getString("reg_adapterid"));
                 String ddd = ra.getString("creationdate");
                 CasesUtilityClass.setCreationdate(ddd.substring(0, ddd.indexOf(" ")));
 
-              // String rett = SendToDHISServer.get_trackEntity("select externalid from person where id = ?", ra.getString("person_id"));
+              // String rett = SendToDHISServer.get_trackEntity("select adapterid from person where id = ?", ra.getString("person_id"));
                 CasesUtilityClass.setTrackedentity_id(ra.getString("person_external_id"));
                 CaseSender.jsonDHISSender();
 

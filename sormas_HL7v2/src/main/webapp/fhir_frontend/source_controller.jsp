@@ -1,5 +1,9 @@
+ <%           
+    if(session.getAttribute("xloggedx") != null || session.getAttribute("xloggedx") == "truet_" ){
+%>
 <%@page import="com.mirabilia.org.hzi.Util.sourceDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
     <jsp:include page="template/head.jsp"></jsp:include>
@@ -904,3 +908,12 @@
 
                 </body>
                 </html>
+                
+                
+
+<%
+    } else {
+    response.sendRedirect(request.getContextPath());
+    }
+
+%>

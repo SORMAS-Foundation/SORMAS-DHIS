@@ -76,7 +76,10 @@ SORMAS DHIS2 ADAPTER is a java web application program built on simple java logi
       ```
       $ localhost:8080/adapter
       ```
-      
+  7. You may want to add apache2 as a reversed proxy server following the manual found here https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/How-to-configure-Apache-as-a-reverse-proxy-example
+
+
+
       ## Project Management
 
 ### ZenHub

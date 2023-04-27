@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.hzi.com.mirabilia</groupId>
-    <artifactId>sormas_HL7v2_3</artifactId>
-    <version>2.3.1.2</version>
+    <artifactId>sormas_HL7v2_4</artifactId>
+    <version>2.4</version>
     <packaging>war</packaging>
 
     <name>sormas_HL7v2_4</name>

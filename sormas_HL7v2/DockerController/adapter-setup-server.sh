@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 ROOT_PREFIX=
@@ -14,8 +13,6 @@ SORMAS2SORMAS_DIR=${ROOT_PREFIX}/opt/sormas2dhis
 DOMAIN_DIR=${DOMAINS_HOME}/${DOMAIN_NAME}
 LOG_FILE_PATH=${DOMAIN_DIR}/logs
 LOG_FILE_NAME=server_update_`date +"%Y-%m-%d_%H-%M-%S"`.log
-
-
 
 mkdir -p ${PAYARA_HOME}
 mkdir -p ${DOMAINS_HOME}
